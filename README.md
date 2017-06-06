@@ -7,7 +7,7 @@ This is where I keep all my solutions to Harvard University's CS50 (Introduction
 ### Problem sets
 | Submissions        | Description           |
 | ------------- |:--------------------:|
-| [Set 0](#)     | [Set Scope](http://docs.cs50.net/2017/x/psets/0/pset0.html) Program in Scratch |
+| [Set 0](#)[[i]](http://docs.cs50.net/2017/x/psets/0/pset0.html)     | Program in Scratch |
 
 ### Other Associative Links/Sites
 | Website        | Description           |
