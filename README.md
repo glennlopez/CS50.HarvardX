@@ -7,9 +7,9 @@ This is where I keep all my solutions to Harvard University's CS50 (Introduction
 ### Problem sets
 | Submissions        | Description           |
 | ------------- |:--------------------:|
-| [Set 0](https://scratch.mit.edu/projects/164751294/)     | Program in Scratch [[i]](http://docs.cs50.net/2017/x/psets/0/pset0.html)|
-| [Set 1](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset1)     | Program in C [[i]](http://docs.cs50.net/2016/fall/psets/1/pset1.html)|
-| [Set 2](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset2)     | Crypto [[i]](#)|
+| [Set 0](https://scratch.mit.edu/projects/164751294/)     | Program in Scratch |
+| [Set 1](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset1)     | Program in C |
+| [Set 2](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset2)     | Crypto |
 
 ### Other Associative Links/Sites
 | Website        | Description           |
