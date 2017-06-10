@@ -12,16 +12,16 @@ This is where I keep all my solutions to CS50 (Introduction to Computer Science)
 | Submissions        | Description           |
 | ------------- |:--------------------:|
 | [Problem Set 0](https://scratch.mit.edu/projects/164751294/)     | Program in Scratch |
-| [Problem Set 1](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set1)     | Program in C |
-| [Problem Set 2](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set2)     | Arrays |
-| [Problem Set 3](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set3)     | Algorithms |
-| [Problem Set 4](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set4)     | Memory |
-| [Problem Set 5](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set5)     | Data Structures |
-| [Problem Set 6](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set6)     | HTTP |
-| [Problem Set 7](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set7)     | Machine Learning |
-| [Problem Set 8](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set8)     | Python |
-| [Problem Set 9](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set9)     | SQL |
-| [Problem Set 10](https://github.com/glennlopez/CS50.HarvardX/tree/master/pProblem set10)     | Javascript |
+| [Problem Set 1](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset1)     | Program in C |
+| [Problem Set 2](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset2)     | Arrays |
+| [Problem Set 3](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset3)     | Algorithms |
+| [Problem Set 4](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset4)     | Memory |
+| [Problem Set 5](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset5)     | Data Structures |
+| [Problem Set 6](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset6)     | HTTP |
+| [Problem Set 7](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset7)     | Machine Learning |
+| [Problem Set 8](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset8)     | Python |
+| [Problem Set 9](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset9)     | SQL |
+| [Problem Set 10](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset10)     | Javascript |
 | [Problem Set 11](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset11)     | The End |
 
 ### Other Associative Links/Sites
