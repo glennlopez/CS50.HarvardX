@@ -1,31 +1,43 @@
 //test cards - https://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
+//return array - https://www.youtube.com/watch?v=EDy8BmAW3uo
 #include<stdio.h>
 #include<cs50.h>
 
+//prototypes
 long long get_posLongLong(void);
 int countDigits(long long param);
 void checkType(long long param);
+
+
+
 
 int main(){
 
     
     long long cc_number = get_posLongLong();
-    int debug = countDigits(cc_number); //debug
+    int digitCount = countDigits(cc_number);
+    int ccNum[digitCount];
     
+    
+    //store each card digit inside array ccNum[...]
+    unsigned long long nextCardDigit = 1;
     for(int i = 0; i < countDigits(cc_number); i++){
-        printf("Credit Card(%i): %lld\n", debug, cc_number);  //debug
-        //use array[] for storage
+        printf("Credit Card(%i): %lld\n", digitCount, cc_number);  //debug - digit count
+        ccNum[i] = ((cc_number%(10 * nextCardDigit))/(1 * nextCardDigit));
         
-        //int next = 100;
-        //int x = 4324%(10 * next);
-        //int y = x/(1 * next);
-        //printf("%i\n", y);
-
+        nextCardDigit *= 10;    //iterate through the next digit
+    }
+    
+    //debug - display array contents
+    for(int i = countDigits(cc_number) -1; i >= 0; i--){
+        printf("%i ", ccNum[i]);
     }
 
-    
+    printf("\n");
     return 0;
 }
+
+
 
 
 
@@ -34,7 +46,7 @@ long long get_posLongLong(void){long long posInt = -9;
     do{
         printf("Number: ");
         posInt = get_long_long();
-    //}while( (posInt <= 0) || (countDigits(posInt) < 12));
+    //}while( (posInt <= 0) || (countDigits(posInt) < 12)); //min valid cc_number is 12
     }while(posInt <= 0);
     
     return posInt;
@@ -68,11 +80,11 @@ int countDigits(long long param){
 //check the type of cc used
 void checkType(long long param){
     printf("FIXME: %lld\n", param);
-    //INVALID
+    //CHECKSUM INVALID 
     
-    //VISA
+    //VISA - 
     
-    //MASTERCARD
+    //MASTERCARD - 
     
-    //AMEX
+    //AMEX - 15 digits (34,37)
 }
