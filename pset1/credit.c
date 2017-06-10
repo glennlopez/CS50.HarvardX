@@ -4,19 +4,23 @@
 
 long long get_posLongLong(void);
 int countDigits(long long param);
+void checkType(long long param);
 
 int main(){
 
     
-    //int next = 100;
-    //int x = 4324%(10 * next);
-    //int y = x/(1 * next);
-    //printf("%i\n", y);
-    
     long long cc_number = get_posLongLong();
     int debug = countDigits(cc_number); //debug
+    
     for(int i = 0; i < countDigits(cc_number); i++){
         printf("Credit Card(%i): %lld\n", debug, cc_number);  //debug
+        //use array[] for storage
+        
+        //int next = 100;
+        //int x = 4324%(10 * next);
+        //int y = x/(1 * next);
+        //printf("%i\n", y);
+
     }
 
     
@@ -59,4 +63,16 @@ int countDigits(long long param){
     if (param < 1000000000000000000) return 18;
     // maxumum length on a cc & long long is 19 digits
     return 19;
+}
+
+//check the type of cc used
+void checkType(long long param){
+    printf("FIXME: %lld\n", param);
+    //INVALID
+    
+    //VISA
+    
+    //MASTERCARD
+    
+    //AMEX
 }
