@@ -5,9 +5,6 @@ HarvardX: CS50 - Introduction to Computer Science
 This is where I keep all my solutions to CS50 (Introduction to Computer Science). This repo exists to facilitate code review for potential employers verifying my progress with Computer Science. It is in no way a solicitation to cheat Harvard/Yales CS50 course.  
 >Introduction to the intellectual enterprises of computer science and the art of programming. This course teaches students how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML. Problem sets inspired by real-world domains of biology, cryptography, finance, forensics, and gaming. Designed for concentrators and non-concentrators alike, with or without prior programming experience.
 
-<b>Attention Harvard students</b>, this repository contains answers to Harvards CS50 course work. Please be sure to read [Harvards Honor code](https://honor.fas.harvard.edu/honor-code), [Academic Integrity](https://college.harvard.edu/academics/academic-integrity), and this [article](http://www.thecrimson.com/article/2017/5/3/cs50-cheating-cases-2017/) posted on the Crimson about Academic Dishonnesty. Algorithmically speaking, you are inferior compared to your prof --- you will get caught. <b>Don't be stupid.</b>
-> The Honor Council can recommend that students guilty of academic integrity violations undergo a “change in status” ranging from probation to temporary withdrawal from the College, and even permanent dismissal in extreme cases.
-
 ### Problem sets
 | Submissions        | Description           |
 | ------------- |:--------------------:|
