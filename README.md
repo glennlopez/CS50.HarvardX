@@ -17,7 +17,7 @@ This is where I keep all my solutions to CS50 (Introduction to Computer Science)
 | [Problem Set 6](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset6)     | Sentimental |
 | [Problem Set 7](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset7)     | C$50 Finance |
 | [Problem Set 8](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset8)     | Mashup |
-| [Problem Set 9](https://github.com/glennlopez/CS50.HarvardX/tree/master/final)     | Final Project |
+| [Project 1](https://github.com/glennlopez/CS50.HarvardX/tree/master/final)     | Final Project |
 
 ### Other Associative Links/Sites
 | Website        | Description           |
