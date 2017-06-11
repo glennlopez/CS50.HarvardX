@@ -8,5 +8,5 @@ rm -- !(*.c)
 cd ~/workspace/CS50.HarvardX/pset1
 rm -- !(*.c) 
 
-#cd ~/workspace/CS50.HarvardX/pset2
-#rm -- !(*.c) 
+cd ~/workspace/CS50.HarvardX/pset2
+rm -- !(*.c) 
