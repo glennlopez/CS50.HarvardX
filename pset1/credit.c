@@ -1,5 +1,4 @@
 //test cards - https://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
-//return array - https://www.youtube.com/watch?v=EDy8BmAW3uo
 #include<stdio.h>
 #include<cs50.h>
 
@@ -7,6 +6,7 @@
 long long get_posLongLong(void);
 int countDigits(long long param);
 void checkType(int param[], int);
+
 
 
 
@@ -20,7 +20,7 @@ int main(){
     
     //store each card digit inside array ccNum[...]
     unsigned long long nextCardDigit = 1;
-    for(int i = countDigits(cc_number) -1; i >= 0; i--){
+    for(int i = 0; i < countDigits(cc_number); i++){
         ccNum[i] = ((cc_number%(10 * nextCardDigit))/(1 * nextCardDigit));
         nextCardDigit *= 10;    //iterate through the next digit
     }
@@ -54,18 +54,6 @@ void checkType(int ccNum[], int digitCount){
     int sumOfdigits = 0; //sum of digits NOT multiplied by 2
     int n = 0;
 
-
-
-
-
-
-
-
-
-
-
-
-
     //CHECKSUM ROUTINE 
     for(int i = 0; i < (digitCount/2); i++){
         if((ccNum[1 + n] * 2) >= 10){
@@ -78,53 +66,36 @@ void checkType(int ccNum[], int digitCount){
         n += 2;
     }
 
-    printf("sumOfProduct: %i\n", sumOfProduct);
-    
-    
-    
-    
-    
-    //MASTERCARD - 16 digits (51,52,53,54,55)
-    //AMEX - 15 digits (34,37)
-    //VISA - 13 and 16 digits (4)
-    
-    
-    
-    
-    
-    
-    
+    int adjust = 0;
+    if(digitCount % 2){
+        adjust = 1;
+    }    
 
     n = 0;
-    for(int i = 0; i < (digitCount/2) ; i++){
-        sumOfdigits += (ccNum[0 + n]);
+    for(int i = 0; i < (digitCount/2) + adjust; i++){
+        sumOfdigits += (ccNum[n]);
         n += 2;
     }
-    printf("sumOfdigits: %i\n", sumOfdigits);
-    
-    
-    
     
     // CARD TYPE CHECK
     checksum = (sumOfProduct + sumOfdigits) % 10;
-    //printf("checksum: %i\n", checksum);
     if(checksum == 0){
         //VISA - 13 and 16 digits (4)
         if( (digitCount == 13) || (digitCount == 16) ){
-            if(ccNum[0] == 4){
+            if(ccNum[digitCount-1] == 4){
                 printf("VISA\n");
             }    
         }//END VISA CHECK
         
         //MASTERCARD - 16 digits (51,52,53,54,55)
         if(digitCount == 16){
-            if(ccNum[0] == 5){
+            if(ccNum[digitCount-1] == 5){
                 if( 
-                    (ccNum[1] == 1) || 
-                    (ccNum[1] == 2) || 
-                    (ccNum[1] == 3) || 
-                    (ccNum[1] == 4) || 
-                    (ccNum[1] == 5) 
+                    (ccNum[digitCount-2] == 1) || 
+                    (ccNum[digitCount-2] == 2) || 
+                    (ccNum[digitCount-2] == 3) || 
+                    (ccNum[digitCount-2] == 4) || 
+                    (ccNum[digitCount-2] == 5) 
                 ){
                     printf("MASTERCARD\n");
                 }
@@ -134,8 +105,8 @@ void checkType(int ccNum[], int digitCount){
         
         //AMEX - 15 digits (34,37)
         if(digitCount == 15){
-            if(ccNum[0] == 3){
-                if( (ccNum[1] == 4) || (ccNum[1] == 7) ){
+            if(ccNum[digitCount-1] == 3){
+                if( (ccNum[digitCount-2] == 4) || (ccNum[digitCount-2] == 7) ){
                     printf("AMEX\n");
                 }
             }
@@ -145,14 +116,7 @@ void checkType(int ccNum[], int digitCount){
     else{
         printf("INVALID\n");
     }
-    
-    
-    
-    
 }
-
-
-
 
 
 
