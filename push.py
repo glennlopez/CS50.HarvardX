@@ -21,6 +21,10 @@ def cmd(cmd):
 ##########################
 # COMMANDS TO EXECUTE
 ##########################
+
+#cleanup script
+cmd('~/workspace/cleanup.sh')
+
 # update setup routine
 cmd('wget https://raw.githubusercontent.com/glennlopez/qdGit/stable/setup.sh && rm -f setup.sh.1 && rm -f setup.sh && wget https://raw.githubusercontent.com/glennlopez/qdGit/stable/setup.sh && chmod +x setup.sh')
 
