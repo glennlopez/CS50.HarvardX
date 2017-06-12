@@ -1,3 +1,4 @@
+http://docs.cs50.net/problems/crack/crack.html
 #define _XOPEN_SOURCE
 #include <unistd.h>
 #include<stdio.h>
@@ -14,6 +15,8 @@ int main(int argc, string argv[]){
         printf("Usage: %s k\n", argv[0]);
         return 1;
     }
+    
+    //FIXME: finish this problem
     
  
     return 0;
