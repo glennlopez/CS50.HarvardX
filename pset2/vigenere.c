@@ -1,4 +1,4 @@
-http://docs.cs50.net/problems/vigenere/vigenere.html
+//http://docs.cs50.net/problems/vigenere/vigenere.html
 #include<stdio.h>
 #include<cs50.h>
 #include<string.h>
