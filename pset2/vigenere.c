@@ -5,15 +5,11 @@
 #include<ctype.h>
 #include<stdlib.h>
 
-char cypher(char, int);
+//prototypes
+char cypher(char, string);
 
-/*
-    [x] get the key
-    [x] get the plaintext
-    [x] encipher
-    [x] print ciphertext
-
-*/
+//global variables
+int keyCounter = 0;
 
 
 //MAIN ROUTINE
@@ -26,7 +22,7 @@ int main(int argc, string argv[]){
     }
     
     //get user-key
-    int key = atoi(&argv[1][0]);
+    string key = argv[1];
     
     //get user-plaintext
     printf("plaintext: ");
@@ -46,8 +42,8 @@ int main(int argc, string argv[]){
 
 
 
-//CIPHER SUBROUTINE
-char cypher(char cin, int key){
+//VIGENERE CIPHER SUBROUTINE
+char cypher(char cin, string key){
     
     if(isupper(cin)){   //ascii upercase starts at 65
         //zero the character (index it)
@@ -61,14 +57,17 @@ char cypher(char cin, int key){
     }
     if(islower(cin)){   //ascii lowercase starts at 97
         //zero the character (index it)
-        cin -= 97;
+        //cin -= 97;
         
         //cypher the zeroed character using key
-        cin = (cin + key) % 26;
+        //cin = (cin + key) % 26;
         
         //un-zero the cyphered character into cin
-        cin += 97;
+        //cin += 97;
     }
+    
+    printf("Keyword: %s KeyCounter: %i\n", key, keyCounter); // debug
+    keyCounter++;
     return cin;
 }
 

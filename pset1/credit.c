@@ -90,13 +90,7 @@ void checkType(int ccNum[], int digitCount){
         //MASTERCARD - 16 digits (51,52,53,54,55)
         if(digitCount == 16){
             if(ccNum[digitCount-1] == 5){
-                if( 
-                    (ccNum[digitCount-2] == 1) || 
-                    (ccNum[digitCount-2] == 2) || 
-                    (ccNum[digitCount-2] == 3) || 
-                    (ccNum[digitCount-2] == 4) || 
-                    (ccNum[digitCount-2] == 5) 
-                ){
+                if( (ccNum[digitCount-2] >= 1) || (ccNum[digitCount-2] <= 5) ){
                     printf("MASTERCARD\n");
                 }
             }
