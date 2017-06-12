@@ -6,10 +6,7 @@
 #include<ctype.h>
 #include<stdlib.h>
 
-//PROTOTYPES
 char cypher(char, string);
-
-//GLOBAL VARS
 int keyCounter = 0;
 
 
@@ -27,9 +24,7 @@ int main(int argc, string argv[]){
             printf("Usage: %s k\n", argv[0]);
             return 1;
             }
-        
         }
-        
     }
     
     //get user-key
@@ -47,7 +42,6 @@ int main(int argc, string argv[]){
     //print ciphered string using key
     printf("ciphertext: %s\n", s);
 
-
     return 0; 
 } 
 
@@ -63,21 +57,13 @@ char cypher(char cin, string key){ int vKey = '?';
         vKey = key[keyCounter % strlen(key)] - 65;
     }
     
-    
     //index the user input
     if(isupper(cin)){  
-        cin -= 65;
-        cin = (cin + vKey) % 26;
-        cin += 65;
-        
+        cin -= 65; cin = (cin + vKey) % 26; cin += 65;
         keyCounter++;
     }
-    
     if(islower(cin)){ 
-        cin -= 97;
-        cin = (cin + vKey) % 26;
-        cin += 97;
-        
+        cin -= 97; cin = (cin + vKey) % 26; cin += 97;
         keyCounter++;
     }
     
