@@ -6,7 +6,6 @@
 #include<stdlib.h>
 
 char cypher(char, int);
-void printCipher(char usrStr[], int);
 
 /*
     [x] get the key
@@ -32,21 +31,15 @@ int main(int argc, string argv[]){
     string s = get_string();
     
     //print ciphered string using key
-    printCipher(s, key);
+    for(int i = 0, n = strlen(s); i < n; i++){
+        s[i] = cypher(s[i], key);
+    }
+    
+    printf("%s\n", s);
 
 
     return 0; 
 } 
-
-
-//CIPHER STRING ROUTINE
-void printCipher(char usrStr[], int key){
-    for(int i = 0, n = strlen(usrStr); i < n; i++){
-        printf("%c", cypher(usrStr[i], key));
-    }
-    
-    printf("\n");
-}
 
 
 
