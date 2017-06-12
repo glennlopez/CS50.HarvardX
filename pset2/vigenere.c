@@ -1,15 +1,18 @@
-//http://docs.cs50.net/problems/caesar/caesar.html
+http://docs.cs50.net/problems/vigenere/vigenere.html
 #include<stdio.h>
 #include<cs50.h>
 #include<string.h>
 #include<ctype.h>
 #include<stdlib.h>
 
-//prototypes
+//PROTOTYPES
 char cypher(char, string);
 
-//global variables
+//GLOBAL VARS
 int keyCounter = 0;
+
+
+
 
 
 //MAIN ROUTINE
@@ -19,6 +22,16 @@ int main(int argc, string argv[]){
     if(argc != 2){
         printf("Usage: %s k\n", argv[0]);
         return 1;
+    }
+    else{
+        for(int i = 0, n = strlen(argv[1]); i < n; i++){
+            if(!(isalpha(argv[1][i]))){
+            printf("Usage: %s k\n", argv[0]);
+            return 1;
+            }
+        
+        }
+        
     }
     
     //get user-key
@@ -42,32 +55,50 @@ int main(int argc, string argv[]){
 
 
 
+
+
+
 //VIGENERE CIPHER SUBROUTINE
-char cypher(char cin, string key){
+char cypher(char cin, string key){ int vKey = '?';
+
+    //index the user key
+    if(islower(key[keyCounter % strlen(key)])){
+        vKey = key[keyCounter % strlen(key)] - 97;
+    }
+    else{
+        vKey = key[keyCounter % strlen(key)] - 65;
+    }
     
+    
+    //index the user input
     if(isupper(cin)){   //ascii upercase starts at 65
+        
         //zero the character (index it)
         cin -= 65;
         
         //cypher the zeroed character using key
-        cin = (cin + key) % 26;
+        cin = (cin + vKey) % 26;
         
         //un-zero the cyphered character into cin
         cin += 65;
-    }
-    if(islower(cin)){   //ascii lowercase starts at 97
-        //zero the character (index it)
-        //cin -= 97;
         
-        //cypher the zeroed character using key
-        //cin = (cin + key) % 26;
-        
-        //un-zero the cyphered character into cin
-        //cin += 97;
+        keyCounter++;
     }
     
-    printf("Keyword: %s KeyCounter: %i\n", key, keyCounter); // debug
-    keyCounter++;
+    if(islower(cin)){   //ascii lowercase starts at 97
+        
+        //zero the character (index it)
+        cin -= 97;
+        
+        //cypher the zeroed character using key
+        cin = (cin + vKey) % 26;
+        
+        //un-zero the cyphered character into cin
+        cin += 97;
+        
+        keyCounter++;
+    }
+    
     return cin;
 }
 
