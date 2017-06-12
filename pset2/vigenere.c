@@ -1,4 +1,5 @@
 //http://docs.cs50.net/problems/vigenere/vigenere.html
+//https://www.guballa.de/vigenere-solver
 #include<stdio.h>
 #include<cs50.h>
 #include<string.h>
@@ -10,9 +11,6 @@ char cypher(char, string);
 
 //GLOBAL VARS
 int keyCounter = 0;
-
-
-
 
 
 //MAIN ROUTINE
@@ -54,10 +52,6 @@ int main(int argc, string argv[]){
 } 
 
 
-
-
-
-
 //VIGENERE CIPHER SUBROUTINE
 char cypher(char cin, string key){ int vKey = '?';
 
@@ -71,29 +65,17 @@ char cypher(char cin, string key){ int vKey = '?';
     
     
     //index the user input
-    if(isupper(cin)){   //ascii upercase starts at 65
-        
-        //zero the character (index it)
+    if(isupper(cin)){  
         cin -= 65;
-        
-        //cypher the zeroed character using key
         cin = (cin + vKey) % 26;
-        
-        //un-zero the cyphered character into cin
         cin += 65;
         
         keyCounter++;
     }
     
-    if(islower(cin)){   //ascii lowercase starts at 97
-        
-        //zero the character (index it)
+    if(islower(cin)){ 
         cin -= 97;
-        
-        //cypher the zeroed character using key
         cin = (cin + vKey) % 26;
-        
-        //un-zero the cyphered character into cin
         cin += 97;
         
         keyCounter++;
