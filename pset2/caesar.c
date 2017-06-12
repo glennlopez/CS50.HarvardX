@@ -7,14 +7,6 @@
 
 char cypher(char, int);
 
-/*
-    [x] get the key
-    [x] get the plaintext
-    [x] encipher
-    [x] print ciphertext
-
-*/
-
 
 //MAIN ROUTINE
 int main(int argc, string argv[]){
@@ -40,35 +32,21 @@ int main(int argc, string argv[]){
     //print ciphered string using key
     printf("ciphertext: %s\n", s);
 
-
     return 0; 
 } 
 
 
 
-//CIPHER SUBROUTINE
+//CAESAR CIPHER SUBROUTINE
 char cypher(char cin, int key){
     
-    if(isupper(cin)){   //ascii upercase starts at 65
-        //zero the character (index it)
-        cin -= 65;
-        
-        //cypher the zeroed character using key
-        cin = (cin + key) % 26;
-        
-        //un-zero the cyphered character into cin
-        cin += 65;
+    if(isupper(cin)){ 
+        cin -= 65; cin = (cin + key) % 26; cin += 65;
     }
-    if(islower(cin)){   //ascii lowercase starts at 97
-        //zero the character (index it)
-        cin -= 97;
-        
-        //cypher the zeroed character using key
-        cin = (cin + key) % 26;
-        
-        //un-zero the cyphered character into cin
-        cin += 97;
+    if(islower(cin)){ 
+        cin -= 97; cin = (cin + key) % 26; cin += 97;
     }
+    
     return cin;
 }
 
