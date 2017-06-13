@@ -6,8 +6,13 @@
 #include<ctype.h>
 #include<stdlib.h>
 
-char cypher(char, string);
-int keyCounter = 0;
+#define ASCII_LWRCASE_INDEX 97
+#define ASCII_UPRCASE_INDEX 65
+#define A_TO_Z 26
+#define KEY_SIZE strlen(key)
+
+char cipher(char, string);
+int charIndex = 0;
 
 
 //MAIN ROUTINE
@@ -21,8 +26,8 @@ int main(int argc, string argv[]){
     else{
         for(int i = 0, n = strlen(argv[1]); i < n; i++){
             if(!(isalpha(argv[1][i]))){
-            printf("Usage: %s k\n", argv[0]);
-            return 1;
+                printf("Usage: %s k\n", argv[0]);
+                return 1;
             }
         }
     }
@@ -36,7 +41,7 @@ int main(int argc, string argv[]){
     
     //encipher using user-key
     for(int i = 0, n = strlen(s); i < n; i++){
-        s[i] = cypher(s[i], key);
+        s[i] = cipher(s[i], key);
     }
     
     //print ciphered string using key
@@ -47,24 +52,28 @@ int main(int argc, string argv[]){
 
 
 //VIGENERE CIPHER SUBROUTINE
-char cypher(char cin, string key){ int vKey = '?';
+char cipher(char cin, string key){ int keyIndex = '?';
 
-    //index the user key
-    if(islower(key[keyCounter % strlen(key)])){
-        vKey = key[keyCounter % strlen(key)] - 97;
+    //remove ascii from keyIndex (so a or A = 0) based on uppercase or lowecase
+    if(islower(key[charIndex % KEY_SIZE])){
+        keyIndex = key[charIndex % KEY_SIZE] - ASCII_LWRCASE_INDEX;
     }
     else{
-        vKey = key[keyCounter % strlen(key)] - 65;
+        keyIndex = key[charIndex % KEY_SIZE] - ASCII_UPRCASE_INDEX;
     }
     
-    //index the user input
+    //shift character by keyIndex
     if(isupper(cin)){  
-        cin -= 65; cin = (cin + vKey) % 26; cin += 65;
-        keyCounter++;
+        cin -= ASCII_UPRCASE_INDEX;         //remove ascii from char (so A = 0)
+        cin = (cin + keyIndex) % A_TO_Z;    //add keyIndex to char
+        cin += ASCII_UPRCASE_INDEX;         //add ascii back to char
+        charIndex++;                        //increment to the next character
     }
     if(islower(cin)){ 
-        cin -= 97; cin = (cin + vKey) % 26; cin += 97;
-        keyCounter++;
+        cin -= ASCII_LWRCASE_INDEX; 
+        cin = (cin + keyIndex) % A_TO_Z; 
+        cin += ASCII_LWRCASE_INDEX;
+        charIndex++;
     }
     
     return cin;
