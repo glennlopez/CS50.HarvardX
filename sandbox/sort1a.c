@@ -40,6 +40,7 @@ int main(){
         
         //Search unsorted part of the data to find smallest value
         for(int i = sortedIndex; i < n ; i++){
+            //Swap the smallest value found with the first element of the unsorted part
             if(usrArr[i] < smallestNum){
                 smallestNum = usrArr[i];
                 usrArr[i] = usrArr[sortedIndex];
@@ -47,10 +48,10 @@ int main(){
             }
         }
         
-        
         sortedIndex++;              //increment sorted index
         smallestNum = 2147483647;   //set smallestNum largest possible positive int 
     }
+    //END SELECTION SORT ALGORYTHM
 
 
     
