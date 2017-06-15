@@ -5,7 +5,7 @@
 //int usrArr[] = {5,2,1,3,6,4};
 //int usrArr[] = {5,2,1,3,4,6};
 //int usrArr[] = {6,2,5,3,4,1};
-int usrArr[] = {6,5,4,3,2,1};
+int usrArr[] = {-10,300,-4,3,0,-1};
 int totalSteps = 0;
 
 #define ARRLEN(arr) ( sizeof(arr) / sizeof(arr[0]))
@@ -35,7 +35,7 @@ int main(){
     
     //BUBBLE SORT ALGORYTHM
     int swapCounter = -1;
-    int buffer = -9999;
+    int buffer = -9999; //set to -9999 for flagging errors
     
     do{
         swapCounter = 0;
@@ -43,12 +43,11 @@ int main(){
         for(int i = 0, n = ARRLEN(usrArr); i < n -1; i++){
         
             if(usrArr[i] > usrArr[i+1]){
-                buffer = usrArr[i+1];       totalSteps++;
-                usrArr[i+1] = usrArr[i];    totalSteps++;
-                usrArr[i] = buffer;         totalSteps++;
+                buffer = usrArr[i+1];       
+                usrArr[i+1] = usrArr[i];    
+                usrArr[i] = buffer;         
                 swapCounter++;
             }
-                                            totalSteps++;   //min arraylen(arr) steps
         } 
         
     }while(swapCounter != 0);
