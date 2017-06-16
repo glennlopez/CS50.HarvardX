@@ -8,7 +8,7 @@
  * where n is number of pseudorandom numbers to print
  * and s is an optional seed
  */
- 
+  
 #define _XOPEN_SOURCE
 
 #include <cs50.h>
@@ -22,6 +22,7 @@
 int main(int argc, string argv[])
 {
     // TODO: comment me
+    //return error cmd error if argument count is not 2 and 3
     if (argc != 2 && argc != 3)
     {
         printf("Usage: ./generate n [s]\n");
@@ -29,9 +30,11 @@ int main(int argc, string argv[])
     }
 
     // TODO: comment me
+    //Number of rand numbers to generate: convert numerical string argument after ./generate to an int
     int n = atoi(argv[1]);
 
     // TODO: comment me
+    //use the second cmd argument as a seed for srand48 for drand48, else use computers date+time as a seed
     if (argc == 3)
     {
         srand48((long) atoi(argv[2]));
@@ -42,6 +45,7 @@ int main(int argc, string argv[])
     }
 
     // TODO: comment me
+    //print out drand but type cast it to an int withing the LIMIT
     for (int i = 0; i < n; i++)
     {
         printf("%i\n", (int) (drand48() * LIMIT));
