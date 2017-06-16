@@ -13,10 +13,23 @@ int main(){
     //int usrArr[] = {6,2,5,3,4,1};
     //int usrArr[] = {6,5,4,3,2,1};
     //int usrArr[] = {-10,300,-4,3,0,-1};
-
     
+    //array size
     int size = ARRLEN(usrArr);
+    
+    printf("Before: ");
+    for(int i = 0; i < size; i++){
+        printf("%i ", usrArr[i]);
+    } printf("\n");
+
+    //sort array
     sort(usrArr, size);
+    
+     
+    printf(" After: ");
+    for(int i = 0; i < size; i++){
+        printf("%i ", usrArr[i]);
+    } printf("\n");
     
 
 
@@ -32,18 +45,9 @@ int main(){
 
 
 //SELECTION SORT ALGORYTHM - COMPARTMENTALIZED
-    //PSEUDOCODE: https://www.youtube.com/watch?v=f8hXR_Hvybo
-        //Repeat until no unsorted elements remain
-            //Search unsorted part of the data to find smallest value
-            //Swap the smallest value found with the first element of the unsorted part
 void sort(int values[], int n){
-    printf("Size of array: %i\n", n);
-    
-    
-    
-    
-    
-    //SELECTION SORT ALGORYTHM
+
+    //START SELECTION SORT ALGORYTHM
     int smallestNum = values[0];
     int sortedIndex = 0;
 
@@ -67,15 +71,5 @@ void sort(int values[], int n){
     }
     //END SELECTION SORT ALGORYTHM
     
-    
-    
-    
-    
-    
-    printf("Array: ");
-    for(int i = 0; i < n; i++){
-        printf("%i ", values[i]);
-    } printf("\n");
-        
     return;
 }
