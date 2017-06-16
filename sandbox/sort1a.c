@@ -9,6 +9,8 @@ int usrArr[] = {5,2,1,3,4,6};
 //int usrArr[] = {-10,300,-4,3,0,-1};
 #define ARRLEN(arr) ( sizeof(arr) / sizeof(arr[0]))
 
+void sort(int values[], int n);
+
 int main(){
     
     //print original array
@@ -69,4 +71,19 @@ int main(){
     
 
     return 0;
+}
+
+
+
+
+
+//SELECTION SORT ALGORYTHM - COMPARTMENTALIZED
+void sort(int values[], int n){
+    printf("Size of array: %i", n);
+    
+    for(int i = 0; i < n; i++){
+        printf("%i ", values[i]);
+    } printf("\n");
+        
+    return;
 }
