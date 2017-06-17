@@ -1,4 +1,9 @@
 0. TODO
+     The game will allow a minimum of 3x3 and a maximum of 9x9
+     as per DIM_MIN and DIM_MAX
 1. TODO
+     The game uses a 2 dimentional array data structure: arr[a][b]
 2. TODO
+     greet()
 3. TODO
+     Functions init, draw, move, and won need to be implimented
