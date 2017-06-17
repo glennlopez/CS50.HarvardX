@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #define ARRLEN(arr) ( sizeof(arr) / sizeof(arr[0]))
 
+//prototype
 bool search(int value, int values[], int n);
 
 int main(){
@@ -21,19 +22,15 @@ int main(){
     //number to look for
     int needle = 21;
     
-    
     // try to find needle in haystack
-    if (search(needle, usrArr, size))
-    {
+    if (search(needle, usrArr, size)){
         printf("\nFound needle in haystack!\n\n");
         return 0;
     }
-    else
-    {
+    else{
         printf("\nDidn't find needle in haystack.\n\n");
         return 1;
     }
-    
     
     return 0;
 }
