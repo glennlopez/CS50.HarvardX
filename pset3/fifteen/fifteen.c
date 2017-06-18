@@ -156,7 +156,22 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+    //START INITIALIZE BOARD ROUTINE
+    //add values to tiles
+    int tileValue = (d*d) -1;
+    for(int i = 0; i < d; i++){
+        for(int j = 0; j < d; j++){
+           board[i][j] = tileValue;
+           tileValue--;
+        }
+    }  
+    
+    //odd tile swap
+    if(((d*d)-1) % 2){
+         board[d-1][d-2] = 2;
+         board[d-1][d-3] = 1;
+    }
+    //END INITIALIZE BOARD ROUTINE
 }
 
 /**
