@@ -12,7 +12,7 @@ int d;
 
 // prototypes
 void init(void);
-
+void draw(void);
 
 
 //MAIN ROUTINE
@@ -20,22 +20,39 @@ int main(){
     
     d = 3;  //<-- user input
     init(); //<-- init subroutine
-
-    
-    //print array
-    for(int i = 0; i < d; i++){
-        
-        for(int j = 0; j < d; j++){
-            printf("%i ", board[i][j]);
-        }printf("\n");
-
-    }printf("\n");
+    draw(); //<-- draw the board
     
     return 0;
 }
 
 
 
+
+
+
+
+
+
+
+//DRAW SUBROUTINE
+ /* Prints the board in its current state.
+ */
+void draw(void){
+    //START DRAW ROUTINE
+    //print array
+    for(int i = 0; i < d; i++){
+        for(int j = 0; j < d; j++){
+            if(board[i][j] == 0){
+                printf(" _ ");
+            }
+            else{
+                printf("%2i ", board[i][j]);  
+            }
+        }
+        printf("\n");
+    }printf("\n");
+    //END DRAW ROUTINE
+}
 
 
 //INIT SUBROUTINE
