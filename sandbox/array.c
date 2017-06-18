@@ -20,8 +20,8 @@ bool move(int tile);
 //MAIN ROUTINE
 int main(){
     
-    d = 3;  //<-- user input
-    usrNum = 4;
+    d = 4;  //<-- user input
+    usrNum = 10;
     init(); //<-- init subroutine
     draw(); //<-- draw the board
     move(usrNum);
@@ -39,14 +39,37 @@ int main(){
  * returns false. 
  */
 bool move(int tile){
-    /* TODO:
-        * given the tile number (not location)
-            [] find the tile location as per user input
-    */
     
-    //find tile number as per user
+    // Find the array index of userNum
+    int x = 0; int y = 0;
+    while(board[x][y] != usrNum){
+        
+        //do not loop if userNum is too large or too small
+        if( (usrNum > ((d*d) - 1)) || (usrNum < 0)){
+            break;
+        }
+        
+        while(x < d){
+            y = 0;
+            while(y < d){
+                if(board[x][y] == usrNum){
+                    break;
+                }
+                y++;
+            }
+            if(board[x][y] == usrNum){
+                break;
+            }
+            x++;
+        }
+    }
+    
+    //debug printf
+    printf("x: %i y: %i is %i\n", x, y, board[x][y]);   //new line
+    printf("\n");   //new line
     printf("UserNum: %i\n", tile);
-    printf("UserNum Location: %i\n", tile);
+    
+    
     return tile;
 }
 
