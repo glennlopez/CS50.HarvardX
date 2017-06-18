@@ -6,7 +6,7 @@
 #define DIM_MIN 3
 #define DIM_MAX 9
 
-int board[DIM_MAX];
+int board[DIM_MAX][DIM_MAX];
 int d;
 
 
@@ -18,15 +18,36 @@ void init(void);
 //MAIN ROUTINE
 int main(){
     
-    d = 3;
+    d = 4;  //<-- user input
+    init(); //<-- init subroutine
     
-    init();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //print array
     for(int i = 0; i < d; i++){
         
-        board[i] = i + 1;
-        printf("%i ", board[i]);
+        for(int j = 0; j < d; j++){
+            printf("%i ", board[i][j]);
+        }printf("\n");
 
     }printf("\n");
     
