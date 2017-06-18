@@ -8,22 +8,52 @@
 
 int board[DIM_MAX][DIM_MAX];
 int d;
+int usrNum;
 
 
 // prototypes
 void init(void);
 void draw(void);
+bool move(int tile);
 
 
 //MAIN ROUTINE
 int main(){
     
     d = 3;  //<-- user input
+    usrNum = 4;
     init(); //<-- init subroutine
     draw(); //<-- draw the board
-    
+    move(usrNum);
     return 0;
 }
+
+
+
+
+
+
+
+//MOVE SUBROUTINE
+ /* If tile borders empty space, moves tile and returns true, else
+ * returns false. 
+ */
+bool move(int tile){
+    /* TODO:
+        * given the tile number (not location)
+            [] find the tile location as per user input
+    */
+    
+    //find tile number as per user
+    printf("UserNum: %i\n", tile);
+    printf("UserNum Location: %i\n", tile);
+    return tile;
+}
+
+
+
+
+
 
 
 
