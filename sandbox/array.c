@@ -20,10 +20,10 @@ bool move(int tile);
 //MAIN ROUTINE
 int main(){
     
-    d = 3;  //<-- user input
-    usrNum = 7;
-    init(); //<-- init subroutine
-    draw(); //<-- draw the board
+    d = 3;      //<-- user input for board size
+    usrNum = 7; //<-- user input for number to swap
+    init();     //<-- init subroutine
+    draw();     //<-- draw the board
     move(usrNum);
     return 0;
 }
@@ -36,7 +36,7 @@ int main(){
 
 //MOVE SUBROUTINE
  /* If tile borders empty space, moves tile and returns true, else
- * returns false. 
+ * returns false.  
  */
 bool move(int tile){
     
@@ -49,6 +49,7 @@ bool move(int tile){
             break;
         }
         
+        //index the location of the array userNum is in
         while(x < d){
             y = 0;
             while(y < d){
