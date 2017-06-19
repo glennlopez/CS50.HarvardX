@@ -20,8 +20,8 @@ bool move(int tile);
 //MAIN ROUTINE
 int main(){
     
-    d = 4;  //<-- user input
-    usrNum = 10;
+    d = 3;  //<-- user input
+    usrNum = 7;
     init(); //<-- init subroutine
     draw(); //<-- draw the board
     move(usrNum);
