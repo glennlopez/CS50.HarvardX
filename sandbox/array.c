@@ -20,8 +20,8 @@ bool move(int tile);
 //MAIN ROUTINE
 int main(){
     
-    d = 3;      //<-- user input for board size
-    usrNum = 3; //<-- user input for number to swap
+    d = 9;      //<-- user input for board size
+    usrNum = 0; //<-- user input for number to swap
     init();     //<-- init subroutine
     draw();     //<-- draw the board
     move(usrNum);

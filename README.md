@@ -1,28 +1,55 @@
-<!-- https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet -->
+# Harvard CS50: Introduction to Computer Science
+Problem sets and projects for Harvard CS50: Introduction to Computer Science
 
-HarvardX: CS50 - Introduction to Computer Science
-=================
-This is where I keep all my solutions to CS50 (Introduction to Computer Science). This repo exists to facilitate code review for potential employers verifying my progress with Computer Science. It is in no way a solicitation to cheat Harvard/Yales CS50 course. 
+To complete the following psets, I studied all of the CS50's lectures, shorts, and walkthroughs on edX. All Problem Set submissions received scores of 100% from the https://cs50.me/ gradebook.
 
->Introduction to the intellectual enterprises of computer science and the art of programming. This course teaches students how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML. Problem sets inspired by real-world domains of biology, cryptography, finance, forensics, and gaming. Designed for concentrators and non-concentrators alike, with or without prior programming experience.
+### CS50 Problem Sets:
+- [Problem Set 1: C](https://cdn.cs50.net/2015/x/psets/1/pset1/pset1.html)
+- [Problem Set 2: Crypto](http://cdn.cs50.net/2016/x/psets/2/pset2/pset2.html)
+- [Problem Set 3: Game of Fifteen](http://cdn.cs50.net/2016/x/psets/3/pset3/pset3.html)
+- [Problem Set 4: Forensics](http://cdn.cs50.net/2016/x/psets/4/pset4/pset4.html)
+- [Problem Set 5: Mispellings](http://cdn.cs50.net/2016/x/psets/5/pset5/pset5.html)
+- [Problem Set 6: Web Server](http://cdn.cs50.net/2016/x/psets/6/pset6/pset6.html)
+- [Problem Set 7: C$50 Finance](http://cdn.cs50.net/2016/x/psets/7/pset7/pset7.html)
+- [Problem Set 8: Mashup](http://cdn.cs50.net/2016/x/psets/8/pset8/pset8.html)
 
-### Problem sets
-| Submissions        | Description           |
-| ------------- |:--------------------:|
-| [Problem Set 0](https://scratch.mit.edu/projects/164751294/)     | Program in Scratch |
-| [Problem Set 1](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset1)     | Program in C |
-| [Problem Set 2](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset2)     | Crypto |
-| [Problem Set 3](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset3)     | Game of Fifteen |
-| [Problem Set 4](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset4)     | Forensics |
-| [Problem Set 5](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset5)     | Mispellings |
-| [Problem Set 6](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset6)     | Sentimental |
-| [Problem Set 7](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset7)     | C$50 Finance |
-| [Problem Set 8](https://github.com/glennlopez/CS50.HarvardX/tree/master/pset8)     | Mashup |
-| [Project 1](https://github.com/glennlopez/CS50.HarvardX/tree/master/final)     | Final Project |
 
-### Other Associative Links/Sites
-| Website        | Description           |
-| ------------- |:--------------------:|
-| [My Scratch Projects](https://scratch.mit.edu/users/glennlopez/)     | all the projects i've done in MIT's Scratch platform |
-| [My C Stuff](https://github.com/glennlopez/Cpp.Playground/tree/master/c_practice)     | all the practice sessions i've done in C |
-| [My C++ Stuff](https://github.com/glennlopez/Cpp.Playground/tree/master/cpp_practice)     | all the practice sessions i've done in C++ |
+### [Syllabus:](http://docs.cs50.net/2017/x/syllabus.html)
+### Week 0
+Binary. ASCII. Algorithms. Pseudocode. Source code. Compiler. Object code. Scratch. Statements. Boolean expressions. Conditions. Loops. Variables. Functions. Arrays. Threads. Events.
+
+### Week 1
+Linux. C. Compiling. Libraries. Types. Standard output.
+
+### Week 2
+Casting. Imprecision. Switches. Scope. Strings. Arrays. Cryptography.
+
+### Week 3
+Command-line arguments. Searching. Sorting. Bubble sort. Selection sort. Insertion sort. O. Ω .Θ. Recursion. Merge Sort.
+
+### Week 4
+Stack. Debugging. File I/O. Hexadecimal. Strings. Pointers. Dynamic memory allocation.
+
+### Week 5
+Heap. Buffer overflow. Linked lists. Hash tables. Tries. Trees. Stacks. Queues.
+
+### Week 6
+TCP/IP. HTTP.
+
+### Week 7
+HTML. CSS. PHP.
+
+### Week 8
+MVC. SQL.
+
+### Week 9
+JavaScript. Ajax.
+
+### Week 10
+Security. Artificial intelligence.
+
+### Week 11
+Artificial intelligence, continued.
+
+### Week 12
+Exciting conclusion.
