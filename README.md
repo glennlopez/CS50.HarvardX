@@ -2,7 +2,7 @@
 These are my solutions to Harvard University's CS50: Introduction to Computer Science course offered at edX.
 
 To complete the following Problem Sets, I studied all of the CS50's lectures, shorts, and walkthroughs on edX. All Problem Set submissions received scores of 100% from the https://cs50.me/ gradebook. 
-> This course is currently still on-going..
+> NOTE: This course is still in progress, some psets will be missing. If a pset you're looking for is missing, it means I havn't gotten that far in the course yet.
 
 ### CS50 Problem Sets:
 - [Problem Set 0: Scratch](https://scratch.mit.edu/projects/164751294/)
