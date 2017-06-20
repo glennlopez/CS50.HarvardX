@@ -1,9 +1,11 @@
-# Harvard CS50: Introduction to Computer Science
-Problem sets and projects for Harvard CS50: Introduction to Computer Science
+# Harvard CS50: Introduction to Computer Science 2017
+These are my solutions to Harvard University's CS50: Introduction to Computer Science course offered at edX.
 
-To complete the following psets, I studied all of the CS50's lectures, shorts, and walkthroughs on edX. All Problem Set submissions received scores of 100% from the https://cs50.me/ gradebook.
+To complete the following Problem Sets, I studied all of the CS50's lectures, shorts, and walkthroughs on edX. All Problem Set submissions received scores of 100% from the https://cs50.me/ gradebook. 
+> This course is currently still on-going..
 
 ### CS50 Problem Sets:
+- [Problem Set 0: Scratch](https://scratch.mit.edu/projects/164751294/)
 - [Problem Set 1: C](https://cdn.cs50.net/2015/x/psets/1/pset1/pset1.html)
 - [Problem Set 2: Crypto](http://cdn.cs50.net/2016/x/psets/2/pset2/pset2.html)
 - [Problem Set 3: Game of Fifteen](http://cdn.cs50.net/2016/x/psets/3/pset3/pset3.html)
