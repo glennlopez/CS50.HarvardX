@@ -21,7 +21,7 @@ bool move(int tile);
 int main(){
     
     d = 3;      //<-- user input for board size
-    usrNum = 4; //<-- user input for number to swap
+    usrNum = 6; //<-- user input for number to swap
     init();     //<-- init subroutine
     draw();     //<-- draw the board
     move(usrNum);
@@ -40,15 +40,21 @@ int main(){
  */
 bool move(int tile){ bool tile_exists = false;
     
-    //index the location of the tile in the board 
-    int x = 0; int y = 0; 
+    //index user tile and blank tile
+    int x = 0; int y = 0;   //user tile index 
+    int a = 0; int b = 0;   //blank tile index
     for(int i = 0; i < d; i++){
         for(int j = 0; j < d; j++){
+            
+            //search for user tile
             if(board[i][j] == usrNum){
-                x = i;
-                y = j;
+                x = i; y = j;
                 tile_exists = true;
-                break;
+            }
+            
+            //search for blank tile
+            if(board[i][j] == 0){
+                a = i; b = j;
             }
         }
     }
@@ -59,10 +65,28 @@ bool move(int tile){ bool tile_exists = false;
     }
     
     
+    
     //debug printf
     printf("x: %i y: %i is %i\n", x, y, board[x][y]);   //new line
+    printf("a: %i b: %i is %i\n", a, b, board[a][b]);   //new line
     printf("\n");   //new line
     printf("UserNum: %i\n", tile);
+
+   
+    //TODO: tile borders empty space
+    //if(y == (d/2)){    //y = middle 
+    if( (y >= 1) && (y < d) ){    //y = middle 
+        printf("IS in the middle\n");
+        if( board[x][y + 1] == board[a][b]){    //y-pos: check leftside
+            printf("Near empty tile\n");
+        }
+        if( board[x][y - 1] == board[a][b]){    //y-pos: check rightside
+            printf("Near empty tile\n");
+        }
+    }
+
+        
+
     
     
     return tile;
@@ -124,4 +148,5 @@ void init(void){
          board[d-1][d-3] = 1;
     }
     //END INITIALIZE BOARD ROUTINE
+    
 }
