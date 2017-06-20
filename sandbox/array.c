@@ -21,7 +21,7 @@ bool move(int tile);
 int main(){
     
     d = 3;      //<-- user input for board size
-    usrNum = 7; //<-- user input for number to swap
+    usrNum = 3; //<-- user input for number to swap
     init();     //<-- init subroutine
     draw();     //<-- draw the board
     move(usrNum);
@@ -40,29 +40,27 @@ int main(){
  */
 bool move(int tile){
     
-    // Find the array index of userNum
-    int x = 0; int y = 0;
-    while(board[x][y] != usrNum){
+    //index the location of the array userNum is in
+    int x = 0; int y = 0; 
+    while(x < d){
         
         //do not loop if userNum is too large or too small
         if( (usrNum > ((d*d) - 1)) || (usrNum < 0)){
             break;
         }
-        
-        //index the location of the array userNum is in
-        while(x < d){
-            y = 0;
-            while(y < d){
-                if(board[x][y] == usrNum){
-                    break;
-                }
-                y++;
-            }
+            
+        y = 0;
+        while(y < d){
             if(board[x][y] == usrNum){
                 break;
             }
-            x++;
+            y++;
         }
+        
+        if(board[x][y] == usrNum){
+            break;
+        }
+        x++;
     }
     
     //debug printf
