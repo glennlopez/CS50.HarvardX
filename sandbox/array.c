@@ -20,8 +20,8 @@ bool move(int tile);
 //MAIN ROUTINE
 int main(){
     
-    d = 9;      //<-- user input for board size
-    usrNum = 32; //<-- user input for number to swap
+    d = 3;      //<-- user input for board size
+    usrNum = 4; //<-- user input for number to swap
     init();     //<-- init subroutine
     draw();     //<-- draw the board
     move(usrNum);
@@ -38,18 +38,24 @@ int main(){
  /* If tile borders empty space, moves tile and returns true, else
  * returns false.  
  */
-bool move(int tile){
+bool move(int tile){ bool tile_exists = false;
     
-    //index the location of the array userNum is in
+    //index the location of the tile in the board 
     int x = 0; int y = 0; 
-    
     for(int i = 0; i < d; i++){
         for(int j = 0; j < d; j++){
             if(board[i][j] == usrNum){
                 x = i;
                 y = j;
+                tile_exists = true;
+                break;
             }
         }
+    }
+    
+    //check if tile exists
+    if(tile_exists == false){
+        return false;   // tile doesnt exist - invalid move
     }
     
     
