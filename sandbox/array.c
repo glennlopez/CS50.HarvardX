@@ -20,8 +20,8 @@ bool move(int tile);
 //MAIN ROUTINE
 int main(){
     
-    d = 3;      //<-- user input for board size
-    usrNum = 6; //<-- user input for number to swap
+    d = 5;      //<-- user input for board size
+    usrNum = 1; //<-- user input for number to swap
     init();     //<-- init subroutine
     draw();     //<-- draw the board
     move(usrNum);
@@ -75,8 +75,8 @@ bool move(int tile){ bool tile_exists = false;
    
     //TODO: tile borders empty space
     //if(y == (d/2)){    //y = middle 
-    if( (y >= 1) && (y < d) ){    //y = middle 
-        printf("IS in the middle\n");
+    if( (y != 0) && (y != (d -1) ) ){           //y = middle tiles 
+        printf("Within limits..\n");
         if( board[x][y + 1] == board[a][b]){    //y-pos: check leftside
             printf("Near empty tile\n");
         }
