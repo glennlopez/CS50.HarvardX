@@ -20,8 +20,8 @@ bool move(int tile);
 //MAIN ROUTINE
 int main(){
     
-    d = 5;      //<-- user input for board size
-    usrNum = 1; //<-- user input for number to swap
+    d = 3;      //<-- user input for board size
+    usrNum = 8; //<-- user input for number to swap
     init();     //<-- init subroutine
     draw();     //<-- draw the board
     move(usrNum);
@@ -34,11 +34,24 @@ int main(){
 
 
 
+
+
+
+
+
+
+
+
+
+
 //MOVE SUBROUTINE
  /* If tile borders empty space, moves tile and returns true, else
  * returns false.  
  */
-bool move(int tile){ bool tile_exists = false;
+bool move(int tile){ 
+    
+    bool tile_exists = false; 
+    bool tile_movable = false;
     
     //index user tile and blank tile
     int x = 0; int y = 0;   //user tile index 
@@ -74,22 +87,56 @@ bool move(int tile){ bool tile_exists = false;
 
    
     //TODO: tile borders empty space
-    //if(y == (d/2)){    //y = middle 
+/*
     if( (y != 0) && (y != (d -1) ) ){           //y = middle tiles 
-        printf("Within limits..\n");
-        if( board[x][y + 1] == board[a][b]){    //y-pos: check leftside
+        printf("Within y limits..\n");
+        if( board[x][y + 1] == board[a][b]){    //y-pos: check rightside
             printf("Near empty tile\n");
         }
-        if( board[x][y - 1] == board[a][b]){    //y-pos: check rightside
+        if( board[x][y - 1] == board[a][b]){    //y-pos: check leftside
             printf("Near empty tile\n");
         }
     }
+    
+        if( (x != 0) && (x != (d -1) ) ){       //x = middle tiles 
+        printf("Within x limits..\n");
+        if( board[x + 1][y] == board[a][b]){    //x-pos: check below
+            printf("Near empty tile\n");
+        }
+        if( board[x - 1][y] == board[a][b]){    //x-pos: check above
+            printf("Near empty tile\n");
+        }
+    }
+    
+*/
+    
+    if(y == 0){                                 //y = first tile only
+        printf("Within x limits..\n");
+        if( board[x][y + 1] == board[a][b]){    //y-pos: check rightside only
+            printf("Near empty tile\n");
+        }  
+    }
 
-        
+
+
+
+
+
+
+
+
+
+
+    //check if tile was moved
+    if(tile_movable == true){
+        //TODO: swap function
+        return true;    //tile moved, return true
+    }
+
 
     
     
-    return tile;
+    return false; //returns false - if tile exists but cannot be moved
 }
 
 
