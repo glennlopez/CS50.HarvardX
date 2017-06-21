@@ -13,16 +13,18 @@ int d;
 void init(void);
 void draw(void);
 bool move(int tile);
+bool won(void);
 
 
 //MAIN ROUTINE
 int main(){
     int usrNum;
     
-    d = 5;          //<-- user input for board size
+    d = 3;          //<-- user input for board size
     usrNum = 1;     //<-- user input for number to swap
     init();         //<-- init subroutine
     draw();         //<-- draw the board
+    won();
     move(usrNum);
     draw();         //<-- draw the board
     return 0;
@@ -32,6 +34,14 @@ int main(){
 
 
 
+/**
+ * Returns true if game is won (i.e., board is in winning configuration), 
+ * else false.
+ */
+bool won(void){
+    // TODO
+    return false;
+}
 
 
 
