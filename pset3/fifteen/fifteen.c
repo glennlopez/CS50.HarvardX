@@ -287,6 +287,25 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
+    //START WON ROUTINE
+    int orderedNumbers = 0;
+    int tileValue = (d * d);
+    
+    //count the number of ordered numbers
+    for(int i = (d - 1); i >= 0; i--){
+        for(int j = (d - 1); j >= 0; j--){
+           if(board[i][j] == tileValue){
+               orderedNumbers++;
+           }
+           tileValue--;
+        }
+    }  
+    
+    //return true if ordered number count matches ammount of tiles
+    if(orderedNumbers >= (d * d) - 1){
+        return true;
+    }
+    
     return false;
+    //END WON ROUTINE
 }

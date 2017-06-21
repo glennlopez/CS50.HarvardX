@@ -20,13 +20,13 @@ bool won(void);
 int main(){
     int usrNum;
     
-    d = 3;          //<-- user input for board size
+    d = 7;          //<-- user input for board size
     usrNum = 1;     //<-- user input for number to swap
     init();         //<-- init subroutine
     draw();         //<-- draw the board
     won();
-    move(usrNum);
-    draw();         //<-- draw the board
+    //move(usrNum);
+    //draw();         //<-- draw the board
     return 0;
 }
 
@@ -39,7 +39,23 @@ int main(){
  * else false.
  */
 bool won(void){
-    // TODO
+    
+    int orderedNumbers = 0;
+    int tileValue = (d * d);
+    
+    for(int i = (d - 1); i >= 0; i--){
+        for(int j = (d - 1); j >= 0; j--){
+           if(board[i][j] == tileValue){
+               orderedNumbers++;
+           }
+           tileValue--;
+        }
+    }  
+    
+    if(orderedNumbers >= (d * d) - 1){
+        return true;
+    }
+    
     return false;
 }
 
@@ -168,9 +184,9 @@ void draw(void){
 void init(void){
     //START INITIALIZE BOARD ROUTINE
     //add values to tiles
-    int tileValue = (d*d) -1;
-    for(int i = 0; i < d; i++){
-        for(int j = 0; j < d; j++){
+    int tileValue = (d * d);
+    for(int i = (d - 1); i >= 0; i--){
+        for(int j = (d - 1); j >= 0; j--){
            board[i][j] = tileValue;
            tileValue--;
         }
@@ -182,5 +198,8 @@ void init(void){
          board[d-1][d-3] = 1;
     }
     //END INITIALIZE BOARD ROUTINE
+    
+    board[d-1][d-1] = 0;
+    //board[1][1] = ((d*d)-1);
     
 }
