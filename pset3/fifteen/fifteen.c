@@ -201,8 +201,85 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // TODO
-    return false;
+    //START MOVE ROUTINE
+    bool tile_exists = false; 
+    bool tile_movable = false;
+    
+    //index user tile and blank tile
+    int x = 0; int y = 0;   //user tile index 
+    int a = 0; int b = 0;   //blank tile index
+    for(int i = 0; i < d; i++){
+        for(int j = 0; j < d; j++){
+            
+            //search for user tile
+            if(board[i][j] == tile){
+                x = i; y = j;
+                tile_exists = true;
+            }
+            
+            //search for blank tile
+            if(board[i][j] == 0){
+                a = i; b = j;
+            }
+        }
+    }
+    
+    //check if tile exists
+    if(tile_exists == false){
+        return false;   // tile doesnt exist - invalid move
+    }
+   
+    //Check inner tiles
+    if( (y != 0) && (y != (d - 1) ) ){ 
+        if( board[x][y + 1] == board[a][b]){    //y: rightside
+            tile_movable = true;
+        }
+        if( board[x][y - 1] == board[a][b]){    //y: leftside
+            tile_movable = true;
+        }
+    }
+    if( (x != 0) && (x != (d - 1) ) ){ 
+        //printf("Within x limits..\n");
+        if( board[x + 1][y] == board[a][b]){    //x: below
+            tile_movable = true;
+        }
+        if( board[x - 1][y] == board[a][b]){    //x: above
+            tile_movable = true;
+        }
+    }
+    
+    //Check outer tiles
+    if(y == 0){                                 
+        if( board[x][y + 1] == board[a][b]){    //y: rightside at orgin
+            tile_movable = true;
+        }  
+    }
+    if(y == (d - 1)){                          
+        if( board[x][y - 1] == board[a][b]){    //y: leftside at d-limit
+            tile_movable = true;
+        }  
+    }
+    if(x == 0){                                 
+        if( board[x + 1][y] == board[a][b]){    //x: below at orgin
+            tile_movable = true;
+        }  
+    }
+    if(x == (d - 1)){                          
+        if( board[x - 1][y] == board[a][b]){    //x: above at d-limit
+            tile_movable = true;
+        }  
+    }
+
+    //swap empty tile
+    if(tile_movable == true){
+        int buffer = board[x][y];
+        board[x][y] = board[a][b];
+        board[a][b] = buffer;
+        return true;
+    }
+
+    return false;  
+    //START MOVE ROUTINE
 }
 
 /**

@@ -8,8 +8,6 @@
 
 int board[DIM_MAX][DIM_MAX];
 int d;
-int usrNum;
-
 
 // prototypes
 void init(void);
@@ -19,12 +17,14 @@ bool move(int tile);
 
 //MAIN ROUTINE
 int main(){
+    int usrNum;
     
-    d = 3;      //<-- user input for board size
-    usrNum = 8; //<-- user input for number to swap
-    init();     //<-- init subroutine
-    draw();     //<-- draw the board
+    d = 5;          //<-- user input for board size
+    usrNum = 1;     //<-- user input for number to swap
+    init();         //<-- init subroutine
+    draw();         //<-- draw the board
     move(usrNum);
+    draw();         //<-- draw the board
     return 0;
 }
 
@@ -50,6 +50,7 @@ int main(){
  */
 bool move(int tile){ 
     
+     //START MOVE ROUTINE
     bool tile_exists = false; 
     bool tile_movable = false;
     
@@ -60,7 +61,7 @@ bool move(int tile){
         for(int j = 0; j < d; j++){
             
             //search for user tile
-            if(board[i][j] == usrNum){
+            if(board[i][j] == tile){
                 x = i; y = j;
                 tile_exists = true;
             }
@@ -76,82 +77,60 @@ bool move(int tile){
     if(tile_exists == false){
         return false;   // tile doesnt exist - invalid move
     }
-    
-    
-    
-    //debug printf
-    printf("x: %i y: %i is %i\n", x, y, board[x][y]);   //new line
-    printf("a: %i b: %i is %i\n", a, b, board[a][b]);   //new line
-    printf("\n");   //new line
-    printf("UserNum: %i\n", tile);
-
    
-    //TODO: tile borders empty space
-/*
-    if( (y != 0) && (y != (d -1) ) ){           //y = middle tiles 
-        printf("Within y limits..\n");
-        if( board[x][y + 1] == board[a][b]){    //y-pos: check rightside
-            printf("Near empty tile\n");
+    //Check inner tiles
+    if( (y != 0) && (y != (d - 1) ) ){ 
+        if( board[x][y + 1] == board[a][b]){    //y: rightside
+            tile_movable = true;
         }
-        if( board[x][y - 1] == board[a][b]){    //y-pos: check leftside
-            printf("Near empty tile\n");
+        if( board[x][y - 1] == board[a][b]){    //y: leftside
+            tile_movable = true;
+        }
+    }
+    if( (x != 0) && (x != (d - 1) ) ){ 
+        //printf("Within x limits..\n");
+        if( board[x + 1][y] == board[a][b]){    //x: below
+            tile_movable = true;
+        }
+        if( board[x - 1][y] == board[a][b]){    //x: above
+            tile_movable = true;
         }
     }
     
-        if( (x != 0) && (x != (d -1) ) ){       //x = middle tiles 
-        printf("Within x limits..\n");
-        if( board[x + 1][y] == board[a][b]){    //x-pos: check below
-            printf("Near empty tile\n");
-        }
-        if( board[x - 1][y] == board[a][b]){    //x-pos: check above
-            printf("Near empty tile\n");
-        }
+    //Check outer tiles
+    if(y == 0){                                 
+        if( board[x][y + 1] == board[a][b]){    //y: rightside at orgin
+            tile_movable = true;
+        }  
     }
-    
-*/
-    
-    if(y == 0){                                 //y = first tile only
-        printf("Within x limits..\n");
-        if( board[x][y + 1] == board[a][b]){    //y-pos: check rightside only
-            printf("Near empty tile\n");
+    if(y == (d - 1)){                          
+        if( board[x][y - 1] == board[a][b]){    //y: leftside at d-limit
+            tile_movable = true;
+        }  
+    }
+    if(x == 0){                                 
+        if( board[x + 1][y] == board[a][b]){    //x: below at orgin
+            tile_movable = true;
+        }  
+    }
+    if(x == (d - 1)){                          
+        if( board[x - 1][y] == board[a][b]){    //x: above at d-limit
+            tile_movable = true;
         }  
     }
 
-
-
-
-
-
-
-
-
-
-
-    //check if tile was moved
+    //swap empty tile
     if(tile_movable == true){
-        //TODO: swap function
-        return true;    //tile moved, return true
+        int buffer = board[x][y];
+        board[x][y] = board[a][b];
+        board[a][b] = buffer;
+        return true;
     }
 
-
+    return false;
+    //END MOVE ROUTINE
     
-    
-    return false; //returns false - if tile exists but cannot be moved
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //DRAW SUBROUTINE
  /* Prints the board in its current state.
