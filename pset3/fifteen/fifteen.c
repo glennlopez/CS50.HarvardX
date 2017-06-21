@@ -224,7 +224,7 @@ bool move(int tile)
         }
     }
     
-    //check if tile exists
+    //Check if tile exists
     if(tile_exists == false){
         return false;   // tile doesnt exist - invalid move
     }
@@ -239,7 +239,6 @@ bool move(int tile)
         }
     }
     if( (x != 0) && (x != (d - 1) ) ){ 
-        //printf("Within x limits..\n");
         if( board[x + 1][y] == board[a][b]){    //x: below
             tile_movable = true;
         }
@@ -278,8 +277,8 @@ bool move(int tile)
         return true;
     }
 
-    return false;  
-    //START MOVE ROUTINE
+    return false;
+    //END MOVE ROUTINE
 }
 
 /**
