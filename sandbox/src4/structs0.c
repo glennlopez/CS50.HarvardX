@@ -5,7 +5,7 @@
 #include "structs.h"
 
 #define STUDENTS 3
-
+ 
 int main(void)
 {
     student students[STUDENTS];
