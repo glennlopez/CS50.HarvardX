@@ -19,14 +19,14 @@ int main(){
         printf("Dorm: ");
         UoM[i].dorm = get_string();
         printf("\n");
-    }
+    } 
     
     //this will add user inputs to a textfile
-    FILE *file = fopen("test.txt", "a");
+    FILE *file = fopen("test.csv", "a");
     if(file != NULL){
         for(int i = 0; i < MAX_STUDENT; i++){
             //printf("%s belongs to %s\n", UoM[i].name, UoM[i].dorm);
-            fprintf(file, "%s belongs to %s\n", UoM[i].name, UoM[i].dorm);
+            fprintf(file, "%s,%s\n", UoM[i].name, UoM[i].dorm);
         
         }
         fclose(file);
