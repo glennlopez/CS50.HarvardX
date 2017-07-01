@@ -27,7 +27,7 @@ int main(){
         for(int i = 0; i < MAX_STUDENT; i++){
             //printf("%s belongs to %s\n", UoM[i].name, UoM[i].dorm);
             fprintf(file, "%s,%s\n", UoM[i].name, UoM[i].dorm);
-        
+         
         }
         fclose(file);
         
