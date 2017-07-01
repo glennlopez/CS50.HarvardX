@@ -4,7 +4,7 @@
 int main(){
     
     
-    printf(" Input: ");
+    printf(" Input: "); 
     char *s = get_string();
     
     
