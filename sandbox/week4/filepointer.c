@@ -9,9 +9,6 @@ int main(){
         otherwise if n is even, repeate this proccess on n/2
         otherwise if n is odd, repeate this proccess on 3n + 1
    */
-    
-    //TODO: graph the result using csv and file();
-    //https://en.wikipedia.org/wiki/Collatz_conjecture
 
     //search boundary 
     int limit_low = 100;
@@ -21,22 +18,22 @@ int main(){
     int low = 2147483647;
     int highestCol = 0;
     int lowestCol = 0;
+    FILE *writeData = fopen("collatz.cvs", "w");
     
     for(int i = limit_low; i < limit_high; i++){
-        
         //highest collatz
         if(collatz(i) > max){
             max = collatz(i);
             highestCol = i;
         }
-        
         //lowest collatz
         if(collatz(i) < low){
             low = collatz(i);
             lowestCol = i;
         }    
-
     }
+    
+    fclose(writeData);
     
     printf("Highest collatz(n): %i\n", highestCol); 
     printf("collatz(highestCol): %i\n", collatz(highestCol));   
