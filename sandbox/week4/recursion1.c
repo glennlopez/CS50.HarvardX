@@ -10,7 +10,9 @@ int main(){
         otherwise if n is odd, repeate this proccess on 3n + 1
    */
    
-    int col = 3;
+    //TODO: find the most and least collatz steps of numbers 1 - 100
+    //https://en.wikipedia.org/wiki/Collatz_conjecture
+    int col = 7;
     
     printf("Collatz of %i is %i\n", col, collatz(col));
     printf("\n");
