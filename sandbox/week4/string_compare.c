@@ -34,36 +34,21 @@ bool string_compare(char *first, char *second){ int i;
 
 
 int main(){
-    //test string
-    char t[] = {'G','L','E','N','N','\0'};  //<-- notice the null char
     
     //get input from user
-    printf("User Input: ");
+    printf("User Input 1: ");
     char *s = get_string();
+    printf("User Input 2: ");
+    char *t = get_string();
     
-    //print user string
-    printf("s: ");
-    int i = 0;
-    while(s[i] != '\0'){
-        printf("%c",s[i]);
-        i++;
+    //print results
+    printf("Result: %i ", (int)string_compare(s,t));
+    if(!(string_compare(s,t))){
+        printf("(same)\n");
     }
-    printf("\n");
-    
-    //print test string
-    printf("t: ");
-    i = 0;
-    while(t[i] != '\0'){
-        printf("%c",t[i]);
-        i++;
+    else{
+        printf("(not the same)\n");
     }
-    printf("\n");
-    
-    printf("Result: %i\n", (int)string_compare(s,t));
-    printf("&s[0]: %i\n", (int)&s[0]);
-    printf("&s[1]: %i\n", (int)&s[1]);    
-    printf("&t[0]: %i\n", (int)&t[0]);
-    printf("&t[1]: %i\n", (int)&t[1]);
 
     
     return 0;
