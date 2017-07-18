@@ -12,11 +12,10 @@ bool string_compare(char *first, char *second){ int i;
         i++;
     }
     int count_second = 0;
-    i = 0;
-    while(second[i] != '\0'){    //count *second
+    for(i = 0; second[i] != '\0'; i++){
         count_second++;
-        i++;
     }
+
     
     if(count_first != count_second){
         return 1;

@@ -8,3 +8,6 @@
 
 ### Projects
 Implement recover.c, resize.c, and whodunit.c. See folders for project details.
+
+### References used
+[Stack vs Heap vs Text](http://www-ee.eng.hawaii.edu/~tep/EE160/Book/chap14/subsection2.1.1.8.html)
