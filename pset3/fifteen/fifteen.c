@@ -173,7 +173,7 @@ void init(void)
     }
     //END INITIALIZE BOARD ROUTINE
 }
-
+ 
 /**
  * Prints the board in its current state.
  */

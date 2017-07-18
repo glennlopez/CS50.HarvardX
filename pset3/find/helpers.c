@@ -23,7 +23,7 @@ bool search(int value, int values[], int n)
         if(values[midPoint] != value){
             
             if(values[midPoint] < value){
-                startPoint = midPoint + 1;
+                startPoint = midPoint + 1; 
             }
             
             if(values[midPoint] > value){

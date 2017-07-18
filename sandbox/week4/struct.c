@@ -19,7 +19,7 @@ int main(){
         printf("Dorm: ");
         UoM[i].dorm = get_string();
         printf("\n");
-    } 
+    }  
     
     //this will add user inputs to a textfile
     FILE *file = fopen("test.csv", "a");

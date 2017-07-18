@@ -8,7 +8,7 @@
 
 #define ASCII_LWRCASE_INDEX 97
 #define ASCII_UPRCASE_INDEX 65
-#define A_TO_Z 26
+#define A_TO_Z 26 
 #define KEY_SIZE strlen(key)
 
 char cipher(char, string);

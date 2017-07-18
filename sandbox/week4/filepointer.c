@@ -1,26 +1,35 @@
 #include<stdio.h>
 #include<cs50.h>
-int collatz(int);
+long long collatz(long long);
 
 int main(){
 
-   /* COLLATZ
+   /* COLLATZ CONJECTURE
         if n is 1, stop
         otherwise if n is even, repeate this proccess on n/2
         otherwise if n is odd, repeate this proccess on 3n + 1
    */
 
     //search boundary 
-    int limit_low = 100;
-    int limit_high = 200;
+    long long limit_low = 1;
+    long long limit_high = 1000000;
     
-    int max = 0;
-    int low = 2147483647;
-    int highestCol = 0;
-    int lowestCol = 0;
-    FILE *writeData = fopen("collatz.cvs", "w");
+    long long max = 0;
+    long long low = 2147483647;
+    long long highestCol = 0;
+    long long lowestCol = 0;
     
-    for(int i = limit_low; i < limit_high; i++){
+    //open file pointer to write data
+    FILE *writeData = fopen("collatz.csv", "w");
+    if(writeData == NULL){
+        printf("Null Pointer Error!\n");
+        return 1;
+    }
+    
+    for(long long i = limit_low; i <= limit_high; i++){
+        //collect datadump - save to cvs for graphing
+        fprintf(writeData, "%lli,%lli\n", i, collatz(i));
+        
         //highest collatz
         if(collatz(i) > max){
             max = collatz(i);
@@ -33,14 +42,17 @@ int main(){
         }    
     }
     
+    //close file in file pointer
     fclose(writeData);
     
-    printf("Highest collatz(n): %i\n", highestCol); 
-    printf("collatz(highestCol): %i\n", collatz(highestCol));   
+    
+    //DEBUG PRINT
+    printf("Highest collatz(n): %lli\n", highestCol); 
+    printf("collatz(highestCol): %lli\n", collatz(highestCol));   
     printf("\n");
     
-    printf("Lowest collatz(n): %i\n", lowestCol); 
-    printf("collatz(lowestCol): %i\n", collatz(lowestCol)); 
+    printf("Lowest collatz(n): %lli\n", lowestCol); 
+    printf("collatz(lowestCol): %lli\n", collatz(lowestCol)); 
     //printf("collatz(n): %i\n", collatz(5)); 
     printf("\n"); 
     
@@ -50,18 +62,16 @@ int main(){
 
 
 //COLLATZ SUBROUTINE
-int collatz(int n){
+long long collatz(long long n){
     //basecase
-    if(n == 1){
+    if(n == 1)  //<-- if n is 1, stop
         return 0;
-    }
     
     //recursive
-    else if((n % 2) == 0){
-        return 1 + collatz(n/2);
-    }
-    
-    else{
+    else if((n % 2) == 0)
+        // otherwise if n is even, repeate this proccess on n/2
+        return 1 + collatz(n/2); 
+    else
+         // otherwise if n is odd, repeate this proccess on 3n + 1
         return 1 + collatz((3*n + 1));
-    }
 }
