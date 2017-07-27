@@ -15,6 +15,7 @@ int main(){
     printf("Output: ");
     for(int i = 0; s[i] != '\0'; i++){
         if(i == 0){
+            //uppercase the first char
             s[i] = toupper(s[i]);
         }
         printf( "%c", *(s + i) );
