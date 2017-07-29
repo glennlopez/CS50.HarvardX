@@ -30,5 +30,7 @@ int main(){
     }
     printf("\n");
     
+    free(t);    //FREE memory
+    
     return 0;
 }

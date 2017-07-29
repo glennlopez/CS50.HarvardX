@@ -8,7 +8,7 @@ int main(){
     printf("Input: ");
     char *s = get_string();
     if(s == NULL){
-        return 1;
+        return 1; 
     }
     
     //print string using pointer arithmatic
