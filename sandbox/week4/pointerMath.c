@@ -4,9 +4,12 @@
 
 int main(){
     
+    char *s = NULL;
+    //char *s;
+    
     //get input string from user
     printf("Input: ");
-    char *s = get_string();
+    s = get_string();
     if(s == NULL){
         return 1; 
     }
@@ -17,7 +20,7 @@ int main(){
         if(i == 0){
             //uppercase the first char
             s[i] = toupper(s[i]);
-        }
+        } 
         printf( "%c", *(s + i) );
     }
     printf("\n");
