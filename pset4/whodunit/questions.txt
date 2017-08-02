@@ -1,7 +1,9 @@
-1.  TODO
+1.  What’s stdint.h - a libray providing programmers 
+
+
 2.  TODO
 3.  TODO
-4.  TODO
+4.  TODO 
 5.  TODO
 6.  TODO
 7.  TODO

@@ -2,7 +2,7 @@
  * BMP-related data types based on Microsoft's own.
  */
 
-#include <stdint.h>
+#include <stdint.h> 
 
 /**
  * Common Data Types 
@@ -60,7 +60,7 @@ typedef struct
 } __attribute__((__packed__))
 BITMAPINFOHEADER; 
 
-/**
+/** 
  * RGBTRIPLE
  *
  * This structure describes a color consisting of relative intensities of
