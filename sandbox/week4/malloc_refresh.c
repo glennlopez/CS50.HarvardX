@@ -2,6 +2,7 @@
 #include <cs50.h>
 #include <string.h>
 #include <ctype.h>
+//memcheck using: valgrind --tool=memcheck --leak-check=yes
 
 /*
     Get user string input from stack
@@ -41,6 +42,9 @@ int main(){
         //printf("%c", *(usrHeap + 1));
     }
     printf("\n");
+
+    //free heap memory
+    free(usrHeap);
 
 
 
