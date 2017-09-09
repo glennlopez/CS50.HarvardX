@@ -8,24 +8,28 @@ bool compareString(char *param1, char *param2);
 
 int main(){
 
-    string s = "Glenn";
-    string t = "GleNn";
+    string s = "GlENn";
+    string t = "GlENn";
 
-    //compare string size first
+    //compare string size first (faster)
     if(stringCount(s) != stringCount(t)){
         printf("Does not match! \n");
         return 0;
     }
 
-    //compare char if string size matches
-    if(compareString(s, t) == 1){
+    //compare char if string size matches (double check )
+    if(compareString(s, t) == 1)
         printf("Matches!\n");
-    }
-    else{
+    else
         printf("No Match!\n");
-    }
+
+
     return 0;
 }
+
+
+
+
 
 //COMPARE CHAR
 bool compareString(char *param1, char *param2){ bool result = 1;
