@@ -1,5 +1,5 @@
 # Harvard CS50: Introduction to Computer Science
-These are my solutions to Harvard University's CS50 2017: Introduction to Computer Science course offered at edX.
+These are my solutions to Harvard University's "CS50 2017: Introduction to Computer Science" course offered at edX. I used both CS50's [c9.io](https://c9.io/) IDE and my own flavor of linux + [cs50's](http://www.oss.io/p/cs50/library50-c) Libraries to complete this course.
 
 To complete the following Problem Sets, I [studied](https://study.cs50.net/) all of the CS50's [lectures](http://docs.cs50.net/2017/x/syllabus.html#lectures), shorts, [walkthroughs](http://docs.cs50.net/2017/x/syllabus.html#walkthroughs), and participated in class discussions via [/r/CS50](https://www.reddit.com/r/cs50/) on Reddit. All Problem Set submissions received scores of 100% from the https://cs50.me/ gradebook.
 > NOTE: This course is still in progress, some psets will be missing. If a pset you're looking for is missing, it means I havn't gotten that far in the course yet.
