@@ -10,5 +10,4 @@
 - Implement **greedy.c**, a program that asks the user how much change is owed (in $) and prints the minimum number of coins with which said change can be made.
 
 ![Mario's pyramid](http://i.imgur.com/qfgSWU0.png)
-
 ![Change dispenser](http://i.imgur.com/xJDsuKI.png)
