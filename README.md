@@ -37,23 +37,24 @@ Stack. Debugging. File I/O. Hexadecimal. Strings. Pointers. Dynamic memory alloc
 Heap. Buffer overflow. Linked lists. Hash tables. Tries. Trees. Stacks. Queues.
 
 ### [Week 6](https://docs.cs50.net/2016/fall/notes/6/week6.html)
-The Internet. HTTP. HTML. CSS. POST. 
+The Internet. HTTP. HTML. CSS. POST.
 
 ### [Week 7](https://docs.cs50.net/2016/fall/notes/7/week7.html)
-Introduction to Machine Learning. Image Classification. Nearest Neighbors with Python. Image Classification with Python. Text Clustering. 
+Introduction to Machine Learning. Image Classification. Nearest Neighbors with Python. Image Classification with Python. Text Clustering.
 
 ### [Week 8](https://docs.cs50.net/2016/fall/notes/8/week8.html)
-Intro to Python. First Programs. Logical Programs. More Complex Programs. Web Servers. 
+Intro to Python. First Programs. Logical Programs. More Complex Programs. Web Servers.
 
 ### [Week 9](https://docs.cs50.net/2016/fall/notes/9/week9.html)
-Frosh IMs. SQL. Models. SQL Injections. 
+Frosh IMs. SQL. Models. SQL Injections.
 
 ### [Week 10](https://docs.cs50.net/2016/fall/notes/10/week10.html)
-Javascript Basics. Events and DOM. Form Validation. Fun Features. 
+Javascript Basics. Events and DOM. Form Validation. Fun Features.
 
 ### [Week 11](https://docs.cs50.net/2016/fall/notes/11/week11.html)
 Closure
 
 # Useful Links:
 [CS50 Appliance](https://github.com/cs50/libcs50)
+
 [Makefile Appliance Tutorial](https://cs50.stackexchange.com/questions/2816/how-to-make-my-makefile-match-the-appliance)
