@@ -1,5 +1,6 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <math.h>
 
 #define QUARTER 25
 #define DIME 10
@@ -9,7 +10,7 @@
 int main(){
     int coins = 0;
     int cents = 0;
-    double uNum = 0;
+    float uNum = 0; //NOTE: if you change datatype from float to double see what happens
 
     //loop back when uNum is out of bounds
     do{
@@ -19,10 +20,36 @@ int main(){
     while(uNum < 0);
 
     //converts $1.00 to 100 cents
-    cents = uNum * 100;
+    cents = round(uNum * 100);  //<-- round prevents float to int errors
 
     while(cents > 0){
 
+        if(cents >= QUARTER){
+            coins++;
+            cents -= QUARTER;
+        }
+
+        else if(cents >= DIME){
+            coins++;
+            cents -= DIME;
+        }
+
+        else if(cents >= NICKEL){
+            coins++;
+            cents -= NICKEL;
+        }
+
+        else if(cents >= PENNY){
+            coins++;
+            cents -= PENNY;
+        }
+
+        else{
+            coins++;
+            cents -= QUARTER;
+        }
+
+        /*  //FAILS
         if( !(cents % QUARTER) ){
             coins++;
             cents -= QUARTER;
@@ -42,6 +69,7 @@ int main(){
             coins++;
             cents -= PENNY;
         }
+        */
     }
 
 
