@@ -55,6 +55,5 @@ Javascript Basics. Events and DOM. Form Validation. Fun Features.
 Closure
 
 # Useful Links:
-[CS50 Appliance](https://github.com/cs50/libcs50)
-
-[Makefile Appliance Tutorial](https://cs50.stackexchange.com/questions/2816/how-to-make-my-makefile-match-the-appliance)
+- [CS50 Appliance](https://github.com/cs50/libcs50)
+- [Makefile Appliance Tutorial](https://cs50.stackexchange.com/questions/2816/how-to-make-my-makefile-match-the-appliance)
