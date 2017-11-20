@@ -19,22 +19,22 @@ To complete the following Problem Sets, I [studied](https://study.cs50.net/) all
 This course teaches you how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML. Problem sets inspired by real-world domains of biology, cryptography, finance, forensics, and gaming. Designed for concentrators and non-concentrators alike, with or without prior programming experience. 68% of CS50 students have never taken CS before.
 
 ### [Week 0](https://docs.cs50.net/2016/fall/notes/0/week0.html)
-Binary. ASCII. Algorithms. Pseudocode. Source code. Compiler. Object code. Scratch. Statements. Boolean expressions. Conditions. Loops. Variables. Functions. Arrays. Threads. Events.
+This is CS50. Algorithms. About CS50. Scratch. 
 
 ### [Week 1](https://docs.cs50.net/2016/fall/notes/1/week1.html)
-Linux. C. Compiling. Libraries. Types. Standard output.
+Scratch vs C. Hello C. CS50 Library. Data Types. 
 
 ### [Week 2](https://docs.cs50.net/2016/fall/notes/2/week2.html)
-Casting. Imprecision. Switches. Scope. Strings. Arrays. Cryptography.
+Debbuging. Things to know. Cryptography. Command-line Argiments. 
 
 ### [Week 3](https://docs.cs50.net/2016/fall/notes/3/week3.html)
-Command-line arguments. Searching. Sorting. Bubble sort. Selection sort. Insertion sort. O. Ω .Θ. Recursion. Merge Sort.
+Sorting. Running Time. Linier Search. Binary Search. Bubble Sort. Selection Sort. Merge Sort. Insertion Sort. 
 
 ### [Week 4](https://docs.cs50.net/2016/fall/notes/4/week4.html)
-Stack. Debugging. File I/O. Hexadecimal. Strings. Pointers. Dynamic memory allocation.
+Strings. Memory. Pointers. Memory Allocation. Images. 
 
 ### [Week 5](https://docs.cs50.net/2016/fall/notes/5/week5.html)
-Heap. Buffer overflow. Linked lists. Hash tables. Tries. Trees. Stacks. Queues.
+Linked Lists. Stacks and Queues. Trees. Hash Tables and Tries. 
 
 ### [Week 6](https://docs.cs50.net/2016/fall/notes/6/week6.html)
 The Internet. HTTP. HTML. CSS. POST.
