@@ -48,7 +48,6 @@ int main(int argc, string argv[]){
     //check if matching
     //isMatching(usrHash, genHash);
 
-
     printf("Password: %s\n", keyGen());
 
 
@@ -82,14 +81,70 @@ int main(int argc, string argv[]){
 
 
 
-string keyGen(void){ string password = "???";
+/*  
+    Password Generator Subroutine
+    Description: brute forces DES hash 
+    Dependencies: crypt(), isMatching()
+*/
+string keyGen(void){ 
+    
+    string password = "???";
+    genHash = crypt(password, salt);
 
-    do{
-        password = "rofl";
-        //hash generator
-        genHash = crypt(password, salt);
+    //do{
 
-    }while( !(isMatching(usrHash, genHash)) );
+        char key[5];
+
+        key[0] = '@'; key[1] = '\0';
+        for(int i = 0; key[0] != '{'; i++){
+            key[0] += 1;
+
+            password = key;
+            genHash = crypt(password, salt);
+
+            if(isMatching(usrHash, genHash)){
+                return password;
+            }
+
+
+            key[1] = '@'; key[2] = '\0';
+            for(int j = 0; key[1] != '{'; j++){
+                key[1] += 1;
+
+                password = key;
+                genHash = crypt(password, salt);
+
+                if(isMatching(usrHash, genHash)){
+                    return password;
+                }
+
+                key[2] = '@'; key[3] = '\0';
+                for(int k = 0; key[2] != '{'; k++){
+                    key[2] += 1;
+
+                    if(isMatching(usrHash, genHash)){
+                        return password;
+                    }
+
+                    key[3] = '@'; key[4] = '\0';
+                    for(int k = 0; key[3] != '{'; k++){
+                        printf("%s\n", key);
+                        key[3] += 1;
+
+                        if(isMatching(usrHash, genHash)){
+                            return password;
+                        }   
+                    }
+                }
+            }
+        }
+
+        
+
+
+
+    //}while( !(isMatching(usrHash, genHash)) );
+
 
     return password;
 }
@@ -99,7 +154,11 @@ string keyGen(void){ string password = "???";
 
 
 
-//Checks to see if strings match
+/*  
+    String Compare Subroutine
+    Description: compares each char in a string and returns true if similar
+    Dependencies: none
+*/
 bool isMatching(char inputHash[], char generatedHash[]){
 
     //count character length
