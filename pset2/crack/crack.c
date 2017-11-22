@@ -4,60 +4,45 @@
 #include <cs50.h>
 #include <stdio.h>
 
-/*
-    [x] Accept a single command-line argument (hashed password)
-        [x] Print error if no argument or more than one argument is entered
-        [x] return 1 on error
-    [1] Assume passwords were hashed with DES crypt function
-    [!] Assume passwords are no longer than 4 characters
-    [!] Assume that each password is composed of alphabetical characters (upper and lower case)
+bool isMatching(string inputHash, string generatedHash);
 
-    Topics covered in Week 2:
-        - Functions, Variable scope, Array, Command-line arguments, Magic Numbers
-        - Strings, Ascii, error codes
-*/
+char usrHash[20];
+char salt[20];
 
-//prototypes
-bool isMatching(char[], char[]);
-
-int main(){
-
-    string a = "rofl";
-
-    char key[5];
-
-    key[0] = '@'; key[1] = '\0';
-    for(int i = 0; key[0] != '{'; i++){
-        key[0] += 1;
-
-        key[1] = '@'; key[2] = '\0';
-        for(int j = 0; key[1] != '{'; j++){
-            key[1] += 1;
-
-            key[2] = '@'; key[3] = '\0';
-            for(int k = 0; key[2] != '{'; k++){
-                key[2] += 1;
-
-                key[3] = '@'; key[4] = '\0';
-                for(int k = 0; key[3] != '{'; k++){
-                    printf("%s\n", key);
-
-                    if( isMatching(a, key) ){
-                        printf("Match! \n");
-                        return 0;
-                    }
+int main(int argc, string argv[]){
 
 
-                    key[3] += 1;
-                }
-            }
-        }
+    //get command-line arguments
+    if (argc != 2){
+        printf("Error: Invalid argument!\n");
+        return 1;
     }
+
+    //extract information from user input (key length, hash, salt)
+    unsigned int charCnt = 0;
+    for(int i = 0; argv[1][i] != '\0'; i++){
+        usrHash[i] = argv[1][i];
+        charCnt++;
+    }
+    salt[0] = argv[1][0];
+    salt[1] = argv[1][1];
+
+    string hashGenerated = crypt("rofl", salt); //generates predicted 50fkUxYHbnXGw hash
+
+    //FIXME: make the above "rofl" generate "AAAA" to "zzzz" while usrHash != hashGenerated
+
+    if( isMatching(usrHash, hashGenerated) ){
+        printf("Match!\n");
+    }
+
+
+
+    //debug out
+    printf("Hash in: %s\n", usrHash);
+    printf("Hash out: %s\n", hashGenerated);
 
     return 0;
 }
-
-
 
 
 
@@ -67,7 +52,7 @@ int main(){
     Description: compares each char in a string and returns true if similar
     Dependencies: none
 */
-bool isMatching(char inputHash[], char generatedHash[]){
+bool isMatching(string inputHash, string generatedHash){
 
     //count character length
     unsigned int inputLen = 0;
