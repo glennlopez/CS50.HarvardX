@@ -6,8 +6,9 @@
 
 //prototypes
 bool isMatching(string inputHash, string generatedHash);
-string findPassword(string usrHash, string generatedHash);
+bool findPassword(string usrHash, string generatedHash);
 
+//global variables
 char usrHash[20];
 char salt[20];
 
@@ -30,13 +31,17 @@ int main(int argc, string argv[]){
     salt[1] = argv[1][1];
 
     //string hashGenerated = crypt("zzzz", salt); //generates predicted 50fkUxYHbnXGw hash
-    string hashGenerated = crypt("rofl", "50"); //generates predicted 50fkUxYHbnXGw hash
+    string hashGenerated = crypt("zy", "50"); //generates predicted 50fkUxYHbnXGw hash
 
     //FIXME: make the above "rofl" generate "AAAA" to "zzzz" while usrHash != hashGenerated
 
+    findPassword(usrHash, hashGenerated);
+
+    /* DEBUG
     if( isMatching(usrHash, hashGenerated) ){
         printf("Match!\n");
     }
+    */
 
 
 
@@ -55,22 +60,53 @@ int main(int argc, string argv[]){
     Description: Brute forces hash generation to find a matching pair
     Dependencies: isMatching()
 */
-string findPassword(string usrHash, string generatedHash){
-    string result = "not found";
+bool findPassword(string usrHash, string generatedHash){
+
     string hashGenerated = crypt("zzzz", salt); //starting hash
 
-    do{
-        //generate next param for crypt() function
+    //generate next param for crypt() function
+    //string a = "b";
+    //z = 50s7QGTz4Jjzc
+    //f = 50AWs/7oe6pkA
+    //gg = 503ri32DnOw4o
+    //xl = 50H4BMr9R1ey2
+    //zy = 50AHc7mcjHmzk
+
+    char key[5];
+
+    //brute force 1 character
+    key[0] = '@'; key[1] = '\0';
+    for(int i = 0; key[0] != '{'; i++){
         
+        key[0] += 1;
+        hashGenerated = crypt(key, salt); 
 
-        //generate next hash to test
-        hashGenerated = crypt("rofl", salt); //<-- NOTE: change "rofl" to be dynamic
+        if( isMatching(usrHash, hashGenerated) ){
+            printf("Password found: %s\n", key);
+            return true;
+        }
+    }
 
-        //break after maximum attempts (so it doesnt get stuck in subroutine)
+    //brute force 2 characters
+    key[0] = '@'; key[1] = '\0';
+    for(int i = 0; key[0] != '{'; i++){
+        key[0] += 1;
 
-    }while( !(isMatching(usrHash, generatedHash)) );
+        key[1] = '@'; key[2] = '\0';
+        for(int j = 0; key[1] != '{'; j++){
+           
+            key[1] += 1;
+            hashGenerated = crypt(key, salt);
 
-    return result;
+            if( isMatching(usrHash, hashGenerated) ){
+                printf("Password found: %s\n", key);
+                return true;
+            }
+        }
+    }
+
+    printf("Password not found! \n");
+    return false;
 }
 
 
