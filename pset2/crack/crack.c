@@ -4,7 +4,9 @@
 #include <cs50.h>
 #include <stdio.h>
 
+//prototypes
 bool isMatching(string inputHash, string generatedHash);
+string findPassword(string usrHash, string generatedHash);
 
 char usrHash[20];
 char salt[20];
@@ -27,7 +29,8 @@ int main(int argc, string argv[]){
     salt[0] = argv[1][0];
     salt[1] = argv[1][1];
 
-    string hashGenerated = crypt("rofl", salt); //generates predicted 50fkUxYHbnXGw hash
+    //string hashGenerated = crypt("zzzz", salt); //generates predicted 50fkUxYHbnXGw hash
+    string hashGenerated = crypt("rofl", "50"); //generates predicted 50fkUxYHbnXGw hash
 
     //FIXME: make the above "rofl" generate "AAAA" to "zzzz" while usrHash != hashGenerated
 
@@ -38,10 +41,36 @@ int main(int argc, string argv[]){
 
 
     //debug out
-    printf("Hash in: %s\n", usrHash);
-    printf("Hash out: %s\n", hashGenerated);
+    printf("Hash in: %s (from cmd-line)\n", usrHash);
+    printf("Hash out: %s (generated w/ salt:50)\n", hashGenerated);
 
     return 0;
+}
+
+
+
+
+/*  
+    Find Password Subroutine
+    Description: Brute forces hash generation to find a matching pair
+    Dependencies: isMatching()
+*/
+string findPassword(string usrHash, string generatedHash){
+    string result = "not found";
+    string hashGenerated = crypt("zzzz", salt); //starting hash
+
+    do{
+        //generate next param for crypt() function
+        
+
+        //generate next hash to test
+        hashGenerated = crypt("rofl", salt); //<-- NOTE: change "rofl" to be dynamic
+
+        //break after maximum attempts (so it doesnt get stuck in subroutine)
+
+    }while( !(isMatching(usrHash, generatedHash)) );
+
+    return result;
 }
 
 
