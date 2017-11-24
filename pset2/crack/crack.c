@@ -57,7 +57,7 @@ int main(int argc, string argv[]){
 /*  
     Description: generates every possible hash to find a match and returns the key
     Dependencies: isMatching()
-    Returns: True or False if password is found
+    Returns: True or False if password is found (for debugging)
 */
 bool findPassword(string usrHash){ 
     
@@ -110,6 +110,8 @@ bool findPassword(string usrHash){
                 key[2] += 1;
                 hashGenerated = crypt(key, salt);
 
+                //printf("%s\n", key);    //debug output
+
                 if( isMatching(usrHash, hashGenerated) ){
                     printf("Password found: %s\n", key);
                     return true;
@@ -119,6 +121,34 @@ bool findPassword(string usrHash){
     }
 
     //brute force 4 characters
+    key[0] = '@'; key[1] = '\0';
+    for(int i = 0; key[0] != '{'; i++){
+        key[0] += 1;
+
+        key[1] = '@'; key[2] = '\0';
+        for(int j = 0; key[1] != '{'; j++){
+            key[1] += 1;
+
+            key[2] = '@'; key[3] = '\0';
+            for(int k = 0; key[2] != '{'; k++){
+                key[2] += 1;
+
+                key[3] = '@'; key[4] = '\0';
+                for(int k = 0; key[3] != '{'; k++){
+
+                    key[3] += 1;
+                    hashGenerated = crypt(key, salt);
+
+                    //printf("%s\n", key);    //debug output
+
+                    if( isMatching(usrHash, hashGenerated) ){
+                        printf("Password found: %s\n", key);
+                        return true;
+                    }
+                }
+            }
+        }
+    }
 
 
     printf("Password not found! \n");
