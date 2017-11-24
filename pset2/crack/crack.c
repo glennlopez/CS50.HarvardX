@@ -4,16 +4,31 @@
 #include <cs50.h>
 #include <stdio.h>
 
+    //test hash
+    //z = 50s7QGTz4Jjzc
+    //f = 50AWs/7oe6pkA
+    //gg = 503ri32DnOw4o
+    //xl = 50H4BMr9R1ey2
+    //zy = 50AHc7mcjHmzk
+    //zyz = 50oi68XAsf0jA
+    //xyz = 50yi70MN3ixyM
+    //cat = 506RU8OAqwvXA
+    //dog = 50Ecvq43taQ.I
+    //CoW = 507dx548PpBLs
+    //cow = 50ZYHbIgHblYI
+
 //prototypes
-bool isMatching(string inputHash, string generatedHash);
-bool findPassword(string usrHash, string generatedHash);
+bool isMatching(string, string);
+bool findPassword(string usrHash);
 
 //global variables
 char usrHash[20];
 char salt[20];
 
-int main(int argc, string argv[]){
 
+
+//MAIN ROUTINE
+int main(int argc, string argv[]){
 
     //get command-line arguments
     if (argc != 2){
@@ -21,7 +36,7 @@ int main(int argc, string argv[]){
         return 1;
     }
 
-    //extract information from user input (key length, hash, salt)
+    //extract information from cmd-line arg (key length, hash, salt)
     unsigned int charCnt = 0;
     for(int i = 0; argv[1][i] != '\0'; i++){
         usrHash[i] = argv[1][i];
@@ -30,24 +45,8 @@ int main(int argc, string argv[]){
     salt[0] = argv[1][0];
     salt[1] = argv[1][1];
 
-    //string hashGenerated = crypt("zzzz", salt); //generates predicted 50fkUxYHbnXGw hash
-    string hashGenerated = crypt("zy", "50"); //generates predicted 50fkUxYHbnXGw hash
-
-    //FIXME: make the above "rofl" generate "AAAA" to "zzzz" while usrHash != hashGenerated
-
-    findPassword(usrHash, hashGenerated);
-
-    /* DEBUG
-    if( isMatching(usrHash, hashGenerated) ){
-        printf("Match!\n");
-    }
-    */
-
-
-
-    //debug out
-    printf("Hash in: %s (from cmd-line)\n", usrHash);
-    printf("Hash out: %s (generated w/ salt:50)\n", hashGenerated);
+    //bruteforce hash for password
+    findPassword(usrHash);
 
     return 0;
 }
@@ -56,22 +55,13 @@ int main(int argc, string argv[]){
 
 
 /*  
-    Find Password Subroutine
-    Description: Brute forces hash generation to find a matching pair
+    Description: generates every possible hash to find a match and returns the key
     Dependencies: isMatching()
+    Returns: True or False if password is found
 */
-bool findPassword(string usrHash, string generatedHash){
-
-    string hashGenerated = crypt("zzzz", salt); //starting hash
-
-    //generate next param for crypt() function
-    //string a = "b";
-    //z = 50s7QGTz4Jjzc
-    //f = 50AWs/7oe6pkA
-    //gg = 503ri32DnOw4o
-    //xl = 50H4BMr9R1ey2
-    //zy = 50AHc7mcjHmzk
-
+bool findPassword(string usrHash){ 
+    
+    string hashGenerated;  
     char key[5];
 
     //brute force 1 character
@@ -105,6 +95,32 @@ bool findPassword(string usrHash, string generatedHash){
         }
     }
 
+    //brute force 3 characters
+    key[0] = '@'; key[1] = '\0';
+    for(int i = 0; key[0] != '{'; i++){
+        key[0] += 1;
+
+        key[1] = '@'; key[2] = '\0';
+        for(int j = 0; key[1] != '{'; j++){
+            key[1] += 1;
+
+            key[2] = '@'; key[3] = '\0';
+            for(int k = 0; key[2] != '{'; k++){
+                
+                key[2] += 1;
+                hashGenerated = crypt(key, salt);
+
+                if( isMatching(usrHash, hashGenerated) ){
+                    printf("Password found: %s\n", key);
+                    return true;
+                }
+            }
+        }
+    }
+
+    //brute force 4 characters
+
+
     printf("Password not found! \n");
     return false;
 }
@@ -113,9 +129,9 @@ bool findPassword(string usrHash, string generatedHash){
 
 
 /*  
-    String Compare Subroutine
     Description: compares each char in a string and returns true if similar
     Dependencies: none
+    Returns: True or False if string matches char per char
 */
 bool isMatching(string inputHash, string generatedHash){
 
