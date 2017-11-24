@@ -4,19 +4,6 @@
 #include <cs50.h>
 #include <stdio.h>
 
-    //test hash
-    //z = 50s7QGTz4Jjzc
-    //f = 50AWs/7oe6pkA
-    //gg = 503ri32DnOw4o
-    //xl = 50H4BMr9R1ey2
-    //zy = 50AHc7mcjHmzk
-    //zyz = 50oi68XAsf0jA
-    //xyz = 50yi70MN3ixyM
-    //cat = 506RU8OAqwvXA
-    //dog = 50Ecvq43taQ.I
-    //CoW = 507dx548PpBLs
-    //cow = 50ZYHbIgHblYI
-
 //prototypes
 bool isMatching(string, string);
 bool findPassword(string usrHash);
@@ -72,7 +59,7 @@ bool findPassword(string usrHash){
         hashGenerated = crypt(key, salt); 
 
         if( isMatching(usrHash, hashGenerated) ){
-            printf("Password found: %s\n", key);
+            printf("%s\n", key);
             return true;
         }
     }
@@ -89,7 +76,7 @@ bool findPassword(string usrHash){
             hashGenerated = crypt(key, salt);
 
             if( isMatching(usrHash, hashGenerated) ){
-                printf("Password found: %s\n", key);
+                printf("%s\n", key);
                 return true;
             }
         }
@@ -113,7 +100,7 @@ bool findPassword(string usrHash){
                 //printf("%s\n", key);    //debug output
 
                 if( isMatching(usrHash, hashGenerated) ){
-                    printf("Password found: %s\n", key);
+                    printf("%s\n", key);
                     return true;
                 }
             }
@@ -142,7 +129,7 @@ bool findPassword(string usrHash){
                     //printf("%s\n", key);    //debug output
 
                     if( isMatching(usrHash, hashGenerated) ){
-                        printf("Password found: %s\n", key);
+                        printf("%s\n", key);
                         return true;
                     }
                 }
