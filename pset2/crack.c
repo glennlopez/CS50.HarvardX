@@ -46,7 +46,7 @@ int main(int argc, string argv[]){
     Dependencies: isMatching()
     Returns: True or False if password is found (for debugging)
 */
-bool findPassword(string usrHash){
+bool findPassword(string param){
 
     string hashGenerated;
     char key[5];
@@ -58,7 +58,7 @@ bool findPassword(string usrHash){
         key[0] += 1;
         hashGenerated = crypt(key, salt);
 
-        if( isMatching(usrHash, hashGenerated) ){
+        if( isMatching(param, hashGenerated) ){
             printf("%s\n", key);
             return true;
         }
@@ -75,7 +75,7 @@ bool findPassword(string usrHash){
             key[1] += 1;
             hashGenerated = crypt(key, salt);
 
-            if( isMatching(usrHash, hashGenerated) ){
+            if( isMatching(param, hashGenerated) ){
                 printf("%s\n", key);
                 return true;
             }
@@ -99,7 +99,7 @@ bool findPassword(string usrHash){
 
                 //printf("%s\n", key);    //debug output
 
-                if( isMatching(usrHash, hashGenerated) ){
+                if( isMatching(param, hashGenerated) ){
                     printf("%s\n", key);
                     return true;
                 }
@@ -121,14 +121,14 @@ bool findPassword(string usrHash){
                 key[2] += 1;
 
                 key[3] = '@'; key[4] = '\0';
-                for(int k = 0; key[3] != '{'; k++){
+                for(int m = 0; key[3] != '{'; m++){
 
                     key[3] += 1;
                     hashGenerated = crypt(key, salt);
 
                     //printf("%s\n", key);    //debug output
 
-                    if( isMatching(usrHash, hashGenerated) ){
+                    if( isMatching(param, hashGenerated) ){
                         printf("%s\n", key);
                         return true;
                     }
