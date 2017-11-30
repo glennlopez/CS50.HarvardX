@@ -11,6 +11,7 @@ int main(){
     printf("a: %i\n", a);
     printf("b: %i\n\n", b);
 
+
     swap(&a, &b);
 
     printf("a: %i\n", a);
