@@ -14,8 +14,8 @@ void player_defaults(player *param);
 int main(){
 
     // INITIALIZE VARIABLES
-    player *npc_001 = malloc( sizeof(player) ); //<-- allocates npc to HEAP memory 
-    
+    player *npc_001 = malloc( sizeof(player) ); //<-- allocates npc to HEAP memory
+
     //INITIALIZE NPC's
     player_defaults(npc_001);
     (*npc_001).name = "Barney";
@@ -24,7 +24,7 @@ int main(){
 
     //DEBUG
     printf( "Object Name: %s\n", (*npc_001).name );
-    printf( "Level: %i\n", (*npc_001).lvl);
+    printf( "Level: %i\n", (*npc_001).lvl );
     printf( "Health: %i\n", (*npc_001).health );
 
     //MEMORY CLEANUP
