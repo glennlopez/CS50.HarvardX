@@ -22,19 +22,13 @@ void add_health(player *param, int);
 int main(){
 
     // INITIALIZE VARIABLES
-<<<<<<< HEAD
     player *npc_001 = malloc( sizeof(player) ); //<-- allocates npc to HEAP memory 
     player *npc_002 = malloc( sizeof(player) ); //<-- allocates npc to HEAP memory
     
-=======
-    player *npc_001 = malloc( sizeof(player) ); //<-- allocates npc to HEAP memory
-
->>>>>>> 5092cbf787ad340179f8b8adb30dcd5ddadc3b75
     //INITIALIZE NPC's
     player_defaults(npc_001);
     player_defaults(npc_002);
 
-<<<<<<< HEAD
     //MODIFY STATS
     set_name(npc_001, "Barney");
     add_lvl(npc_001, 10);
@@ -45,12 +39,6 @@ int main(){
     //PRINT OUT PLAYER STATS
     print_stats(npc_001);
     print_stats(npc_002);
-=======
-    //DEBUG
-    printf( "Object Name: %s\n", (*npc_001).name );
-    printf( "Level: %i\n", (*npc_001).lvl );
-    printf( "Health: %i\n", (*npc_001).health );
->>>>>>> 5092cbf787ad340179f8b8adb30dcd5ddadc3b75
 
     //MEMORY CLEANUP
     free(npc_001);
@@ -59,7 +47,6 @@ int main(){
     printf("\n");   //new line
     return 0;
 }
-
 
 
 
