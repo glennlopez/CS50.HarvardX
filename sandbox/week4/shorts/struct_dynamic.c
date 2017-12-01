@@ -14,14 +14,13 @@ void player_defaults(player *param);
 int main(){
 
     // INITIALIZE VARIABLES
-    //player *player_1;                           //<-- allocates player to STACK memory
-    //player player_2;                            //<-- allocated player to STACK memory
     player *npc_001 = malloc( sizeof(player) ); //<-- allocates npc to HEAP memory 
-    //player *npc_002 = malloc( sizeof(player) ); //<-- allocates another npc to HEAP memory
     
     //INITIALIZE NPC's
-    //player_defaults(player *npc_001);
+    player_defaults( player &npc_001 );
     (*npc_001).name = "Barney";
+    (*npc_001).lvl = 30;
+    (*npc_001).health = 9001;
 
     //DEBUG
     printf( "Object Name: %s\n", (*npc_001).name );
