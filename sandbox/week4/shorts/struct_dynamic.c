@@ -20,7 +20,7 @@ int main(){
     //player *npc_002 = malloc( sizeof(player) ); //<-- allocates another npc to HEAP memory
     
     //INITIALIZE NPC's
-    //player_defaults(struct player *npc_001);
+    //player_defaults(player *npc_001);
     (*npc_001).name = "Barney";
 
     //DEBUG
