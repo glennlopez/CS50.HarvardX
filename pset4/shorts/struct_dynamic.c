@@ -17,7 +17,7 @@ int main(){
     player *npc_001 = malloc( sizeof(player) ); //<-- allocates npc to HEAP memory 
     
     //INITIALIZE NPC's
-    player_defaults( player &npc_001 );
+    //player_defaults( player &npc_001 );
     (*npc_001).name = "Barney";
     (*npc_001).lvl = 30;
     (*npc_001).health = 9001;
