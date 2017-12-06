@@ -2,13 +2,20 @@
 #include <cs50.h>
 
 //MAIN ROUTINE
-int main(){ //FIXME: add commandline argument
+int main(int argc, char *argv[]){ //FIXME: add commandline argument
+
+    //get cmdline argument from user
+    if(argc != 2){
+        printf("Error: Improper command line argument.\n");
+        return 1;
+    }
+
 
     //create a file pointer
     FILE *objectData = NULL;
 
-    //point objectData to an readable log.txt
-    objectData = fopen("log_fgetc.txt", "r");   //FIXME: replace with commandline argument
+    //point objectData to an file specified by the cmdline argument
+    objectData = fopen(argv[1], "r");
     if(objectData == NULL){
         printf("Error: Null Pointer \n");
         return 1;
