@@ -33,14 +33,21 @@ int main(){
 
 
     //log struct object data
-    FILE *objectData;                       //create a file pointer
-    objectData = fopen("log.txt", "w");     //objectData points to a writeable log.txt
-    objectData = fopen("log.txt", "w");     //objectData points to a writeable log.txt
+    FILE *objectData = NULL;                        //create a file pointer
+    objectData = fopen("log_fopen.txt", "a");       //objectData points to an appendable log.txt
+
+    if(objectData == NULL){
+        printf("Error: Null Pointer \n");
+        return 1;
+    }
 
     //printf to file pointer
     fprintf(objectData, "ObjectID (wall): %i\n", wall.objectID);
     fprintf(objectData, "ObjectID (npc): %i\n", npc.objectID);
     fprintf(objectData, "ObjectID (box): %i\n", box.objectID);
+
+    //close file pointer
+    fclose(objectData);
 
     //debug - output
     printf("objectID (wall): %i\n", wall.objectID);
@@ -55,7 +62,7 @@ int main(){
 
 
 //SUBROUTINES
-void initiate_object(object *(param) ){
+void initiate_object( object *(param) ){
     idCounter++;                //increments global ID counter when function is called
     param->objectID = idCounter;    //sets the object ID using the ID counter
     param->objectName = "???";
