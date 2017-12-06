@@ -22,6 +22,10 @@ int main(){
     printf("dataChar (from fgetc): %c\n", dataChar);
 
 
-    printf("\n");   //newline
+
+
+
+
+    printf("\n");   //new line
     return 0;
 }
