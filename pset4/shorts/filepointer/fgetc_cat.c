@@ -2,7 +2,7 @@
 #include <cs50.h>
 
 //MAIN ROUTINE
-int main(int argc, char *argv[]){ //FIXME: add commandline argument
+int main(int argc, char *argv[]){
 
     //get cmdline argument from user
     if(argc != 2){
@@ -23,10 +23,10 @@ int main(int argc, char *argv[]){ //FIXME: add commandline argument
 
     //print data from objectData
     char ch;
-    while( (ch = fgetc(objectData)) != EOF ){
+    while( (ch = fgetc(objectData)) != EOF ){   //<-- WHY DOES THIS WORK??
         printf("%c", ch);
     }
-     printf("\n");  //new line
+    printf("\n");  //new line
 
     //all read operations are done, close the file pointer
     fclose(objectData);
