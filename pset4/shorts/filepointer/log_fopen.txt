@@ -1,3 +1,6 @@
 ObjectID (wall): 1002
 ObjectID (npc): 1003
 ObjectID (box): 1001
+ObjectID (wall): 1002
+ObjectID (npc): 1003
+ObjectID (box): 1001

@@ -14,16 +14,23 @@ int main(int argc, char *argv[]){
     }
 
     //fopen a file with appendable-able param
-    FILE *dataPointer = fopen("log_fputc.txt", "a");
+    FILE *dataPointer = fopen("log_fputsc_cmd.txt", "a");
 
-    //put command line argument to textfile
-    for(int i = 0; argv[1][i] != '\0'; i++){//change NULL to EOF
-        printf("%c", argv[1][i]);
-        //fputs(argv, dataPointer);
+    //copy argv to string
+    char *usrStr[20];
+    for(int i = 0; argv[1][i] != '\0'; i++){
+        usrStr[i] = &argv[1][i];
     }
 
-    //put a character into that file
-    fputc('b', dataPointer);
+    //char test[20] = "testing";
+
+    //debug printout
+    for(int i = 0; usrStr[i] != '\0'; i++){
+        printf("%s", usrStr);
+    }
+
+    fclose(dataPointer);
+
 
     printf("\n");   //new line
     return 0;
