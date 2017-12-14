@@ -40,7 +40,8 @@ int main(int argc, char *argv[]){
         fputc(ch, copiedFile);
     }
 
-
+    fclose(originalFile);
+    fclose(copiedFile);
 
 
 
