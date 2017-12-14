@@ -15,7 +15,7 @@ int main(){
     }
 
     //fread(<buffer>, <size>, <qty>, <filepointer>)
-    sz = fread(arr, sizeof(int), 50, filePointer);
+    sz = fread(arr, sizeof(char), 50, filePointer);
 
     printf("%s",arr);
 
