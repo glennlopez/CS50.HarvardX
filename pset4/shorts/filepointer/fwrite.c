@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <cs50.h>
 
+//FIXME: fwrite doesnt write to the txt file Read more into how fwrite works
+
 int main(){
 
     char *FIXED = "testing...";

@@ -8,7 +8,7 @@
  * Common Data Types 
  *
  * The data types in this section are essentially aliases for C/C++ 
- * primitive data types.
+ * primitive data types. 
  *
  * Adapted from https://msdn.microsoft.com/en-us/library/cc230309.aspx.
  * See http://en.wikipedia.org/wiki/Stdint.h for more on stdint.h.
