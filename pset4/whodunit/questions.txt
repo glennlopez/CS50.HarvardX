@@ -1,3 +1,36 @@
+Go ahead and pull up the URLs to which BITMAPFILEHEADER and BITMAPINFOHEADER are attributed, per the comments in bmp.h.
+
+Rather than hold your hand further on a stroll through copy.c, we’re instead going to ask you some questions and let you teach yourself how the code therein works. As always, man is your friend, and so, now, is Microsoft Developer Network (aka MSDN). If not sure on first glance how to answer some question, do some quick research and figure it out! You might want to turn to https://reference.cs50.net/stdio as well.
+
+In questions.txt, answer each of the following questions in a sentence or more.
+
+1) What’s stdint.h?
+
+2) What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+
+3) How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+
+4) What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats (with high probability) are generally called "magic numbers."
+
+5) What’s the difference between bfSize and biSize?
+
+6) What does it mean if biHeight is negative?
+
+7) What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+
+8) Why might fopen return NULL in lines 24 and 32 of copy.c?
+
+9) Why is the third argument to fread always 1 in our code?
+
+10) What value does line 65 of copy.c assign to padding if bi.biWidth is 3?
+
+11) What does fseek do?
+
+12) What is SEEK_CUR?
+
+
+
+
 1.  What’s stdint.h - a libray providing programmers 
 2.  TODO
 3.  TODO
