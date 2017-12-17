@@ -1,7 +1,25 @@
+//https://www.tutorialspoint.com/c_standard_library/c_function_fwrite.htm
 #include <stdio.h>
 #include <cs50.h>
 
 //FIXME: fwrite doesnt write to the txt file Read more into how fwrite works
+/*
+
+#include<stdio.h>
+
+int main () {
+   FILE *fp;
+   char str[] = "This is tutorialspoint.com";
+
+   fp = fopen( "file.txt" , "w" );
+   fwrite(str , 1 , sizeof(str) , fp );
+
+   fclose(fp);
+  
+   return(0);
+}
+
+*/
 
 int main(){
 

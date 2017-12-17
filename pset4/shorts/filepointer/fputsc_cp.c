@@ -2,7 +2,7 @@
 #include <cs50.h>
 
 /*
-    Creates a duplicate file
+    Creates a duplicate file accepting 1 paramater (the file name)
 */
 
 int main(int argc, char *argv[]){
