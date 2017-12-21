@@ -11,6 +11,7 @@ int main(){
 
     //fputs puts string, fputc puts char
     fputs("I ate 55 pumpkins today.", inputData);
+    fclose(inputData);
 
     printf("\n");
     return 0;
