@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-    // ensure proper usage
+    // ensure propesr usage
     if (argc != 3)
     {
         fprintf(stderr, "Usage: ./copy infile outfile\n");
