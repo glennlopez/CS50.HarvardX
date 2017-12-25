@@ -3,7 +3,7 @@
 
 int main(){
 
-    FILE *inputData = fopen("fseek.txt", "w");
+    FILE *inputData = fopen("log_fputs.txt", "w");
     if(inputData == NULL){
         printf("Error! File poiunter is null\n");
         return 1;

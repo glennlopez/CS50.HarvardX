@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <cs50.h>
 
+//SEEK_SET
+
 int main(){
 
-    FILE *filePointer = fopen("fseek.txt", "w+");
+    FILE *filePointer = fopen("log_fseek_set.txt", "w+");
     if(filePointer == NULL){
         printf("Error! File poiunter is null\n");
         return 1;
