@@ -4,7 +4,7 @@ These are my solutions to Harvard University's "CS50: Introduction to Computer S
 To complete the following Problem Sets, I [studied](https://study.cs50.net/) all of the CS50's [lectures (2017)](http://docs.cs50.net/2017/x/syllabus.html#lectures), shorts, [walkthroughs (2017)](http://docs.cs50.net/2017/x/syllabus.html#walkthroughs), and participated in class discussions via [/r/CS50](https://www.reddit.com/r/cs50/) on Reddit. All Problem Set submissions received scores of 100% from the https://cs50.me/ gradebook.
 > NOTE: This course is still in progress, some psets will be missing. If a pset you're looking for is missing, it means I havn't gotten that far in the course yet.
 
-### CS50 (2018) Problem Set instructions: ([whats new?](https://docs.cs50.net/2018/x/new.html))
+### CS50 (2018) Problem Sets: ([whats new?](https://docs.cs50.net/2018/x/new.html))
 - wip...
 - [Problem Set 0: Scratch](#)
 - [Problem Set 1: C](#)
@@ -16,7 +16,7 @@ To complete the following Problem Sets, I [studied](https://study.cs50.net/) all
 - [Problem Set 7: C$50 Finance](#)
 - [Problem Set 8: Mashup](#)
 
-### CS50 (2017) Problem Set instructions:
+### CS50 (2017) Problem Sets:
 - [Problem Set 0: Scratch](https://docs.cs50.net/2017/x/psets/0/pset0.html)
 - [Problem Set 1: C](https://docs.cs50.net/2017/x/psets/1/pset1.html)
 - [Problem Set 2: Crypto](https://docs.cs50.net/2017/x/psets/2/pset2.html)
@@ -62,14 +62,14 @@ Web Programming, Frosh IMs, Similarities
 ### [Week 8](http://docs.cs50.net/2017/fall/notes/10/lecture10.html)
 Flask, MVC, SQL, Cookies, Databases
 
-### [Week 9](https://docs.cs50.net/2016/fall/notes/9/week9.html)
+### [Week 9](http://docs.cs50.net/2017/fall/notes/11/lecture11.html)
+JavaScript, DOM, Ajax, Model View Converter, Javascript basics, DOM, Ajax 
 
+### [Week 10](#)
+WIP? - Nothing announced: Start final project.
 
-### [Week 10](https://docs.cs50.net/2016/fall/notes/10/week10.html)
-
-
-### [Week 11](https://docs.cs50.net/2016/fall/notes/11/week11.html)
-
+### [Week 11](https://docs.cs50.net/2017/fall/notes/12/lecture12.html)
+Final Project, [2018 Seminars](https://courses.edx.org/courses/course-v1:HarvardX+CS50+X/courseware/bdc606f10e7347f6a61a341c4544bbf7/b3a373c224534dea9e7630566af461e6/?activate_block_id=block-v1%3AHarvardX%2BCS50%2BX%2Btype%40sequential%2Bblock%40b3a373c224534dea9e7630566af461e6)
 
 # Recomended Books (check eBook folder for availability)
 - C Programming Absolute Beginner’s Guide, Third Edition
