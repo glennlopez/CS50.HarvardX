@@ -1,3 +1,5 @@
+<!-- git push https://github.com/glennlopez/CS50.HarvardX.git  master:staging -->
+
 # Harvard CS50: Introduction to Computer Science
 These are my solutions to Harvard University's "CS50: Introduction to Computer Science" course offered at edX. I used both CS50's [c9.io](https://c9.io/) IDE and my own text editor on linux & macOS + [cs50's](http://www.oss.io/p/cs50/library50-c) Libraries to complete this course (library [rederences](https://reference.cs50.net/) here.)
 
