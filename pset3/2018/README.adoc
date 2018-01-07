@@ -1,0 +1,47 @@
+---
+layout: 2018/x
+---
+:skip-front-matter:
+
+= Problem Set 3: Music
+
+== tl;dr
+ 
+[start=0]
+. Watch https://video.cs50.net/2018/x/lectures/3[Week 2's lecture].
+. Make beautiful music. 
+. Submit your code.
+
+== Getting Started
+
+Alright, here we go again!
+
+Log into https://cs50.io/[cs50.io] and execute the below in a terminal window.
+
+[source]
+----
+update50
+mkdir ~/workspace/pset3/
+cd ~/workspace/pset3/
+----
+
+== What to Do
+
+Implement https://docs.cs50.net/2018/x/psets/3/music/music.html[Music].
+
+== How to Submit
+
+. Log into https://cs50.io/[CS50 IDE] and open a terminal window, if not open already.
+. Ensure your workspace is up-to-date by executing:
++
+[source]
+----
+update50
+----
+. Submit Music by executing:
++
+[source]
+----
+cd ~/workspace/pset3/music/
+submit50 cs50/2018/x/music
+----
