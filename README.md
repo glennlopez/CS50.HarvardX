@@ -8,7 +8,7 @@ To complete the following Problem Sets, I [studied](https://study.cs50.net/) all
 
 ### CS50 (2018) Problem Sets: ([whats new?](https://docs.cs50.net/2018/x/new.html))
 - [Problem Set 0: Scratch](https://docs.cs50.net/2018/x/psets/0/pset0.html)
-- [Problem Set 1: C](https://docs.cs50.net/2018/x/psets/1/pset1.html)
+- [Problem Set 1: C](https://docs.cs50.net/2018/x/psets/1/pset1.html) *updated
 - [Problem Set 2: Crypto](https://docs.cs50.net/2018/x/psets/2/pset2.html)
 - [Problem Set 3: Music](https://docs.cs50.net/2018/x/psets/3/pset3.html) *NEW
 - [Problem Set 4: Forensics](https://docs.cs50.net/2018/x/psets/4/pset4.html)
