@@ -2,9 +2,9 @@
 #include <cs50.h>
 #include <ctype.h>
 
-/* 
+/*
     Track: 10min in the video
-    Make a program that takes a user input (name) and converts it into 
+    Make a program that takes a user input (name) and converts it into
     an initial.
 */
 
@@ -16,7 +16,7 @@ int main(){
     //calculate the number of chars to use for initials variable
     int nameSpace = 1;
     for(int i = 0; uName[i] != '\0'; i++){
-        if(uName[i] == ' '){ 
+        if(uName[i] == ' '){
             //if( isupper(uName[i + 1]) ){ //<--- this will not work if the name is in lower case
                 nameSpace++;
             //}
@@ -26,7 +26,7 @@ int main(){
     char initials[nameSpace + 1];
     initials[0] = uName[0];
     for(int i = 0; uName[i] != '\0'; i++){
-        if(uName[i] == ' '){ 
+        if(uName[i] == ' '){
                 initials[i] = uName[i+1];
         }
     }
