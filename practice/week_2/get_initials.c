@@ -19,7 +19,7 @@ int main(){
         if(uName[i] == ' '){
             //if( isupper(uName[i + 1]) ){ //<--- this will not work if the name is in lower case
                 nameSpace++;
-            //}
+            //} //test
         }
     }
 
