@@ -34,7 +34,7 @@ void sort(int values[], int n);
 
 
     /* ELEMENTS ARE SORTED HERE HERE */
-
+    sort(unsorted, size);
 
 
 
@@ -50,3 +50,33 @@ void sort(int values[], int n);
 
 
 
+
+//SELECTION SORT ALGORYTHM - COMPARTMENTALIZED
+void sort(int values[], int n){
+
+    //START SELECTION SORT ALGORYTHM
+    int smallestNum = values[0];
+    int sortedIndex = 0;
+
+    //Repeat until no unsorted elements remain
+    while(sortedIndex < n){
+
+
+        //Search unsorted part of the data to find smallest value
+        for(int i = sortedIndex; i < n ; i++){
+
+            //Swap the smallest value found with the first element of the unsorted part
+            if(values[i] < smallestNum){
+                smallestNum = values[i];
+                values[i] = values[sortedIndex];
+                values[sortedIndex] = smallestNum;
+            }
+        }
+
+        sortedIndex++;              //increment sorted index
+        smallestNum = 2147483647;   //set smallestNum largest possible positive int
+    }
+    //END SELECTION SORT ALGORYTHM
+
+    return;
+}
