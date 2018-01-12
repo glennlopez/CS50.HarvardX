@@ -15,7 +15,7 @@ int main(){
     string uName = get_string();
     char initials[MAX_CHAR];
 
-    //determines initials using uppercase letter AND spaces
+    //determines initials using uppercase (letter AND spaces) patern
     int initial_counter = 0;
     for(int i = 0; uName[i] != '\0'; i++){
         if( (isupper(uName[i])) && ( (uName[i - 1] == ' ') || (i == 0) ) ){
