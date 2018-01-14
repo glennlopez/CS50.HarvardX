@@ -1,0 +1,5 @@
+Practice Sorting Agorythm
+    [] Insertion Sort
+    [] Bubble Sort
+    [] Selection Sort
+    [] Merge Sort

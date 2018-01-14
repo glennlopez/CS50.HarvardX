@@ -1,48 +1,44 @@
-#include <stdio.h>
 #include <cs50.h>
+#include <stdio.h>
 #include <ctype.h>
 
+#define MAX_CHAR 4
+
 /*
-    Track: 10min in the video
-    Make a program that takes a user input (name) and converts it into
-    an initial.
+    Takes users input (full name), and turns it
+    into an initial by placing new chars in a new string.
 */
 
 int main(){
 
-    printf("Type your name: ");
+    printf("Name: ");
     string uName = get_string();
+    char initials[MAX_CHAR];
 
-    //calculate the number of chars to use for initials variable
-    int nameSpace = 1;
+    //determines initials using uppercase (letter AND spaces) patern
+    int initial_counter = 0;
     for(int i = 0; uName[i] != '\0'; i++){
-        if(uName[i] == ' '){
-            //if( isupper(uName[i + 1]) ){ //<--- this will not work if the name is in lower case
-                nameSpace++;
-            //} //test
+        if( (isupper(uName[i])) && ( (uName[i - 1] == ' ') || (i == 0) ) ){
+            initials[initial_counter] = uName[i];
+            initial_counter++;
+        }
+
+        //user input error checking
+        if(initial_counter >= 4){
+            printf("Error: User name is too long!\n");
+            return 1;
+        }
+        if(initial_counter == 0){
+            printf("Error: User name formatting error.\n");
+            return 1;
         }
     }
+    initials[initial_counter] = '\0'; //makes sure null terminator is in the last array always
 
-    char initials[nameSpace + 1];
-    initials[0] = uName[0];
-    for(int i = 0; uName[i] != '\0'; i++){
-        if(uName[i] == ' '){
-                initials[i] = uName[i+1];
-        }
-    }
-    initials[nameSpace + 1] = '\0'; //add a null terminator at the end
-
-    //debug
-    printf("Number of initials: %i\n", nameSpace);
-
-    //print out variables
+    //print out
     printf("uName: %s\n", uName);
+    printf("initials: %s\n", initials);
+
     printf("\n");
-
-    printf("Initials: ");
-    for(int i = 0; initials[i] != '\0'; i++){
-        printf("%c\n", initials[i]);
-    }
-
     return 0;
 }
