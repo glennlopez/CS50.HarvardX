@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_ELEMENTS 8
-#define ARRLEN(arr) ( sizeof(arr) / sizeof(arr[0]))
 
 void sort(int values[], int n);
 
@@ -22,11 +20,8 @@ void sort(int values[], int n);
         7,10,3,5,2,8,11,9
     };
 
-    //calculate array size
-    int size = ARRLEN(unsorted);
-
     printf("Unsorted list: ");
-    for(int i = 0; i < size; i++){
+    for(int i = 0; i < 8; i++){
         printf("%i ", unsorted[i]);
     }
     printf("\n");
@@ -39,7 +34,7 @@ void sort(int values[], int n);
 
 
     printf("Sorted list:   ");
-    for(int i = 0; i < size; i++){
+    for(int i = 0; i < 8; i++){
         printf("%i ", unsorted[i]);
     }
     printf("\n");
