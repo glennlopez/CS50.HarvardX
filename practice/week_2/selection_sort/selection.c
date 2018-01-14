@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void sort(int values[], int n);
-
  /*
     Selection sort: https://edx-video.net/HARCS50X2016-V035200_DTH.mp4
     Find the smallest unsorted element and add it to the end of the sorted list
