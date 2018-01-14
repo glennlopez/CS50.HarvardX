@@ -28,7 +28,7 @@ void sort(int values[], int n);
 
 
 
-    /* ELEMENTS ARE SORTED HERE HERE */
+    /* ELEMENTS ARE SORTED HERE */
 
 
 
