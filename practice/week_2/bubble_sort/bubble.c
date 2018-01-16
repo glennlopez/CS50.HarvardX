@@ -15,13 +15,48 @@
 
  */
 
- int main(){
+//prototypes
+void swap(int*, int*);
 
+
+/* MAIN ROUTINES */
+
+#define MAX_ELEMENTS 8
+int usrArr[MAX_ELEMENTS] = {11,52,13,0,6,1,-1,200};
+
+int main(){
+
+
+    printf("Original state: ");
+    for(int i = 0; i < MAX_ELEMENTS; i++){
+        printf("%i ", usrArr[i]);
+    }
+    printf("\n");   //newline
+
+
+
+    /* SWAP HERE */
+    swap(&usrArr[0], &usrArr[1]);
+
+
+    printf("Altered state:  ");
+    for(int i = 0; i < MAX_ELEMENTS; i++){
+        printf("%i ", usrArr[i]);
+    }
+    printf("\n");   //newline
 
 
     printf("\n");
     return 0;
- }
+}
 
 
+
+/* SUBROUTINES */
+
+//swap function
+void swap(int *param1, int *param2){
+    printf("param1: %i\n", *param1);
+    printf("param2: %i\n", *param2);
+}
 
