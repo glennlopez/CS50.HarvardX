@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_ELEMENTS 8
+#define MAX_ELEMENTS 13
 void print_array(int []);
 void swap(int*, int*);
 
@@ -17,65 +17,56 @@ void swap(int*, int*);
             - swap the smallest found value with the first element of the unsorted list
  */
 
- int main(){
+//prototypes for selection sort
+void selection_sort(int []);
+
+
+/* MAIN ROUTINES */
+int main(){
 
     //unsorted list
-    int usrArr[MAX_ELEMENTS] = {
-        7,0,3,-5,200,8,11,-8
+    int usrArr[MAX_ELEMENTS] = {    //Note: Adjust MAX_ELEMENTS to scale
+        -7,0,13,-95,200,-8, 15, 23,13,-4,80, -48, 0
     };
 
 
 
     /* TEST HERE */
-    printf("Before: ");
+    printf("Random:  ");
     print_array(usrArr);
 
-    int sorted_index = 0;
-    int smallest_num = usrArr[0];
-    //int sort_counter = 0;
+
+    selection_sort(usrArr); //<-- use this function
 
 
-    //--at start: set to sort_counter to 0
-
-    //--at start: set the lowest number to be the first element on the array
-
-    //--at start: set the sorted_index as the first element in the array
-
-
-    //iterate through the array once to find the smallest number
-        //keep track of smallest number using variable smallest_num
-    for(int i = sorted_index ; i < MAX_ELEMENTS; i++){
-        if(smallest_num > usrArr[i]){
-            smallest_num = usrArr[i];
-        }
-    }
-
-    //swap the first element in the array with the smallest number found in the unsorted list
-        //set the sort_counter to 1
-
-
-
-
-
-
-    printf("After:  ");
+    printf("Sorted: ");
     print_array(usrArr);
 
-    printf("Smallest Num: %i", smallest_num);
 
     printf("\n");
     return 0;
- }
+}
+
+
 
 
 /* SUBROUTINES */
 
-//array print-out subroutine
-void print_array(int paramArr[]){
-    for(int i = 0; i < MAX_ELEMENTS; i++){
-        printf("%i ", paramArr[i]);
+//selection sort algorythm
+void selection_sort(int paramArr[]){
+    int sorted_index = 0;
+    int swap_counter = 1;
+
+    while(swap_counter == 1){
+        swap_counter = 0;
+        for(int i = sorted_index ; i < MAX_ELEMENTS; i++){
+            if(paramArr[sorted_index] > paramArr[i]){
+                swap(&paramArr[sorted_index], &paramArr[i]);
+                swap_counter = 1;
+            }
+        }
+        sorted_index++;
     }
-    printf("\n");   //newline
 }
 
 //swap subroutine
@@ -83,4 +74,12 @@ void swap(int *param1, int *param2){    int buffer = 0;
     buffer = *param1;
     *param1 = *param2;
     *param2 = buffer;
+}
+
+//array print-out subroutine
+void print_array(int paramArr[]){
+    for(int i = 0; i < MAX_ELEMENTS; i++){
+        printf("%i ", paramArr[i]);
+    }
+    printf("\n");   //newline
 }

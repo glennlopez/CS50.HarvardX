@@ -19,28 +19,37 @@ void swap(int*, int*);
  */
 
 //prototypes for bubble sort
-void bubble_Sort(int []);
+void bubble_sort(int []);
+
 
 
 
 /* MAIN ROUTINES */
-int usrArr[MAX_ELEMENTS] = {11000,52,2058,0,6,1,-1,200};
+
 int main(){
+
+    int usrArr[MAX_ELEMENTS] = {    //Note: Adjust MAX_ELEMENTS to scale
+    11000,52,2058,0,6,1,-1,200
+
+    };
 
 
     /* TEST HERE */
-    printf("Before: ");
+    printf("Random: ");
     print_array(usrArr);
 
-    bubble_Sort(usrArr);
 
-    printf("After:  ");
+    bubble_sort(usrArr);    //<-- use this function
+
+
+    printf("Sorted:  ");
     print_array(usrArr);
 
 
     printf("\n");
     return 0;
 }
+
 
 
 
@@ -54,7 +63,7 @@ void swap(int *param1, int *param2){    int buffer = 0;
 }
 
 //bubble sort subroutine
-void bubble_Sort(int paramArr[]){
+void bubble_sort(int paramArr[]){
     int swapCounter = 1;
     while(swapCounter == 1){
         swapCounter = 0;
