@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#define MAX_ELEMENTS 8
+void print_array(int []);
 
  /*
     Bubble sort: https://edx-video.net/HARCS50X2016-V034300_DTH.mp4
@@ -15,47 +17,25 @@
 
  */
 
-//prototypes
-void swap(int*, int*);
+//prototypes for bubble sort
+void bubble_Swap(int*, int*);
+void bubble_Sort(int []);
+
 
 
 /* MAIN ROUTINES */
-
-#define MAX_ELEMENTS 8
-int usrArr[MAX_ELEMENTS] = {110,52,13,0,6,1,-1,200};
-
+int usrArr[MAX_ELEMENTS] = {11000,52,2058,0,6,1,-1,200};
 int main(){
 
 
-    printf("Original state: ");
-    for(int i = 0; i < MAX_ELEMENTS; i++){
-        printf("%i ", usrArr[i]);
-    }
-    printf("\n");   //newline
+    /* TEST HERE */
+    printf("Before: ");
+    print_array(usrArr);
 
+    bubble_Sort(usrArr);
 
-
-
-    /* SWAP HERE */
-    int swapCounter = 1;
-    while(swapCounter == 1){
-
-        swapCounter = 0;
-        for(int i = 0; i < MAX_ELEMENTS - 1; i++){
-            if(usrArr[i + 0] > usrArr[i + 1]){
-                swap(&usrArr[i + 0], &usrArr[i + 1]);
-                swapCounter = 1;
-            }
-        }
-    }
-
-
-
-    printf("Altered state:  ");
-    for(int i = 0; i < MAX_ELEMENTS; i++){
-        printf("%i ", usrArr[i]);
-    }
-    printf("\n");   //newline
+    printf("After:  ");
+    print_array(usrArr);
 
 
     printf("\n");
@@ -67,8 +47,30 @@ int main(){
 /* SUBROUTINES */
 
 //swap subroutine
-void swap(int *param1, int *param2){    int buffer = 0;
+void bubble_Swap(int *param1, int *param2){    int buffer = 0;
     buffer = *param1;
     *param1 = *param2;
     *param2 = buffer;
+}
+
+//bubble sort subroutine
+void bubble_Sort(int paramArr[]){
+    int swapCounter = 1;
+    while(swapCounter == 1){
+        swapCounter = 0;
+        for(int i = 0; i < MAX_ELEMENTS - 1; i++){
+            if(paramArr[i + 0] > paramArr[i + 1]){
+                bubble_Swap(&paramArr[i + 0], &paramArr[i + 1]);
+                swapCounter = 1;
+            }
+        }
+    }
+}
+
+//array print-out subroutine
+void print_array(int paramArr[]){
+    for(int i = 0; i < MAX_ELEMENTS; i++){
+        printf("%i ", paramArr[i]);
+    }
+    printf("\n");   //newline
 }
