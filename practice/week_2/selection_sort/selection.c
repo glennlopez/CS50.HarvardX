@@ -20,17 +20,38 @@ void swap(int*, int*);
  int main(){
 
     //unsorted list
-    int unsorted[MAX_ELEMENTS] = {
-        7,10,3,5,2,8,11,9
+    int usrArr[MAX_ELEMENTS] = {
+        7,0,3,-5,200,8,11,-8
     };
-
-
 
 
 
     /* TEST HERE */
     printf("Before: ");
-    print_array(unsorted);
+    print_array(usrArr);
+
+    int sorted_index = 0;
+    int smallest_num = usrArr[0];
+    //int sort_counter = 0;
+
+
+    //--at start: set to sort_counter to 0
+
+    //--at start: set the lowest number to be the first element on the array
+
+    //--at start: set the sorted_index as the first element in the array
+
+
+    //iterate through the array once to find the smallest number
+        //keep track of smallest number using variable smallest_num
+    for(int i = sorted_index ; i < MAX_ELEMENTS; i++){
+        if(smallest_num > usrArr[i]){
+            smallest_num = usrArr[i];
+        }
+    }
+
+    //swap the first element in the array with the smallest number found in the unsorted list
+        //set the sort_counter to 1
 
 
 
@@ -38,7 +59,9 @@ void swap(int*, int*);
 
 
     printf("After:  ");
-    print_array(unsorted);
+    print_array(usrArr);
+
+    printf("Smallest Num: %i", smallest_num);
 
     printf("\n");
     return 0;
