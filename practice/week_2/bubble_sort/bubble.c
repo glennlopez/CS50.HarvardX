@@ -22,7 +22,7 @@ void swap(int*, int*);
 /* MAIN ROUTINES */
 
 #define MAX_ELEMENTS 8
-int usrArr[MAX_ELEMENTS] = {11,52,13,0,6,1,-1,200};
+int usrArr[MAX_ELEMENTS] = {110,52,13,0,6,1,-1,200};
 
 int main(){
 
@@ -35,8 +35,20 @@ int main(){
 
 
 
+
     /* SWAP HERE */
-    swap(&usrArr[0], &usrArr[1]);
+    int swapCounter = 1;
+    while(swapCounter == 1){
+
+        swapCounter = 0;
+        for(int i = 0; i < MAX_ELEMENTS - 1; i++){
+            if(usrArr[i + 0] > usrArr[i + 1]){
+                swap(&usrArr[i + 0], &usrArr[i + 1]);
+                swapCounter = 1;
+            }
+        }
+    }
+
 
 
     printf("Altered state:  ");
@@ -54,9 +66,9 @@ int main(){
 
 /* SUBROUTINES */
 
-//swap function
-void swap(int *param1, int *param2){
-    printf("param1: %i\n", *param1);
-    printf("param2: %i\n", *param2);
+//swap subroutine
+void swap(int *param1, int *param2){    int buffer = 0;
+    buffer = *param1;
+    *param1 = *param2;
+    *param2 = buffer;
 }
-
