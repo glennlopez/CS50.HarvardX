@@ -2,6 +2,7 @@
 #include <string.h>
 #define MAX_ELEMENTS 8
 void print_array(int []);
+void swap(int*, int*);
 
  /*
     Bubble sort: https://edx-video.net/HARCS50X2016-V034300_DTH.mp4
@@ -18,7 +19,6 @@ void print_array(int []);
  */
 
 //prototypes for bubble sort
-void bubble_Swap(int*, int*);
 void bubble_Sort(int []);
 
 
@@ -47,7 +47,7 @@ int main(){
 /* SUBROUTINES */
 
 //swap subroutine
-void bubble_Swap(int *param1, int *param2){    int buffer = 0;
+void swap(int *param1, int *param2){    int buffer = 0;
     buffer = *param1;
     *param1 = *param2;
     *param2 = buffer;
@@ -60,7 +60,7 @@ void bubble_Sort(int paramArr[]){
         swapCounter = 0;
         for(int i = 0; i < MAX_ELEMENTS - 1; i++){
             if(paramArr[i + 0] > paramArr[i + 1]){
-                bubble_Swap(&paramArr[i + 0], &paramArr[i + 1]);
+                swap(&paramArr[i + 0], &paramArr[i + 1]);
                 swapCounter = 1;
             }
         }
