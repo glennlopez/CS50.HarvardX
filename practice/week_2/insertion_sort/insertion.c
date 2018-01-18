@@ -21,6 +21,7 @@ void swap(int*, int*);
 
 //prototypes for selection sort
 //FIXME: place selection sort routine prototype here
+void shift_array(int paramArr[], int targetElement, int shiftCounter);
 
 
 /* MAIN ROUTINES */
@@ -40,15 +41,12 @@ int main(){
 
 
 
-    //FIXME: Call the selection sort function here
 
+   /* ARRAY SHIFTER */
 
-    for(int i = 0; i < MAX_ELEMENTS; i++){
-        if(usrArr[i + 0] > usrArr[i + 1]){
-            swap(&usrArr[i + 0], &usrArr[i + 1]);
-        }
+    //shift(array to work on, targeElement to shift, how many times to shift);
+    shift_array(usrArr, 2, -2);
 
-    }
 
 
 
@@ -65,7 +63,12 @@ int main(){
 
 /* SUBROUTINES */
 
-//FIXME: create a selection sort subroutine
+//array shift subroutine - shift(array to work on, element index to shift, how many times to shift);
+void shift_array(int paramArr[], int targetElement, int shiftCounter){
+    printf("This is a test\n");
+}
+
+
 
 
 //swap subroutine
