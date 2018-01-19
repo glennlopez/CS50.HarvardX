@@ -10,6 +10,12 @@
 # Extension specific whitelist
 !.gitignore
 !.sb2
+!*.php
+!*.html
+!*.js
+!*.css
+!*.xml
+!*.sql
 !*.py
 !*.c
 !*.h
