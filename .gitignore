@@ -1,2 +1,40 @@
-.DS_Store
-get_initials.dSYM
+# Ignore everything
+*
+
+# But descend into directories
+#!*/
+
+# Folder specific whitelist
+!/eBooks/**
+
+# Extension specific whitelist
+!.gitignore
+!.sb2
+!*.php
+!*.html
+!*.js
+!*.css
+!*.xml
+!*.sql
+!*.py
+!*.c
+!*.h
+!*.md
+!*.wav
+!*.mp3
+!*.txt
+!*.sh
+!*.cpp
+!*.adoc
+!*.pdf
+!*.docx
+!*.doc
+!*.csv
+!*.jpeg
+!*.jpg
+!*.png
+!*.bmp
+!*.gif
+!LICENSE
+!Makefile
+!Make

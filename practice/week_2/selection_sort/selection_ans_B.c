@@ -18,7 +18,7 @@ void swap(int*, int*);
  */
 
 //prototypes for selection sort
-//FIXME: place selection sort routine prototype here
+void selection_sort(int []);
 
 
 /* MAIN ROUTINES */
@@ -36,10 +36,7 @@ int main(){
     print_array(usrArr);
 
 
-
-
-    //FIXME: Call the selection sort function here
-
+    selection_sort(usrArr); //<-- use this function
 
 
     printf("Sorted: ");
@@ -55,8 +52,22 @@ int main(){
 
 /* SUBROUTINES */
 
-//FIXME: create a selection sort subroutine
+//selection sort algorythm
+void selection_sort(int paramArr[]){
+    int sorted_index = 0;
+    int swap_counter = 1;
 
+    while(swap_counter == 1){
+        swap_counter = 0;
+        for(int i = sorted_index ; i < MAX_ELEMENTS; i++){
+            if(paramArr[sorted_index] > paramArr[i]){
+                swap(&paramArr[sorted_index], &paramArr[i]);
+                swap_counter = 1;
+            }
+        }
+        sorted_index++;
+    }
+}
 
 //swap subroutine
 void swap(int *param1, int *param2){    int buffer = 0;
