@@ -9,9 +9,13 @@
 
 # Extension specific whitelist
 !.gitignore
+!.sb2
 !*.py
 !*.c
+!*.h
 !*.md
+!*.wav
+!*.mp3
 !*.txt
 !*.sh
 !*.cpp
@@ -26,3 +30,5 @@
 !*.bmp
 !*.gif
 !LICENSE
+!Makefile
+!Make
