@@ -2,7 +2,7 @@
 *
 
 # But descend into directories
-!*/
+#!*/
 
 # Folder specific whitelist
 !/eBooks/**
