@@ -2,7 +2,6 @@
 #include <string.h>
 #define MAX_ELEMENTS 13
 void print_array(int []);
-void swap(int*, int*);
 
 
  /*
@@ -16,8 +15,12 @@ void swap(int*, int*);
            - Look at the next unsorted element
            - Insert into the sorted ortion by shifting the required number of elements
 
-
  */
+
+//insertion sort prototypes
+void insertion_sort(int []);
+void swap(int*, int*);
+
 
 
 /* MAIN ROUTINES */
@@ -34,28 +37,9 @@ int main(){
     printf("Random: ");
     print_array(usrArr);
 
-    //FIXME: x10/+ element bug
 
 
-    int sdx = 0;            //sorted index
-    int tdx = sdx + 1;      //target index (number that is currently being sorted)
-
-    //loop through an array once
-    for(int i = 0; i < MAX_ELEMENTS; i++){
-
-        //loop until the target number is the smallest 
-        while( (usrArr[tdx] < usrArr[tdx - 1]) && (tdx > 0) && (tdx < MAX_ELEMENTS)){
-            swap(&usrArr[tdx], &usrArr[tdx - 1]);
-            tdx--;
-            //print_array(usrArr);    //debug printout
-        }
-
-        sdx++;          //increment sorted index
-        tdx = sdx + 1;  //set a new target index
-
-    }
-
-
+    insertion_sort(usrArr);
 
 
 
@@ -73,6 +57,28 @@ int main(){
 
 /* SUBROUTINES */
 
+//insertion sort subroutine
+void insertion_sort(int paramArr[]){
+    int sdx = 0;            //sorted index
+    int tdx = sdx + 1;      //target index (number that is currently being sorted)
+
+    //loop through the entire array only once
+    for(int i = 0; i < MAX_ELEMENTS; i++){
+
+        /* 
+            loop until the target number is the smallest 
+            making sure tdx does not index beyond the size of the array
+        */
+        while( (paramArr[tdx] < paramArr[tdx - 1]) && (tdx > 0) && (tdx < MAX_ELEMENTS)){
+            swap(&paramArr[tdx], &paramArr[tdx - 1]);
+            tdx--;
+        }
+
+        sdx++;          //increment sorted index
+        tdx = sdx + 1;  //set a new target index
+
+    }
+}
 
 
 //swap subroutine
