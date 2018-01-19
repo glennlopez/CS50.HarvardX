@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_ELEMENTS 5
+#define MAX_ELEMENTS 13
 void print_array(int []);
 void swap(int*, int*);
 
@@ -19,17 +19,13 @@ void swap(int*, int*);
 
  */
 
-//prototypes for selection sort
-//FIXME: place selection sort routine prototype here
-void shift_array(int paramArr[], int targetElement, int shiftCounter);
-
 
 /* MAIN ROUTINES */
 int main(){
 
     //unsorted list
     int usrArr[MAX_ELEMENTS] = {    //Note: Adjust MAX_ELEMENTS to scale
-        5,3,2,1,8
+        200,100,-7,-3,2,66,4,1,0,99,-8,0,5
     };
 
 
@@ -38,14 +34,28 @@ int main(){
     printf("Random: ");
     print_array(usrArr);
 
+    //FIXME: x10/+ element bug
 
 
+    int sdx = 0;            //sorted index
+    int tdx = sdx + 1;      //target index (number that is currently being sorted)
+
+    //loop through an array once
+    for(int i = 0; i < MAX_ELEMENTS; i++){
+
+        //loop until the target number is the smallest 
+        while( (usrArr[tdx] < usrArr[tdx - 1]) && (tdx > 0) && (tdx < MAX_ELEMENTS)){
+            swap(&usrArr[tdx], &usrArr[tdx - 1]);
+            tdx--;
+            //print_array(usrArr);    //debug printout
+        }
+
+        sdx++;          //increment sorted index
+        tdx = sdx + 1;  //set a new target index
+
+    }
 
 
-   /* ARRAY SHIFTER */
-
-    //shift(array to work on, targeElement to shift, how many times to shift);
-    shift_array(usrArr, 2, -2);
 
 
 
@@ -62,12 +72,6 @@ int main(){
 
 
 /* SUBROUTINES */
-
-//array shift subroutine - shift(array to work on, element index to shift, how many times to shift);
-void shift_array(int paramArr[], int targetElement, int shiftCounter){
-    printf("This is a test\n");
-}
-
 
 
 
