@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_ELEMENTS 13
+#define MAX_ELEMENTS 15
 void print_array(int []);
 
 
@@ -28,7 +28,7 @@ int main(){
 
     //unsorted list
     int usrArr[MAX_ELEMENTS] = {    //Note: Adjust MAX_ELEMENTS to scale
-        200,100,-7,-3,2,66,4,1,0,99,-8,0,5
+        200,100,-7,-3,2,66,4,1,0,99,-8,0,5, -3000, -2309
     };
 
 
@@ -66,16 +66,17 @@ void insertion_sort(int paramArr[]){
     for(int i = 0; i < MAX_ELEMENTS; i++){
 
         /* 
-            loop until the target number is the smallest 
-            making sure tdx does not index beyond the size of the array
+            loop a swap function moving the target number to the left, until 
+            the target number is the smaller number compared to the left-adjacent
+            element, making sure tdx does not index beyond the size of the array
         */
-        while( (paramArr[tdx] < paramArr[tdx - 1]) && (tdx > 0) && (tdx < MAX_ELEMENTS)){
+        while( (paramArr[tdx] < paramArr[tdx - 1]) && (tdx > 0) && (tdx < MAX_ELEMENTS) ){
             swap(&paramArr[tdx], &paramArr[tdx - 1]);
-            tdx--;
+            tdx--;  //keeps track of where tdx is when a swap function is called
         }
 
-        sdx++;          //increment sorted index
-        tdx = sdx + 1;  //set a new target index
+        sdx++;          //increment sorted index once an element has been sorted
+        tdx = sdx + 1;  //set a new target index based on sorted index value
 
     }
 }
