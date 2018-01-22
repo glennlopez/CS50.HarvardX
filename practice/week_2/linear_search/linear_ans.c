@@ -14,8 +14,9 @@ void print_array(int []);
 
  */
 
-//prototypes for selection sort
+//prototypes for sorting algorithms
 int linear_search(int [], int);
+void insertion_sort(int []);
 void selection_sort(int []);
 void swap(int *, int *);
 
@@ -42,7 +43,8 @@ int main(){
 
     //sort if required
     if( (uChar == 'y') || (uChar == 'Y')){
-        selection_sort(usrArr);
+        //selection_sort(usrArr);
+        insertion_sort(usrArr);
     }
     
     //search for number specified by usr
@@ -75,6 +77,30 @@ int linear_search(int paramArr[], int targetNum){ int steps_taken = 0;
     //debug
     printf("Steps taken to find '%i': %i", targetNum, steps_taken);
     return 0;
+}
+
+//insertion sort subroutine
+void insertion_sort(int paramArr[]){
+    int sdx = 0;            //sorted index
+    int tdx = sdx + 1;      //target index (number that is currently being sorted)
+
+    //loop through the entire array only once
+    for(int i = 0; i < MAX_ELEMENTS; i++){
+
+        /* 
+            loop a swap function moving the target number to the left, until 
+            the target number is the smaller number compared to the left-adjacent
+            element, making sure tdx does not index beyond the size of the array
+        */
+        while( (paramArr[tdx] < paramArr[tdx - 1]) && (tdx > 0) && (tdx < MAX_ELEMENTS) ){
+            swap(&paramArr[tdx], &paramArr[tdx - 1]);
+            tdx--;  //keeps track of where tdx is when a swap function is called
+        }
+
+        sdx++;          //increment sorted index once an element has been sorted
+        tdx = sdx + 1;  //set a new target index based on sorted index value
+
+    }
 }
 
 //selection sort algorythm

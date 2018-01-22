@@ -2,6 +2,7 @@
 #include <string.h>
 #define MAX_ELEMENTS 15
 void print_array(int []);
+//https://sourceware.org/gdb/wiki/BuildingOnDarwin - FOR GDB CHECK
 
 
  /*
@@ -38,10 +39,7 @@ int main(){
     print_array(usrArr);
 
 
-
     insertion_sort(usrArr);
-
-
 
 
     printf("Sorted: ");
