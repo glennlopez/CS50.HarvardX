@@ -7,6 +7,7 @@
 int sum(int);
 int sum_usrInput(int);
 
+
 int main(int argc, char *argv[]){
 
     //user doesnt type an argument
