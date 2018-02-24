@@ -44,6 +44,7 @@ void binarySearch(int param[], int paramSize){
     while(target != midPoint){
         //FIXME: last element in the array cant be found (num:1-10)
         //FIXME: needs a way to stop looping if number cant be found
+        //FIXME: if target is "0", function stops searching
 
         midPoint = (startPoint + endPoint)/2;
         if(target == midPoint){
