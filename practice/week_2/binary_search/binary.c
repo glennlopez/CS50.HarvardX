@@ -7,13 +7,13 @@ void binarySearch(int [], int);
 int main(){
 
     //sorted array
-    int ar[] = {1,2,3,4,5,6,7,8,9,10};
+    int ar[] = {1,2,3,4,5,6,7,8,9,10,11,12};
     int arSize = sizeof(ar)/sizeof(int);
 
     binarySearch(ar, arSize);
 
     //outputs
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < arSize; i++){
         printf("%i ", *(ar + i));
     }
 
@@ -31,31 +31,36 @@ void binarySearch(int param[], int paramSize){
     int target = get_int("Search: ");
     int startPoint = 0;
     int endPoint = paramSize;
-    int midPoint = 0; //FIXME: put this in while loop
+    int midPoint = paramSize; 
 
     /*
-    [ ] While target != midPoint do: 
-        [ ] re-calculate midPoint -> (startPoint + endPoint)/2
-        [ ] if the target is in the midPoint, stop -> *number found*
-        [ ] if the target is lessthan midPoint, change endPoint = midPoint
-        [ ] if the target is greater than midPoint, change startPoint = midPoint
+    [x] While target != midPoint do: 
+        [x] re-calculate midPoint -> (startPoint + endPoint)/2
+        [x] if the target is in the midPoint, stop -> *number found*
+        [x] if the target is lessthan midPoint, change endPoint = midPoint
+        [x] if the target is greater than midPoint, change startPoint = midPoint
     */
 
-    while(target != midPoint){
-        //FIXME: last element in the array cant be found (num:1-10)
-        //FIXME: needs a way to stop looping if number cant be found
-        //FIXME: if target is "0", function stops searching
+    while(target != param[midPoint]){ 
 
         midPoint = (startPoint + endPoint)/2;
-        if(target == midPoint){
+
+        if(target == param[midPoint]){
             printf("Target found! \n");
         }
-        else if(target < midPoint){
+        else if(target < param[midPoint]){
             endPoint = midPoint;
         }
-        else if(target > midPoint){
+        else if(target > param[midPoint]){
             startPoint = midPoint;
         }
+
+        //number doesnt exist, stop looping
+        if( (endPoint - startPoint) == 1){
+            printf("Target NOT found!\n");
+            break;
+        }
+
 
     }
 
