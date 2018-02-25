@@ -1,5 +1,0 @@
-Practice Sorting Agorythm
-    [x] Bubble Sort  (easy)
-    [x] Selection Sort (med)
-    [] Insertion Sort (hard)
-    [] Merge Sort (hardest)
