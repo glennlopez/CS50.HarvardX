@@ -6,7 +6,7 @@ int binarySearch(int [], int);
 int main(){
 
     //sorted array
-    int ar[] = {1,2,3,4};
+    int ar[] = {1,2,3,4,5,6,7,8,9,10};
     int arSize = sizeof(ar)/sizeof(int);
 
     if(binarySearch(ar, arSize)){
@@ -18,13 +18,12 @@ int main(){
 
     printf("\n");
     return 0;
-} 
+}
 
 
 
 /* SUBROUTINE */
 int binarySearch(int param[], int paramSize){
-    //BUG: 2x, 3x, 6x elements in array produces error
 
     //initial variable sets
     int target = get_int("Search: ");
