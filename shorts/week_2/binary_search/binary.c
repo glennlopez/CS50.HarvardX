@@ -1,25 +1,30 @@
 #include <stdio.h>
 #include <cs50.h>
 
-void binarySearch(int [], int);
+int binarySearch(int [], int);
 
 int main(){
 
     //sorted array
-    int ar[] = {-10,-6,-1,0,1,23,55,1002};
+    int ar[] = {1,2,3,4};
     int arSize = sizeof(ar)/sizeof(int);
 
-    binarySearch(ar, arSize);
+    if(binarySearch(ar, arSize)){
+        printf("Found!\n");
+    }
+    else{
+        printf("Not found\n");
+    }
 
     printf("\n");
     return 0;
-}
-
+} 
 
 
 
 /* SUBROUTINE */
-void binarySearch(int param[], int paramSize){
+int binarySearch(int param[], int paramSize){
+    //BUG: 2x, 3x, 6x elements in array produces error
 
     //initial variable sets
     int target = get_int("Search: ");
@@ -39,10 +44,10 @@ void binarySearch(int param[], int paramSize){
     while(target != param[midPoint]){
         midPoint = (startPoint + endPoint)/2;
         if(target == param[midPoint]){
-            printf("Target found! \n");
+            return 1;
         }
         else if(startPoint == midPoint){
-            printf("Target NOT found!\n");
+            return 0;
             break;
         }
         else if(target < param[midPoint]){
@@ -52,4 +57,5 @@ void binarySearch(int param[], int paramSize){
             startPoint = midPoint;
         }
     }
+    return 2;
 }
