@@ -1,0 +1,9 @@
+Musical Notes as ASCII
+
+Example: 
+    D4@1/8 = D note, 4rth Octive, 1/8th duration
+            = blank line means "rest" for 1/8 note duration
+    F#4@1/4 = F sharp note, 4rth Octive, 1/4th duration
+
+
+
