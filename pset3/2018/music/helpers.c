@@ -5,9 +5,21 @@
 #include "helpers.h"
 
 // Converts a fraction formatted as X/Y to eighths
-int duration(string fraction)
-{
-    // TODO
+int duration(string fraction){
+    int result = 0;
+
+    //simple ascii-char to int conversion
+    int numer = (int)fraction[0] - 48;
+    int denom = (int)fraction[2] - 48; 
+
+    if(denom == 8){
+        result = numer;
+    }
+    else if(numer == 1){
+        result = 8/denom;
+    }
+
+    return result;
 }
 
 // Calculates frequency (in Hz) of a note
@@ -24,10 +36,11 @@ bool is_rest(string s){
     for(int i = 0; s[i] != '\0'; i++){
         if(s[i] != '\0'){
             counter++;
+            break;  //dont waste anymore time
         }
     }
 
-    //checks for blank string
+    //if a charater is found its not a rest
     if(counter <= 0){
         return 1;
     }

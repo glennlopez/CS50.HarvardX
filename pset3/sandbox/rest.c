@@ -24,10 +24,11 @@ bool is_rest(string s){
     for(int i = 0; s[i] != '\0'; i++){
         if(s[i] != '\0'){
             counter++;
+            break;  //dont waste anymore time
         }
     }
 
-    //checks for blank string
+    //if a charater is found its not a rest
     if(counter <= 0){
         return 1;
     }
