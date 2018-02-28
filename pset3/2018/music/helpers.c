@@ -40,7 +40,7 @@ bool is_rest(string s){
         }
     }
 
-    //if a charater is found its not a rest
+    //determine rest from counter
     if(counter <= 0){
         return 1;
     }
