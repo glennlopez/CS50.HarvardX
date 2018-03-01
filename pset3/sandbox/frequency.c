@@ -25,7 +25,7 @@ int frequency(string note){
     int octive = 0;
     int octive_pos = 0;
     int octive_frq = 0;
-    double note_frq = 0;
+    double tone_frq = 0;
     char tone[] = {
         'A','?','B','C','?','D','?','E','F','?','G','?','\0'
     };
@@ -39,10 +39,8 @@ int frequency(string note){
         octive_pos = 1;
     }
 
-    //convert octive char to int:
-    octive = (int)note[octive_pos] - 48; 
-
     //octive to frequency calculator
+    octive = (int)note[octive_pos] - 48; 
     if( (note[0] == 'A') || (note[0] == 'B') ){ 
         octive_frq = 440 * ( pow(2,octive - 4) );
     }
@@ -50,7 +48,7 @@ int frequency(string note){
         octive_frq = 440 * ( pow(2,octive - 5) );
     }
 
-    //find exponent(n) for tone calculation 2^(n/12)
+    //find n to calculate for tone: 2^(n/12)
     for(n_exponent = 0; tone[n_exponent] != note[0]; n_exponent++){
         if(n_exponent > 11){    //prevents non-sensical notes
             n_exponent = 0;
@@ -58,12 +56,13 @@ int frequency(string note){
         }
     }
 
-    //Return frq:
-    note_frq =  octive_frq * pow(2, (n_exponent/12.00000));
+    //calculate for tone frequency
+    tone_frq =  octive_frq * pow(2, (n_exponent/12.00000));
 
+    //TODO:
         //accidentals to frequency
         //sharp (#)
         //flats (b)
 
-    return ceil(note_frq); //FIXME: E7 (2637.02) is rounded up to 2638 
+    return ceil(tone_frq); //FIXME: E7 (2637.02) is rounded up to 2638 
 }
