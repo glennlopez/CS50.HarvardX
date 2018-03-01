@@ -30,8 +30,25 @@ int frequency(string note){
     };
 
     //octive to frequency:
-        octive = (int)note[1] - 48; //calculates octives from 1 to 9
+    octive = (int)note[1] - 48; //calculates octives from 1 to 9
+
+    if( (note[0] == 'A') || (note[0] == 'B') ){ 
         octive_frq = 440 * ( pow(2,octive - 4) );
+    }
+    else{ //corrects for octive roll-over
+        octive_frq = 440 * ( pow(2,octive - 5) );
+    }
+    //FIXME: G4 should be 392, G3 shows up as 392
+    /*
+        C4 - (261.63)   524
+        D4 - (293.66)   588
+        E4 - (329.63)   660
+        F4 - (349.23)   699
+        G4 - (392.00)   784
+        A4 - works      (440.00)
+        B4 - works      (493.88)
+        C5 - (523.25)   1047
+    */
 
     //count the number of char in the string   
     for(strCnt = 0; note[strCnt] != '\0'; strCnt++);
@@ -55,5 +72,5 @@ int frequency(string note){
         note_frq =  octive_frq * pow(2, (n_exponent/12.00000));
 
     //return rounded number
-    return note_frq;
+    return ceil(note_frq);
 }
