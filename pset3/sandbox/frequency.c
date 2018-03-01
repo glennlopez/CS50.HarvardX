@@ -19,13 +19,14 @@ int main(void){
 /* SUBROUTINES */
 // Calculates frequency (in Hz) of a note
 int frequency(string note){
+    //TODO: capitalize lowercase chars in note string
+
     //int frq = 0; 
     int strCnt = 0;
     int n_exponent = 0;
-    int octive = 0;
-    int octive_pos = 0;
-    int octive_frq = 0;
     double tone_frq = 0;
+    //double accidental_frq = 0;
+    int octive = 0; int octive_pos = 0; int octive_frq = 0;
     char tone[] = {
         'A','?','B','C','?','D','?','E','F','?','G','?','\0'
     };
@@ -59,10 +60,15 @@ int frequency(string note){
     //calculate for tone frequency
     tone_frq =  octive_frq * pow(2, (n_exponent/12.00000));
 
-    //TODO:
-        //accidentals to frequency
-        //sharp (#)
-        //flats (b)
 
-    return ceil(tone_frq); //FIXME: E7 (2637.02) is rounded up to 2638 
+     //accidentals to frequency
+    if( (strCnt == 3) && (note[1] == '#') ){
+        tone_frq *= pow(2, (1/12.00000));
+    }
+    if( (strCnt == 3) && (note[1] == 'b') ){
+        tone_frq /= pow(2, (1/12.00000));
+    }
+
+    //return a rounded frequency int 
+    return round(tone_frq);
 }
