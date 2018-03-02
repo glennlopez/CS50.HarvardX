@@ -5,18 +5,21 @@
 #include "helpers.h"
 
 // Converts a fraction formatted as X/Y to eighths
-int duration(string fraction){
+int duration(string fraction)
+{
     int result = 0;
 
     //simple ascii-char to int conversion
     int numer = (int)fraction[0] - 48;
     int denom = (int)fraction[2] - 48;
 
-    if (denom == 8){
+    if (denom == 8)
+    {
         result = numer;
     }
-    else if (numer == 1){
-        result = 8/denom;
+    else if (numer == 1)
+    {
+        result = 8 / denom;
     }
 
     return result;
@@ -31,7 +34,7 @@ int frequency(string note)
     int octive = 0;
     int octive_pos = 0;
     int octive_frq = 0;
-    char tone[] = 
+    char tone[] =
     {
         'A', '?', 'B', 'C', '?', 'D', '?', 'E', 'F', '?', 'G', '?', '\0'
     };
@@ -42,7 +45,7 @@ int frequency(string note)
     {
         octive_pos = 2;
     }
-    if(strCnt == 2)
+    if (strCnt == 2)
     {
         octive_pos = 1;
     }
@@ -87,7 +90,8 @@ int frequency(string note)
 }
 
 // Determines whether a string represents a rest
-bool is_rest(string s){
+bool is_rest(string s)
+{
     //count the number of characters in the string
     int counter = 0;
     for (int i = 0; s[i] != '\0'; i++)
