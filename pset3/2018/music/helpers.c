@@ -10,7 +10,7 @@ int duration(string fraction){
 
     //simple ascii-char to int conversion
     int numer = (int)fraction[0] - 48;
-    int denom = (int)fraction[2] - 48; 
+    int denom = (int)fraction[2] - 48;
 
     if(denom == 8){
         result = numer;
@@ -44,17 +44,18 @@ int frequency(string note){
     }
 
     //octive to frequency calculator
-    octive = (int)note[octive_pos] - 48; 
-    if( (note[0] == 'A') || (note[0] == 'B') ){ 
-        octive_frq = 440 * ( pow(2,octive - 4) );
+    octive = (int)note[octive_pos] - 48;
+    if((note[0] == 'A') || (note[0] == 'B')){
+        octive_frq = 440 * (pow(2,octive - 4));
     }
-    else{ //corrects for octive roll-over
-        octive_frq = 440 * ( pow(2,octive - 5) );
+    //corrects for octive roll-over
+    else{
+        octive_frq = 440 * (pow(2,octive - 5));
     }
 
     //find n to calculate for tone: 2^(n/12)
     for(n_exponent = 0; tone[n_exponent] != note[0]; n_exponent++){
-        if(n_exponent > 11){    //prevents non-sensical notes
+        if(n_exponent > 11){
             n_exponent = 0;
             break;
         }
@@ -64,20 +65,19 @@ int frequency(string note){
     tone_frq =  octive_frq * pow(2, (n_exponent/12.0000));
 
     //accidentals to frequency
-    if( (strCnt == 3) && (note[1] == '#') ){
+    if((strCnt == 3) && (note[1] == '#')){
         tone_frq *= pow(2, (1/12.0000));
     }
-    if( (strCnt == 3) && (note[1] == 'b') ){
+    if((strCnt == 3) && (note[1] == 'b')){
         tone_frq /= pow(2, (1/12.0000));
     }
 
-    //return a rounded frequency int 
+    //return a rounded frequency int
     return round(tone_frq);
 }
 
 // Determines whether a string represents a rest
 bool is_rest(string s){
-    
     //count the number of characters in the string
     int counter = 0;
     for(int i = 0; s[i] != '\0'; i++){
