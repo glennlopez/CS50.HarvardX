@@ -20,9 +20,12 @@ PADDLE_SPEED = 300
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
+    --seeding RNG with os time
+    math.randomseed(os.time())
+
     -- more "retro-looking" font object we can use for any text
     smallFont = love.graphics.newFont('font.ttf', 8)
-    scoreFont = love.graphics.newFont('font.ttf', 20)
+    --scoreFont = love.graphics.newFont('font.ttf', 30)
 
     -- set LÖVE2D's active font to the smallFont obect
     love.graphics.setFont(smallFont)
@@ -35,12 +38,24 @@ function love.load()
     })
 
     -- initialize player scores
-    player1Score = 0
-    player2Score = 3
+    --player1Score = 0
+    --player2Score = 3
 
     -- paddle pos variable on Y axis (for movement)
     player1Y = VIRTUAL_HEIGHT / 2
     player2Y = VIRTUAL_HEIGHT / 2
+
+    -- starting position values for ball
+    ballX = VIRTUAL_WIDTH / 2 - 2
+    ballY = VIRTUAL_HEIGHT / 2 - 2
+
+    -- random ball velocity at startup
+    ballDX = math.random(2) 
+    -- TODO: https://youtu.be/GfwpRU0cT10?t=39m18s
+    
+
+    -- keep track of game state
+    gameState = 'start'
 
 end
 
@@ -114,9 +129,10 @@ function love.draw()
     --[[
         PLAYER 1 ASSETS:
     ]]
-    -- score:
+    --[[ score:
     love.graphics.setFont(scoreFont)
     love.graphics.print(tostring(player1Score), VIRTUAL_WIDTH / 2 - 50, VIRTUAL_HEIGHT / 3)
+    ]]
 
     -- render P1 paddle
     love.graphics.rectangle('fill', 10, player1Y, 5, 20)
@@ -125,9 +141,10 @@ function love.draw()
     --[[
         PLAYER 2 ASSETS:
     ]]
-    -- score:
+    --[[ score:
     love.graphics.setFont(scoreFont)
     love.graphics.print(tostring(player2Score), VIRTUAL_WIDTH / 2 + 30, VIRTUAL_HEIGHT / 3)
+    ]]
 
     -- render P2 paddle
     love.graphics.rectangle('fill', VIRTUAL_WIDTH - 10, player2Y, 5, 20)
