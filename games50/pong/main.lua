@@ -14,7 +14,7 @@ P2_PADDLE_SPEED = 300
 P2_PADDLE_SIZE = 20
 
 -- ball
-ballSpeed = 100
+
 
 
 
@@ -57,8 +57,8 @@ function love.load()
     ballY = VIRTUAL_HEIGHT / 2 - 2
 
     -- random ball velocity at startup
-    ballDX = math.random(2) == 1 and ballSpeed or -ballSpeed
-    ballDY = math.random(-ballSpeed, ballSpeed)
+    ballDX = math.random(2) == 1 and 100 or -100
+    ballDY = math.random(-100, 100)
     
 
     -- keep track of game state
@@ -93,6 +93,11 @@ function love.update(dt)
         ballX = ballX + ballDX * dt
         ballY = ballY + ballDY * dt
     end
+
+    if ballX > VIRTUAL_WIDTH / 2 then
+        P1_PADDLE_SIZE = 1
+    end
+
 end
 
 
@@ -119,8 +124,8 @@ function love.keypressed(key)
             ballY = VIRTUAL_HEIGHT / 2 - 2
 
             -- random ball velocity at startup
-            ballDX = math.random(2) == 1 and ballSpeed or -ballSpeed
-            ballDY = math.random(-ballSpeed, ballSpeed)
+            ballDX = math.random(2) == 1 and 100 or -100
+            ballDY = math.random(-100, 100)
         end
     end
 end
