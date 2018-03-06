@@ -6,8 +6,13 @@ WINDOW_HEIGHT = 720
 VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
 
--- speed of the paddle when a key is pressed
-PADDLE_SPEED = 300
+-- player 1
+P1_PADDLE_SPEED = 300
+P1_PADDLE_SIZE = 20
+
+-- player 2
+P2_PADDLE_SPEED = 300
+P2_PADDLE_SIZE = 20
 
 
 
@@ -51,12 +56,12 @@ function love.load()
 
     -- random ball velocity at startup
     ballDX = math.random(2) 
+    ballDY = math.random(-50, 50)
     -- TODO: https://youtu.be/GfwpRU0cT10?t=39m18s
     
 
     -- keep track of game state
     gameState = 'start'
-
 end
 
 
@@ -70,19 +75,18 @@ end
 function love.update(dt)
     --player 1 paddle controls
     if love.keyboard.isDown('w') then
-        player1Y = player1Y + -PADDLE_SPEED * dt
+        player1Y = math.max(0, player1Y + -P1_PADDLE_SPEED * dt)
     elseif love.keyboard.isDown('s') then
-        player1Y = player1Y + PADDLE_SPEED * dt
+        player1Y = math.min(VIRTUAL_HEIGHT - P1_PADDLE_SIZE, player1Y + P1_PADDLE_SPEED * dt)
     end
 
     --player 2 paddle controls
     if love.keyboard.isDown('up') then
-        player2Y = player2Y + -PADDLE_SPEED * dt
+        player2Y = math.max(0, player2Y + -P2_PADDLE_SPEED * dt)
     elseif love.keyboard.isDown('down') then
-        player2Y = player2Y + PADDLE_SPEED * dt
+        player2Y = math.min(VIRTUAL_HEIGHT - P2_PADDLE_SIZE, player2Y + P2_PADDLE_SPEED * dt)
     end
 end
-
 
 
 
@@ -135,7 +139,7 @@ function love.draw()
     ]]
 
     -- render P1 paddle
-    love.graphics.rectangle('fill', 10, player1Y, 5, 20)
+    love.graphics.rectangle('fill', 10, player1Y, 5, P1_PADDLE_SIZE)
 
 
     --[[
@@ -147,7 +151,7 @@ function love.draw()
     ]]
 
     -- render P2 paddle
-    love.graphics.rectangle('fill', VIRTUAL_WIDTH - 10, player2Y, 5, 20)
+    love.graphics.rectangle('fill', VIRTUAL_WIDTH - 10, player2Y, 5, P2_PADDLE_SIZE)
 
 
     --[[
