@@ -58,11 +58,11 @@ function love.load()
 
     -- random ball velocity at startup
     ballDX = math.random(2) == 1 and ballSpeed or -ballSpeed
-    ballDY = math.random(-50, 50)
+    ballDY = math.random(-ballSpeed, ballSpeed)
     
 
     -- keep track of game state
-    gameState = 'play'
+    gameState = 'start'
 end
 
 
@@ -103,15 +103,25 @@ end
     Callback function triggered when a key is pressed.
 ]]
 function love.keypressed(key)
-    -- keys can be accessed by string name
+    -- Escape Keys
     if key == 'escape' then
         -- function LÖVE gives us to terminate application
         love.event.quit()
-    end
 
-    if key == 'space' then
-        -- function LÖVE gives us to terminate application
-        love.event.quit()
+    elseif key == 'enter' or key == 'return' then 
+        if gameState == 'start' then
+            gameState = 'play'
+        else
+            gameState = 'start'
+
+            -- starting position values for ball
+            ballX = VIRTUAL_WIDTH / 2 - 2
+            ballY = VIRTUAL_HEIGHT / 2 - 2
+
+            -- random ball velocity at startup
+            ballDX = math.random(2) == 1 and ballSpeed or -ballSpeed
+            ballDY = math.random(-ballSpeed, ballSpeed)
+        end
     end
 end
 
