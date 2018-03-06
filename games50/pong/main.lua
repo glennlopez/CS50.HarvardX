@@ -1,8 +1,7 @@
+-- environment
 push = require 'push'
-
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
-
 VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
 
@@ -13,6 +12,9 @@ P1_PADDLE_SIZE = 20
 -- player 2
 P2_PADDLE_SPEED = 300
 P2_PADDLE_SIZE = 20
+
+-- ball
+ballSpeed = 100
 
 
 
@@ -55,13 +57,12 @@ function love.load()
     ballY = VIRTUAL_HEIGHT / 2 - 2
 
     -- random ball velocity at startup
-    ballDX = math.random(2) 
+    ballDX = math.random(2) == 1 and ballSpeed or -ballSpeed
     ballDY = math.random(-50, 50)
-    -- TODO: https://youtu.be/GfwpRU0cT10?t=39m18s
     
 
     -- keep track of game state
-    gameState = 'start'
+    gameState = 'play'
 end
 
 
@@ -85,6 +86,12 @@ function love.update(dt)
         player2Y = math.max(0, player2Y + -P2_PADDLE_SPEED * dt)
     elseif love.keyboard.isDown('down') then
         player2Y = math.min(VIRTUAL_HEIGHT - P2_PADDLE_SIZE, player2Y + P2_PADDLE_SPEED * dt)
+    end
+
+    -- update ball movement if gamestate is play
+    if gameState == 'play' then
+        ballX = ballX + ballDX * dt
+        ballY = ballY + ballDY * dt
     end
 end
 
@@ -158,7 +165,7 @@ function love.draw()
         CPU ASSETS:
     ]]
     -- render ball
-    love.graphics.rectangle('fill', VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
+    love.graphics.rectangle('fill', ballX, ballY, 4, 4)
 
     -- end rendering at virtual resolution
     push:apply('end')
