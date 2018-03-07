@@ -94,8 +94,10 @@ function love.update(dt)
         ballY = ballY + ballDY * dt
     end
 
+    --testing
     if ballX > VIRTUAL_WIDTH / 2 then
         P1_PADDLE_SIZE = 1
+        P1_PADDLE_SPEED = 50
     end
 
 end
