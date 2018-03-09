@@ -53,7 +53,6 @@ function love.update(dt)
         ball:update(dt)
     end
 
-    -- update player 1 and player 2 paddles each frame
     player1:update(dt)
     player2:update(dt)
 end
