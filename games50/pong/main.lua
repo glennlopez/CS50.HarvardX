@@ -13,7 +13,7 @@ VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
 
 -- atributes
-PADDLE_SPEED = 200
+PADDLE_SPEED = 300
 
 
 
@@ -75,7 +75,6 @@ function love.update(dt)
     -- update paddles location
     player1:update(dt)
     player2:update(dt)
-
 end
 
 
@@ -83,12 +82,49 @@ end
 
 -- keypressed(dt) runs at every frame
 function love.keypressed(key)
-    --TODO
+    -- quit game
+    if key == 'escape' then
+        love.event.quit()
+    
+    -- play game
+    elseif key == 'enter' or key == 'return' then
+        if gameState == 'start' then
+            gameState = 'play'
+        else
+            gameState = 'start'
+
+            -- set the ball back home 
+            ball:reset()
+        end
+    end
 end
 
 
 
 -- draw(dt) runs after update(dt); draws renders to screen
 function love.draw()
-    --TODO
+    -- render virtual resolution
+    push:apply('start')
+
+    -- apply background before rendering environment
+    love.graphics.clear(40, 45, 52, 255)
+
+    -- draw small font for use
+    love.graphics.setFont(smallFont)
+
+    -- gamt state print to screen
+    if gameState == 'start' then
+        love.graphics.printf("Start State!", 0, 20, VIRTUAL_WIDTH, 'center')
+    else
+        love.graphics.printf("Play State!", 0, 20, VIRTUAL_WIDTH, 'center')
+    end
+
+    -- render players
+    player1:render()
+    player2:render()
+
+    -- render npcs
+    ball:render()
+
+    push:apply('end')
 end
