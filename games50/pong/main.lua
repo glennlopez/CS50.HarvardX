@@ -1,6 +1,9 @@
 -- library for rendering retro resolution
 push = require 'push'
 
+-- library for displaying frames per second
+fps = require 'fps'
+
 -- class libraries
 Class = require 'class'
         require 'Paddle'
@@ -13,12 +16,15 @@ VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
 
 -- atributes
-PADDLE_SPEED = 300
-
+PADDLE_SPEED = 200
+BALL_SPEED = 50
 
 
 -- executes once on start; establishes vars & resources globaly  
 function love.load()
+    -- set the title of the window
+    love.window.setTitle('Un/Fair Pong')
+
     -- establish resources for environment stage
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -39,7 +45,7 @@ function love.load()
     player2 = Paddle(VIRTUAL_WIDTH - 10, 30, 5, 20)
 
     -- establish npc Ball(x, y, width, height) resources
-    ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4)
+    ball = Ball(VIRTUAL_WIDTH / 2 - 2, VIRTUAL_HEIGHT / 2 - 2, 4, 4, BALL_SPEED)
 
     -- initialize initial gameState
     gameState = 'start'
@@ -109,10 +115,10 @@ function love.draw()
     -- apply background before rendering environment
     love.graphics.clear(40, 45, 52, 255)
 
-    -- draw small font for use
+    -- set font for use
     love.graphics.setFont(smallFont)
 
-    -- gamt state print to screen
+    -- game state print to screen
     if gameState == 'start' then
         love.graphics.printf("Start State!", 0, 20, VIRTUAL_WIDTH, 'center')
     else
@@ -126,5 +132,9 @@ function love.draw()
     -- render npcs
     ball:render()
 
+    -- render FPS
+    displayFPS()
+
+    -- stop rendering at vertual resolution
     push:apply('end')
 end
