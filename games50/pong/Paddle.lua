@@ -15,7 +15,6 @@ end
 
 
 -- Paddle frame update
---player1Y = math.max(0, player1Y + -P1_PADDLE_SPEED * dt)
 function Paddle:update(dt)
     if self.dy < 0 then
         self.y = math.max(0, self.y + self.dy * dt)

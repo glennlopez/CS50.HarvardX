@@ -20,6 +20,7 @@ PADDLE_SPEED = 200
 BALL_SPEED = 50
 
 
+
 -- executes once on start; establishes vars & resources globaly  
 function love.load()
     -- set the title of the window
@@ -133,7 +134,8 @@ function love.draw()
     ball:render()
 
     -- render FPS
-    displayFPS()
+    --displayFPS()
+    rgbFPS(0,0,255)
 
     -- stop rendering at vertual resolution
     push:apply('end')
