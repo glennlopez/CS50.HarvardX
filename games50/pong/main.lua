@@ -21,7 +21,12 @@ BALL_SPEED = 50
 
 
 
--- executes once on start; establishes vars & resources globaly  
+
+--[[
+    LOAD RESOURCES:
+        executes once on start; 
+        establishes vars & resources globaly
+]] 
 function love.load()
     -- set the title of the window
     love.window.setTitle('Un/Fair Pong')
@@ -54,7 +59,36 @@ end
 
 
 
--- update(dt) runs at every frame
+
+--[[
+    PROCESS INPUT
+        keypressed(dt) runs at every frame
+]]
+function love.keypressed(key)
+    -- quit game
+    if key == 'escape' then
+        love.event.quit()
+    
+    -- play game
+    elseif key == 'enter' or key == 'return' then
+        if gameState == 'start' then
+            gameState = 'play'
+        else
+            gameState = 'start'
+
+            -- set the ball back home 
+            ball:reset()
+        end
+    end
+end
+
+
+
+
+--[[
+    UPDATE GAME RESOURCE:
+        update(dt) runs at every frame
+]]
 function love.update(dt)
     -- set player 1 dy as per keypress
     if love.keyboard.isDown('w') then
@@ -87,28 +121,10 @@ end
 
 
 
--- keypressed(dt) runs at every frame
-function love.keypressed(key)
-    -- quit game
-    if key == 'escape' then
-        love.event.quit()
-    
-    -- play game
-    elseif key == 'enter' or key == 'return' then
-        if gameState == 'start' then
-            gameState = 'play'
-        else
-            gameState = 'start'
-
-            -- set the ball back home 
-            ball:reset()
-        end
-    end
-end
-
-
-
--- draw(dt) runs after update(dt); draws renders to screen
+--[[
+    DRAW RESOURCES:
+        draw(dt) runs after update(dt); draws renders to screen
+]]
 function love.draw()
     -- render virtual resolution
     push:apply('start')
