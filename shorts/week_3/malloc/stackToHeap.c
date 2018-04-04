@@ -29,17 +29,18 @@ int main(){
     }
 
     //copy user string into heap memory
-    
     for(int i = 0; i < usrStr_size; i++){
         usrStr_copy[i] = usrStr[i];
     }
-    
+
     //print out contents of heap memory
     printf("Heap Memory: ");
     for(int i = 0; usrStr_copy[i] != '\0'; i++){
         printf("%c", *(usrStr_copy + i));
     }
     printf("\n");
+
+    free(usrStr_copy);
 
     return 0;
 }
