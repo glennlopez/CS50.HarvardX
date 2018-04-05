@@ -3,7 +3,7 @@ Paddle = Class{}
 
 
 
--- Paddle initialized values
+-- Paddle initialized values loaded
 function Paddle:init(x, y, width, height)
     self.x = x
     self.y = y
@@ -25,7 +25,7 @@ end
 
 
 
--- Render Paddle
+-- Paddle render
 function Paddle:render()
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end

@@ -2,7 +2,7 @@
 Ball = Class{}
 
 
--- Ball initial values
+-- Ball initial values loaded
 function Ball:init(x, y, width, height, BALL_SPEED)
     self.x = x
     self.y = y
@@ -14,7 +14,7 @@ end
 
 
 
--- Ball home
+-- Ball home/reset value position
 function Ball:reset()
     self.x = VIRTUAL_WIDTH / 2 - 2
     self.y = VIRTUAL_HEIGHT / 2 - 2
@@ -31,7 +31,7 @@ function Ball:update(dt)
 end
 
 
--- Ball rendering
+-- Ball render
 function Ball:render()
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end

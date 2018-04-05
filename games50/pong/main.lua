@@ -151,7 +151,7 @@ function love.draw()
 
     -- render FPS
     --displayFPS()
-    rgbFPS(0,0,255)
+    rgbFPS(255,0,0)
 
     -- stop rendering at vertual resolution
     push:apply('end')
