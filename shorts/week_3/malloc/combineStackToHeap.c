@@ -25,6 +25,9 @@ int main(){
 
     // memory alocation
     char *uNameGreet = malloc(charCnt * sizeof(char));
+    if(uNameGreet == NULL){
+        return 1;
+    }
 
     //copy stack content to heap
     int CpyIndex = 0;
