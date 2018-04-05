@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <cs50.h>
 /*
     Ref used:
         - https://www.tutorialspoint.com/c_standard_library/c_function_fseek.htm
@@ -6,6 +7,9 @@
 */
 
 int main(){
+    //user defined parameters
+    char a = get_char("Change: ");
+    char b = get_char("To: ");
 
     // create a pointer
     FILE *textfile;
@@ -17,13 +21,13 @@ int main(){
     }
 
 
-    // places a char in ch from a file pointer until EOF
+    // iterate through every char until EOF
     char ch;
     while( (ch = fgetc(textfile)) != EOF ){
-        // modifies . to a !
-        if(ch == '.'){ // look for any instances of '.'
-            fseek(textfile, -1, SEEK_CUR); // set cursor back 1 char
-            fputc('!', textfile);   // put ! in the pos of the cursor
+        // modifier
+        if(ch == a){    // looks for instances of var a
+            fseek(textfile, -1, SEEK_CUR);
+            fputc(b, textfile); // replaces var a with var b
         }
     }
 
