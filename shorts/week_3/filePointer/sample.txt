@@ -1,0 +1,10 @@
+this the first
+second line
+and thirdline with %name%
+should contain the name Glenn and nothing else for example
+.
+.....
+adding more text so that
+we can hit the maximum number of charachters
+random instance of Glenn here
+which is 150
