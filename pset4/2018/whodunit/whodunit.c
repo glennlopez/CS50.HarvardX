@@ -35,6 +35,13 @@ int main(int argc, char *argv[])
         return 3;
     }
 
+
+    /*
+        char <buffer>
+        fread(<buffer>, <size>, <qty>, <filepointer>);
+    */
+
+
     // read infile's BITMAPFILEHEADER
     BITMAPFILEHEADER bf;
     fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);
@@ -53,6 +60,7 @@ int main(int argc, char *argv[])
         return 4;
     }
 
+
     // write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
 
@@ -70,12 +78,45 @@ int main(int argc, char *argv[])
         {
             // temporary storage
             RGBTRIPLE triple;
+            RGBTRIPLE newTripple;
+
 
             // read RGB triple from infile
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
-            // write RGB triple to outfile
-            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+
+
+
+            // SOLUTION
+            if ((triple.rgbtRed == 0xFF) && (triple.rgbtGreen == 0x00) && (triple.rgbtBlue == 0x00))
+            {
+                // change red pixels to WHITE
+                newTripple.rgbtRed = 0xFF;
+                newTripple.rgbtGreen = 0xFF;
+                newTripple.rgbtBlue = 0xFF;
+                fwrite(&newTripple, sizeof(RGBTRIPLE), 1, outptr);
+            }
+            else if (!((triple.rgbtRed == 0xFF) && (triple.rgbtGreen == 0x00) && (triple.rgbtBlue == 0x00)) &&
+                     !((triple.rgbtRed == 0xFF)
+                       && (triple.rgbtGreen == 0xFF) && (triple.rgbtBlue == 0xFF)))
+            {
+                // change anything that is not red or white to BLACK
+                newTripple.rgbtRed = 0x00;
+                newTripple.rgbtGreen = 0x00;
+                newTripple.rgbtBlue = 0x00;
+                fwrite(&newTripple, sizeof(RGBTRIPLE), 1, outptr);
+            }
+            else
+            {
+                // if its anything else (white), don't change anything
+                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            }
+            // END OF SOLUTION
+
+
+
+
         }
 
         // skip over padding, if any
@@ -88,6 +129,9 @@ int main(int argc, char *argv[])
         }
     }
 
+
+
+
     // close infile
     fclose(inptr);
 
@@ -97,3 +141,5 @@ int main(int argc, char *argv[])
     // success
     return 0;
 }
+
+
