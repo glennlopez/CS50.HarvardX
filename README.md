@@ -2,9 +2,9 @@
 <!-- git checkout staging -->
 
 # Harvard CS50: Introduction to Computer Science
-These are my solutions to Harvard University's "CS50: Introduction to Computer Science" course offered at edX. I used both CS50's [c9.io](https://c9.io/) IDE and my own text editor on linux & macOS + [cs50's](http://www.oss.io/p/cs50/library50-c) Libraries to complete this course (library [rederences](https://reference.cs50.net/) here.)
+These are my solutions to Harvard University's "CS50: Introduction to Computer Science" course offered at edX. I used both CS50's [c9.io](https://c9.io/) IDE and my own text editor on linux & macOS + CS50's [Libraries](http://www.oss.io/p/cs50/library50-c) to complete this course (library [references](https://reference.cs50.net/) here.)
 
-To complete the following Problem Sets, I [studied](https://study.cs50.net/) all of the CS50's lectures ([2017](http://docs.cs50.net/2017/x/syllabus.html#lectures) and 2018), shorts, [walkthroughs (2017)](http://docs.cs50.net/2017/x/syllabus.html#walkthroughs), and participated in class discussions via [/r/CS50](https://www.reddit.com/r/cs50/) on Reddit. All Problem Set submissions received correctness scores of 5/5 and "style" score of atleast 4/5 (becuase no one that is efficient adds a '\n' before a '{' .
+To complete the following Problem sets, I [studied](https://study.cs50.net/) all of the CS50's lectures ([2017](http://docs.cs50.net/2017/x/syllabus.html#lectures) and 2018), shorts, walkthrough [(2017)](http://docs.cs50.net/2017/x/syllabus.html#walkthroughs), and participated in class discussions via [/r/CS50](https://www.reddit.com/r/cs50/) on Reddit. All Problem set submissions received correctness scores of 5/5 and "style" score of atleast 4/5 (efficiency doesn't '\n' before and after '{' ).
 
 > NOTE: This course is still in progress, some psets will be missing. 
 
@@ -77,6 +77,7 @@ Final Project, [2018 Seminars](https://courses.edx.org/courses/course-v1:Harvard
 - Hacker’s Delight, Second Edition
 - How Computers Work, Tenth Edition
 - Programming in C, Fourth Edition
+- [more..](https://datbase.org/glennlopez/cs-books)
 
 # Useful Links:
 - [CS50 Appliance](https://github.com/cs50/libcs50)
