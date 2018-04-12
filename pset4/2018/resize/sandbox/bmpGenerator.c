@@ -146,7 +146,8 @@ int main(int argc, char *argv[])
             /*
                 DEFINE RGB VAL HERE
             */
-            triple.rgbtBlue = 0x00;
+            //triple.rgbtBlue = 0x00;
+            RGB_R(0x00);
             triple.rgbtGreen = 0xFF;
             triple.rgbtRed = 0xFF;
 
