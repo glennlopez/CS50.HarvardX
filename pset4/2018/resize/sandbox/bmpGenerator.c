@@ -9,6 +9,8 @@
 #define COLOR_PALETS 3
 #define COLOR_DEPTH (BYTE_SIZE * COLOR_PALETS)
 
+#define RGB_R(param) (triple.rgbtBlue = param)
+
 #define FILEHEADER_SIZE 14
 #define INFOHEADER_SIZE 40
 #define HEADER_SIZE (FILEHEADER_SIZE+INFOHEADER_SIZE)
