@@ -9,8 +9,6 @@
 #define COLOR_PALETS 3
 #define COLOR_DEPTH (BYTE_SIZE * COLOR_PALETS)
 
-#define RGB_R(param) (triple.rgbtBlue = param)
-
 #define FILEHEADER_SIZE 14
 #define INFOHEADER_SIZE 40
 #define HEADER_SIZE (FILEHEADER_SIZE+INFOHEADER_SIZE)
@@ -18,6 +16,11 @@
 #define PADDING_SIZE ((4 - (IMAGE_WIDTH * sizeof(RGBTRIPLE)) % 4) % 4)
 #define IMAGE_BYTESIZE (((IMAGE_WIDTH * COLOR_PALETS) + PADDING_SIZE) * IMAGE_HEIGHT)
 #define FILE_BYTESIZE (HEADER_SIZE+IMAGE_BYTESIZE)
+
+// MACROs
+#define RGB_R(param) (triple.rgbtRed = param)
+#define RGB_G(param) (triple.rgbtGreen = param)
+#define RGB_B(param) (triple.rgbtBlue = param)
 
 /*
     Draws (n) number of pixel(s) on a file
@@ -146,10 +149,7 @@ int main(int argc, char *argv[])
             /*
                 DEFINE RGB VAL HERE
             */
-            //triple.rgbtBlue = 0x00;
-            RGB_R(0x00);
-            triple.rgbtGreen = 0xFF;
-            triple.rgbtRed = 0xFF;
+            RGB_R(0x00); RGB_G(0xFF); RGB_B(0x00);
 
             // read RGB triple from infile - copy
             //fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
