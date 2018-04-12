@@ -41,10 +41,19 @@ int main(int argc, char *argv[])
 
     // read infile's BITMAPFILEHEADER
     BITMAPFILEHEADER bf;
+    fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);
+
     /*
         DEFINE FILE HEADER HERE
     */
-    fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);
+    //TODO: change bfSize
+    bf.bfType = 0x4D42;     // always 0x4D42 for BMP
+    bf.bfSize = 90;         //* header + (scanline_size+padding) * height
+    bf.bfReserved1 = 0;     // always 0
+    bf.bfReserved2 = 0;     // always 0
+    bf.bfOffBits = 54;      // BITMAPFILEHEADER + BITMAPINFOHEADER size
+
+    // PRINT OUT HEADER 
     printf("BITMAPFILEHEADER\n");
     printf("bf.bfType: %i\n", bf.bfType);
     printf("bf.bfSize: %i\n", bf.bfSize);
@@ -54,11 +63,25 @@ int main(int argc, char *argv[])
 
     // read infile's BITMAPINFOHEADER
     BITMAPINFOHEADER bi;
+    fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
     /*
         DEFINE INFO HEADER HERE
     */
-    fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
-    printf("\nBITMAPFILEHEADER\n");
+    //TODO: change biWidth, biHeight, biSizeImage
+    bi.biSize = 40;     //* size of BITMAPINFOHEADER must be 40
+    bi.biWidth = 3;     //* image width in pixels (not including padding)
+    bi.biHeight = 3;    // image height in pixels
+    bi.biPlanes = 1;    // must be 1
+    bi.biBitCount = 24; // RGB * 1 byte (3 * 8)
+    bi.biCompression = 0;
+    bi.biSizeImage = 36; //* size of image data (including padding, excluding headers)
+    bi.biXPelsPerMeter = 2835;  // not important keep at 2835
+    bi.biYPelsPerMeter = 2835;  // not important keep at 2835
+    bi.biClrUsed = 0;           // not important keep at 0
+    bi.biClrImportant = 0;      // not important keep at 0
+
+    // PRINT OUT INFO HEADER 
+    printf("\nBITMAPINFOHEADER\n");
     printf("bi.biSize: %i\n", bi.biSize);
     printf("bi.biWidth: %i\n", bi.biWidth);
     printf("bi.biHeight: %i\n", bi.biHeight);
