@@ -1,11 +1,8 @@
-// Copies a BMP file
-
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "bmp.h"
 #define RESIZE_FACTOR 2
 
-#include "bmp.h"
 
 int main(int argc, char *argv[])
 {
@@ -45,15 +42,14 @@ int main(int argc, char *argv[])
     BITMAPINFOHEADER bi;
     fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
 
-    //store old data
+    // keep track of old data
     int old_padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     int old_biWidth = bi.biWidth;
     int old_biHeight = bi.biHeight;
     int old_biSizeImage = bi.biSizeImage;
     int old_bfSize = bf.bfSize;
 
-
-    // PARAMETRIC CHANGES
+    // add scaled changes to original
     bi.biWidth *= RESIZE_FACTOR;
     bi.biHeight *= RESIZE_FACTOR;
     int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
@@ -108,9 +104,6 @@ int main(int argc, char *argv[])
 
     // write outfile's BITMAPINFOHEADER
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
-
-    // determine padding for scanlines
-    //int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
 
     // iterate over infile's scanlines
     for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
