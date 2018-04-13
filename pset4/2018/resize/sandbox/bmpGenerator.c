@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "bmp.h"
 
-#define IMAGE_WIDTH 3
-#define IMAGE_HEIGHT 3
+#define IMAGE_WIDTH 1
+#define IMAGE_HEIGHT 1
 
 #define BYTE_SIZE 8
 #define COLOR_PALETS 3

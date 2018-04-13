@@ -1,32 +1,11 @@
+// Copies a BMP file
+
 #include <stdio.h>
 #include <stdlib.h>
+
+#define RESIZE_FACTOR 2
+
 #include "bmp.h"
-
-#define IMAGE_WIDTH 3
-#define IMAGE_HEIGHT 3
-
-#define BYTE_SIZE 8
-#define COLOR_PALETS 3
-#define COLOR_DEPTH (BYTE_SIZE * COLOR_PALETS)
-
-#define FILEHEADER_SIZE 14
-#define INFOHEADER_SIZE 40
-#define HEADER_SIZE (FILEHEADER_SIZE+INFOHEADER_SIZE)
-
-#define PADDING_SIZE ((4 - (IMAGE_WIDTH * sizeof(RGBTRIPLE)) % 4) % 4)
-#define IMAGE_BYTESIZE (((IMAGE_WIDTH * COLOR_PALETS) + PADDING_SIZE) * IMAGE_HEIGHT)
-#define FILE_BYTESIZE (HEADER_SIZE+IMAGE_BYTESIZE)
-
-// MACROs
-#define RGB_R(param) (triple.rgbtRed = param)
-#define RGB_G(param) (triple.rgbtGreen = param)
-#define RGB_B(param) (triple.rgbtBlue = param)
-
-/*
-    Draws (n) number of pixel(s) on a file
-    BMP ref: http://www.fastgraph.com/help/bmp_header_format.html
-*/
-
 
 int main(int argc, char *argv[])
 {
@@ -62,43 +41,43 @@ int main(int argc, char *argv[])
     BITMAPFILEHEADER bf;
     fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);
 
-    /*
-        DEFINE FILE HEADER HERE
-    */
-    //TODO: change bfSize
-    bf.bfType = 0x4D42;     // always 0x4D42 for BMP
-    bf.bfSize = FILE_BYTESIZE;
-    bf.bfReserved1 = 0;     // always 0
-    bf.bfReserved2 = 0;     // always 0
-    bf.bfOffBits = HEADER_SIZE;
- 
+    // read infile's BITMAPINFOHEADER
+    BITMAPINFOHEADER bi;
+    fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
+
+    //store old data
+    int old_padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+    int old_biWidth = bi.biWidth;
+    int old_biHeight = bi.biHeight;
+    int old_biSizeImage = bi.biSizeImage;
+    int old_bfSize = bf.bfSize;
+
+
+    // PARAMETRIC CHANGES
+    bi.biWidth *= RESIZE_FACTOR;
+    bi.biHeight *= RESIZE_FACTOR;
+    int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+    bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
+    bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
+
+    printf("\n\nbi.biWidth * triple: %lu\n", (bi.biWidth * sizeof(RGBTRIPLE)));
+    printf("padding: %i\n\n", padding);
+
+    // DEBUG - OLD DATA
+    printf("\nOLD DATA\n");
+    printf("old_padding: %i\n", old_padding);
+    printf("old_biWidth: %i\n", old_biWidth);
+    printf("old_biHeight: %i\n", old_biHeight);
+    printf("old_biSizeImage: %i\n", old_biSizeImage);
+    printf("old_bfSize: %i\n", old_bfSize);
+
     // DEBUG - PRINT OUT HEADER 
-    printf("BITMAPFILEHEADER\n");
+    printf("\nBITMAPFILEHEADER\n");
     printf("bf.bfType: %i\n", bf.bfType);
     printf("bf.bfSize: %i\n", bf.bfSize);
     printf("bf.bfReserved1: %i\n", bf.bfReserved1);
     printf("bf.bfReserved2: %i\n", bf.bfReserved2);
     printf("bf.bfOffBits: %i\n", bf.bfOffBits);
-
-    // read infile's BITMAPINFOHEADER
-    BITMAPINFOHEADER bi;
-    fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
-    /*
-        DEFINE INFO HEADER HERE
-    */
-    //TODO: change biWidth, biHeight, biSizeImage
-    bi.biSize = INFOHEADER_SIZE;
-    bi.biWidth = IMAGE_WIDTH;
-    bi.biHeight = IMAGE_HEIGHT;
-    bi.biPlanes = 1;        // must be 1
-    bi.biBitCount = COLOR_DEPTH;
-    bi.biCompression = 0;
-    bi.biSizeImage = IMAGE_BYTESIZE;
-    bi.biXPelsPerMeter = 2835;  // not important keep at 2835
-    bi.biYPelsPerMeter = 2835;  // not important keep at 2835
-    bi.biClrUsed = 0;           // not important keep at 0
-    bi.biClrImportant = 0;      // not important keep at 0
-
     // DEBUG - PRINT OUT INFO HEADER 
     printf("\nBITMAPINFOHEADER\n");
     printf("bi.biSize: %i\n", bi.biSize);
@@ -112,6 +91,7 @@ int main(int argc, char *argv[])
     printf("bi.biYPelsPerMeter: %i\n", bi.biYPelsPerMeter);
     printf("bi.biClrUsed: %i\n", bi.biClrUsed);
     printf("bi.biClrImportant: %i\n", bi.biClrImportant);
+
 
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
     if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||
@@ -130,32 +110,25 @@ int main(int argc, char *argv[])
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
     // determine padding for scanlines
-    /*
-        DEFINE PADDING HERE
-    */
     //int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-    int padding = PADDING_SIZE;
-    
 
     // iterate over infile's scanlines
-    //for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
-    for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
+    for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
     {
         // iterate over pixels in scanline
-        for (int j = 0; j < bi.biWidth; j++)
+        //for (int j = 0, biWidth = (bi.biWidth); j < biWidth; j++)
+        for (int j = 0; j < old_biWidth; j++)
         {
             // temporary storage
             RGBTRIPLE triple;
-            /*
-                DEFINE RGB VAL HERE
-            */
-            RGB_R(0x00); RGB_G(0xFF); RGB_B(0x00);
 
-            // read RGB triple from infile - copy
-            //fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+            // read RGB triple from infile
+            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
-            // write RGB triple to outfile - paste
-            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            for(int k = 0; k < RESIZE_FACTOR; k++){
+                // write RGB triple to outfile
+                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            }
         }
 
         // skip over padding, if any
@@ -177,6 +150,3 @@ int main(int argc, char *argv[])
     // success
     return 0;
 }
-
-
-
