@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define RESIZE_FACTOR 2
+#define SCALE_FACTOR 3
 
 
 int main(int argc, char *argv[])
@@ -50,8 +50,8 @@ int main(int argc, char *argv[])
     int old_bfSize = bf.bfSize;
 
     // add scaled changes to original
-    bi.biWidth *= RESIZE_FACTOR;
-    bi.biHeight *= RESIZE_FACTOR;
+    bi.biWidth *= SCALE_FACTOR;
+    bi.biHeight *= SCALE_FACTOR;
     int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
     bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
@@ -105,25 +105,28 @@ int main(int argc, char *argv[])
     // write outfile's BITMAPINFOHEADER
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
-    // iterate over infile's scanlines
+
+    //for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
     for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
     {
         // iterate over pixels in scanline
-        //for (int j = 0, biWidth = (bi.biWidth); j < biWidth; j++)
         for (int j = 0; j < old_biWidth; j++)
         {
             // temporary storage
             RGBTRIPLE triple;
 
-            // read RGB triple from infile
+            // read pixel
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
-            for(int k = 0; k < RESIZE_FACTOR; k++){
-                // write RGB triple to outfile
+            // re-write scanline by SCALE_FACTOR
+            for(int scale = 0; scale < SCALE_FACTOR; scale++)
+            {
                 fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
             }
+            
         }
 
+    
         // skip over padding, if any
         fseek(inptr, padding, SEEK_CUR);
 
@@ -133,6 +136,43 @@ int main(int argc, char *argv[])
             fputc(0x00, outptr);
         }
     }
+
+    fseek(inptr, -(padding), SEEK_CUR);
+
+
+        //for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
+    for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
+    {
+        // iterate over pixels in scanline
+        for (int j = 0; j < old_biWidth; j++)
+        {
+            // temporary storage
+            RGBTRIPLE triple;
+
+            // read pixel
+            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+
+            // re-write scanline by SCALE_FACTOR
+            for(int scale = 0; scale < SCALE_FACTOR; scale++)
+            {
+                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            }
+            
+        }
+
+    
+        // skip over padding, if any
+        fseek(inptr, padding, SEEK_CUR);
+
+        // then add it back (to demonstrate how)
+        for (int k = 0; k < padding; k++)
+        {
+            fputc(0x00, outptr);
+        }
+        
+    }
+
+
 
     // close infile
     fclose(inptr);
