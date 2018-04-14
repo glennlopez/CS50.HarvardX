@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "bmp.h"
 
-#define IMAGE_WIDTH 1
+#define IMAGE_WIDTH 3
 #define IMAGE_HEIGHT 1
 
 #define BYTE_SIZE 8
@@ -149,12 +149,11 @@ int main(int argc, char *argv[])
             /*
                 DEFINE RGB VAL HERE
             */
+            RGB_R(0xFF); RGB_G(0x00); RGB_B(0x00);
+            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
             RGB_R(0x00); RGB_G(0xFF); RGB_B(0x00);
-
-            // read RGB triple from infile - copy
-            //fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-
-            // write RGB triple to outfile - paste
+            fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+            RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);
             fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
         }
 

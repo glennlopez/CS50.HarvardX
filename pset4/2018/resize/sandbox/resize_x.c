@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 3
+#define SCALE_FACTOR 1
 
 
 int main(int argc, char *argv[])
@@ -99,48 +99,52 @@ int main(int argc, char *argv[])
         return 4;
     }
 
-    // write outfile's BITMAPFILEHEADER
-    fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
+    // DEBUG - HEADER MODIFIERS
+    bi.biWidth = 2;
+    bi.biHeight = 1;
+    padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+    bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
+    bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
 
-    // write outfile's BITMAPINFOHEADER
+    // write HEADERS
+    fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
+    //temp storage
+    RGBTRIPLE triple;
 
-    //for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
-    for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
+
+
+
+    triple.rgbtRed = 0xFF; triple.rgbtGreen = 0x00; triple.rgbtBlue = 0x00;
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+/*
+    // skip over padding, if any
+    fseek(inptr, padding, SEEK_CUR);
+
+    // then add it back (to demonstrate how)
+    for (int k = 0; k < padding; k++)
     {
-        // iterate over pixels in scanline
-        for (int j = 0; j < old_biWidth; j++)
-        {
-            // temporary storage
-            RGBTRIPLE triple;
-
-            // read pixel
-            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-
-            // re-write scanline by SCALE_FACTOR
-            for(int scale = 0; scale < SCALE_FACTOR; scale++)
-            {
-                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-            }
-            
-        }
-
-    
-        // skip over padding, if any
-        fseek(inptr, padding, SEEK_CUR);
-
-        // then add it back (to demonstrate how)
-        for (int k = 0; k < padding; k++)
-        {
-            fputc(0x00, outptr);
-        }
+        fputc(0x00, outptr);
     }
+*/
 
-    fseek(inptr, -(padding), SEEK_CUR);
+    triple.rgbtRed = 0xFF; triple.rgbtGreen = 0x00; triple.rgbtBlue = 0x00;
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    // skip over padding, if any
+    fseek(inptr, padding, SEEK_CUR);
+
+    // then add it back (to demonstrate how)
+    for (int k = 0; k < padding; k++)
+    {
+        fputc(0x00, outptr);
+    }
+    
 
 
-        //for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
+
+    /*
     for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
     {
         // iterate over pixels in scanline
@@ -157,20 +161,20 @@ int main(int argc, char *argv[])
             {
                 fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
             }
-            
+                
         }
 
-    
-        // skip over padding, if any
-        fseek(inptr, padding, SEEK_CUR);
-
-        // then add it back (to demonstrate how)
-        for (int k = 0; k < padding; k++)
-        {
-            fputc(0x00, outptr);
-        }
         
+        // skip over padding, if any
+        fseek(inptr, padding, SEEK_CUR);
+
+        // then add it back (to demonstrate how)
+        for (int k = 0; k < padding; k++)
+        {
+            fputc(0x00, outptr);
+        }
     }
+    */
 
 
 
