@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 1
+#define SCALE_FACTOR 2
 
 
 int main(int argc, char *argv[])
@@ -99,52 +99,68 @@ int main(int argc, char *argv[])
         return 4;
     }
 
-    // DEBUG - HEADER MODIFIERS
-    bi.biWidth = 2;
-    bi.biHeight = 1;
+
+
+/*  // DEBUG - HEADER MODIFIERS
+    bi.biWidth = 3;
+    bi.biHeight = 2;
     padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
     bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
+*/  // END OF HEADER MODIFIER DEBUG
+
+
 
     // write HEADERS
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
+
+
+
+    /* //DEBUG - VERTICAL SCALE TESTS
     //temp storage
     RGBTRIPLE triple;
+    RGBTRIPLE *triple_y = malloc(sizeof(RGBTRIPLE) * bi.biWidth);
 
-
-
-
-    triple.rgbtRed = 0xFF; triple.rgbtGreen = 0x00; triple.rgbtBlue = 0x00;
+    // Red pixel
+    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-/*
+
+    // Green pixel
+    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    // Blue Pixel
+    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
     // skip over padding, if any
-    fseek(inptr, padding, SEEK_CUR);
+    //fseek(inptr, padding, SEEK_CUR);
 
     // then add it back (to demonstrate how)
     for (int k = 0; k < padding; k++)
     {
         fputc(0x00, outptr);
     }
-*/
 
-    triple.rgbtRed = 0xFF; triple.rgbtGreen = 0x00; triple.rgbtBlue = 0x00;
-    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-    // skip over padding, if any
-    fseek(inptr, padding, SEEK_CUR);
-
-    // then add it back (to demonstrate how)
-    for (int k = 0; k < padding; k++)
-    {
-        fputc(0x00, outptr);
-    }
+    //fseek(inptr, 0, SEEK_SET);
+    fread(triple_y, sizeof(RGBTRIPLE), 3, inptr);
+    fwrite(triple_y, sizeof(RGBTRIPLE), 3, outptr);
     
+    // skip over padding, if any
+    fseek(inptr, padding, SEEK_CUR);
+
+    // then add it back (to demonstrate how)
+    for (int k = 0; k < padding; k++)
+    {
+        fputc(0x00, outptr);
+    }
+    */ // END OF VERTICAL SCALE TEST
 
 
-
-    /*
+    // scale image
+    RGBTRIPLE *triple_y = malloc(sizeof(RGBTRIPLE) * bi.biWidth);
     for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
     {
         // iterate over pixels in scanline
@@ -164,6 +180,10 @@ int main(int argc, char *argv[])
                 
         }
 
+        //TODO: write the vertical scale here
+            //buffer scanline to tripple_y
+            //write to outptr from tripple_y
+
         
         // skip over padding, if any
         fseek(inptr, padding, SEEK_CUR);
@@ -174,7 +194,7 @@ int main(int argc, char *argv[])
             fputc(0x00, outptr);
         }
     }
-    */
+    
 
 
 
@@ -186,4 +206,15 @@ int main(int argc, char *argv[])
 
     // success
     return 0;
+}
+
+
+
+
+/**************
+ * SUBROUTINE
+ **************/
+
+void printMetadata(void){
+    
 }
