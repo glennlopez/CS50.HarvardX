@@ -164,9 +164,18 @@ int main(int argc, char *argv[])
     // scan through original image height
     for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
     {
+        /********************
+        * old_biHeight loop
+        *********************/
+
+
         // iterate through old width pixel scanline 
         for (int j = 0; j < old_biWidth; j++)
         {
+            /********************
+            * old_biWidth loop
+            *********************/
+
             // temporary storage
             RGBTRIPLE triple;
 
@@ -181,12 +190,10 @@ int main(int argc, char *argv[])
             }
 
             
- 
+            /**************************
+            * END old_biWidth loop END
+            ***************************/
         }
-
-        fread(triple_y, sizeof(RGBTRIPLE), bi.biWidth, inptr);
-        
-        
 
         // skip over padding, if any
         fseek(inptr, padding, SEEK_CUR);
@@ -200,15 +207,11 @@ int main(int argc, char *argv[])
 
 
 
-        fwrite(triple_y, sizeof(RGBTRIPLE), bi.biWidth, outptr);
-        // skip over padding, if any
-        fseek(inptr, padding, SEEK_CUR);
 
-        // then add it back (to demonstrate how)
-        for (int k = 0; k < padding; k++)
-        {
-            fputc(0x00, outptr);
-        }
+
+       /**************************
+        * END old_biHeight loop END
+        ***************************/
 
     }
 
@@ -233,7 +236,3 @@ int main(int argc, char *argv[])
 /**************
  * SUBROUTINE
  **************/
-
-void printMetadata(void){
-    
-}
