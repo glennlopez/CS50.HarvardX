@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 
 
 
-    // write HEADERS
+    // write NEW HEADERS
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
@@ -158,33 +158,36 @@ int main(int argc, char *argv[])
     }
     */ // END OF VERTICAL SCALE TEST
 
-
-    // scale image
+    // create enough memory for duplicate scanline
     RGBTRIPLE *triple_y = malloc(sizeof(RGBTRIPLE) * bi.biWidth);
+
+    // scan through original image height
     for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
     {
-        // iterate over pixels in scanline
+        // iterate through old width pixel scanline 
         for (int j = 0; j < old_biWidth; j++)
         {
             // temporary storage
             RGBTRIPLE triple;
 
-            // read pixel
+            // read pixel into the buffer
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
-            // re-write scanline by SCALE_FACTOR
+            // write a new scanline to outptr by SCALE_FACTOR
             for(int scale = 0; scale < SCALE_FACTOR; scale++)
             {
                 fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+                //fread(triple_y, sizeof(RGBTRIPLE), 1, outptr);
             }
-                
+
+            
+ 
         }
 
-        //TODO: write the vertical scale here
-            //buffer scanline to tripple_y
-            //write to outptr from tripple_y
-
+        fread(triple_y, sizeof(RGBTRIPLE), bi.biWidth, inptr);
         
+        
+
         // skip over padding, if any
         fseek(inptr, padding, SEEK_CUR);
 
@@ -193,7 +196,23 @@ int main(int argc, char *argv[])
         {
             fputc(0x00, outptr);
         }
+
+
+
+
+        fwrite(triple_y, sizeof(RGBTRIPLE), bi.biWidth, outptr);
+        // skip over padding, if any
+        fseek(inptr, padding, SEEK_CUR);
+
+        // then add it back (to demonstrate how)
+        for (int k = 0; k < padding; k++)
+        {
+            fputc(0x00, outptr);
+        }
+
     }
+
+
     
 
 
