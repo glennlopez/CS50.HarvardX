@@ -181,12 +181,14 @@ int main(int argc, char *argv[])
 
             // read pixel into the buffer
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+            
 
             // write a new scanline to outptr by SCALE_FACTOR
             for(int scale = 0; scale < SCALE_FACTOR; scale++)
             {
                 fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-                //fread(triple_y, sizeof(RGBTRIPLE), 1, outptr);
+                fread(triple_y, sizeof(RGBTRIPLE), 1, outptr);
+                
             }
 
             
@@ -194,6 +196,7 @@ int main(int argc, char *argv[])
             * END old_biWidth loop END
             ***************************/
         }
+
 
         // skip over padding, if any
         fseek(inptr, padding, SEEK_CUR);
@@ -204,6 +207,7 @@ int main(int argc, char *argv[])
             fputc(0x00, outptr);
         }
 
+        
 
 
 

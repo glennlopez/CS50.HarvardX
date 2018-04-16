@@ -20,8 +20,14 @@ int main(){
     // read the text into a buffer
     // fread(<buffer>, <size>, <qty>, <file pointer>);
     char *triple = malloc(sizeof(char) * 3);
-    fread(triple, sizeof(char), 3, inptr);
-    fwrite(triple, sizeof(char), 3, outptr);
+    fread(triple, sizeof(char), 1, inptr);
+    fwrite(triple, sizeof(char), 1, outptr);
+
+    fread(triple, sizeof(char), 1, inptr);
+    fwrite(triple, sizeof(char), 1, outptr);
+
+    fread(triple, sizeof(char), 1, inptr);
+    fwrite(triple, sizeof(char), 1, outptr);
 
     // TODO: OUTPUT TO ANOTHER FILE
 
