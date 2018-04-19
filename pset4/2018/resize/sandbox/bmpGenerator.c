@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "bmp.h"
 
-#define IMAGE_WIDTH 3       // change this
-#define IMAGE_HEIGHT 1      // change this
+#define image_width 3       // change this
+#define image_height 1      // change this
 
 #define BYTE_SIZE 8
 #define COLOR_PALETS 3
@@ -13,8 +13,8 @@
 #define INFOHEADER_SIZE 40
 #define HEADER_SIZE (FILEHEADER_SIZE+INFOHEADER_SIZE)
 
-#define PADDING_SIZE ((4 - (IMAGE_WIDTH * sizeof(RGBTRIPLE)) % 4) % 4)
-#define IMAGE_BYTESIZE (((IMAGE_WIDTH * COLOR_PALETS) + PADDING_SIZE) * IMAGE_HEIGHT)
+#define PADDING_SIZE ((4 - (image_width * sizeof(RGBTRIPLE)) % 4) % 4)
+#define IMAGE_BYTESIZE (((image_width * COLOR_PALETS) + PADDING_SIZE) * image_height)
 #define FILE_BYTESIZE (HEADER_SIZE+IMAGE_BYTESIZE)
 
 // MACROs
@@ -42,7 +42,7 @@ int main()
 
 
 
-    // FILE HEADER
+    // SET FILE HEADER
     BITMAPFILEHEADER bf;
     bf.bfType = 0x4D42;     // always 0x4D42 for BMP
     bf.bfSize = FILE_BYTESIZE;
@@ -50,11 +50,11 @@ int main()
     bf.bfReserved2 = 0;     // always 0
     bf.bfOffBits = HEADER_SIZE;
 
-    // INFO HEADER HERE
+    // SET INFO HEADER HERE
     BITMAPINFOHEADER bi;
     bi.biSize = INFOHEADER_SIZE;
-    bi.biWidth = IMAGE_WIDTH;
-    bi.biHeight = IMAGE_HEIGHT;
+    bi.biWidth = image_width;
+    bi.biHeight = image_height;
     bi.biPlanes = 1;        // must be 1
     bi.biBitCount = COLOR_DEPTH;
     bi.biCompression = 0;
@@ -105,26 +105,57 @@ int main()
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
-    for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
+    // temporary storage
+    RGBTRIPLE triple;
+
+    RGB_R(0xFF); RGB_G(0x00); RGB_B(0x00);  // RED
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    RGB_R(0x00); RGB_G(0xFF); RGB_B(0x00);  // GREEN
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    // insert required padding
+    for (int k = 0; k < padding; k++)
     {
-        // temporary storage
-        RGBTRIPLE triple;
-
-        RGB_R(0xFF); RGB_G(0x00); RGB_B(0x00);  // RED
-        fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-        RGB_R(0x00); RGB_G(0xFF); RGB_B(0x00);  // GREEN
-        fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-        RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
-        fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-        // insert required padding
-        for (int k = 0; k < padding; k++)
-        {
-            fputc(0x00, outptr);
-        }
+        fputc(0x00, outptr);
     }
+
+    /*
+
+    RGB_R(0x00); RGB_G(0xFF); RGB_B(0x00);  // GREEN
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    RGB_R(0xFF); RGB_G(0xFF); RGB_B(0xFF);  // WHITE
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    RGB_R(0x00); RGB_G(0xFF); RGB_B(0x00);  // GREEN
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    // insert required padding
+    for (int k = 0; k < padding; k++)
+    {
+        fputc(0x00, outptr);
+    }
+
+    RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    // insert required padding
+    for (int k = 0; k < padding; k++)
+    {
+        fputc(0x00, outptr);
+    }
+
+    */
 
     // close outfile
     fclose(outptr);
