@@ -67,14 +67,23 @@ int main(int argc, char *argv[])
     printf("old_biSizeImage: %i\n", old_biSizeImage);
     printf("old_bfSize: %i\n", old_bfSize);
 
-    // DEBUG - PRINT OUT HEADER 
+    // DEBUG - NEW DATA
+    printf("\nNEW DATA\n");
+    printf("new_padding: %i\n", padding);
+    printf("new_biWidth: %i\n", bi.biWidth);
+    printf("new_biHeight: %i\n", bi.biHeight);
+    printf("new_biSizeImage: %i\n", bi.biSizeImage);
+    printf("new_bfSize: %i\n", bf.bfSize);
+
+    /*
+    // DEBUG - PRINT OUT HEADER
     printf("\nBITMAPFILEHEADER\n");
     printf("bf.bfType: %i\n", bf.bfType);
     printf("bf.bfSize: %i\n", bf.bfSize);
     printf("bf.bfReserved1: %i\n", bf.bfReserved1);
     printf("bf.bfReserved2: %i\n", bf.bfReserved2);
     printf("bf.bfOffBits: %i\n", bf.bfOffBits);
-    // DEBUG - PRINT OUT INFO HEADER 
+    // DEBUG - PRINT OUT INFO HEADER
     printf("\nBITMAPINFOHEADER\n");
     printf("bi.biSize: %i\n", bi.biSize);
     printf("bi.biWidth: %i\n", bi.biWidth);
@@ -87,6 +96,7 @@ int main(int argc, char *argv[])
     printf("bi.biYPelsPerMeter: %i\n", bi.biYPelsPerMeter);
     printf("bi.biClrUsed: %i\n", bi.biClrUsed);
     printf("bi.biClrImportant: %i\n", bi.biClrImportant);
+    */
 
 
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
@@ -101,13 +111,14 @@ int main(int argc, char *argv[])
 
 
 
-/*  // DEBUG - HEADER MODIFIERS
-    bi.biWidth = 3;
-    bi.biHeight = 2;
-    padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-    bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
-    bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
-*/  // END OF HEADER MODIFIER DEBUG
+  // DEBUG - HEADER MODIFIERS
+    //bi.biWidth = 6;
+    //bi.biHeight = 3;
+    //padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
+    //bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
+    //bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
+  // END OF HEADER MODIFIER DEBUG
+
 
 
 
@@ -117,59 +128,19 @@ int main(int argc, char *argv[])
 
 
 
-
-    /* //DEBUG - VERTICAL SCALE TESTS
-    //temp storage
-    RGBTRIPLE triple;
-    RGBTRIPLE *triple_y = malloc(sizeof(RGBTRIPLE) * bi.biWidth);
-
-    // Red pixel
-    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-    // Green pixel
-    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-    // Blue Pixel
-    fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-    // skip over padding, if any
-    //fseek(inptr, padding, SEEK_CUR);
-
-    // then add it back (to demonstrate how)
-    for (int k = 0; k < padding; k++)
-    {
-        fputc(0x00, outptr);
-    }
-
-    //fseek(inptr, 0, SEEK_SET);
-    fread(triple_y, sizeof(RGBTRIPLE), 3, inptr);
-    fwrite(triple_y, sizeof(RGBTRIPLE), 3, outptr);
-    
-    // skip over padding, if any
-    fseek(inptr, padding, SEEK_CUR);
-
-    // then add it back (to demonstrate how)
-    for (int k = 0; k < padding; k++)
-    {
-        fputc(0x00, outptr);
-    }
-    */ // END OF VERTICAL SCALE TEST
-
     // create enough memory for duplicate scanline
-    RGBTRIPLE *triple_y = malloc(sizeof(RGBTRIPLE) * bi.biWidth);
+    //RGBTRIPLE *triple_y = malloc(sizeof(RGBTRIPLE) * bi.biWidth);
 
     // scan through original image height
-    for (int i = 0, biHeight = abs(old_biHeight); i < biHeight; i++)
+    int pixelCount = 0;
+    for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
     {
         /********************
         * old_biHeight loop
         *********************/
 
 
-        // iterate through old width pixel scanline 
+        // iterate through old width pixel scanline
         for (int j = 0; j < old_biWidth; j++)
         {
             /********************
@@ -181,17 +152,31 @@ int main(int argc, char *argv[])
 
             // read pixel into the buffer
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-            
+
+
+
 
             // write a new scanline to outptr by SCALE_FACTOR
             for(int scale = 0; scale < SCALE_FACTOR; scale++)
             {
                 fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-                fread(triple_y, sizeof(RGBTRIPLE), 1, outptr);
-                
+                pixelCount++;
             }
 
-            
+            // place padding as per scale_factor
+            if(pixelCount == bi.biWidth){
+                for (int k = 0; k < padding; k++)
+                {
+                    fputc(0x00, outptr);
+                    pixelCount = 0;
+                }
+            }
+
+
+
+            //DEBUG
+            printf("pixelCount: %i\n", pixelCount);
+
             /**************************
             * END old_biWidth loop END
             ***************************/
@@ -199,28 +184,25 @@ int main(int argc, char *argv[])
 
 
         // skip over padding, if any
-        fseek(inptr, padding, SEEK_CUR);
+        //fseek(inptr, old_padding, SEEK_CUR);
 
+/*
         // then add it back (to demonstrate how)
         for (int k = 0; k < padding; k++)
         {
             fputc(0x00, outptr);
         }
-
-        
-
+*/
 
 
 
-
+        fseek(inptr, 54, SEEK_SET);
        /**************************
         * END old_biHeight loop END
         ***************************/
 
     }
 
-
-    
 
 
 
