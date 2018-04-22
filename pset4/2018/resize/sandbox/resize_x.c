@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 2
+#define SCALE_FACTOR 4
 
 
 int main(int argc, char *argv[])
@@ -133,6 +133,9 @@ int main(int argc, char *argv[])
 
     // scan through original image height
     int pixelCount = 0;
+    int scanlineCount = 0;
+    int heightCounter = 0;
+    int pixelSeekCount = (old_biWidth * 3) + old_padding;
     for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
     {
         /********************
@@ -163,6 +166,7 @@ int main(int argc, char *argv[])
                 pixelCount++;
             }
 
+
             // place padding as per scale_factor
             if(pixelCount == bi.biWidth){
                 for (int k = 0; k < padding; k++)
@@ -170,40 +174,34 @@ int main(int argc, char *argv[])
                     fputc(0x00, outptr);
                     pixelCount = 0;
                 }
+
+                //TODO: move seek to next scanline
+                if(heightCounter == SCALE_FACTOR){
+                   scanlineCount++;
+                   heightCounter = 0;
+                }
+                heightCounter++;
+
             }
 
-
-
-            //DEBUG
-            printf("pixelCount: %i\n", pixelCount);
 
             /**************************
             * END old_biWidth loop END
             ***************************/
         }
 
-
-        // skip over padding, if any
-        //fseek(inptr, old_padding, SEEK_CUR);
-
-/*
-        // then add it back (to demonstrate how)
-        for (int k = 0; k < padding; k++)
-        {
-            fputc(0x00, outptr);
-        }
-*/
+        //DEBUG
+        printf("scanlineCount: %i\n", (scanlineCount));
+        //printf("heightCounter: %i\n", (heightCounter));
 
 
+        fseek(inptr, (54 + ((pixelSeekCount) * scanlineCount)), SEEK_SET);
 
-        fseek(inptr, 54, SEEK_SET);
        /**************************
         * END old_biHeight loop END
         ***************************/
 
     }
-
-
 
 
     // close infile
