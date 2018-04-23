@@ -6,7 +6,7 @@ These are my solutions to Harvard University's "CS50: Introduction to Computer S
 
 To complete the following Problem sets, I [studied](https://study.cs50.net/) all of the CS50's lectures ([2017](http://docs.cs50.net/2017/x/syllabus.html#lectures) and 2018), shorts, walkthrough [(2017)](http://docs.cs50.net/2017/x/syllabus.html#walkthroughs), and participated in class discussions via [/r/CS50](https://www.reddit.com/r/cs50/) on Reddit. All Problem set submissions received correctness scores of 5/5 and "style" score of atleast 4/5 (efficiency doesn't '\n' before and after '{' ).
 
-> NOTE: This course is still in progress, some psets will be missing. 
+> NOTE: Do not use 2017 solution for 2018 as they will have different "check50" standards.
 
 ### CS50 (2018) Problem Sets: ([whats new?](https://docs.cs50.net/2018/x/new.html))
 - [Problem Set 0: Scratch](https://docs.cs50.net/2018/x/psets/0/pset0.html)
@@ -64,7 +64,7 @@ Web Programming, Frosh IMs, Similarities
 Flask, MVC, SQL, Cookies, Databases
 
 ### [Week 9](http://docs.cs50.net/2017/fall/notes/11/lecture11.html)
-JavaScript, DOM, Ajax, Model View Converter, Javascript basics, DOM, Ajax 
+JavaScript, DOM, Ajax, Model View Converter, Javascript basics, DOM, Ajax
 
 ### [Week 10](#)
 WIP? - Nothing announced: Start final project.
