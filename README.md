@@ -2,11 +2,11 @@
 <!-- git checkout staging -->
 
 # Harvard CS50: Introduction to Computer Science
-These are my solutions to Harvard University's "CS50: Introduction to Computer Science" course offered at edX. I used both CS50's [c9.io](https://c9.io/) IDE and my own text editor on linux & macOS + [cs50's](http://www.oss.io/p/cs50/library50-c) Libraries to complete this course (library [rederences](https://reference.cs50.net/) here.)
+These are my solutions to Harvard University's "CS50: Introduction to Computer Science" course offered at edX. I used both CS50's [c9.io](https://c9.io/) IDE and my own text editor on linux & macOS + CS50's [Libraries](http://www.oss.io/p/cs50/library50-c) to complete this course (library [references](https://reference.cs50.net/) here.)
 
-To complete the following Problem Sets, I [studied](https://study.cs50.net/) all of the CS50's [lectures (2017)](http://docs.cs50.net/2017/x/syllabus.html#lectures), shorts, [walkthroughs (2017)](http://docs.cs50.net/2017/x/syllabus.html#walkthroughs), and participated in class discussions via [/r/CS50](https://www.reddit.com/r/cs50/) on Reddit. All Problem Set submissions received scores of 100% from the https://cs50.me/ gradebook.
+To complete the following Problem sets, I [studied](https://study.cs50.net/) all of the CS50's lectures ([2017](http://docs.cs50.net/2017/x/syllabus.html#lectures) and 2018), shorts, walkthrough [(2017)](http://docs.cs50.net/2017/x/syllabus.html#walkthroughs), and participated in class discussions via [/r/CS50](https://www.reddit.com/r/cs50/) on Reddit. All Problem set submissions received correctness scores of 5/5 and "style" score of atleast 4/5 (efficiency doesn't '\n' before and after '{' ).
 
-> NOTE: This course is still in progress, some psets will be missing. If a pset you're looking for is missing, it means I havn't gotten that far in the course yet. Psets will also be a mix of 2017 and 2018 respective of thier folders. If a 2017 folder is missing, it means I have continued the course into 2018.
+> NOTE: This course is still in progress, some psets will be missing. 
 
 ### CS50 (2018) Problem Sets: ([whats new?](https://docs.cs50.net/2018/x/new.html))
 - [Problem Set 0: Scratch](https://docs.cs50.net/2018/x/psets/0/pset0.html)
@@ -30,12 +30,8 @@ To complete the following Problem Sets, I [studied](https://study.cs50.net/) all
 - [Problem Set 7: C$50 Finance](https://docs.cs50.net/2017/x/psets/7/pset7.html)
 - [Problem Set 8: Mashup](https://docs.cs50.net/2017/x/psets/8/pset8.html)
 
-> Note to Yale and Harvard Students: Harvardx (contents in this repository) is based on lectures from last year. This means that if youre a 2018 student at Harvard University, my 2018 material is based on Harvard University's 2017 lecture.
-
 # CS50 2018 Sylabus:
 This course teaches you how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML. Problem sets inspired by real-world domains of biology, cryptography, finance, forensics, and gaming. Designed for concentrators and non-concentrators alike, with or without prior programming experience. 68% of CS50 students have never taken CS before.
-
-> NOTE: Only the most recent sylabus will be displayed. I've also omited week 0: introductory to cs50.
 
 ### [Week 1A](https://docs.cs50.net/2017/fall/notes/1/lecture1.html)
 IDE, Command Line, Data Types, Operators, Conditional Statements, Loops
@@ -81,6 +77,7 @@ Final Project, [2018 Seminars](https://courses.edx.org/courses/course-v1:Harvard
 - Hacker’s Delight, Second Edition
 - How Computers Work, Tenth Edition
 - Programming in C, Fourth Edition
+- [more..](https://datbase.org/glennlopez/cs-books)
 
 # Useful Links:
 - [CS50 Appliance](https://github.com/cs50/libcs50)
