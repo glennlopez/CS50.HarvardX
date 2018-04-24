@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 4
+#define SCALE_FACTOR 1
 
 
 int main(int argc, char *argv[])
@@ -112,8 +112,8 @@ int main(int argc, char *argv[])
 
 
   // DEBUG - HEADER MODIFIERS
-    //bi.biWidth = 6;
-    //bi.biHeight = 3;
+    bi.biWidth = 3;
+    bi.biHeight = 1;
     //padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     //bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
     //bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
@@ -127,81 +127,30 @@ int main(int argc, char *argv[])
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
 
-
-    // create enough memory for duplicate scanline
-    //RGBTRIPLE *triple_y = malloc(sizeof(RGBTRIPLE) * bi.biWidth);
-
-    // scan through original image height
-    int pixelCount = 0;
-    int scanlineCount = 0;
-    int heightCounter = 0;
-    int pixelSeekCount = (old_biWidth * 3) + old_padding;
-    for (int i = 0, biHeight = abs(bi.biHeight); i < biHeight; i++)
+    // itterate through old width
+    for (int i = 0; i < old_biWidth; i++)
     {
-        /********************
-        * old_biHeight loop
-        *********************/
+        // read each pixel of the scanline into a buffer from an infile
+        //fread();
 
-
-        // iterate through old width pixel scanline
-        for (int j = 0; j < old_biWidth; j++)
-        {
-            /********************
-            * old_biWidth loop
-            *********************/
-
-            // temporary storage
-            RGBTRIPLE triple;
-
-            // read pixel into the buffer
-            fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
-
-
-
-
-            // write a new scanline to outptr by SCALE_FACTOR
-            for(int scale = 0; scale < SCALE_FACTOR; scale++)
-            {
-                fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-                pixelCount++;
-            }
-
-
-            // place padding as per scale_factor
-            if(pixelCount == bi.biWidth){
-                for (int k = 0; k < padding; k++)
-                {
-                    fputc(0x00, outptr);
-                    pixelCount = 0;
-                }
-
-                //TODO: move seek to next scanline
-                if(heightCounter == SCALE_FACTOR){
-                   scanlineCount++;
-                   heightCounter = 0;
-                }
-                heightCounter++;
-
-            }
-
-
-            /**************************
-            * END old_biWidth loop END
-            ***************************/
+        // write the contents of the buffer by SCALE_FACTOR to an outfile
+        for(int x_scale = 0; x_scale < SCALE_FACTOR; x_scale++){
+            //fwrite();
         }
 
-        //DEBUG
-        printf("scanlineCount: %i\n", (scanlineCount));
-        //printf("heightCounter: %i\n", (heightCounter));
-
-
-        fseek(inptr, (54 + ((pixelSeekCount) * scanlineCount)), SEEK_SET);
-
-       /**************************
-        * END old_biHeight loop END
-        ***************************/
-
     }
+
+    // add padding
+
+
+
+
+
+
+
+
+
+
 
 
     // close infile
