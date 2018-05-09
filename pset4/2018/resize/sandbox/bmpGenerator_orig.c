@@ -30,7 +30,7 @@
 int main()
 {
     // filenames
-    char *outfile = "generated.bmp";
+    char *outfile = "rgb2.bmp";
 
     // open output file
     FILE *outptr = fopen(outfile, "w");
