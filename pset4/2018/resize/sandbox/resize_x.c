@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 1
+#define SCALE_FACTOR 1 // change this
 
 
 int main(int argc, char *argv[])
@@ -112,8 +112,8 @@ int main(int argc, char *argv[])
 
 
   // DEBUG - HEADER MODIFIERS
-    bi.biWidth = 3;
-    bi.biHeight = 1;
+    //bi.biWidth = 3;
+    //bi.biHeight = 1;
     //padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     //bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
     //bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
@@ -126,21 +126,37 @@ int main(int argc, char *argv[])
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
+    // buffer
+    // temp read storage
+    // TODO: store pixels in 2D array
+    RGBTRIPLE triple[bi.biHeight][bi.biWidth];    //todo: use parametric var
 
-    // itterate through old width
-    for (int i = 0; i < old_biWidth; i++)
+
+    // READ PIXELS TO BUFFER
+    for (int i = 0; i < old_biHeight; i++)
     {
-        // read each pixel of the scanline into a buffer from an infile
-        //fread();
-
-        // write the contents of the buffer by SCALE_FACTOR to an outfile
-        for(int x_scale = 0; x_scale < SCALE_FACTOR; x_scale++){
-            //fwrite();
+        for (int j = 0; j < old_biWidth; j++)
+        {
+            // read each pixel to input file pointer
+            fread(&triple[i][j], sizeof(RGBTRIPLE), 1, inptr);
         }
-
     }
 
-    // add padding
+    // WRITE PIXELS FROM BUFFER
+    for (int i = 0; i < old_biHeight; i++)
+    {
+        for (int j = 0; j < old_biWidth; j++)
+        {
+            // write each pixel to output file pointer
+            fwrite(&triple[0][1], sizeof(RGBTRIPLE), 1, outptr);
+        }
+
+        // add padding
+        for (int k = 0; k < padding; k++) // padding = new padding
+        {
+            fputc(0x00, outptr);
+        }
+    }
 
 
 

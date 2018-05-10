@@ -44,10 +44,10 @@ int main()
 
     // SET FILE HEADER
     BITMAPFILEHEADER bf;
-    bf.bfType = 0x4D42;     // always 0x4D42 for BMP
+    bf.bfType = 0x4D42;         // always 0x4D42 for BMP
     bf.bfSize = FILE_BYTESIZE;
-    bf.bfReserved1 = 0;     // always 0
-    bf.bfReserved2 = 0;     // always 0
+    bf.bfReserved1 = 0;         // always 0
+    bf.bfReserved2 = 0;         // always 0
     bf.bfOffBits = HEADER_SIZE;
 
     // SET INFO HEADER HERE
@@ -55,7 +55,7 @@ int main()
     bi.biSize = INFOHEADER_SIZE;
     bi.biWidth = image_width;
     bi.biHeight = image_height;
-    bi.biPlanes = 1;        // must be 1
+    bi.biPlanes = 1;            // must be 1
     bi.biBitCount = COLOR_DEPTH;
     bi.biCompression = 0;
     bi.biSizeImage = IMAGE_BYTESIZE;
