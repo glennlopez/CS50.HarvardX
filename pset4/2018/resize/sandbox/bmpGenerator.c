@@ -3,7 +3,7 @@
 #include "bmp.h"
 
 #define image_width 3       // change this
-#define image_height 2      // change this
+#define image_height 3      // change this
 
 #define BYTE_SIZE 8
 #define COLOR_PALETS 3
@@ -30,7 +30,7 @@
 int main()
 {
     // filenames
-    char *outfile = "generated.bmp";
+    char *outfile = "rgb3.bmp";
 
     // open output file
     FILE *outptr = fopen(outfile, "w");
@@ -117,6 +117,23 @@ int main()
     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
 
     RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    // insert required padding
+    for (int k = 0; k < padding; k++)
+    {
+        fputc(0x00, outptr);
+    }
+
+
+    // MIDDLE ROW
+    RGB_R(0xCC); RGB_G(0xBB); RGB_B(0x00);
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    RGB_R(0xBB); RGB_G(0xCC); RGB_B(0x00);
+    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+    RGB_R(0xCC); RGB_G(0x00); RGB_B(0xBB);
     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
 
     // insert required padding

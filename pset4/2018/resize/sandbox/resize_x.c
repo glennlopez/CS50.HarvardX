@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     // keep track of old data
     int old_padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     int old_biWidth = bi.biWidth;
-    int old_biHeight = bi.biHeight;
+    int old_biHeight = abs(bi.biHeight);
     int old_biSizeImage = bi.biSizeImage;
     int old_bfSize = bf.bfSize;
 
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     printf("\nNEW DATA\n");
     printf("new_padding: %i\n", padding);
     printf("new_biWidth: %i\n", bi.biWidth);
-    printf("new_biHeight: %i\n", bi.biHeight);
+    printf("new_biHeight: %i\n", abs(bi.biHeight));
     printf("new_biSizeImage: %i\n", bi.biSizeImage);
     printf("new_bfSize: %i\n", bf.bfSize);
 
@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
     // buffer
     // temp read storage
     // TODO: store pixels in 2D array
-    RGBTRIPLE triple[bi.biHeight][bi.biWidth];    //todo: use parametric var
+    RGBTRIPLE triple[old_biHeight][old_biWidth];    //todo: use parametric var
 
 
     // READ PIXELS TO BUFFER
@@ -140,15 +140,17 @@ int main(int argc, char *argv[])
             // read each pixel to input file pointer
             fread(&triple[i][j], sizeof(RGBTRIPLE), 1, inptr);
         }
+        fseek(inptr, old_padding, SEEK_CUR);
     }
 
     // WRITE PIXELS FROM BUFFER
+    // TODO: scale by SCALE_FACTOR
     for (int i = 0; i < old_biHeight; i++)
     {
         for (int j = 0; j < old_biWidth; j++)
         {
             // write each pixel to output file pointer
-            fwrite(&triple[0][1], sizeof(RGBTRIPLE), 1, outptr);
+            fwrite(&triple[i][j], sizeof(RGBTRIPLE), 1, outptr);
         }
 
         // add padding
