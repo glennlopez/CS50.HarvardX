@@ -108,6 +108,8 @@ int main()
     // temporary storage
     RGBTRIPLE triple;
 
+
+    // BOTTOM ROW
     RGB_R(0xFF); RGB_G(0x00); RGB_B(0x00);  // RED
     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
 
@@ -124,31 +126,14 @@ int main()
     }
 
 
-
-    RGB_R(0xFF); RGB_G(0xFF); RGB_B(0x00);  // YELLOW
+    // TOP ROW
+    RGB_R(0xFF); RGB_G(0xFF); RGB_B(0x00);  // REDGREEN (YELLOW)
     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
 
-    RGB_R(0x00); RGB_G(0xFF); RGB_B(0xFF);  // GREENBLUE
+    RGB_R(0x00); RGB_G(0xFF); RGB_B(0xFF);  // GREENBLUE (CYAN)
     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
 
-    RGB_R(0xFF); RGB_G(0x00); RGB_B(0xFF);  // PINK
-    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-    // insert required padding
-    for (int k = 0; k < padding; k++)
-    {
-        fputc(0x00, outptr);
-    }
-
-    /*
-
-    RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
-    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-    RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
-    fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
-
-    RGB_R(0x00); RGB_G(0x00); RGB_B(0xFF);  // BLUE
+    RGB_R(0xFF); RGB_G(0x00); RGB_B(0xFF);  // REDBLUE (PINK)
     fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
 
     // insert required padding
@@ -156,8 +141,6 @@ int main()
     {
         fputc(0x00, outptr);
     }
-
-    */
 
     // close outfile
     fclose(outptr);
