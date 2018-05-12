@@ -127,7 +127,10 @@ int main(int argc, char *argv[])
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
     // buffer
-    RGBTRIPLE triple[old_biHeight][old_biWidth];
+    // temp read storage
+    // TODO: store pixels in 2D array
+    RGBTRIPLE triple[old_biHeight][old_biWidth];    //todo: use parametric var
+
 
     // READ PIXELS TO BUFFER
     for (int i = 0; i < old_biHeight; i++)
@@ -137,20 +140,21 @@ int main(int argc, char *argv[])
             // read each pixel to input file pointer
             fread(&triple[i][j], sizeof(RGBTRIPLE), 1, inptr);
         }
+        // skip reading old data padding
         fseek(inptr, old_padding, SEEK_CUR);
     }
 
     // WRITE PIXELS FROM BUFFER
     // TODO: scale by SCALE_FACTOR
-    for (int i = 0; i < bi.biHeight; i++)
+    for (int i = 0; i < old_biHeight; i++)
     {
-        for (int j = 0; j < bi.biWidth; j++)
+        for (int j = 0; j < old_biWidth; j++)
         {
             // write each pixel to output file pointer
             fwrite(&triple[i][j], sizeof(RGBTRIPLE), 1, outptr);
         }
 
-        // add padding
+        // add padding to new data
         for (int k = 0; k < padding; k++) // padding = new padding
         {
             fputc(0x00, outptr);
