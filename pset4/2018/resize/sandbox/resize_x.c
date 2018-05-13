@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 1 // change this
+#define SCALE_FACTOR 2 // change this
 
 
 int main(int argc, char *argv[])
@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 
   // DEBUG - HEADER MODIFIERS
     //bi.biWidth = 3;
-    //bi.biHeight = 1;
+    bi.biHeight = 3;
     //padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     //bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
     //bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
@@ -122,15 +122,12 @@ int main(int argc, char *argv[])
 
 
 
-    // write NEW HEADERS
+    // NEW HEADERS
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
-    // buffer
-    // temp read storage
-    // TODO: store pixels in 2D array
-    RGBTRIPLE triple[old_biHeight][old_biWidth];    //todo: use parametric var
-
+    // BUFFER
+    RGBTRIPLE triple[old_biHeight][old_biWidth];
 
     // READ PIXELS TO BUFFER
     for (int i = 0; i < old_biHeight; i++)
@@ -145,16 +142,28 @@ int main(int argc, char *argv[])
     }
 
     // WRITE PIXELS FROM BUFFER
-    // TODO: scale by SCALE_FACTOR
+    int index_x = 0;
+    int index_y = 0;
     for (int i = 0; i < old_biHeight; i++)
     {
+        // write new scanline to output
         for (int j = 0; j < old_biWidth; j++)
         {
-            // write each pixel to output file pointer
-            fwrite(&triple[i][j], sizeof(RGBTRIPLE), 1, outptr);
+            // write each pixel by scale factor
+            for(int scale_x = 0; scale_x < SCALE_FACTOR; scale_x++)
+            {
+                fwrite(&triple[index_y][index_x], sizeof(RGBTRIPLE), 1, outptr); //fixme
+            }
+            // increment to next pixel
+            index_x++;
         }
+        // reset index_x to 0
+        index_x = 0;
 
-        // add padding to new data
+        // increment to the next scanline
+        index_y++;
+
+        // add padding after scanline
         for (int k = 0; k < padding; k++) // padding = new padding
         {
             fputc(0x00, outptr);
