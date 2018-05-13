@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 
   // DEBUG - HEADER MODIFIERS
     //bi.biWidth = 3;
-    bi.biHeight = 6;
+    //bi.biHeight = 6;
     //padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     //bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
     //bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
@@ -142,17 +142,16 @@ int main(int argc, char *argv[])
     }
 
     // WRITE PIXELS FROM BUFFER
-    int index_x = 0;
-    int index_y = 0;
+    int index_x = 0;    int index_y = 0;
     for (int i = 0; i < old_biHeight; i++)
     {
-        //for(int scale_y = 0; scale_y < SCALE_FACTOR; scale_y++)
-        //{
+        for (int scale_y = 0; scale_y < SCALE_FACTOR; scale_y++)
+        {
             // write new scanline to output
             for (int j = 0; j < old_biWidth; j++)
             {
                 // write each pixel by scale factor
-                for(int scale_x = 0; scale_x < SCALE_FACTOR; scale_x++)
+                for (int scale_x = 0; scale_x < SCALE_FACTOR; scale_x++)
                 {
                     fwrite(&triple[index_y][index_x], sizeof(RGBTRIPLE), 1, outptr); //fixme
                 }
@@ -161,65 +160,21 @@ int main(int argc, char *argv[])
             }
             // reset index_x to 0
             index_x = 0;
-        //}
 
-        // increment to the next scanline
-        //index_y++;
-
-        // add padding after scanline
-        for (int k = 0; k < padding; k++) // padding = new padding
-        {
-            fputc(0x00, outptr);
-        }
-
-
-
-
-
-
-        // write new scanline to output
-        for (int j = 0; j < old_biWidth; j++)
-        {
-            // write each pixel by scale factor
-            for(int scale_x = 0; scale_x < SCALE_FACTOR; scale_x++)
+            // TODO: only add this after scale factor
+            // increment to the next scanline
+            if (index_x < scale_y)
             {
-                fwrite(&triple[index_y][index_x], sizeof(RGBTRIPLE), 1, outptr); //fixme
+                index_y++;
             }
-            // increment to next pixel
-            index_x++;
+
+            // add padding after scanline
+            for (int k = 0; k < padding; k++) // padding = new padding
+            {
+                fputc(0x00, outptr);
+            }
         }
-        // reset index_x to 0
-        index_x = 0;
-
-
-
-
-
-        // increment to the next scanline
-        index_y++;
-
-        // add padding after scanline
-        for (int k = 0; k < padding; k++) // padding = new padding
-        {
-            fputc(0x00, outptr);
-        }
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
 
     // close infile
     fclose(inptr);
