@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 3 // change this
+#define SCALE_FACTOR 2 // change this
 
 int main(int argc, char *argv[])
 {
@@ -45,8 +45,6 @@ int main(int argc, char *argv[])
     int old_padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     int old_biWidth = bi.biWidth;
     int old_biHeight = abs(bi.biHeight);
-    int old_biSizeImage = bi.biSizeImage;
-    int old_bfSize = bf.bfSize;
 
     // add scaled changes to original
     bi.biWidth *= SCALE_FACTOR;
@@ -54,26 +52,6 @@ int main(int argc, char *argv[])
     int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
     bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
     bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
-
-    printf("\n\nbi.biWidth * triple: %lu\n", (bi.biWidth * sizeof(RGBTRIPLE)));
-    printf("padding: %i\n\n", padding);
-
-    // DEBUG - OLD DATA
-    printf("\nOLD DATA\n");
-    printf("old_padding: %i\n", old_padding);
-    printf("old_biWidth: %i\n", old_biWidth);
-    printf("old_biHeight: %i\n", old_biHeight);
-    printf("old_biSizeImage: %i\n", old_biSizeImage);
-    printf("old_bfSize: %i\n", old_bfSize);
-
-    // DEBUG - NEW DATA
-    printf("\nNEW DATA\n");
-    printf("new_padding: %i\n", padding);
-    printf("new_biWidth: %i\n", bi.biWidth);
-    printf("new_biHeight: %i\n", abs(bi.biHeight));
-    printf("new_biSizeImage: %i\n", bi.biSizeImage);
-    printf("new_bfSize: %i\n", bf.bfSize);
-
 
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
     if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||
