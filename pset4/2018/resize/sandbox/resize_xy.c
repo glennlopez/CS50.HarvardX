@@ -17,9 +17,8 @@ int main(int argc, char *argv[])
     char *infile = argv[2];
     char *outfile = argv[3];
 
-    // convert scale to int
-    SCALE_FACTOR = *scale;
-    SCALE_FACTOR -= 48;
+    // set scale factor
+    SCALE_FACTOR = atoi(scale);
 
     // open input file
     FILE *inptr = fopen(infile, "r");
