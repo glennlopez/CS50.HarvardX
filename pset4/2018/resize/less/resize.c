@@ -89,7 +89,8 @@ int main(int argc, char *argv[])
     }
 
     // add scaled changes to original data (RGBTRIPLES)
-    int index_x = 0;    int index_y = 0;
+    int index_x = 0;
+    int index_y = 0;
     for (int i = 0; i < old_biHeight; i++)
     {
         // write each SCANLINE by scale factor
