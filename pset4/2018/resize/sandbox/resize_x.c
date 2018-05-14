@@ -158,15 +158,20 @@ int main(int argc, char *argv[])
                 // increment to next pixel
                 index_x++;
             }
-            // reset index_x to 0
+            // reset index_x to 0 after scanline completion
             index_x = 0;
 
-            // TODO: only add this after scale factor
-            // increment to the next scanline
-            if (index_x < scale_y)
+
+
+
+            if (scale_y >= SCALE_FACTOR - 1)
             {
+                // increment to the next scanline
                 index_y++;
             }
+
+
+
 
             // add padding after scanline
             for (int k = 0; k < padding; k++) // padding = new padding
