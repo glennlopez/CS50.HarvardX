@@ -1,20 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 3 // change this
 
+int SCALE_FACTOR;
 int main(int argc, char *argv[])
 {
     // ensure proper usage
-    if (argc != 3)
+    if (argc != 4)
     {
         fprintf(stderr, "Usage: copy infile outfile\n");
         return 1;
     }
 
-    // remember filenames
-    char *infile = argv[1];
-    char *outfile = argv[2];
+    // remember filenames and scale
+    char *scale = argv[1];
+    char *infile = argv[2];
+    char *outfile = argv[3];
+
+    // convert scale to int
+    SCALE_FACTOR = *scale;
+    SCALE_FACTOR -= 48;
 
     // open input file
     FILE *inptr = fopen(infile, "r");
