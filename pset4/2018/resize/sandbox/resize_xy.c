@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bmp.h"
-#define SCALE_FACTOR 2 // change this
+#define SCALE_FACTOR 3 // change this
 
 int main(int argc, char *argv[])
 {
@@ -33,12 +33,14 @@ int main(int argc, char *argv[])
         return 3;
     }
 
-    // read infile's BITMAPFILEHEADER
+    // HEADER buffer
     BITMAPFILEHEADER bf;
+    BITMAPINFOHEADER bi;
+
+    // read infile's BITMAPFILEHEADER into buffer
     fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);
 
-    // read infile's BITMAPINFOHEADER
-    BITMAPINFOHEADER bi;
+    // read infile's BITMAPINFOHEADER into buffer
     fread(&bi, sizeof(BITMAPINFOHEADER), 1, inptr);
 
     // keep track of old data
@@ -46,7 +48,7 @@ int main(int argc, char *argv[])
     int old_biWidth = bi.biWidth;
     int old_biHeight = abs(bi.biHeight);
 
-    // add scaled changes to original
+    // add scaled changes to original data (HEADERS)
     bi.biWidth *= SCALE_FACTOR;
     bi.biHeight *= SCALE_FACTOR;
     int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
@@ -63,14 +65,14 @@ int main(int argc, char *argv[])
         return 4;
     }
 
-    // NEW HEADERS
+    // write scaled header changes to outfile
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
-    // BUFFER
+    // RGBTRIPLE buffer
     RGBTRIPLE triple[old_biHeight][old_biWidth];
 
-    // READ PIXELS TO BUFFER
+    // read original pixels to 2D array buffer
     for (int i = 0; i < old_biHeight; i++)
     {
         for (int j = 0; j < old_biWidth; j++)
@@ -82,21 +84,22 @@ int main(int argc, char *argv[])
         fseek(inptr, old_padding, SEEK_CUR);
     }
 
-    // WRITE PIXELS FROM BUFFER
+    // add scaled changes to original data (RGBTRIPLES)
     int index_x = 0;    int index_y = 0;
     for (int i = 0; i < old_biHeight; i++)
     {
+        // write each SCANLINE by scale factor
         for (int scale_y = 0; scale_y < SCALE_FACTOR; scale_y++)
         {
             // write new scanline to output
             for (int j = 0; j < old_biWidth; j++)
             {
-                // write each pixel by scale factor
+                // write each PIXEL by scale factor
                 for (int scale_x = 0; scale_x < SCALE_FACTOR; scale_x++)
                 {
-                    fwrite(&triple[index_y][index_x], sizeof(RGBTRIPLE), 1, outptr); //fixme
+                    fwrite(&triple[index_y][index_x], sizeof(RGBTRIPLE), 1, outptr);
                 }
-                // increment to next pixel
+                // increment to next pixel index to copy from buffer
                 index_x++;
             }
             // reset index_x to 0 after scanline completion
@@ -104,7 +107,7 @@ int main(int argc, char *argv[])
 
             if (scale_y >= SCALE_FACTOR - 1)
             {
-                // increment to the next scanline
+                // increment to next scanline index to copy from buffer
                 index_y++;
             }
 
@@ -122,6 +125,5 @@ int main(int argc, char *argv[])
     // close outfile
     fclose(outptr);
 
-    // success
     return 0;
 }
