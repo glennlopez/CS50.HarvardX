@@ -3,7 +3,6 @@
 #include "bmp.h"
 #define SCALE_FACTOR 3 // change this
 
-
 int main(int argc, char *argv[])
 {
     // ensure proper usage
@@ -75,29 +74,6 @@ int main(int argc, char *argv[])
     printf("new_biSizeImage: %i\n", bi.biSizeImage);
     printf("new_bfSize: %i\n", bf.bfSize);
 
-    /*
-    // DEBUG - PRINT OUT HEADER
-    printf("\nBITMAPFILEHEADER\n");
-    printf("bf.bfType: %i\n", bf.bfType);
-    printf("bf.bfSize: %i\n", bf.bfSize);
-    printf("bf.bfReserved1: %i\n", bf.bfReserved1);
-    printf("bf.bfReserved2: %i\n", bf.bfReserved2);
-    printf("bf.bfOffBits: %i\n", bf.bfOffBits);
-    // DEBUG - PRINT OUT INFO HEADER
-    printf("\nBITMAPINFOHEADER\n");
-    printf("bi.biSize: %i\n", bi.biSize);
-    printf("bi.biWidth: %i\n", bi.biWidth);
-    printf("bi.biHeight: %i\n", bi.biHeight);
-    printf("bi.biPlanes: %i\n", bi.biPlanes);
-    printf("bi.biBitCount: %i\n", bi.biBitCount);
-    printf("bi.biCompression: %i\n", bi.biCompression);
-    printf("bi.biSizeImage: %i\n", bi.biSizeImage);
-    printf("bi.biXPelsPerMeter: %i\n", bi.biXPelsPerMeter);
-    printf("bi.biYPelsPerMeter: %i\n", bi.biYPelsPerMeter);
-    printf("bi.biClrUsed: %i\n", bi.biClrUsed);
-    printf("bi.biClrImportant: %i\n", bi.biClrImportant);
-    */
-
 
     // ensure infile is (likely) a 24-bit uncompressed BMP 4.0
     if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||
@@ -108,19 +84,6 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Unsupported file format.\n");
         return 4;
     }
-
-
-
-  // DEBUG - HEADER MODIFIERS
-    //bi.biWidth = 3;
-    //bi.biHeight = 6;
-    //padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
-    //bi.biSizeImage = (((bi.biWidth * sizeof(RGBTRIPLE)) + padding) * abs(bi.biHeight));
-    //bf.bfSize = (sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi.biSizeImage);
-  // END OF HEADER MODIFIER DEBUG
-
-
-
 
     // NEW HEADERS
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
@@ -161,17 +124,11 @@ int main(int argc, char *argv[])
             // reset index_x to 0 after scanline completion
             index_x = 0;
 
-
-
-
             if (scale_y >= SCALE_FACTOR - 1)
             {
                 // increment to the next scanline
                 index_y++;
             }
-
-
-
 
             // add padding after scanline
             for (int k = 0; k < padding; k++) // padding = new padding
