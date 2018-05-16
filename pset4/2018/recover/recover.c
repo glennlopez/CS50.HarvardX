@@ -52,23 +52,34 @@ int main(int argc, char *argv[])
         return 2;
     }
 
+    // open output file
+    FILE *outptr = fopen("outfile.jpeg", "w");
+    if (outptr == NULL)
+    {
+        fclose(inptr);
+        fprintf(stderr, "Could not create outfile.jpeg.\n");
+        return 3;
+    }
+
     // buffer
     uint8_t dataBuffer[512]; // look for --> [0xFF][0xD8][0xFF][0xE?]
 
     int dataByte;
-    int jpegFound;
+    int jpegFound = 0;
     int block = 0; // DEBUG: printout variable
     int jpegCount = 0; // DEBUG: printout variable
     while( (dataByte = fgetc(inptr)) != EOF )
     {
-        jpegFound = 0;
-        printf("**** BLOCK %i ****\n", block);
+
+        //printf("\n**** BLOCK %i ****\n", block); // DEBUG
+        printf("\n\n"); // DEBUG <-- gap for showing every 512 block of memory
         fread(dataBuffer, sizeof(uint8_t), 512, inptr);
         for(int i = 0; i < 512; i++)
         {
             if( ((dataBuffer[i] == 0xFF) && (dataBuffer[i+1] == 0xD8) && (dataBuffer[i+2] == 0xFF)) )
             {
-                printf("-------------------------> JPEG FOUND\n");  // DEBUG
+                printf("\n\n\n\n");
+                printf("-------------------------> NEW JPEG FOUND\n");  // DEBUG
                 jpegFound = 1;
                 jpegCount++; // DEBUG
             }
@@ -76,9 +87,14 @@ int main(int argc, char *argv[])
             if(jpegFound == 1)
             {
                 printf("%X ", dataBuffer[i]);
+                fwrite(&dataBuffer[i], sizeof(uint8_t), 1, outptr);
             }
+
         }
+
+
         block++;
+        //jpegFound = 0;
     }
 
 
