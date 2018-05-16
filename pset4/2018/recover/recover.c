@@ -34,7 +34,7 @@
 
 int main(int argc, char *argv[])
 {
-    // ensure proper usage
+    // ensure proper command line usage
     if (argc != 2)
     {
         fprintf(stderr, "Usage: copy infile outfile\n");
@@ -56,27 +56,33 @@ int main(int argc, char *argv[])
     uint8_t dataBuffer[512]; // look for --> [0xFF][0xD8][0xFF][0xE?]
 
     int dataByte;
+    int jpegFound;
     int block = 0; // DEBUG: printout variable
+    int jpegCount = 0; // DEBUG: printout variable
     while( (dataByte = fgetc(inptr)) != EOF )
     {
+        jpegFound = 0;
         printf("**** BLOCK %i ****\n", block);
         fread(dataBuffer, sizeof(uint8_t), 512, inptr);
         for(int i = 0; i < 512; i++)
         {
-            int jpegFound = 0;
-            if( (dataBuffer[i] == 0xFF) && (dataBuffer[i+1] == 0xD8) && (dataBuffer[i+2] == 0xFF) )
+            if( ((dataBuffer[i] == 0xFF) && (dataBuffer[i+1] == 0xD8) && (dataBuffer[i+2] == 0xFF)) )
             {
-                //printf("%X ", dataBuffer[i]);
-                //printf("dataByte[%i] = %X\n",i, dataBuffer[0]);
+                printf("-------------------------> JPEG FOUND\n");  // DEBUG
                 jpegFound = 1;
-                printf("-------------------------> JPEG FOUND\n");
+                jpegCount++; // DEBUG
+            }
+
+            if(jpegFound == 1)
+            {
+                printf("%X ", dataBuffer[i]);
             }
         }
         block++;
     }
 
 
-
+    printf("JPEG COUNT: %i \n", jpegCount); // DEBUG
 
     return 0;
 }
