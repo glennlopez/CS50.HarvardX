@@ -69,15 +69,14 @@ int main(int argc, char *argv[])
 
 
 
-    // jpeg magic numbers
-    //uint8_t jpgHdr[4] = {0xFF, 0xD8, 0xFF, 0xE0};
-    //uint8_t jpgFtr[2] = {0xFF, 0xD9};
+    // infile buffer
     uint8_t buffer[512 + 3];
 
     // 2. repeate until end of card
     int dataByte;
     int dataIndex = 0;
     int jpgFound = 0;
+    int jpgEnd = 0;
     int jpgCount = 0;   //debug
     while( (dataByte = fgetc(inptr_EOF)) != EOF )
     {
@@ -87,19 +86,34 @@ int main(int argc, char *argv[])
             fread(&buffer[i], sizeof(uint8_t), 1, inptr);
         }
 
-        // 4. Start of a new JPEG?
         for(int i = 0; i < 512; i++)
         {
-            if( (buffer[i] == 0xFF) && (buffer[i+1] == 0xD8) && (buffer[i+2] == 0xFF) )
+
+            // 4. Start of a new JPEG?
+            if( (buffer[i] == 0xFF) && (buffer[i+1] == 0xD8) && (buffer[i+2] == 0xFF) && jpgFound == 0)
             {
+                printf("\n\n\n\n\n\n\n ------------ NEW JPEG ------------ \n\n\n\n\n\n\n"); //debug
+                jpgEnd = 0;
                 jpgFound = 1;
                 jpgCount++; //debug
             }
 
             if(jpgFound == 1)
             {
-                // write data to outfile
+                // write data[i] to outfile
+                printf("%X ", buffer[i]); //debug
+                fwrite(&buffer[i], sizeof(uint8_t), 1, outptr);
             }
+
+            // end block loop if end of jpeg is found
+            /*
+            if( (buffer[i] == 0xFF) && (buffer[i+1] == 0xD9) )
+            {
+                jpgFound = 0;
+                jpgEnd = 1;
+                break;
+            }
+            */
         }
 
         // fgetc EOF seek_set
@@ -108,10 +122,12 @@ int main(int argc, char *argv[])
     }
 
 
+    /*
     for(int i = 0; i < 512; i++)
     {
         printf("%X ", buffer[i]);
     }
+    */
     printf("\n");
 
 
