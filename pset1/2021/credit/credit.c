@@ -20,8 +20,7 @@ int main(void)
     // todo: calculate the checksum
     if(isValid(cardNumber))
     {
-        printf("VALID!\n"); //debug
-        // todo: check for card len and starting digits
+        CheckCardType(cardNumber);
     }
     else
     {
@@ -39,13 +38,36 @@ int main(void)
 }
 
 
-// LIMITATIONS - CANNOT USE ARRAYS
-// calculate the checksum and check if the number is a valid credit card number
+// Returns a string (credit card type)
+string CheckCardType(long ccnum)
+{
+    string result = "INVALID";
+
+    // Check Card length
+    int cardLen = 1;
+
+    // todo: change this to a for loop
+    long ccdigits = 10;
+    while(ccdigits < ccnum)
+    {
+        ccdigits *= 10;
+        cardLen++;
+    }
+
+    // todo: Check Starting Digits
+
+    return result;
+}
+
+
+// Returns a bool (true) if credit card number is valid
 bool isValid(long ccnum)
 {
     bool result = false; // default is false
 
-    //store single digits of the card int i1 - i16
+    /* PARSE DIGITS */
+    // store every single digit of the users credit card into its own variable
+    // note: a temp variable is used to make sure no information is lost during cascading math operations
     long d1 = ccnum % 10;
     int i1 = d1;
     long d2 = ccnum % 100;
@@ -87,10 +109,12 @@ bool isValid(long ccnum)
         return false;
     }
 
-
-    //CHECKSUM
-    // mul every other digit starting from the second by 2 ::  condition ? value_if_true : value_if_false
-    // Note: if 5 * 2 = 10, is 2 digits.. should this be 1 + 0 = 1?
+    /* CHECKSUM */
+    // 1. multiply every second digit starting from the second most right number by 2
+    // 2. if the result from multiplying by 2 is greater than 9, the resulting digits are added
+    //    example: 7 * [2] = (14) -> (1 + 4) = 5    vs   3 * [2] = 6
+    //    14 has two digits (1, and 4) so they are added, 5 is used
+    //    6 has one digit, this is kept as is
     i2 = (i2 * 2 < 10) ? i2 * 2 : (((i2 * 2) % 10) + ((i2 * 2) / 10));
     i4 = (i4 * 2 < 10) ? i4 * 2 : (((i4 * 2) % 10) + ((i4 * 2) / 10));
     i6 = (i6 * 2 < 10) ? i6 * 2 : (((i6 * 2) % 10) + ((i6 * 2) / 10));
@@ -100,8 +124,11 @@ bool isValid(long ccnum)
     i14 = (i14 * 2 < 10) ? i14 * 2 : (((i14 * 2) % 10) + ((i14 * 2) / 10));
     i16 = (i16 * 2 < 10) ? i16 * 2 : (((i16 * 2) % 10) + ((i16 * 2) / 10));
 
+    // 3. Add up all the numbers
     int checksumA = i2 + i4 + i6 + i8 + i10 + i12 + i14 + i16;
     int checksumB = i1 + i3 + i5 + i7 + i9 + i11 + i13 + i15;
+
+    // 4. if the last digit of the sum is 0, then checksum is passed
     result = ((checksumA + checksumB) % 10 != 0) ? false : true;
 
 
