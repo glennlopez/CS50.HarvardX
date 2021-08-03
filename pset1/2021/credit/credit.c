@@ -2,11 +2,6 @@
 #include <cs50.h>
 #include <math.h>
 
-/*
- * VISA, MASTERCARD, DISCOVERY = 16 DIGITS
- * AMEX / AMERICAN EXPRESSS = 15 DIGITS
- */
-
 // Prototypes
 long GetUserInput(void);
 bool isValid(long ccnum);
@@ -42,10 +37,16 @@ int main(void)
 string CheckCardType(long ccnum)
 {
     string result = "INVALID";
-
-    // Check Card length
     int cardLen = 1;
+    int cardStart = 0;
 
+    /*
+     * American Express - 15 Digits, starts at 34 or 37
+     * MasterCard - 16 Digits, starts at 51, 52, 53, 54 or 55
+     * Visa 13 or 16 digits, starts with 4
+     */
+
+    /* CHECK CARD LEN */
     // todo: change this to a for loop
     long ccdigits = 10;
     while(ccdigits < ccnum)
@@ -54,7 +55,24 @@ string CheckCardType(long ccnum)
         cardLen++;
     }
 
-    // todo: Check Starting Digits
+    printf("Card Len: %i\n", cardLen);
+
+    long d14 = (ccnum % 100000000000000)/10000000000000;
+    long d15 = (ccnum % 1000000000000000)/100000000000000;
+
+    printf("d14: %li\n", d14);
+    printf("d15: %li\n", d15);
+
+    /* CHECK STARTING CARD NUM */
+    // Check AMEX
+    if(cardLen == 15)
+    {
+        // Double check
+    }
+
+
+
+
 
     return result;
 }
