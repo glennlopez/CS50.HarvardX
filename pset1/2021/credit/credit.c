@@ -9,73 +9,71 @@ string CheckCardType(long ccnum);
 
 int main(void)
 {
-    // todo: get card number from user input
+    // get card number from user input
     long cardNumber = GetUserInput();
 
-    // todo: calculate the checksum
-    if(isValid(cardNumber))
+
+    // Check card validity and type
+    if (isValid(cardNumber))
     {
-        CheckCardType(cardNumber);
+        string cardType = CheckCardType(cardNumber);
+        printf("%s", cardType);
     }
     else
     {
-         printf("INVALID!\n"); //debug
+        printf("INVALID\n");
     }
 
-
-
-
-
-    // todo: print "AMEX", "MASTERCARD", "VISA", or "INVALID"
-
-    //debug
-    //printf("Credit Card: %ld \n", cardNumber);
 }
 
 
 // Returns a string (credit card type)
 string CheckCardType(long ccnum)
 {
-    string result = "INVALID";
+    string result = "INVALID\n";
     int cardLen = 1;
     int cardStart = 0;
 
-    /*
-     * American Express - 15 Digits, starts at 34 or 37
-     * MasterCard - 16 Digits, starts at 51, 52, 53, 54 or 55
-     * Visa 13 or 16 digits, starts with 4
-     */
-
-    /* CHECK CARD LEN */
-    // todo: change this to a for loop
+    /* CALCULATE CARD LEN */
     long ccdigits = 10;
-    while(ccdigits < ccnum)
+    while (ccdigits < ccnum)
     {
         ccdigits *= 10;
         cardLen++;
     }
 
-    printf("Card Len: %i\n", cardLen);
+    // Calculate 13th, 14th, 15th, and 16th card digit
+    long i13 = (ccnum % 10000000000000) / 1000000000000;
+    long i14 = (ccnum % 100000000000000) / 10000000000000;
+    long i15 = (ccnum % 1000000000000000) / 100000000000000;
+    long i16 = (ccnum % 10000000000000000) / 1000000000000000;
 
-    long d14 = (ccnum % 100000000000000)/10000000000000;
-    long d15 = (ccnum % 1000000000000000)/100000000000000;
-
-    printf("d14: %li\n", d14);
-    printf("d15: %li\n", d15);
-
-    /* CHECK STARTING CARD NUM */
-    // Check AMEX
-    if(cardLen == 15)
+    /* CHECK CARD TYPE */
+    // Check Visa - 13 or 16 digits, starts with 4
+    if (cardLen == 13 && (i13 == 4))
     {
-        // Double check
+        result = "VISA\n";
+    }
+    if (cardLen == 16 && (i16 == 4))
+    {
+        result = "VISA\n";
     }
 
+    // Check American Express - 15 Digits, starts at 34 or 37
+    if (cardLen == 15 && (i15 == 3) && ((i14 == 4) || (i14 == 7)))
+    {
+        result = "AMEX\n";
+    }
 
-
-
+    // Check MasterCard  - 16 Digits, starts at 51, 52, 53, 54 or 55
+    if (cardLen == 16 && (i16 == 5) && ((i15 == 1) || (i15 == 2) || (i15 == 3) || (i15 == 4) || (i15 == 5)))
+    {
+        result = "MASTERCARD\n";
+    }
 
     return result;
 }
+
 
 
 // Returns a bool (true) if credit card number is valid
@@ -83,51 +81,34 @@ bool isValid(long ccnum)
 {
     bool result = false; // default is false
 
-    /* PARSE DIGITS */
+    // PARSE DIGITS
     // store every single digit of the users credit card into its own variable
-    // note: a temp variable is used to make sure no information is lost during cascading math operations
-    long d1 = ccnum % 10;
-    int i1 = d1;
-    long d2 = ccnum % 100;
-    int i2 = (d2 - d1) / 10;
-    long d3 = ccnum % 1000;
-    int i3 = (d3 - d2) / 100;
-    long d4 = ccnum % 10000;
-    int i4 = (d4 - d3) / 1000;
-    long d5 = ccnum % 100000;
-    int i5 = (d5 - d4) / 10000;
-    long d6 = ccnum % 1000000;
-    int i6 = (d6 - d5) / 100000;
-    long d7 = ccnum % 10000000;
-    int i7 = (d7 - d6) / 1000000;
-    long d8 = ccnum % 100000000;
-    int i8 = (d8 - d7) / 10000000;
-    long d9 = ccnum % 1000000000;
-    int i9 = (d9 - d8) / 100000000;
-    long d10 = ccnum % 10000000000;
-    int i10 = (d10 - d9) / 1000000000;
-    long d11 = ccnum % 100000000000;
-    int i11 = (d11 - d10) / 10000000000;
-    long d12 = ccnum % 1000000000000;
-    int i12 = (d12 - d11) / 100000000000;
-    long d13 = ccnum % 10000000000000;
-    int i13 = (d13 - d12) / 1000000000000;
-    long d14 = ccnum % 100000000000000;
-    int i14 = (d14 - d13) / 10000000000000;
-    long d15 = ccnum % 1000000000000000;
-    int i15 = (d15 - d14) / 100000000000000;
-    long d16 = ccnum % 10000000000000000;
-    int i16= (d16 - d15) / 1000000000000000;
+    long i1 = (ccnum % 10) / 1;
+    long i2 = (ccnum % 100) / 10;
+    long i3 = (ccnum % 1000) / 100;
+    long i4 = (ccnum % 10000) / 1000;
+    long i5 = (ccnum % 100000) / 10000;
+    long i6 = (ccnum % 1000000) / 100000;
+    long i7 = (ccnum % 10000000) / 1000000;
+    long i8 = (ccnum % 100000000) / 10000000;
+    long i9 = (ccnum % 1000000000) / 100000000;
+    long i10 = (ccnum % 10000000000) / 1000000000;
+    long i11 = (ccnum % 100000000000) / 10000000000;
+    long i12 = (ccnum % 1000000000000) / 100000000000;
+    long i13 = (ccnum % 10000000000000) / 1000000000000;
+    long i14 = (ccnum % 100000000000000) / 10000000000000;
+    long i15 = (ccnum % 1000000000000000) / 100000000000000;
+    long i16 = (ccnum % 10000000000000000) / 1000000000000000;
 
     // invalidate card if not zero (too many digits)
-    long d17 = ccnum % 100000000000000000;
-    int i17= (d17 - d16) / 10000000000000000;
-    if(i17)
+    //long d17 = ccnum % 100000000000000000;
+    long i17 = (ccnum % 100000000000000000) / 10000000000000000;
+    if (i17)
     {
         return false;
     }
 
-    /* CHECKSUM */
+    // CHECKSUM
     // 1. multiply every second digit starting from the second most right number by 2
     // 2. if the result from multiplying by 2 is greater than 9, the resulting digits are added
     //    example: 7 * [2] = (14) -> (1 + 4) = 5    vs   3 * [2] = 6
@@ -143,8 +124,8 @@ bool isValid(long ccnum)
     i16 = (i16 * 2 < 10) ? i16 * 2 : (((i16 * 2) % 10) + ((i16 * 2) / 10));
 
     // 3. Add up all the numbers
-    int checksumA = i2 + i4 + i6 + i8 + i10 + i12 + i14 + i16;
-    int checksumB = i1 + i3 + i5 + i7 + i9 + i11 + i13 + i15;
+    long checksumA = i2 + i4 + i6 + i8 + i10 + i12 + i14 + i16;
+    long checksumB = i1 + i3 + i5 + i7 + i9 + i11 + i13 + i15;
 
     // 4. if the last digit of the sum is 0, then checksum is passed
     result = ((checksumA + checksumB) % 10 != 0) ? false : true;
@@ -154,17 +135,18 @@ bool isValid(long ccnum)
 }
 
 
+
 // get users input
 long GetUserInput(void)
 {
     long input = 0;
 
-    // check for non negative values
+    // do not accept 0 or negative numbers
     do
     {
         input = get_long("Number: ");
     }
-    while(input <= 0);
+    while (input <= 0);
 
     return input;
 }
