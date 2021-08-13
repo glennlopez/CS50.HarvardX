@@ -63,7 +63,7 @@ int main(int argc, string argv[])
     print_winner();
 }
 
-// Update vote totals given a new vote
+// TODO - Update vote totals given a new vote
 bool vote(string name)
 {
     // Check each of the candidate structs
