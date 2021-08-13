@@ -1,5 +1,6 @@
 #include <cs50.h>
 #include <stdio.h>
+#include <string.h>
 
 // Max voters and candidates
 #define MAX_VOTERS 100
@@ -82,6 +83,23 @@ int main(int argc, string argv[])
         printf("\n");
     }
 
+
+
+
+    // DEBUG - show contents of preference array
+    for(int i = 0; i < 5 /*MAX_VOTERS*/; i++)
+    {
+        for (int j = 0; j < 3 /*MAX_CANDIDATES*/; j++)
+        {
+            printf("[%i]", preferences[i][j]);
+        }
+        printf("\n");
+    }
+
+
+
+
+
     // Keep holding runoffs until winner exists
     while (true)
     {
@@ -124,44 +142,64 @@ int main(int argc, string argv[])
     return 0;
 }
 
+
+
+
+
+
+
+
+// TODO - https://youtu.be/-Vc5aGywKxo?t=449
 // Record preference if vote is valid
 bool vote(int voter, int rank, string name)
 {
-    // TODO
-    return false;
+    // Check if voter choice is valid
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (strcmp(name, candidates[i].name) == 0)
+        {
+            preferences[voter][rank] = i;
+            //printf("Voter: [%i], Rank: [%i], Candidate: [%s](%i) \n", voter, rank, name, i); // debug
+            return true;
+        }
+    }
+
+
+    return false; // catch all
 }
 
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO
+    // TODO - https://youtu.be/-Vc5aGywKxo?t=575
     return;
 }
 
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
-    return false;
+    // TODO - https://youtu.be/-Vc5aGywKxo?t=707
+    //return false; //debug - default is false
+    return true;
 }
 
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
+    // TODO - https://youtu.be/-Vc5aGywKxo?t=778
     return 0;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    // TODO
+    // TODO - https://youtu.be/-Vc5aGywKxo?t=858
     return false;
 }
 
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
-    // TODO
+    // TODO - https://youtu.be/-Vc5aGywKxo?t=920
     return;
 }
