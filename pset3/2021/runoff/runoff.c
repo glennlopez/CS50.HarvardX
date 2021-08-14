@@ -163,15 +163,23 @@ bool vote(int voter, int rank, string name)
             return true;
         }
     }
-
-
     return false; // catch all
 }
 
+
+// TODO - https://youtu.be/-Vc5aGywKxo?t=575
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO - https://youtu.be/-Vc5aGywKxo?t=575
+    //todo: use voter prefrences for tabulating votes (prefrences[i][j])
+
+
+    //debug - check number of votes each candidate has
+    for (int i = 0; i < candidate_count; i++)
+    {
+        printf("%s has %i vote(s).\n", candidates[i].name, candidates[i].votes);
+    }
+
     return;
 }
 
