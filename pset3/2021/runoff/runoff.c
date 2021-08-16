@@ -1,6 +1,7 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 // Max voters and candidates
 #define MAX_VOTERS 100
@@ -202,18 +203,41 @@ void tabulate(void)
 // TODO - https://youtu.be/-Vc5aGywKxo?t=707
 bool print_winner(void)
 {
-    // If any candidate has more than half the vote (candidate > voter_count/2)
-        //print thier name(s) and return true;
+    int highest_vote = 0;
 
-    
+    // itterate through the candidates
+    for (int i = 0; i < candidate_count; i++)
+    {
+        // find the highest vote count
+        if (candidates[i].votes > highest_vote)
+        {
+            highest_vote = candidates[i].votes;
+        }
+    }
+
+    // debug
+    printf("%i is the highest vote count.\n", highest_vote);
+
+    // if the highest_vote count is greater than half of the total vote, return true
+    if (highest_vote > (voter_count/2))
+    {
+        // check each candidate
+        for (int i = 0; i < candidate_count; i++)
+        {
+            // to see who has the highest vote
+            if (candidates[i].votes == highest_vote)
+            {
+                printf("%s won.\n", candidates[i].name);
+            }
+        }
+        return true;
+    }
 
 
 
 
-
-
-    //return false; //debug - default is false
-    return true;
+    return false;
+    //return true; //debug - enable to test other func
 }
 
 // Return the minimum number of votes any remaining candidate has
