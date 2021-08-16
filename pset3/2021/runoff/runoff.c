@@ -168,26 +168,22 @@ bool vote(int voter, int rank, string name)
 
 
 // TODO - https://youtu.be/-Vc5aGywKxo?t=575
-// Tabulate votes for non-eliminated candidates
- //int preferences[MAX_VOTERS][MAX_CANDIDATES];
+// For every voter, check thier preferences. If thier preferences has not been eliminated, add a vote to the candidate.
 void tabulate(void)
 {
-    //debug - eliminate bob
-    candidates[1].eliminated = true;
-
     // itterate through all the voters
     for (int i = 0; i < voter_count; i++)
     {
 
         // itterate though the voter preferences
-       for(int pref = 0; pref < 3; pref++)
+       for (int pref = 0; pref < 3; pref++)
        {
            // check if the voters preference has NOT been eliminated yet
-           if(!candidates[preferences[i][pref]].eliminated)
+           if (!candidates[preferences[i][pref]].eliminated)
            {
                // add 1 vote to candidate
                candidates[preferences[i][pref]].votes++;
-               break; // break away from the voter pref for-loop
+               break; // break away from the voter pref for-loop (continue to the next voter)
            }
        }
     }
@@ -203,9 +199,19 @@ void tabulate(void)
 }
 
 // Print the winner of the election, if there is one
+// TODO - https://youtu.be/-Vc5aGywKxo?t=707
 bool print_winner(void)
 {
-    // TODO - https://youtu.be/-Vc5aGywKxo?t=707
+    // If any candidate has more than half the vote (candidate > voter_count/2)
+        //print thier name(s) and return true;
+
+    
+
+
+
+
+
+
     //return false; //debug - default is false
     return true;
 }
