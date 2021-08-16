@@ -169,9 +169,28 @@ bool vote(int voter, int rank, string name)
 
 // TODO - https://youtu.be/-Vc5aGywKxo?t=575
 // Tabulate votes for non-eliminated candidates
+ //int preferences[MAX_VOTERS][MAX_CANDIDATES];
 void tabulate(void)
 {
-    //todo: use voter prefrences for tabulating votes (prefrences[i][j])
+    //debug - eliminate bob
+    candidates[1].eliminated = true;
+
+    // itterate through all the voters
+    for (int i = 0; i < voter_count; i++)
+    {
+
+        // itterate though the voter preferences
+       for(int pref = 0; pref < 3; pref++)
+       {
+           // check if the voters preference has NOT been eliminated yet
+           if(!candidates[preferences[i][pref]].eliminated)
+           {
+               // add 1 vote to candidate
+               candidates[preferences[i][pref]].votes++;
+               break; // break away from the voter pref for-loop
+           }
+       }
+    }
 
 
     //debug - check number of votes each candidate has
