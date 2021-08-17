@@ -222,8 +222,9 @@ bool print_winner(void)
     printf("%i is the highest vote count.\n", highest_vote);
 
     // if the highest_vote count is greater than half of the total vote, return true
-    if (highest_vote >= round(voter_count/2) )
+    if (highest_vote >= (float) voter_count/2 )
     {
+
         // check each candidate
         for (int i = 0; i < candidate_count; i++)
         {
@@ -235,8 +236,11 @@ bool print_winner(void)
         }
         return true;
     }
-    //return false;
-    return true; //debug - enable to test other func
+    //debug
+    printf("round(%i/2): %f\n", voter_count, (float) voter_count/2);
+
+    return false;
+    //return true; //debug - enable to test other func
 }
 
 // Return the minimum number of votes any remaining candidate has
