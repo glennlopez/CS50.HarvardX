@@ -172,6 +172,9 @@ bool vote(int voter, int rank, string name)
 // For every voter, check thier preferences. If thier preferences has not been eliminated, add a vote to the candidate.
 void tabulate(void)
 {
+    // debug - bob is eliminated
+    //candidates[1].eliminated = true;
+
     // itterate through all the voters
     for (int i = 0; i < voter_count; i++)
     {
@@ -219,12 +222,12 @@ bool print_winner(void)
     printf("%i is the highest vote count.\n", highest_vote);
 
     // if the highest_vote count is greater than half of the total vote, return true
-    if (highest_vote > (voter_count/2))
+    if (highest_vote >= round(voter_count/2) )
     {
         // check each candidate
         for (int i = 0; i < candidate_count; i++)
         {
-            // to see who has the highest vote
+            // print winners
             if (candidates[i].votes == highest_vote)
             {
                 printf("%s won.\n", candidates[i].name);
@@ -232,12 +235,8 @@ bool print_winner(void)
         }
         return true;
     }
-
-
-
-
-    return false;
-    //return true; //debug - enable to test other func
+    //return false;
+    return true; //debug - enable to test other func
 }
 
 // Return the minimum number of votes any remaining candidate has
