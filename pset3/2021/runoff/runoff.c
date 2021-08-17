@@ -192,7 +192,6 @@ void tabulate(void)
        }
     }
 
-
     //debug - check number of votes each candidate has
     for (int i = 0; i < candidate_count; i++)
     {
@@ -239,15 +238,37 @@ bool print_winner(void)
     //debug
     printf("round(%i/2): %f\n", voter_count, (float) voter_count/2);
 
-    return false;
-    //return true; //debug - enable to test other func
+    //return false;
+    return true; //debug - enable to test other func
 }
 
 // Return the minimum number of votes any remaining candidate has
+// TODO - https://youtu.be/-Vc5aGywKxo?t=778
 int find_min(void)
 {
-    // TODO - https://youtu.be/-Vc5aGywKxo?t=778
-    return 0;
+    int min_vote = MAX_VOTERS;
+
+    // itterate through the candidates
+    for (int i = 0; i < candidate_count; i++)
+    {
+        // find the lowest vote of the candidates that have not been eliminated yet
+        if ( (candidates[i].eliminated == false) && (candidates[i].votes < min_vote) )
+        {
+            // set candidate vote count as the new min_vote
+            min_vote = candidates[i].votes;
+        }
+    }
+
+    //debug - show min_vote
+    printf("min_vote: %i\n", min_vote);
+
+
+
+
+
+
+
+    return min_vote;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
