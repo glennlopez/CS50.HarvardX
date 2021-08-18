@@ -238,8 +238,8 @@ bool print_winner(void)
     //debug
     printf("round(%i/2): %f\n", voter_count, (float) voter_count/2);
 
-    //return false;
-    return true; //debug - enable to test other func
+    return false;
+    //return true; //debug - enable to test other func
 }
 
 // Return the minimum number of votes any remaining candidate has
@@ -262,20 +262,38 @@ int find_min(void)
     //debug - show min_vote
     printf("min_vote: %i\n", min_vote);
 
-
-
-
-
-
-
     return min_vote;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
+// TODO - https://youtu.be/-Vc5aGywKxo?t=858
 bool is_tie(int min)
 {
-    // TODO - https://youtu.be/-Vc5aGywKxo?t=858
-    return false;
+
+    // itterate through each candidates
+    for (int i = 0; i < candidate_count; i++)
+    {
+        // check if non-eliminated candidates HAVE the min vote
+        if ( (candidates[i].eliminated == false) && (candidates[i].votes == round(min)) )
+        {
+            // debug
+            //printf("%s\n");
+
+            continue;
+        }
+        else
+        {
+            return false;
+        }
+
+        // debug
+        printf("Is a tie.\n");
+
+        return true;
+    }
+
+
+    return false; // return true; - catch all
 }
 
 // Eliminate the candidate (or candidates) in last place
