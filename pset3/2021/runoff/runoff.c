@@ -277,12 +277,15 @@ bool is_tie(int min)
         if ( (candidates[i].eliminated == false) && (candidates[i].votes == round(min)) )
         {
             // debug
-            //printf("%s\n");
+            printf("%s is not eliminated and has min(%i) vote.\n", candidates[i].name, min);
 
             continue;
         }
         else
         {
+            // debug
+            printf("%s eliminated and/or does not have min vote.\n", candidates[i].name);
+
             return false;
         }
 
