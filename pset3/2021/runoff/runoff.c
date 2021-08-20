@@ -225,7 +225,6 @@ int find_min(void)
 
 // Return true if the election is tied between all candidates, false otherwise
 // TODO - https://youtu.be/-Vc5aGywKxo?t=858
-//BUG: is_tie did not return true -> is_tie did not detect tie after some candidates have been eliminated
 bool is_tie(int min)
 {
     int candidates_still_running = 0;
@@ -248,12 +247,13 @@ bool is_tie(int min)
 
     }
 
+    // check if the amount of running candidates with min vote is equal to the amount of candidates still running
     if (candidates_still_running == candidates_with_minvote_running)
     {
-        return true;
+        return true; // detected a tie
     }
 
-    return false;
+    return false; // did not detect a tie
 }
 
 // Eliminate the candidate (or candidates) in last place
