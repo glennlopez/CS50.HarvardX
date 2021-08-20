@@ -118,6 +118,11 @@ int main(int argc, string argv[])
         int min = find_min();
         bool tie = is_tie(min);
 
+
+        // DEBUG
+        printf("is_tie returns: %i\n", tie);
+
+
         // If tie, everyone wins
         if (tie)
         {
@@ -236,7 +241,7 @@ bool print_winner(void)
         return true;
     }
     //debug
-    printf("round(%i/2): %f\n", voter_count, (float) voter_count/2);
+    printf("winner half-point -> round(%i/2): %f\n", voter_count, (float) voter_count/2);
 
     return false;
     //return true; //debug - enable to test other func
@@ -269,34 +274,24 @@ int find_min(void)
 // TODO - https://youtu.be/-Vc5aGywKxo?t=858
 bool is_tie(int min)
 {
+    // debug
+    printf("min: %i\n", min);
 
     // itterate through each candidates
     for (int i = 0; i < candidate_count; i++)
     {
         // check if non-eliminated candidates HAVE the min vote
-        if ( (candidates[i].eliminated == false) && (candidates[i].votes == round(min)) )
+        if (!((candidates[i].eliminated == false) && (candidates[i].votes == round(min))) )
         {
-            // debug
-            printf("%s is not eliminated and has min(%i) vote.\n", candidates[i].name, min);
-
-            continue;
+           return false;
         }
-        else
-        {
-            // debug
-            printf("%s eliminated and/or does not have min vote.\n", candidates[i].name);
-
-            return false;
-        }
-
-        // debug
-        printf("Is a tie.\n");
-
-        return true;
     }
 
+    // debug
+    printf("Is a tie.\n");
 
-    return false; // return true; - catch all
+    //return false;
+    return true; // catch all
 }
 
 // Eliminate the candidate (or candidates) in last place
