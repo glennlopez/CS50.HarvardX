@@ -7,18 +7,60 @@ int AppendToFile(void);
 int ReadFromFile(void);
 int WriteToFile(void);
 int CopyFile(void);
+int CopyFileFRead(void);
 
 int main()
 {
     //AppendToFile();
     //ReadFromFile();
     //WriteToFile();
-    CopyFile();
-
+    //CopyFile();
+    CopyFileFRead();
 }
 
 
-// COPY A FILE
+
+
+// COPY A FILE USING fread() and fwrite()
+// fopen()
+
+int CopyFileFRead()
+{
+
+    // Open a file pointer to read data
+    FILE *source = fopen("file.csv", "r");
+    if (source == NULL)
+    {
+        printf("Error: Invalid file\n");
+    }
+
+    // Open a file pointer to copy data to
+    FILE *copy = fopen("new_file.csv", "w");
+    if(copy == NULL)
+    {
+         printf("Error: Invalid copy\n");
+    }
+
+
+    // use fread(<buffer>,<size>,<qty>,<file pointer>) to read the source
+    char c;
+    while(fread(&c, sizeof(char), 1, source))
+    {
+        fwrite(&c, sizeof(char), 1, copy);
+    }
+
+
+    // use fwrite(<buffer>, <size>, <qty>, <file pointer>) to copy the file
+
+    fclose(source);
+    fclose(copy);
+    return 0;
+}
+
+
+
+
+// COPY A FILE USING fgetc() and fputc()
 // fopen() fgetc() fputc() fclose()
 int CopyFile()
 {
