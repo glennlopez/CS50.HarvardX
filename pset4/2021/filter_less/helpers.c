@@ -53,6 +53,32 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
+
+    RGBTRIPLE temp[height][width];
+
+    // iterate through every column in the original photo
+    for (int col = 0; col < height; col++) //column
+    {
+        // store each row of TRIPPLES in temp
+        for (int row = 0; row < width; row++) //row
+        {
+            temp[col][row] = image[col][row];
+        }
+
+    }
+
+    // re-build the image in reverse using the stored TRIPPLES
+    int reverse_index = width;
+    for (int col = 0; col < height; col++)
+    {
+        for (int row = 0; row < width; row++)
+        {
+            image[col][row] = temp[col][reverse_index];
+            reverse_index--;
+        }
+        reverse_index = 0;
+    }
+
     return;
 }
 
