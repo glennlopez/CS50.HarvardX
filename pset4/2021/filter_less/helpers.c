@@ -132,8 +132,6 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 F.rgbtBlue = image[col + 1][row - 1].rgbtBlue;
                 G.rgbtBlue = image[col + 1][row - 0].rgbtBlue;
                 H.rgbtBlue = image[col + 1][row + 1].rgbtBlue;
-                avgBlue = 0; // compute average blue
-
 
                 // Original Green Values
                 A.rgbtGreen = image[col - 1][row - 1].rgbtGreen;
@@ -145,7 +143,6 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 F.rgbtGreen = image[col + 1][row - 1].rgbtGreen;
                 G.rgbtGreen = image[col + 1][row - 0].rgbtGreen;
                 H.rgbtGreen = image[col + 1][row + 1].rgbtGreen;
-                avgGreen = 0; // compute average green
 
                 // Original Red Values
                 A.rgbtRed = image[col - 1][row - 1].rgbtRed;
@@ -157,15 +154,30 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 F.rgbtRed = image[col + 1][row - 1].rgbtRed;
                 G.rgbtRed = image[col + 1][row - 0].rgbtRed;
                 H.rgbtRed = image[col + 1][row + 1].rgbtRed;
-                avgRed = 0; // computer average red
 
+                // Calculate average blue
+                avgBlue = round(A.rgbtBlue + B.rgbtBlue + C.rgbtBlue +
+                D.rgbtBlue + X.rgbtBlue + E.rgbtBlue +
+                F.rgbtBlue + G.rgbtBlue + H.rgbtBlue) / 9;
+
+                // Calculate average red
+                avgRed = round(A.rgbtRed + B.rgbtRed + C.rgbtRed +
+                D.rgbtRed + X.rgbtRed + E.rgbtRed +
+                F.rgbtRed + G.rgbtRed + H.rgbtRed) / 9;
+
+                // Calculate average green
+                avgGreen = round(A.rgbtGreen + B.rgbtGreen + C.rgbtGreen +
+                D.rgbtGreen + X.rgbtGreen + E.rgbtGreen +
+                F.rgbtGreen + G.rgbtGreen + H.rgbtGreen) / 9;
+
+                // Place average in temp RGBTRIPPLE container
+                temp[col][row].rgbtBlue = avgBlue;
+                temp[col][row].rgbtGreen = avgGreen;
+                temp[col][row].rgbtRed = avgRed;
 
 
             }
 
-
-            // Place the average-calculated RGBTRIPPLE in a temp RGBTRIPPLE container for later...
-            temp[col][row] = image[col][row]; // TODO:
         }
 
     }
