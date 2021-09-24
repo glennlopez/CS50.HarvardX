@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <math.h>
 
+int isCorner(int y, int x, int height, int width);
+
 // Convert image to grayscale
 //
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -76,14 +78,92 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
             image[col][row] = temp[col][reverse_index];
             reverse_index--;
         }
-        reverse_index = 0;
+        reverse_index = width;
     }
-
     return;
 }
 
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
+    RGBTRIPLE temp[height][width];
+
+    // Copy the original image to a temp variable
+    int cornerCounter = 0; // debug
+    for (int col = 0; col < height; col++)
+    {
+        for (int row = 0; row < width; row++)
+        {
+            // debug - testing
+            if (isCorner(col, row, height, width) > 0)
+            {
+                cornerCounter++;
+            }
+
+
+
+            temp[col][row] = image[col][row];
+        }
+
+    }
+    printf("%i \n", cornerCounter); // debug
+
+    // re-build the blurred image from the stored TRIPPLES
+    for (int col = 0; col < height; col++)
+    {
+        for (int row = 0; row < width; row++)
+        {
+            temp[col][row] = image[col][row];
+        }
+
+    }
+
+
+
+
+
+
     return;
 }
+
+
+
+// CORNER DETECTION - FOR BLUR
+// Checks to see if RGBTRIPPLE to be AVERAGED is a corner pixel
+// 0 = not a corner, 1 = top left, 2 = top right, 3 = bottom left, 4 = bottom right
+// x and y = curent pixel location; height and width = photo size
+int isCorner(int y, int x, int height, int width)
+{
+    // check top left corner
+    if( (y == 0) && (x == 0) )
+    {
+        printf("Top left corner pixel found [y:%i, x:%i].\n", y, x); // debug
+        return 1; // pixel is at top left corner
+    }
+
+    // check top right corner
+    if( (y == 0) && (x == width - 1) )
+    {
+        printf("Top right corner pixel found [y:%i, x:%i].\n", y, x); // debug
+        return 2; // pixel is at top left corner
+    }
+
+    // check bottom left corner
+    if( (y == height - 1) && (x == 0) )
+    {
+        printf("Bottom left corner pixel found [y:%i, x:%i].\n", y, x); // debug
+        return 3; // pixel is at top left corner
+    }
+
+    if( (y == height - 1) && (x == width - 1) )
+    {
+        printf("Bottom right corner pixel found [y:%i, x:%i].\n", y, x); // debug
+        return 4; // pixel is at top left corner
+    }
+
+    return 0; // not a corner pixel
+}
+
+
+
+
