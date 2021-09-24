@@ -95,23 +95,34 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
     for (int col = 0; col < height; col++)
     {
+        // Calculate the box-blur average for every RGBTRIPPLE in the image
         for (int row = 0; row < width; row++)
         {
-            // debug - testing CORNER DETECTION
+            // RGBTRIPPLE CORNER CASE
             if (isCorner(col, row, height, width) > 0)
             {
-                cornerCounter++;
+                cornerCounter++; // debug - testing CORNER DETECTION
+                // TODO:
             }
 
-            // debug - testing EDGE DETECTION
-            if (isEdge(col, row, height, width) > 0)
+            // RGBTRIPPLE EDGE CASE
+            else if (isEdge(col, row, height, width) > 0)
             {
-                edgeCounter++;
+                edgeCounter++; // debug - testing EDGE DETECTION
+                // TODO:
+            }
+
+            // RGBTRIPPLE IS NOT AN EDGE OR CORNER CASE
+            else
+            {
+                //..
+                // TODO:
+
             }
 
 
-
-            temp[col][row] = image[col][row];
+            // Place the average-calculated RGBTRIPPLE in a temp RGBTRIPPLE container for later...
+            temp[col][row] = image[col][row]; // TODO:
         }
 
     }
@@ -124,7 +135,8 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int row = 0; row < width; row++)
         {
-            temp[col][row] = image[col][row];
+            // Replace the original image RGBTRIPPLE with a re-calculated box blured RGBTRIPPLE
+            image[col][row] = temp[col][row];
         }
 
     }
