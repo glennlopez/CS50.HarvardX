@@ -65,7 +65,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
         // store each row of TRIPPLES in temp
         for (int row = 0; row < width; row++) //row
         {
-            temp[col][row] = image[col][row];
+              temp[col][row] = image[col][row];
         }
 
     }
@@ -93,11 +93,18 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     int cornerCounter = 0; // debug
     int edgeCounter = 0; //debug
 
-    for (int col = 0; col < height; col++)
+    for (int col = 0; col < height; col++) //y
     {
         // Calculate the box-blur average for every RGBTRIPPLE in the image
-        for (int row = 0; row < width; row++)
+        for (int row = 0; row < width; row++) //x
         {
+            // Image Kernel Mapping
+            // [A][B][C]
+            // [D][X][E]
+            // [F][G][H]
+            RGBTRIPLE A, B, C, D, X, E, F, G, H;
+            int avgBlue, avgGreen, avgRed;
+
             // RGBTRIPPLE CORNER CASE
             if (isCorner(col, row, height, width) > 0)
             {
@@ -115,8 +122,44 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // RGBTRIPPLE IS NOT AN EDGE OR CORNER CASE
             else
             {
-                //..
-                // TODO:
+                // Original Blue Values
+                A.rgbtBlue = image[col - 1][row - 1].rgbtBlue;
+                B.rgbtBlue = image[col - 1][row - 0].rgbtBlue;
+                C.rgbtBlue = image[col - 1][row + 1].rgbtBlue;
+                D.rgbtBlue = image[col - 0][row - 1].rgbtBlue;
+                X.rgbtBlue = image[col - 0][row - 0].rgbtBlue;
+                E.rgbtBlue = image[col - 0][row + 1].rgbtBlue;
+                F.rgbtBlue = image[col + 1][row - 1].rgbtBlue;
+                G.rgbtBlue = image[col + 1][row - 0].rgbtBlue;
+                H.rgbtBlue = image[col + 1][row + 1].rgbtBlue;
+                avgBlue = 0; // compute average blue
+
+
+                // Original Green Values
+                A.rgbtGreen = image[col - 1][row - 1].rgbtGreen;
+                B.rgbtGreen = image[col - 1][row - 0].rgbtGreen;
+                C.rgbtGreen = image[col - 1][row + 1].rgbtGreen;
+                D.rgbtGreen = image[col - 0][row - 1].rgbtGreen;
+                X.rgbtGreen = image[col - 0][row - 0].rgbtGreen;
+                E.rgbtGreen = image[col - 0][row + 1].rgbtGreen;
+                F.rgbtGreen = image[col + 1][row - 1].rgbtGreen;
+                G.rgbtGreen = image[col + 1][row - 0].rgbtGreen;
+                H.rgbtGreen = image[col + 1][row + 1].rgbtGreen;
+                avgGreen = 0; // compute average green
+
+                // Original Red Values
+                A.rgbtRed = image[col - 1][row - 1].rgbtRed;
+                B.rgbtRed = image[col - 1][row - 0].rgbtRed;
+                C.rgbtRed = image[col - 1][row + 1].rgbtRed;
+                D.rgbtRed = image[col - 0][row - 1].rgbtRed;
+                X.rgbtRed = image[col - 0][row - 0].rgbtRed;
+                E.rgbtRed = image[col - 0][row + 1].rgbtRed;
+                F.rgbtRed = image[col + 1][row - 1].rgbtRed;
+                G.rgbtRed = image[col + 1][row - 0].rgbtRed;
+                H.rgbtRed = image[col + 1][row + 1].rgbtRed;
+                avgRed = 0; // computer average red
+
+
 
             }
 
