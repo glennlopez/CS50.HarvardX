@@ -3,6 +3,7 @@
 #include <math.h>
 
 int isCorner(int y, int x, int height, int width);
+int isEdge(int y, int x, int height, int width);
 
 // Convert image to grayscale
 //
@@ -90,14 +91,22 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
     // Copy the original image to a temp variable
     int cornerCounter = 0; // debug
+    int edgeCounter = 0; //debug
+
     for (int col = 0; col < height; col++)
     {
         for (int row = 0; row < width; row++)
         {
-            // debug - testing
+            // debug - testing CORNER DETECTION
             if (isCorner(col, row, height, width) > 0)
             {
                 cornerCounter++;
+            }
+
+            // debug - testing EDGE DETECTION
+            if (isEdge(col, row, height, width) > 0)
+            {
+                edgeCounter++;
             }
 
 
@@ -106,7 +115,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         }
 
     }
-    printf("%i \n", cornerCounter); // debug
+    printf("\n");
+    printf("Corner Count: %i \n", cornerCounter); // debug
+    printf("Top Edge Count: %i \n", edgeCounter); // debug
 
     // re-build the blurred image from the stored TRIPPLES
     for (int col = 0; col < height; col++)
@@ -165,5 +176,40 @@ int isCorner(int y, int x, int height, int width)
 }
 
 
+// EDGE DETECTION - FOR BLUR
+// Checks to see if RGBTRIPPLE to be AVERAGED is an edge pixel
+// 0 = not an edge, 1 = Top edge, 2 = Right edge, 3 = Bottom edge, 4 - Left edge
+// x and y = curent pixel location; height and width = photo size
+int isEdge(int y, int x, int height, int width)
+{
+    // check for top edge
+    if ( (y == 0) && (x > 0 && x < width - 1) )
+    {
+        printf("Top edge found [y:%i, x:%i].\n", y, x); // debug
+        return 1; // pixel is a top edge
+    }
 
+    // check for right edge
+    if ( (y > 0 && y < height - 1) && (x == width - 1) )
+    {
+        printf("Right edge found [y:%i, x:%i].\n", y, x); // debug
+        return 2; // pixel is a right edge
+    }
+
+    // check for bottom edge
+    if ( (y == height - 1) && (x > 0 && x < width - 1) )
+    {
+        printf("Bottom edge found [y:%i, x:%i].\n", y, x); // debug
+        return 3; // pixel is a bottom edge
+    }
+
+    // check for left edge
+    if ( (y > 0 && y < height - 1) && (x == 0) )
+    {
+        printf("Left edge found [y:%i, x:%i].\n", y, x); // debug
+        return 4; // pixel is a left edge
+    }
+
+    return 0; // not an edge pixel
+}
 
