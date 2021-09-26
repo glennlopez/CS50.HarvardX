@@ -110,91 +110,121 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // IF Top Edge, exclude:            A,B,C
             // IF Top Right Corner, exclude:    A,B,C,E,H
             // IF Left Edge, exclude:           A,D,F
-
-        //TODO: (1)
             // IF Right Edge, exclude:          C,E,H
             // IF Bottom Left Corner, exclude:  A,D,F,G,H
             // IF Bottom Edge, exclude:         F,G,H
             // IF Bottom Right Corner. exclude: C,E,H,G,F
 
-            // A
-            if( !(isCorner(col, row, height, width) == 1) || !(isEdge(col, row, height, width) == 1) || !(isCorner(col, row, height, width) == 2) || !(isEdge(col, row, height, width) == 4) )
+            // 0 = not a corner, 1 = top left, 2 = top right, 3 = bottom left, 4 = bottom right
+            // 0 = not an edge, 1 = Top edge, 2 = Right edge, 3 = Bottom edge, 4 - Left edge
+
+            if( // A
+                !(isCorner(col, row, height, width) == 1) &&
+                !(isEdge(col, row, height, width) == 1) &&
+                !(isCorner(col, row, height, width) == 2) &&
+                !(isEdge(col, row, height, width) == 4) &&
+                !(isCorner(col, row, height, width) == 3)
+               )
             {
                 A.rgbtBlue = image[col - 1][row - 1].rgbtBlue;
+                A.rgbtGreen = image[col - 1][row - 1].rgbtGreen;
+                A.rgbtRed = image[col - 1][row - 1].rgbtRed;
             }
 
-            // B
-            if( !(isCorner(col, row, height, width) == 1) || !(isEdge(col, row, height, width) == 1) || !(isCorner(col, row, height, width) == 2))
+            if( // B
+                !(isCorner(col, row, height, width) == 1) &&
+                !(isEdge(col, row, height, width) == 1) &&
+                !(isCorner(col, row, height, width) == 2) )
             {
                 B.rgbtBlue = image[col - 1][row - 0].rgbtBlue;
+                B.rgbtGreen = image[col - 1][row - 0].rgbtGreen;
+                B.rgbtRed = image[col - 1][row - 0].rgbtRed;
             }
 
-            // C
-            if( !(isCorner(col, row, height, width) == 1) || !(isEdge(col, row, height, width) == 1) || !(isCorner(col, row, height, width) == 2))
+
+
+            if( // C. - segmentation fault here
+                !(isCorner(col, row, height, width) == 1) &&
+                !(isEdge(col, row, height, width) == 1) &&
+                !(isCorner(col, row, height, width) == 2) &&
+                !(isEdge(col, row, height, width) == 2) &&
+                !(isCorner(col, row, height, width) == 4) )
             {
                 C.rgbtBlue = image[col - 1][row + 1].rgbtBlue;
+                C.rgbtGreen = image[col - 1][row + 1].rgbtGreen;
+                C.rgbtRed = image[col - 1][row + 1].rgbtRed;
             }
 
-            // D
-            if( !(isCorner(col, row, height, width) == 1) || !(isEdge(col, row, height, width) == 4) )
+
+            if( // D
+                !(isCorner(col, row, height, width) == 1) &&
+                !(isEdge(col, row, height, width) == 4) &&
+                !(isCorner(col, row, height, width) == 3) )
             {
                 D.rgbtBlue = image[col - 0][row - 1].rgbtBlue;
+                D.rgbtGreen = image[col - 0][row - 1].rgbtGreen;
+                D.rgbtRed = image[col - 0][row - 1].rgbtRed;
             }
 
             X.rgbtBlue = image[col - 0][row - 0].rgbtBlue;
+            X.rgbtGreen = image[col - 0][row - 0].rgbtGreen;
+            X.rgbtRed = image[col - 0][row - 0].rgbtRed;
+
+
 
             // E
-            if(!(isCorner(col, row, height, width) == 2) )
+            if(!(isCorner(col, row, height, width) == 2) &&
+                !(isEdge(col, row, height, width) == 2) &&
+                !(isCorner(col, row, height, width) == 4))
             {
                 E.rgbtBlue = image[col - 0][row + 1].rgbtBlue;
+                E.rgbtGreen = image[col - 0][row + 1].rgbtGreen;
+                E.rgbtRed = image[col - 0][row + 1].rgbtRed;
             }
 
-            // F
-            if( !(isCorner(col, row, height, width) == 1) || !(isEdge(col, row, height, width) == 4))
+
+            if( // F
+                !(isCorner(col, row, height, width) == 1) &&
+                !(isEdge(col, row, height, width) == 4) &&
+                !(isCorner(col, row, height, width) == 3) &&
+                !(isEdge(col, row, height, width) == 3)  &&
+                !(isCorner(col, row, height, width) == 4))
             {
                 F.rgbtBlue = image[col + 1][row - 1].rgbtBlue;
+                F.rgbtGreen = image[col + 1][row - 1].rgbtGreen;
+                F.rgbtRed = image[col + 1][row - 1].rgbtRed;
             }
-            G.rgbtBlue = image[col + 1][row - 0].rgbtBlue;
+
+
+            if( // G
+                !(isCorner(col, row, height, width) == 3) &&
+                !(isEdge(col, row, height, width) == 3) &&
+                !(isCorner(col, row, height, width) == 4))
+            {
+                G.rgbtBlue = image[col + 1][row - 0].rgbtBlue;
+                G.rgbtGreen = image[col + 1][row - 0].rgbtGreen;
+                G.rgbtRed = image[col + 1][row - 0].rgbtRed;
+            }
+
 
             // H
-            if(!(isCorner(col, row, height, width) == 2) )
+            if(!(isCorner(col, row, height, width) == 2) &&
+                !(isEdge(col, row, height, width) == 2) &&
+                !(isCorner(col, row, height, width) == 3) &&
+                !(isEdge(col, row, height, width) == 3) &&
+                !(isCorner(col, row, height, width) == 4))
             {
                 H.rgbtBlue = image[col + 1][row + 1].rgbtBlue;
+                H.rgbtGreen = image[col + 1][row + 1].rgbtGreen;
+                H.rgbtRed = image[col + 1][row + 1].rgbtRed;
             }
 
 
-
-
-
-
-            // Original Green Values
-            A.rgbtGreen = image[col - 1][row - 1].rgbtGreen;
-            B.rgbtGreen = image[col - 1][row - 0].rgbtGreen;
-            C.rgbtGreen = image[col - 1][row + 1].rgbtGreen;
-            D.rgbtGreen = image[col - 0][row - 1].rgbtGreen;
-            X.rgbtGreen = image[col - 0][row - 0].rgbtGreen;
-            E.rgbtGreen = image[col - 0][row + 1].rgbtGreen;
-            F.rgbtGreen = image[col + 1][row - 1].rgbtGreen;
-            G.rgbtGreen = image[col + 1][row - 0].rgbtGreen;
-            H.rgbtGreen = image[col + 1][row + 1].rgbtGreen;
-
-
-
-            // Original Red Values
-            A.rgbtRed = image[col - 1][row - 1].rgbtRed;
-            B.rgbtRed = image[col - 1][row - 0].rgbtRed;
-            C.rgbtRed = image[col - 1][row + 1].rgbtRed;
-            D.rgbtRed = image[col - 0][row - 1].rgbtRed;
-            X.rgbtRed = image[col - 0][row - 0].rgbtRed;
-            E.rgbtRed = image[col - 0][row + 1].rgbtRed;
-            F.rgbtRed = image[col + 1][row - 1].rgbtRed;
-            G.rgbtRed = image[col + 1][row - 0].rgbtRed;
-            H.rgbtRed = image[col + 1][row + 1].rgbtRed;
-
-            // RGBTRIPPLE CORNER CASE
+            // RGBTRIPPLE CORNER CASE           - // TODO: Do 4 corner cases
             // Top left corner (X,E,G,H)
-            if (isCorner(col, row, height, width) == 1)
+            if (isCorner(col, row, height, width) > 0)
             {
+                cornerCounter++;
                 /*
                 // Calculate average Blue
                 avgBlue = round(X.rgbtBlue + E.rgbtBlue +
@@ -215,7 +245,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 */
             }
 
-            // RGBTRIPPLE EDGE CASE
+            // RGBTRIPPLE EDGE CASE         - //TODO: Do all 4 Edge cases
             else if (isEdge(col, row, height, width) > 0)
             {
                 edgeCounter++; // debug - testing EDGE DETECTION
@@ -245,6 +275,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 temp[col][row].rgbtBlue = avgBlue;
                 temp[col][row].rgbtGreen = avgGreen;
                 temp[col][row].rgbtRed = avgRed;
+
             }
 
         }
