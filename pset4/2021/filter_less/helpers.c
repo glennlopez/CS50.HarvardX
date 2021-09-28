@@ -9,7 +9,7 @@ int isEdge(int y, int x, int height, int width);
 //
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
-    int avg = 0;
+    double avg = 0;
 
     // itterate through all the pixels supplied
     for(int i = 0; i < height; i++) //y
@@ -17,7 +17,7 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
         for(int j = 0; j < width; j++) //x
         {
             // calculate greyscale average
-            avg = (image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed) / 3;
+            avg = round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed) / 3.0);
 
             // replace pixel tripple with average value
             image[i][j].rgbtBlue = avg;
@@ -101,7 +101,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             RGBTRIPLE A, B, C, D, X, E, F, G, H;
             int avgBlue, avgGreen, avgRed;
 
-            // Image Kernel/Mask Values
+            // Store Original and neighbouring 3x3 RGBTRIPPLE for averaging
             // [A][B][C]
             // [D][X][E]
             // [F][G][H]
@@ -115,6 +115,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             // IF Bottom Edge, exclude:         F,G,H
             // IF Bottom Right Corner. exclude: C,E,H,G,F
             //
+            // NOTE: Check to see if [X] (the current pos) is a corner or edge RGBTRIPPLE
             // 0 = not a corner, 1 = top left, 2 = top right, 3 = bottom left, 4 = bottom right
             // 0 = not an edge, 1 = Top edge, 2 = Right edge, 3 = Bottom edge, 4 - Left edge
             if(!(isCorner(col, row, height, width) == 1) && !(isEdge(col, row, height, width) == 1) && !(isCorner(col, row, height, width) == 2) && !(isEdge(col, row, height, width) == 4) && !(isCorner(col, row, height, width) == 3))
@@ -141,9 +142,11 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 D.rgbtGreen = image[col - 0][row - 1].rgbtGreen;
                 D.rgbtRed = image[col - 0][row - 1].rgbtRed;
             }
+
             X.rgbtBlue = image[col - 0][row - 0].rgbtBlue;
             X.rgbtGreen = image[col - 0][row - 0].rgbtGreen;
             X.rgbtRed = image[col - 0][row - 0].rgbtRed;
+
             if(!(isCorner(col, row, height, width) == 2) && !(isEdge(col, row, height, width) == 2) && !(isCorner(col, row, height, width) == 4))
             {
                 E.rgbtBlue = image[col - 0][row + 1].rgbtBlue;
@@ -280,17 +283,118 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
 
 
-
-
-            // RGBTRIPPLE EDGE CASE         - //TODO: Do all 4 Edge cases
-            else if (isEdge(col, row, height, width) > 0)
+            // CALCULATE BLUR AVERAGE - TOP EDGE
+            // [ ][ ][ ]
+            // [D][X][E]
+            // [F][G][H]
+            // 0 = not an edge, 1 = Top edge, 2 = Right edge, 3 = Bottom edge, 4 - Left edge
+            if (isEdge(col, row, height, width) == 1)
             {
                 edgeCounter++; // debug - testing EDGE DETECTION
-                // TODO:
+
+                // Calculate average Blue
+                avgBlue = round(D.rgbtBlue + X.rgbtBlue + E.rgbtBlue +
+                F.rgbtBlue + G.rgbtBlue + H.rgbtBlue) / 6;
+
+                // Calculate average green
+                avgGreen = round(D.rgbtGreen + X.rgbtGreen + E.rgbtGreen +
+                F.rgbtGreen + G.rgbtGreen + H.rgbtGreen) / 6;
+
+                // Calculate average red
+                avgRed = round(D.rgbtRed + X.rgbtRed + E.rgbtRed +
+                F.rgbtRed + G.rgbtRed + H.rgbtRed) / 6;
+
+                // Place average in temp RGBTRIPPLE container
+                temp[col][row].rgbtBlue = avgBlue;
+                temp[col][row].rgbtGreen = avgGreen;
+                temp[col][row].rgbtRed = avgRed;
             }
 
-            // CALCULATE BLUR AVERAGE - NON-CORNER & NON-EDGE
-            else
+            // CALCULATE BLUR AVERAGE - RIGHT EDGE
+            // [A][B][ ]
+            // [D][X][ ]
+            // [F][G][ ]
+            // 0 = not an edge, 1 = Top edge, 2 = Right edge, 3 = Bottom edge, 4 - Left edge
+            if (isEdge(col, row, height, width) == 2)
+            {
+                edgeCounter++; // debug - testing EDGE DETECTION
+
+                // Calculate average Blue
+                avgBlue = round(A.rgbtBlue + B.rgbtBlue + D.rgbtBlue +
+                X.rgbtBlue + F.rgbtBlue + G.rgbtBlue) / 6;
+
+                // Calculate average green
+                avgGreen = round(A.rgbtGreen + B.rgbtGreen + D.rgbtGreen +
+                X.rgbtGreen + F.rgbtGreen + G.rgbtGreen) / 6;
+
+                // Calculate average red
+                avgRed = round(A.rgbtRed + B.rgbtRed + D.rgbtRed +
+                X.rgbtRed + F.rgbtRed + G.rgbtRed) / 6;;
+
+                // Place average in temp RGBTRIPPLE container
+                temp[col][row].rgbtBlue = avgBlue;
+                temp[col][row].rgbtGreen = avgGreen;
+                temp[col][row].rgbtRed = avgRed;
+            }
+
+            // CALCULATE BLUR AVERAGE - BOTTOM EDGE
+            // [A][B][C]
+            // [D][X][E]
+            // [ ][ ][ ]
+            // 0 = not an edge, 1 = Top edge, 2 = Right edge, 3 = Bottom edge, 4 - Left edge
+            if (isEdge(col, row, height, width) == 3)
+            {
+                edgeCounter++; // debug - testing EDGE DETECTION
+
+                // Calculate average Blue
+                avgBlue = round(A.rgbtBlue + B.rgbtBlue + C.rgbtBlue +
+                D.rgbtBlue + X.rgbtBlue + E.rgbtBlue) / 6;
+
+                // Calculate average green
+                avgGreen = round(A.rgbtGreen + B.rgbtGreen + C.rgbtGreen +
+                D.rgbtGreen + X.rgbtGreen + E.rgbtGreen) / 6;
+
+                // Calculate average red
+                avgRed = round(A.rgbtRed + B.rgbtRed + C.rgbtRed +
+                D.rgbtRed + X.rgbtRed + E.rgbtRed) / 6;;
+
+                // Place average in temp RGBTRIPPLE container
+                temp[col][row].rgbtBlue = avgBlue;
+                temp[col][row].rgbtGreen = avgGreen;
+                temp[col][row].rgbtRed = avgRed;
+            }
+
+            // CALCULATE BLUR AVERAGE - LEFT EDGE
+            // [ ][B][C]
+            // [ ][X][E]
+            // [ ][G][H]
+            // 0 = not an edge, 1 = Top edge, 2 = Right edge, 3 = Bottom edge, 4 - Left edge
+            if (isEdge(col, row, height, width) == 4)
+            {
+                edgeCounter++; // debug - testing EDGE DETECTION
+
+                // Calculate average Blue
+                avgBlue = round(B.rgbtBlue + C.rgbtBlue + X.rgbtBlue +
+                E.rgbtBlue + G.rgbtBlue + H.rgbtBlue) / 6;
+
+                // Calculate average green
+                avgGreen = round(B.rgbtGreen + C.rgbtGreen + X.rgbtGreen +
+                E.rgbtGreen + G.rgbtGreen + H.rgbtGreen) / 6;
+
+                // Calculate average red
+                avgRed = round(B.rgbtRed + C.rgbtRed + X.rgbtRed +
+                E.rgbtRed + G.rgbtRed + H.rgbtRed) / 6;;
+
+                // Place average in temp RGBTRIPPLE container
+                temp[col][row].rgbtBlue = avgBlue;
+                temp[col][row].rgbtGreen = avgGreen;
+                temp[col][row].rgbtRed = avgRed;
+            }
+
+
+            // CALCULATE BLUR AVERAGE - NON-EDGE and NON-CORNER
+            //else
+            if ( (isEdge(col, row, height, width) == 0) && (isCorner(col, row, height, width) == 0))
             {
                 // Calculate average blue
                 avgBlue = round(A.rgbtBlue + B.rgbtBlue + C.rgbtBlue +
@@ -316,11 +420,13 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         }
 
     }
-    printf("\n");
-    printf("Corner Count: %i \n", cornerCounter); // debug
-    printf("Top Edge Count: %i \n", edgeCounter); // debug
+    //printf("\n");
+    //printf("Corner Count: %i \n", cornerCounter); // debug
+    //printf("Top Edge Count: %i \n", edgeCounter); // debug
 
-    // re-build the blurred image from the stored TRIPPLES
+
+
+    // Re-build the blurred image from the stored TRIPPLES
     for (int col = 0; col < height; col++)
     {
         for (int row = 0; row < width; row++)
@@ -330,11 +436,6 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         }
 
     }
-
-
-
-
-
 
     return;
 }
@@ -350,27 +451,27 @@ int isCorner(int y, int x, int height, int width)
     // check top left corner
     if( (y == 0) && (x == 0) )
     {
-        printf("Top left corner pixel found [y:%i, x:%i].\n", y, x); // debug
+        //printf("Top left corner pixel found [y:%i, x:%i].\n", y, x); // debug
         return 1; // pixel is at top left corner
     }
 
     // check top right corner
     if( (y == 0) && (x == width - 1) )
     {
-        printf("Top right corner pixel found [y:%i, x:%i].\n", y, x); // debug
+        //printf("Top right corner pixel found [y:%i, x:%i].\n", y, x); // debug
         return 2; // pixel is at top left corner
     }
 
     // check bottom left corner
     if( (y == height - 1) && (x == 0) )
     {
-        printf("Bottom left corner pixel found [y:%i, x:%i].\n", y, x); // debug
+        //printf("Bottom left corner pixel found [y:%i, x:%i].\n", y, x); // debug
         return 3; // pixel is at top left corner
     }
 
     if( (y == height - 1) && (x == width - 1) )
     {
-        printf("Bottom right corner pixel found [y:%i, x:%i].\n", y, x); // debug
+        //printf("Bottom right corner pixel found [y:%i, x:%i].\n", y, x); // debug
         return 4; // pixel is at top left corner
     }
 
@@ -387,28 +488,28 @@ int isEdge(int y, int x, int height, int width)
     // check for top edge
     if ( (y == 0) && (x > 0 && x < width - 1) )
     {
-        printf("Top edge found [y:%i, x:%i].\n", y, x); // debug
+        //printf("Top edge found [y:%i, x:%i].\n", y, x); // debug
         return 1; // pixel is a top edge
     }
 
     // check for right edge
     if ( (y > 0 && y < height - 1) && (x == width - 1) )
     {
-        printf("Right edge found [y:%i, x:%i].\n", y, x); // debug
+        //printf("Right edge found [y:%i, x:%i].\n", y, x); // debug
         return 2; // pixel is a right edge
     }
 
     // check for bottom edge
     if ( (y == height - 1) && (x > 0 && x < width - 1) )
     {
-        printf("Bottom edge found [y:%i, x:%i].\n", y, x); // debug
+        //printf("Bottom edge found [y:%i, x:%i].\n", y, x); // debug
         return 3; // pixel is a bottom edge
     }
 
     // check for left edge
     if ( (y > 0 && y < height - 1) && (x == 0) )
     {
-        printf("Left edge found [y:%i, x:%i].\n", y, x); // debug
+        //printf("Left edge found [y:%i, x:%i].\n", y, x); // debug
         return 4; // pixel is a left edge
     }
 
