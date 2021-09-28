@@ -6,7 +6,6 @@ int isCorner(int y, int x, int height, int width);
 int isEdge(int y, int x, int height, int width);
 
 // Convert image to grayscale
-//
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
     double avg = 0;
@@ -53,34 +52,36 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
     return;
 }
 
+
+
+
+
+
+//TODO: Fix bugs
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-
-    RGBTRIPLE temp[height][width];
-
-    // iterate through every column in the original photo
-    for (int col = 0; col < height; col++) //column
+    RGBTRIPLE temp[width];
+    int temp_index = width - 1;
+    for (int y = 0; y < height; y++)
     {
-        // store each row of TRIPPLES in temp
-        for (int row = 0; row < width; row++) //row
+        // store RGBTRIPPLE in reverse order to temp[]
+        for (int x = 0; x < width; x++)
         {
-              temp[col][row] = image[col][row];
+            temp[temp_index] = image[y][x];
+            temp_index--;
+        }
+        temp_index = width - 1;
+
+        // place temp values into image
+        for (int x = 0; x < width; x++)
+        {
+            image[y][x] = temp[x];
         }
 
     }
 
-    // re-build the image in reverse using the stored TRIPPLES
-    int reverse_index = width;
-    for (int col = 0; col < height; col++)
-    {
-        for (int row = 0; row < width; row++)
-        {
-            image[col][row] = temp[col][reverse_index];
-            reverse_index--;
-        }
-        reverse_index = width;
-    }
+
     return;
 }
 
