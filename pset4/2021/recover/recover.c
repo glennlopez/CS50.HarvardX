@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <cs50.h>
+#include <stdbool.h>
 
 // 0xff 0xd8 0xff (0xe0 - 0xef) = JPEG
 
@@ -16,33 +18,51 @@ int main(int argc, char *argv[])
     }
 
 
-    uint8_t *jpeg_finder = malloc(sizeof(uint8_t) * 4);
-    uint8_t buffer;
-    int index = 0;
+    uint8_t buffer[512];
     int jpeg_counter = 0;
+    char *filename = malloc(sizeof(char) * 30);
+    FILE *jpeg = NULL;
 
-    while(fread(&buffer, sizeof(uint8_t), 1, input))
+
+    // read through the raw data in 512 chunks
+    while(fread(&buffer, sizeof(uint8_t), 512, input))
     {
-        jpeg_finder[index] = buffer; // store buffer to jpeg_block
-        index++; // increment block index
-
-        // reset block index
-        if(index >= 4)
+        // If JPEG is found
+        if ((buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff) && ((buffer[3] & 0xf0) == 0xe0))
         {
-            index = 0;
-        }
-
-        if (jpeg_finder[0] == 0xff && jpeg_finder[1] == 0xd8 && jpeg_finder[2] == 0xff)
-        {
+            //debug
             printf("JPEG found!\n");
-            printf("[0]: 0x%02x\n", jpeg_finder[0]);
-            printf("[1]: 0x%02x\n", jpeg_finder[1]);
-            printf("[2]: 0x%02x\n", jpeg_finder[2]);
-            printf("[3]: 0x%02x\n", jpeg_finder[3]);
+            printf("[0]: 0x%02x\n", buffer[0]);
+            printf("[1]: 0x%02x\n", buffer[1]);
+            printf("[2]: 0x%02x\n", buffer[2]);
+            printf("[3]: 0x%02x\n", buffer[3]);
             printf("\n");
             printf("\n");
+
+            // generate a file name - ###.jpg starting at 000.jpg
+            sprintf(filename, "%03i.jpg", jpeg_counter);
+
+            // open a new file using the filename
+            jpeg = fopen(filename, "w");
+
+            // write the bytes into the file pointer
+            fwrite(&buffer, sizeof(uint8_t), 512, jpeg);
+
             jpeg_counter++;
         }
+        // already found a jpeg
+        else
+        {
+            // keep writing
+            if(jpeg != NULL)
+            {
+                fwrite(&buffer, sizeof(uint8_t), 512, jpeg);
+            }
+
+
+        }
+
+
 
     }
 
