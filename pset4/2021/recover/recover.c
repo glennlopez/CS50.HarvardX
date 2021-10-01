@@ -37,6 +37,12 @@ int main(int argc, char *argv[])
         // If 512 chunk of data in buffer contains JPEG signature
         if ((buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff) && ((buffer[3] & 0xf0) == 0xe0))
         {
+            // close the previous jpeg file pointer if it exists
+            if(jpeg != NULL)
+            {
+                fclose(jpeg);
+            }
+
             // Generate a file name for the new jpeg file - ###.jpg starting at 000.jpg
             sprintf(filename, "%03i.jpg", jpeg_counter);
 
@@ -62,9 +68,14 @@ int main(int argc, char *argv[])
                 fwrite(&buffer, sizeof(uint8_t), 512, jpeg);
             }
         }
-
-        // TODO: free memory
-
     }
+
+    // Free memory
+    if(jpeg != NULL)
+    {
+        fclose(jpeg);
+    }
+    free(filename);
+    fclose(input);
 
 }
