@@ -21,13 +21,18 @@ int main(int argc, char *argv[])
     char *filename = malloc(sizeof(char) * 30);
     FILE *jpeg = NULL;
 
-    // TODO: use argv[1] to take arguments from command line
+    // Program accepts only one command line argument
+    if(argc != 2)
+    {
+        printf("Usage: ./recover <file>\n");
+        return 1;
+    }
 
     // Open the raw data
-    FILE *input = fopen("card.raw", "r");
+    FILE *input = fopen(argv[1], "r");
     if (input == NULL)
     {
-        printf("Invalid file.\n");
+        printf("File invalid or not found.\n");
         return 1;
     }
 
