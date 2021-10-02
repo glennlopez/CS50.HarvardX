@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     FILE *jpeg = NULL;
 
     // Program accepts only one command line argument
-    if(argc != 2)
+    if (argc != 2)
     {
         printf("Usage: ./recover <file>\n");
         return 1;
@@ -37,13 +37,13 @@ int main(int argc, char *argv[])
     }
 
     // Read through the raw data in 512 chunks
-    while(fread(&buffer, sizeof(uint8_t), 512, input))
+    while (fread(&buffer, sizeof(uint8_t), 512, input))
     {
         // If 512 chunk of data in buffer contains JPEG signature
         if ((buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff) && ((buffer[3] & 0xf0) == 0xe0))
         {
             // close the previous jpeg file pointer if it exists
-            if(jpeg != NULL)
+            if (jpeg != NULL)
             {
                 fclose(jpeg);
             }
@@ -55,9 +55,9 @@ int main(int argc, char *argv[])
             jpeg = fopen(filename, "w");
 
             // write the 512 chunks of data into the file pointer
-            if(jpeg != NULL)
+            if (jpeg != NULL)
             {
-                 fwrite(&buffer, sizeof(uint8_t), 512, jpeg);
+                fwrite(&buffer, sizeof(uint8_t), 512, jpeg);
             }
 
             // Increment the jpeg filename counter for the next jpeg file
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
         else
         {
             // keep writing 512 buffer to the jpeg file pointer as long as the file pointer isnt NULL
-            if(jpeg != NULL)
+            if (jpeg != NULL)
             {
                 fwrite(&buffer, sizeof(uint8_t), 512, jpeg);
             }
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
     }
 
     // Free memory
-    if(jpeg != NULL)
+    if (jpeg != NULL)
     {
         fclose(jpeg);
     }
