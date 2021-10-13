@@ -11,8 +11,13 @@ node;
 
 int main()
 {
-    node *list = NULL;
-    node *n = NULL;
+    node *list = NULL;  // list name
+    node *n = NULL;     // node name
+
+    // 1. allocate HEAP memory for a node
+    // 2. set the nodes number value in the node
+    // 3. set the nodes next pointer to NULL (for the for loop)
+    // 4. point the newly created node to the linked list
 
     n = malloc(sizeof(node));
     n->number = 12;
@@ -26,6 +31,16 @@ int main()
 
     list->next = n;
 
+    n = malloc(sizeof(node));
+    (*n).number = 99;
+    (*n).next = NULL;
+
+    list->next->next = n;
+
+
+
+
+    // display linked list
     for (node *tmp = list; list != NULL; list = list->next)
     {
         printf("%i\n", list->number);
