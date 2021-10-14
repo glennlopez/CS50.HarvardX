@@ -20,11 +20,15 @@ int main()
     node *head = NULL;
     node *tmp = NULL;
 
-    for (int i = 1; i <= 3; i++)
+    /* FOR LOOP ASSIGNMENT OF NEW NODES */
+    for (int i = 1; i <= 10; i++)
     {
-
-
+        tmp = CreateNode(i);
+        tmp->next = head;
+        head = tmp;
     }
+
+    PrintList(head);
 
 }
 
