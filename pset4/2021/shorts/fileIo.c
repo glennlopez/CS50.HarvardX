@@ -46,6 +46,7 @@ int CopyFileFRead()
     char c;
     while(fread(&c, sizeof(char), 1, source))
     {
+        // use fwrite buffer to write to a new file
         fwrite(&c, sizeof(char), 1, copy);
     }
 
