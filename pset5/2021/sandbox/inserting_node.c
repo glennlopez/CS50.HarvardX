@@ -1,17 +1,15 @@
 /* Insert a node in an existing Linked List */
 #include<stdio.h>
 #include<stdlib.h>
+#include<cs50.h>
 
-// node typedef
 typedef struct node_struct
 {
     int data;
     struct node_struct *next;
-
 }
 node;
 
-//protype
 node *NewNode(int number);
 void PrintList(node *head);
 
@@ -27,12 +25,13 @@ int main()
         tmp->next = head;
         head = tmp;
     }
-
+    
     // print linked list before insert
     PrintList(head);
     printf("\n");
 
     // TODO: insert a new node
+    
 
     // print linked list after insert
     PrintList(head);
@@ -41,10 +40,17 @@ int main()
 // TODO: insert a new node at the head of the list
 node *InsertAtHead(node *head, node *node_to_insert)
 {
+    head = node_to_insert;
 
+    return NULL;
 }
 
-// print node
+/**
+ * @brief  Displays the data values in the linked list on the console
+ * @note   Prints to console
+ * @param  *head: pointer to the linked list head
+ * @retval None
+ */
 void PrintList(node *head)
 {
     node *tmp = NULL;
@@ -57,7 +63,12 @@ void PrintList(node *head)
     }
 }
 
-// create new node
+/**
+ * @brief  Creates a new linked list node allocated in HEAP memory.
+ * @note   
+ * @param  number: Intiger value to set inside of data
+ * @retval returns the pointer to the newly allocated node
+ */
 node *NewNode(int number)
 {
     node *new_node = malloc(sizeof(node));
