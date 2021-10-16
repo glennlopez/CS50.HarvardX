@@ -15,7 +15,6 @@ node;
 node *NewNode(int number);
 void PrintList(node *head);
 
-
 int main()
 {
     node *head = NULL;
@@ -37,7 +36,11 @@ int main()
 
     // print linked list after insert
     PrintList(head);
+}
 
+// TODO: insert a new node at the head of the list
+node *InsertAtHead(node *head, node *node_to_insert)
+{
 
 }
 
