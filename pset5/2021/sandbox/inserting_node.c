@@ -2,6 +2,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<cs50.h>
 
 // node typedef
 typedef struct node_struct
@@ -53,7 +54,6 @@ void PrintList(node *head)
         printf("%i\n", tmp->data);
         tmp = tmp->next;
     }
-
 }
 
 // create new node
