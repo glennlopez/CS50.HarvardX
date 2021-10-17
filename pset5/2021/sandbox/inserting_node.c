@@ -1,5 +1,5 @@
 /* Insert a node in an existing Linked List */
-//https://www.youtube.com/watch?v=VOpjAHCee7c&t=701s
+// Video: https://www.youtube.com/watch?v=VOpjAHCee7c&t=701s
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -11,17 +11,18 @@ typedef struct node_struct
 }
 node;
 
-node *NewNode(int number);
 void PrintList(node *head);
+node *NewNode(int number);
 node *InsertNodeAt(node **head, node *node_to_insert);
 node *FindNode(node *head, int value);
+void InsertNodeAfter(node *node_to_insert_after, node *new_node);
 
 int main()
 {
     node *head = NULL;
     node *tmp = NULL;
 
-    // create 4 nodes using a loop
+    /* 1. Create a Linked List using a loop */
     for (int i = 1; i <= 4; i++)
     {
         tmp = NewNode(i);
@@ -29,27 +30,61 @@ int main()
         InsertNodeAt(&head, tmp); //head = tmp;
     }
     
-    // print linked list before insert
+    
+    /* Show the linked list BEFORE inserting a node */
     PrintList(head);
     printf("\n");
 
-    // TODO: insert a new node
-    InsertNodeAt(&head, NewNode(99));
-    InsertNodeAt(&head, NewNode(77));
+
+    /* 2. Inserting a new node */
+    InsertNodeAt(&head, NewNode(9));
+    InsertNodeAt(&head, NewNode(7));
     InsertNodeAt(&head, NewNode(123));
+
     
-
-    // print linked list after insert
+    /* Show the linked list AFTER Inserting a new node*/
     PrintList(head);
+    printf("\n");
 
-    //TODO: find a value in the list
-    int usrNum = 123;
+
+    /* 3. Finding a specific value in the list */
+    int usrNum = 100;
     tmp = FindNode(head, usrNum);
     if(tmp == NULL)
         printf("Data(%i) not found.\n", usrNum);
     else
         printf("Data Found: %i(%p) \n", tmp->data, tmp);
+    printf("\n");
+
     
+    /* 4. Inserting a new node after a specific value in the list */
+    InsertNodeAfter(FindNode(head, 3), NewNode(9999));
+
+
+    /* Show the linked list AFTER Inserting a new node*/
+    PrintList(head);
+
+}
+
+//TODO: create a function that deletes a specific node from a linked list
+void DeleteNode(node *head, int value)
+{
+
+}
+
+/**
+ * @brief  
+ * @note   
+ * @param  *node_to_insert_after: 
+ * @param  *new_node: 
+ * @retval None
+ */
+void InsertNodeAfter(node *node_to_insert_after, node *new_node)
+{
+    // TODO: understand how this works
+    
+    new_node->next = node_to_insert_after->next;
+    node_to_insert_after->next = new_node;
 }
 
 /**
