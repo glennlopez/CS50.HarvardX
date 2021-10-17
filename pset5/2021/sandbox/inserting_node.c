@@ -1,7 +1,6 @@
 /* Insert a node in an existing Linked List */
 #include<stdio.h>
 #include<stdlib.h>
-#include<cs50.h>
 
 typedef struct node_struct
 {
@@ -12,6 +11,7 @@ node;
 
 node *NewNode(int number);
 void PrintList(node *head);
+node *InsertAtHead(node *head, node *node_to_insert);
 
 int main()
 {
@@ -23,7 +23,7 @@ int main()
     {
         tmp = NewNode(i);
         tmp->next = head;
-        head = tmp;
+        head = InsertAtHead(head, tmp); //head = tmp;
     }
     
     // print linked list before insert
@@ -37,12 +37,18 @@ int main()
     PrintList(head);
 }
 
-// TODO: insert a new node at the head of the list
+/**
+ * @brief  Insert a new node at the head of the LinkedList
+ * @note   This function does not change the head
+ * @param  *head: pointer to the linked list head
+ * @param  *node_to_insert: pointer to the new node to insert
+ * @retval Returns a pointer to the new node
+ */
 node *InsertAtHead(node *head, node *node_to_insert)
 {
-    head = node_to_insert;
-
-    return NULL;
+    // point the next pointer of the node_to_insert to the head
+    node_to_insert->next = head;
+    return node_to_insert; // return the address of the new node
 }
 
 /**
