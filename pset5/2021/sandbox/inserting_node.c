@@ -12,10 +12,10 @@ typedef struct node_struct
 node;
 
 void PrintList(node *head);
-node *NewNode(int number);
-node *InsertNodeAt(node **head, node *node_to_insert);
-node *FindNode(node *head, int value);
 void InsertNodeAfter(node *node_to_insert_after, node *new_node);
+void InsertNodeAt(node **head, node *node_to_insert);
+node *NewNode(int number);
+node *FindNode(node *head, int value);
 
 int main()
 {
@@ -23,13 +23,13 @@ int main()
     node *tmp = NULL;
 
     /* 1. Create a Linked List using a loop */
+    printf("Create a linked list using a loop:\n");
     for (int i = 1; i <= 4; i++)
     {
-        tmp = NewNode(i);
-        tmp->next = head;
-        InsertNodeAt(&head, tmp); //head = tmp;
+        tmp = NewNode(i);           // point the tmp pointer to the new node
+        tmp->next = head;           // point the pointer to the next node to where *head is pointing
+        InsertNodeAt(&head, tmp);   // insert the new node at the head
     }
-    
     
     /* Show the linked list BEFORE inserting a node */
     PrintList(head);
@@ -37,17 +37,17 @@ int main()
 
 
     /* 2. Inserting a new node */
-    InsertNodeAt(&head, NewNode(9));
-    InsertNodeAt(&head, NewNode(7));
+    printf("Insert a new node:\n");
     InsertNodeAt(&head, NewNode(123));
+    InsertNodeAfter(FindNode(head, 4), NewNode(22));
 
-    
     /* Show the linked list AFTER Inserting a new node*/
     PrintList(head);
     printf("\n");
 
 
     /* 3. Finding a specific value in the list */
+    printf("Find a specific value in the linked list:\n");
     int usrNum = 100;
     tmp = FindNode(head, usrNum);
     if(tmp == NULL)
@@ -58,11 +58,12 @@ int main()
 
     
     /* 4. Inserting a new node after a specific value in the list */
+    printf("Insert a new node after a specific value in the linked list:\n");
     InsertNodeAfter(FindNode(head, 3), NewNode(9999));
-
 
     /* Show the linked list AFTER Inserting a new node*/
     PrintList(head);
+
 
 }
 
@@ -73,58 +74,59 @@ void DeleteNode(node *head, int value)
 }
 
 /**
- * @brief  
+ * @brief  Insert a node after a specified location in the linked
  * @note   
- * @param  *node_to_insert_after: 
- * @param  *new_node: 
+ * @param  *location: a pointer to where node_to_insert will be placed
+ * @param  *node_to_insert: a pointer to a node to be inserted into the list
  * @retval None
  */
-void InsertNodeAfter(node *node_to_insert_after, node *new_node)
+void InsertNodeAfter(node *location, node *node_to_insert)
 {
-    // TODO: understand how this works
-    
-    new_node->next = node_to_insert_after->next;
-    node_to_insert_after->next = new_node;
+    // point the next pointer of the new_node to where the next pointer of the node_to_insert_after is pointing to
+    node_to_insert->next = location->next;
+
+    // point the next pointer of node_to_insert_after to the new node
+    location->next = node_to_insert;
 }
 
 /**
- * @brief  Find a specific value in the linked list
+ * @brief  Insert a node at a location specified by a pointer
  * @note   
- * @param  *head: Pointer to the head of the linked list
- * @param  value: Item in the list you are looking for
- * @retval Returns a pointer to the value 
+ * @param  **location: a pointer to where location is pointing to
+ * @param  *node_to_insert: a pointer to node_to_insert
+ * @retval 
+ */
+void InsertNodeAt(node **location, node *node_to_insert)
+{
+    // point the next pointer to where location is pointing to
+    node_to_insert->next = *location;
+
+    // point the location pointer to where node_to _insert is pointing to
+    *location = node_to_insert;
+}
+
+/**
+ * @brief  Find a node in a linked list with a specific value, and return its pointer.
+ * @note   
+ * @param  *head: Pointer to the begining of a linked list (where to start looking)
+ * @param  value: Value of data in the linked list you are looking for
+ * @retval Returns a pointer to the value found in the linked list. Returns NULL if value is not found.
  */
 node *FindNode(node *head, int value)
 {
-    //TODO: understand how this works
-
+    // use a temporary pointer and point it to where head is pointing
     node *tmp = head;
 
-    // Iterate through the list until list is NULL
+    // iterate through the linked list until a node is NULL
     while(tmp != NULL)
     {
-        // return a pointer to the node value if found
+        // if the node has the value, return a pointer to that node
         if(tmp->data == value) return tmp; 
-        tmp = tmp->next;    // if not found, check the next node
+
+        // set the tmp pointer to the next node (continue to the next node in the link)
+        tmp = tmp->next;
     }
-    return NULL;    // if value is not found, return NULL
-}
-
-/**
- * @brief  Insert a node at the head of the list
- * @note   
- * @param  **head: Pass a pointer to a pointer
- * @param  *node_to_insert: 
- * @retval 
- */
-node *InsertNodeAt(node **head, node *node_to_insert)
-{
-    //TODO: understand how this works
-
-    // point the next pointer where the head is pointing
-    node_to_insert->next = *head;
-    *head = node_to_insert;
-    return node_to_insert; // return the address of the new node
+    return NULL; // return NULL when the list search completes without the value being found
 }
 
 /**
@@ -135,14 +137,17 @@ node *InsertNodeAt(node **head, node *node_to_insert)
  */
 void PrintList(node *head)
 {
+    // create a temporary node pointer to use
     node *tmp = NULL;
+
+    // point the temporary pointer to where *head is pointing
     tmp = head;
 
-    // Print the data while the current node is not NULL
+    // Iterate throught the nodes until the next node is NULL
     while (tmp != NULL)
     {
-        printf("%i\n", tmp->data);
-        tmp = tmp->next;
+        printf("%i\n", tmp->data);  // print the current node data
+        tmp = tmp->next;            // set the current pointer to the next node pointer
     }
 }
 
@@ -154,9 +159,15 @@ void PrintList(node *head)
  */
 node *NewNode(int number)
 {
+    // allocate memory in heap the size of node struct
     node *new_node = malloc(sizeof(node));
+
+    // set the data using function parameters
     new_node->data = number;
+
+    // set the next node NULL
     new_node->next = NULL;
 
+    // return a pointer to the new node allocated in heap
     return new_node;
 }
