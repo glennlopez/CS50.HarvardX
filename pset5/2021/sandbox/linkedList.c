@@ -67,9 +67,16 @@ int main()
 
 }
 
-//TODO: create a function that deletes a specific node from a linked list
+/**
+ * @brief  
+ * @note   
+ * @param  *head: Pointer to head (begining) of the linked list
+ * @param  value: Value to delete
+ * @retval None
+ */
 void DeleteNode(node *head, int value)
 {
+    //TODO: create a function that deletes a specific node from a linked list
 
 }
 
