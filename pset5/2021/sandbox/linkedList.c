@@ -1,8 +1,9 @@
 /* Insert a node in an existing Linked List */
 // Video: https://www.youtube.com/watch?v=VOpjAHCee7c&t=701s
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct node_struct
 {
@@ -16,6 +17,7 @@ void InsertNodeAfter(node *node_to_insert_after, node *new_node);
 void InsertNodeAt(node **head, node *node_to_insert);
 node *NewNode(int number);
 node *FindNode(node *head, int value);
+void DeleteNode(node *head, int value);
 
 int main()
 {
@@ -37,16 +39,17 @@ int main()
 
 
     /* 2. Inserting a new node */
-    printf("Insert a new node:\n");
-    InsertNodeAt(&head, NewNode(123));
-    InsertNodeAfter(FindNode(head, 4), NewNode(22));
+    //printf("Insert a new node:\n");
+    //InsertNodeAt(&head, NewNode(123));
+    //InsertNodeAfter(FindNode(head, 4), NewNode(22));
 
     /* Show the linked list AFTER Inserting a new node*/
-    PrintList(head);
-    printf("\n");
+    //PrintList(head);
+    //printf("\n");
 
 
     /* 3. Finding a specific value in the list */
+    /*
     printf("Find a specific value in the linked list:\n");
     int usrNum = 100;
     tmp = FindNode(head, usrNum);
@@ -55,13 +58,20 @@ int main()
     else
         printf("Data Found: %i(%p) \n", tmp->data, tmp);
     printf("\n");
+    */
 
     
     /* 4. Inserting a new node after a specific value in the list */
-    printf("Insert a new node after a specific value in the linked list:\n");
-    InsertNodeAfter(FindNode(head, 3), NewNode(9999));
+    //printf("Insert a new node after a specific value in the linked list:\n");
+    //InsertNodeAfter(FindNode(head, 3), NewNode(9999));
 
     /* Show the linked list AFTER Inserting a new node*/
+    //PrintList(head);
+
+
+    /* 5. Deleting a node in a linked list */
+    printf("Debug: \n");
+    DeleteNode(head, 3);
     PrintList(head);
 
 
@@ -75,9 +85,42 @@ int main()
  * @retval None
  */
 void DeleteNode(node *head, int value)
-{
-    //TODO: create a function that deletes a specific node from a linked list
+{ //TODO: fix this - does not delete 1st or last node in the list (seg fault)
+    node *curentItem = head;
+    node *nextItem = NULL;
+    
+    node *previousNode = NULL;  // node before target node
+    node *targetNode = NULL;    // node to delete 
+    node *nextNode = NULL;      // node after target node
 
+    bool targetExists = false;
+
+    // set the previous, target, and next node pointers relative to value
+    while(curentItem != NULL)
+    {
+        // segmentation fault check
+        if(curentItem->next != NULL)
+            nextItem = curentItem->next;
+
+        // set the values for target node and previous node
+        if(nextItem->data == value)
+        {
+            targetExists = true;
+            targetNode = nextItem;
+            previousNode = curentItem;
+            nextNode = nextItem->next;
+        }
+
+        // "delete" target node
+        if(curentItem->data == value)
+        {
+            previousNode->next = nextNode;
+            free(curentItem);
+        }
+
+        // traverse the loop to the next node in the linked list
+        curentItem = curentItem->next;
+    }
 }
 
 /**
