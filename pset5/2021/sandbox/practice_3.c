@@ -37,14 +37,40 @@ int main()
     return 0;
 }
 
+/**
+ * @brief  
+ * @note   
+ * @param  *list: 
+ * @param  value: 
+ * @retval 
+ */
+node *FindNode(node *list, int value)
+{
+    //TODO: create a func that returns a pointer to a node that contains a specific value
+    return NULL;
+}
+
+/**
+ * @brief  Creates a new node in HEAP setting the next and number values
+ * @note   
+ * @param  value: numeric data you want to place in the node
+ * @retval 
+ */
 node *CreateNode(int value)
 {
     node *tmp = malloc(sizeof(node));
     tmp->number = value;
     tmp->next = NULL;
+
     return tmp;
 }
 
+/**
+ * @brief  
+ * @note   
+ * @param  *head: 
+ * @retval None
+ */
 void PrintLinkedList(node *head)
 {
     node *tmp = head;
