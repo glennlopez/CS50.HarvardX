@@ -9,9 +9,9 @@ typedef struct node_struct
 node;
 
 /* Practice List
- * [ ] Print a linked list
+ * [x] Print a linked list
  * [x] Create a new node
- * [ ] Find a new node
+ * [x] Find a new node
  * [ ] Insert a node after a value
  * [ ] Insert a node at a specific pointer
  * [ ] Delete a node
@@ -19,6 +19,7 @@ node;
 
 void PrintLinkedList(node *head);
 node *CreateNode(int value);
+node *FindNode(node *list, int value);
 
 int main()
 {
@@ -32,22 +33,38 @@ int main()
         head = tmp;
     }
 
-    PrintLinkedList(head);
+    // debug FindNode()
+    node *test = FindNode(head, 2);
+    if (test == NULL)
+    {
+        printf("test pointer returned NULL\n");
+        return 1;
+    }
+    printf("Found (test->number): %i\n", test->number);
 
     return 0;
 }
 
 /**
- * @brief  
+ * @brief  Find a node with a specified value
  * @note   
- * @param  *list: 
- * @param  value: 
- * @retval 
+ * @param  *list: Pointer to the head of the linked list you wish to search through
+ * @param  value: Integer value you are looking for in the linked list
+ * @retval Pointer to a node containing the value (null if not found)
  */
 node *FindNode(node *list, int value)
 {
-    //TODO: create a func that returns a pointer to a node that contains a specific value
-    return NULL;
+    node *target = NULL;
+    while (list != NULL)
+    {
+        if (list->number == value)
+            target = list;
+
+        // iterate to the next node in the list
+        list = list->next;
+    }
+    
+    return target;
 }
 
 /**
@@ -66,9 +83,9 @@ node *CreateNode(int value)
 }
 
 /**
- * @brief  
+ * @brief  Prints the content of the linked list in the console starting at the head
  * @note   
- * @param  *head: 
+ * @param  *head: Pointer to a linked list starting at the head of the list
  * @retval None
  */
 void PrintLinkedList(node *head)
