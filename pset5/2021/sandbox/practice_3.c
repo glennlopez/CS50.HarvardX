@@ -13,7 +13,6 @@ node;
  * [x] Create a new node
  * [x] Find a new node
  * [x] Insert a node after a value
- * [ ] Insert a node at a specific pointer
  * [ ] Delete a node
  */
 
@@ -21,6 +20,7 @@ void PrintLinkedList(node *head);
 node *CreateNode(int value);
 node *FindNode(node *list, int value);
 void InsertNodeAfter(node *target_location, node *node_to_insert);
+void DeleteNode(node *list, int value);
 
 int main()
 {
@@ -34,9 +34,52 @@ int main()
         head = tmp;
     }
 
+    InsertNodeAfter(FindNode(head, 2), CreateNode(999));
+    
+    PrintLinkedList(head);
+    printf("\n");printf("\n");printf("\n");
+
+    DeleteNode(head, 999);
+
     PrintLinkedList(head);
 
+
     return 0;
+}
+
+void DeleteNode(node *list, int value)
+{
+    //TODO: bug - deleting the first node 
+    //TODO: bug - deleting the last node in the list
+    //TODO: bug - segfault - deleting a node that doesn't exist
+    node *prevNode = NULL;
+    node *tmp = list;
+    
+    // get the pointer to the previous node
+    while (tmp != NULL)
+    {
+        prevNode = tmp;
+
+        if (tmp->next->number == value)
+            break;
+        else if (tmp->number == value)
+            break;
+
+        tmp = tmp->next;
+    }
+
+    // delete node
+    tmp = list;
+    while (tmp != NULL)
+    {
+        if (tmp->number == value)
+        {
+            prevNode->next = tmp->next;
+            free(tmp);
+        }
+
+        tmp = tmp->next;
+    }
 }
 
 /**
