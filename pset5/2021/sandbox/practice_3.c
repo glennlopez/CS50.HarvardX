@@ -12,7 +12,7 @@ node;
  * [x] Print a linked list
  * [x] Create a new node
  * [x] Find a new node
- * [ ] Insert a node after a value
+ * [x] Insert a node after a value
  * [ ] Insert a node at a specific pointer
  * [ ] Delete a node
  */
@@ -20,6 +20,7 @@ node;
 void PrintLinkedList(node *head);
 node *CreateNode(int value);
 node *FindNode(node *list, int value);
+void InsertNodeAfter(node *target_location, node *node_to_insert);
 
 int main()
 {
@@ -33,16 +34,22 @@ int main()
         head = tmp;
     }
 
-    // debug FindNode()
-    node *test = FindNode(head, 2);
-    if (test == NULL)
-    {
-        printf("test pointer returned NULL\n");
-        return 1;
-    }
-    printf("Found (test->number): %i\n", test->number);
+    PrintLinkedList(head);
 
     return 0;
+}
+
+/**
+ * @brief  Insert a new node after a specified node in a linked list
+ * @note   
+ * @param  *target_location: Pointer to where you want to insert the node after
+ * @param  *node_to_insert: Pointer to a node you wish to insert
+ * @retval None
+ */
+void InsertNodeAfter(node *target_location, node *node_to_insert)
+{
+    node_to_insert->next = target_location->next;
+    target_location->next = node_to_insert;
 }
 
 /**
