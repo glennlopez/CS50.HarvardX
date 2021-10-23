@@ -20,7 +20,7 @@ void PrintLinkedList(node *head);
 node *CreateNode(int value);
 node *FindNode(node *list, int value);
 void InsertNodeAfter(node *target_location, node *node_to_insert);
-void DeleteNode(node *list, int value);
+node *DeleteNode(node *list, int value);
 
 int main()
 {
@@ -39,7 +39,7 @@ int main()
     PrintLinkedList(head);
     printf("\n");printf("\n");printf("\n");
 
-    DeleteNode(head, 999);
+    DeleteNode(head, 5);
 
     PrintLinkedList(head);
 
@@ -47,7 +47,7 @@ int main()
     return 0;
 }
 
-void DeleteNode(node *list, int value)
+node *DeleteNode(node *list, int value)
 {
     //TODO: bug - deleting the first node 
     //TODO: bug - deleting the last node in the list
@@ -55,21 +55,25 @@ void DeleteNode(node *list, int value)
     node *prevNode = NULL;
     node *tmp = list;
     
-    // get the pointer to the previous node
+    // Iterate through teh entire linked list
     while (tmp != NULL)
     {
-        prevNode = tmp;
-
+        // if the next node's number is the value
         if (tmp->next->number == value)
-            break;
+        {
+            prevNode = tmp; // point the prevNode ptr to where tmp points
+            break; //exit the loops
+        }
+           
         else if (tmp->number == value)
-            break;
+        {
+            
+        }
 
         tmp = tmp->next;
     }
 
     // delete node
-    tmp = list;
     while (tmp != NULL)
     {
         if (tmp->number == value)
@@ -80,6 +84,7 @@ void DeleteNode(node *list, int value)
 
         tmp = tmp->next;
     }
+    return tmp;
 }
 
 /**
