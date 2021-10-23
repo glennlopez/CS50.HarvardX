@@ -221,3 +221,24 @@ node *NewNode(int number)
     // return a pointer to the new node allocated in heap
     return new_node;
 }
+
+/**
+ * @brief  Free allocated memory in HEAP, used in linked list
+ * @note   
+ * @param  head: Pointer to the start of the linked list
+ * @retval None
+ */
+void FreeNodes(node* head)
+{
+    // temp pointer for reference
+    node* tmp = NULL;
+
+    // iterate through the linked list until a NULL pointer is found
+    while (head != NULL)
+    {
+       tmp = head;
+       head = head->next;
+       free(tmp);
+    }
+
+}
