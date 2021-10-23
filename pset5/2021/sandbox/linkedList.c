@@ -236,9 +236,9 @@ void FreeNodes(node* head)
     // iterate through the linked list until a NULL pointer is found
     while (head != NULL)
     {
-       tmp = head;
-       head = head->next;
-       free(tmp);
+       tmp = head;          // point the temp pointer to the head of the linked list pointer
+       head = head->next;   // advance the head pointer to the next node
+       free(tmp);           // free the current nodes memory
     }
 
 }
