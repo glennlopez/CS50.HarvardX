@@ -13,6 +13,7 @@ void PrintList(node *head);
 void FreeNodes(node *head);
 void InsertNodeAtHead(node *node_to_insert, node **head);
 void InsertNodeAfter(node *target_node, node *node_to_insert);
+void DeleteNode(node *target);
 node *NewNode(int value);
 node *FindNode(int node_value, node *head);
 
@@ -25,7 +26,7 @@ int main()
         InsertNodeAtHead(NewNode(i), &head);
 
     /* Find a specific node and print out its struct contents */
-    node *find = FindNode(1, head);
+    node *find = FindNode(7, head);
     if(find != NULL)
     {
         if (find->prev != NULL)
@@ -36,15 +37,43 @@ int main()
     }
 
     /* Insert a node after a specific node in a linked list */
-    InsertNodeAfter(FindNode(7, head), NewNode(999));
+    //InsertNodeAfter(FindNode(7, head), NewNode(999));
 
-
+    DeleteNode(FindNode(7, head));
 
     // Print Linked List
     PrintList(head);
 
     // Memory Management
     FreeNodes(head);
+}
+
+/**
+ * @brief  
+ * @note   
+ * @param  *target: 
+ * @retval None
+ */
+void DeleteNode(node *target) 
+{
+    node *tmp = target;
+
+    if(target != NULL)
+    {
+        // if deleting head
+        if(target->prev == NULL)
+        {
+            //TODO:
+        }
+        else
+            target->prev->next = target->next;
+
+        if (target->next != NULL)
+            target->next->prev = target->prev;
+        //free(tmp);
+
+        
+    }
 }
 
 
@@ -104,7 +133,7 @@ void InsertNodeAfter(node *target_node, node *node_to_insert)
  * @param  *head: Pointer to the linked list head
  * @retval None
  */
-void FreeNodes(node *head) //TODO: Practice this more
+void FreeNodes(node *head) 
 {
     node *tmp = NULL;
     while (head != NULL)
