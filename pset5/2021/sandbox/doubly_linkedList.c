@@ -10,24 +10,22 @@ typedef struct node_struct
 node;
 
 void PrintList(node *head);
-node *FindNode(int node_value, node *head);
 void FreeNodes(node *head);
 void InsertNodeAtHead(node *node_to_insert, node **head);
-node *NewNode(int value);
 void InsertNodeAfter(node *target_node, node *node_to_insert);
+node *NewNode(int value);
+node *FindNode(int node_value, node *head);
 
 int main()
 {
     node *head = NULL;
-    node *tmp = NULL;
 
-
+    /* Create a bunch of nodes and link them together */
     for (int i = 1; i <= 7; i++)
-    {
         InsertNodeAtHead(NewNode(i), &head);
-    }
 
-    node *find = FindNode(6, head);
+    /* Find a specific node and print out its struct contents */
+    node *find = FindNode(1, head);
     if(find != NULL)
     {
         if (find->prev != NULL)
@@ -37,56 +35,75 @@ int main()
             printf("Target->next: %i\n", find->next->value);
     }
 
-    // Test inserting node after 
-    InsertNodeAfter(FindNode(5, head), NewNode(999));
+    /* Insert a node after a specific node in a linked list */
+    InsertNodeAfter(FindNode(7, head), NewNode(999));
+
+
 
     // Print Linked List
     PrintList(head);
-
 
     // Memory Management
     FreeNodes(head);
 }
 
-node *NewNode(int value)
+
+/**
+ * @brief  Insert a new node at the begining of a linked list
+ * @note   
+ * @param  *node_to_insert: Pointer to node to insert into a linked list
+ * @param  **head: Pointer to the begining of a linked list for the node to be inserted to
+ * @retval None
+ */
+void InsertNodeAtHead(node *new_node, node **target)
 {
-    node *tmp = NULL;
-    tmp = malloc(sizeof(node));
+    // Point the new_node's next pointer to where the target is currently pointing
+    new_node->next = *target;
 
-    //set node values
-    tmp->value = value;
-    tmp->prev = NULL;
-    tmp->next = NULL;
-
-    return tmp;
-}
-
-void InsertNodeAtHead(node *node_to_insert, node **head)
-{
-    node_to_insert->next = *head;
-
-    //TODO: understand this
-    if (*head != NULL)
+    // Only do the following if the head (target) is not NULL (if its NULL, the node wont have a target->next, target->prev, or target->value, and you will get a segfault)
+    if (*target != NULL)
     {
-        (*head)->prev = node_to_insert;
+        // Set the target's prev pointer to point at the new_nodes (target will be placed after the new_node after this loop iteration)
+        (*target)->prev = new_node;
     }
-    node_to_insert->prev = NULL;
 
-    *head = node_to_insert;
+    // Set the new_node's prev pointer to NULL  (because it will be the new head)
+    new_node->prev = NULL;
+
+    // Point the target to new_node (set the newly inserted node to be the head of the list)
+    *target = new_node;
 }
 
+/**
+ * @brief  Insert a node after a node with a specified data
+ * @note   
+ * @param  *target_node: A pointer to the target node to insert after
+ * @param  *node_to_insert: A pointer to the node to insert
+ * @retval None
+ */
 void InsertNodeAfter(node *target_node, node *node_to_insert)
 {
+    // set the node_to_insert->next pointer to the target_node's -> next pointer
     node_to_insert->next = target_node->next;
 
-    // TODO: understand this
+    // if the next node after the target node is not NULL
     if (node_to_insert->next != NULL)
+        // link the next node's prev pointer to the target node
         node_to_insert->next->prev = target_node;
+
+    // set the node_to_insert's prev pointer to point at the the address of the target node
     node_to_insert->prev = target_node;
 
+    // set the target node's next pointer to point at the node to insert
     target_node->next = node_to_insert;
 }
 
+/**
+ * @brief  Free the memory allocations in a linked list
+ * @note   
+ * @param  *head: Pointer to the linked list head
+ * @retval None
+ */
 void FreeNodes(node *head) //TODO: Practice this more
 {
     node *tmp = NULL;
@@ -98,6 +115,13 @@ void FreeNodes(node *head) //TODO: Practice this more
     }
 }
 
+/**
+ * @brief  Find a node with a specific node value/data
+ * @note   
+ * @param  node_value: Intiger value to find
+ * @param  *head: Pointer to a linked list head
+ * @retval 
+ */
 node *FindNode(int node_value, node *head)
 {
     node *tmp = head;
@@ -112,6 +136,31 @@ node *FindNode(int node_value, node *head)
     return NULL;
 }
 
+/**
+ * @brief  Allocated memory in heap for a node-sized data
+ * @note   
+ * @param  value: Set the intiger value of the new nodes data
+ * @retval Returns a pointer to the new node created in HEAP
+ */
+node *NewNode(int value)
+{
+    node *tmp = NULL;
+    tmp = malloc(sizeof(node));
+
+    //set node values
+    tmp->value = value;
+    tmp->prev = NULL;
+    tmp->next = NULL;
+
+    return tmp;
+}
+
+/**
+ * @brief  Prints the linked list data on the console
+ * @note   
+ * @param  *head: Pointer to the linked list head
+ * @retval None
+ */
 void PrintList(node *head)
 {
     node * tmp = head;
