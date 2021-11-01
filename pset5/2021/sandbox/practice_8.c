@@ -12,28 +12,18 @@ node;
 void PrintList(node *head);
 node *CreateNode(int value);
 void FreeNodes(node *head);
-void InsertNode(node *node_to_insert, node **head);
+void InsertNodeAtHead(node *node_to_insert, node **head);
 
 int main()
 {
     node *tmp = NULL;
     node *head = NULL;
 
-    tmp = CreateNode(11);
-    tmp->next = head;
-    tmp->prev = tmp->prev;
-    head = tmp;
-
-    tmp = CreateNode(22);
-    tmp->next = head;
-    tmp->prev = tmp;
-    head = tmp;
-
-    tmp = CreateNode(33);
-    tmp->next = head;
-    tmp->prev = tmp;
-    head = tmp;
-
+    // Create a linked list
+    for (int i = 1; i <= 10; i++)
+    {
+        InsertNodeAtHead(CreateNode(i), &head);
+    }
 
     for (node *debug = tmp; debug != NULL; debug = debug->next)
     {
@@ -44,7 +34,6 @@ int main()
             printf("Next:%i\n", debug->next->value);
         printf("\n");
     }
-    
 
     // print list
     PrintList(head);
@@ -62,13 +51,18 @@ int main()
  * @param  **head: 
  * @retval None
  */
-void InsertNode(node *node_to_insert, node **head)
+void InsertNodeAtHead(node *node_to_insert, node **head)
 {
-    //TODO:
-    
+    node_to_insert->next = *head;
+    *head = node_to_insert;
 }
 
-// Free Node Memory
+/**
+ * @brief  Free the memory allocated in heap used by the nodes in the linked list
+ * @note   
+ * @param  *head: Pointer the the head of the linked list
+ * @retval None
+ */
 void FreeNodes(node *head)
 {
     node *tmp = NULL;
@@ -81,7 +75,12 @@ void FreeNodes(node *head)
 
 }
 
-// Create  New Node
+/**
+ * @brief   Mallocs a node size memory in heap for a new node
+ * @note   
+ * @param  value: Set the value of the new node
+ * @retval 
+ */
 node *CreateNode(int value)
 {
     node *tmp = NULL;
@@ -93,7 +92,12 @@ node *CreateNode(int value)
     return tmp;
 }
 
-// Print Linked List
+/**
+ * @brief  Print the value of the node in a linked list
+ * @note   
+ * @param  *head: Pointer to the head of the linked list
+ * @retval None
+ */
 void PrintList(node *head)
 {
     node *tmp = head;
@@ -103,8 +107,6 @@ void PrintList(node *head)
         tmp = tmp->next;
     }
 }
-
-// Insert Node at head
 
 // Find Node
 

@@ -39,13 +39,13 @@ int main()
     /* Insert a node after a specific node in a linked list */
     //InsertNodeAfter(FindNode(7, head), NewNode(999));
 
-    DeleteNode(FindNode(7, head));
+    DeleteNode(FindNode(6, head));
 
     // Print Linked List
     PrintList(head);
 
     // Memory Management
-    FreeNodes(head);
+    //FreeNodes(head);
 }
 
 /**
@@ -63,16 +63,18 @@ void DeleteNode(node *target)
         // if deleting head
         if(target->prev == NULL)
         {
-            //TODO:
+            target->next->prev = NULL;
+            target = target->next;
         }
         else
             target->prev->next = target->next;
 
         if (target->next != NULL)
             target->next->prev = target->prev;
-        //free(tmp);
-
         
+        // Memory management
+        tmp = target;
+        free(tmp);
     }
 }
 

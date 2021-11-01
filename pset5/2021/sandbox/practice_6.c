@@ -11,8 +11,9 @@ node;
 
 void PrintList(node *head);
 void FreeList(node *head);
-node *NewNode(int node_value);
 void InsertNode(node *node_to_insert, node **linked_list);
+void InsertAfter(node *target_node, node *node_to_insert);
+node *NewNode(int node_value);
 node *FindNode(int node_value, node *linked_list);
 
 int main()
@@ -27,18 +28,24 @@ int main()
     }
 
     // Print list
-    PrintList(head);
+    PrintList(head); 
 
     // Print Found
     node *find = FindNode(5, head);
     if(find != NULL)
         printf("Found: %i(%p)\n", find->data, head);
 
+    // Insert a node after a specific node
+    InsertAfter(FindNode(6, head), NewNode(900));
+    PrintList(head);
+
     // Memory Management
     FreeList(head);
 
 
 }
+
+
 
 node *FindNode(int node_value, node *linked_list)
 {
@@ -53,6 +60,15 @@ node *FindNode(int node_value, node *linked_list)
         tmp = tmp->next;
     }
     return NULL;
+}
+
+void InsertAfter(node *target_node, node *node_to_insert)
+{
+    if(target_node != NULL && node_to_insert != NULL)
+    {
+        node_to_insert->next = target_node->next;
+        target_node->next = node_to_insert;
+    }
 }
 
 void InsertNode(node *node_to_insert, node **linked_list)
