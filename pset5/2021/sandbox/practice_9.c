@@ -16,7 +16,6 @@ void InsertNode(node **head, node *new_node);
 void FreeNodes(node *head);
 node *FindNode(int value, node *head);
 
-//TODO: link the prev nodes properly in all the node funcs
 
 int main()
 {
@@ -29,13 +28,13 @@ int main()
 
     PrintList(head);
 
-    node *find = FindNode(5, head);
+    node *find = FindNode(10, head);
+    if (find->prev != NULL)
+        printf("Prev: %i\n", find->prev->value);
     if (find != NULL)
         printf("Found: %i\n", find->value);
     if (find->next != NULL)
         printf("Next: %i\n", find->next->value);
-    if (find->prev != NULL)
-        printf("Prev: %i\n", find->prev->value);
 
     /* Memory Management */
     FreeNodes(head);
@@ -73,6 +72,8 @@ void FreeNodes(node *head)
 void InsertNode(node **head, node *new_node)
 {
     new_node->next = *head;
+    if (*head != NULL) // skip this step if the linked list starts out as a null-pointer to a node
+        (*head)->prev = new_node;
     *head = new_node;
 }
 
