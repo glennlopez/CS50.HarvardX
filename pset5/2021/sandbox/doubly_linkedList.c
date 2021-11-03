@@ -26,7 +26,7 @@ int main()
         InsertNodeAtHead(NewNode(i), &head);
 
     /* Find a specific node and print out its struct contents */
-    node *find = FindNode(7, head);
+    node *find = FindNode(4, head);
     if(find != NULL)
     {
         if (find->prev != NULL)
@@ -39,13 +39,13 @@ int main()
     /* Insert a node after a specific node in a linked list */
     //InsertNodeAfter(FindNode(7, head), NewNode(999));
 
-    DeleteNode(FindNode(6, head));
+    //DeleteNode(FindNode(6, head)); //TODO: fix this - cannot delete head node
 
     // Print Linked List
     PrintList(head);
 
     // Memory Management
-    //FreeNodes(head);
+    FreeNodes(head);
 }
 
 /**
@@ -91,7 +91,7 @@ void InsertNodeAtHead(node *new_node, node **target)
     // Point the new_node's next pointer to where the target is currently pointing
     new_node->next = *target;
 
-    // Only do the following if the head (target) is not NULL (if its NULL, the node wont have a target->next, target->prev, or target->value, and you will get a segfault)
+    // This check exists because initially, the *target could be a nullpointer (empty list with no nodes)
     if (*target != NULL)
     {
         // Set the target's prev pointer to point at the new_nodes (target will be placed after the new_node after this loop iteration)
@@ -99,7 +99,7 @@ void InsertNodeAtHead(node *new_node, node **target)
     }
 
     // Set the new_node's prev pointer to NULL  (because it will be the new head)
-    new_node->prev = NULL;
+    //new_node->prev = NULL; //TODO: fix this - why is this here?
 
     // Point the target to new_node (set the newly inserted node to be the head of the list)
     *target = new_node;
