@@ -7,7 +7,7 @@
  * [x] Create a linked list
  * [x] Search a linked list
  * [x] Insert a new node into a linked list
- * [ ] Delete a single element from the linked list
+ * [x] Delete a single element from the linked list
  * [x] Delete/Free the linked list nodes
  */
 
@@ -49,11 +49,18 @@ int main()
 
 }
 
+/**
+ * @brief  Delete node with specific value in the linked list
+ * @note   
+ * @param  target_val: Node with the value to deallocate and delete
+ * @param  **head: Pointer to the linked list
+ * @retval None
+ */
 void DeleteNode(int target_val, node **head)
 {
-    node *prevNode = NULL;
-    node *tmp = NULL;
-    node *copy = *head;
+    node *prevNode = NULL;  // keeps track of the target nodes prev node 
+    node *tmp = NULL;       // temporary nullpointer 
+    node *copy = *head;     // copy of the head pointer
 
     while(copy != NULL)
     {
@@ -94,9 +101,9 @@ void DeleteNode(int target_val, node **head)
 
 
 /**
- * @brief  
+ * @brief  De-allocate the linked list nodes
  * @note   
- * @param  *head: 
+ * @param  *head: Pointer to the head of the linked list
  * @retval None
  */
 void FreeListNodes(node *head)
@@ -112,11 +119,11 @@ void FreeListNodes(node *head)
 
 
 /**
- * @brief  
+ * @brief  Find a node in a linked list with a specific node value
  * @note   
- * @param  value: 
- * @param  *head: 
- * @retval 
+ * @param  value: Value of the target node you wish to find
+ * @param  *head: Pointer to the head of the linked list
+ * @retval Returns a pointer to the node with a specific value you are looking for
  */
 node *Find(int value, node *head)
 {
@@ -127,10 +134,10 @@ node *Find(int value, node *head)
 }
 
 /**
- * @brief  
+ * @brief  Inserts a new node at the begining of a linked list
  * @note   
- * @param  *new_node: 
- * @param  **head: 
+ * @param  *new_node: Pointer to a new node
+ * @param  **head: Pointer to the list
  * @retval None
  */
 void Insert(node *new_node, node **head)
@@ -140,9 +147,9 @@ void Insert(node *new_node, node **head)
 }
 
 /**
- * @brief  
+ * @brief  Prints the node values to the console
  * @note   
- * @param  *head: 
+ * @param  *head: Pointer to the linked list
  * @retval None
  */
 void PrintList(node *head)
@@ -152,10 +159,10 @@ void PrintList(node *head)
 }
 
 /**
- * @brief  
+ * @brief  Allocate a new node in heap memory
  * @note   
- * @param  value: 
- * @retval 
+ * @param  value: Value to assign in the node value
+ * @retval Returns a pointer to the newly allocated node in heap
  */
 node *NewNode(int value)
 {
