@@ -23,7 +23,7 @@ void PrintList(node *head);
 void Insert(node *new_node, node **head);
 node *Find(int value, node *head);
 void FreeListNodes(node *head);
-void DeleteNode(int target_val, node *head);
+void DeleteNode(int target_val, node *head, node **list);
 
 int main()
 {
@@ -39,7 +39,7 @@ int main()
     if (find != NULL)
         printf("Number %i, was found!\n", find->value);
 
-    DeleteNode(5, head); //TODO: segfault deleting head or tail
+    DeleteNode(5, head, &head); //TODO: not deleting head
 
     /* Print the linked list */
     PrintList(head);
@@ -49,9 +49,10 @@ int main()
 
 }
 
-void DeleteNode(int target_val, node *head)
+void DeleteNode(int target_val, node *head, node **list)
 {
     node *prevNode = NULL;
+    node *tmp = NULL;
 
     while (head != NULL)
     {
@@ -60,10 +61,29 @@ void DeleteNode(int target_val, node *head)
             prevNode = head;                                                // point the prevNode pointer to where head is currently pointing
 
         // Delete the target node
-        if (head->value == target_val)
+        if (head->value == target_val && prevNode != NULL)
         {
-            prevNode->next = head->next; // TODO: fix segfault
-            free(head);
+            if (head->next != NULL)
+            {
+                prevNode->next = head->next;
+                free(head);
+            }
+
+            // properly remove and de-allocate tail node
+            if (head->next == NULL)
+            {
+                free(prevNode->next);
+                prevNode->next = NULL;
+            }
+        }
+
+        // properly remove and de-allocate the head node
+        if (head->value == target_val && prevNode == NULL)
+        {
+            tmp = *list;
+            *list = (*list)->next;
+            free(tmp);
+            break; // O(1) operation: no need interate over the entire list if target is head
         }
 
         head = head->next;
