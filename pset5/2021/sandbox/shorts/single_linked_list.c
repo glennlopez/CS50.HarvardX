@@ -23,7 +23,7 @@ void PrintList(node *head);
 void Insert(node *new_node, node **head);
 node *Find(int value, node *head);
 void FreeListNodes(node *head);
-void DeleteNode(int target_val, node *head, node **list);
+void DeleteNode(int target_val, node **head);
 
 int main()
 {
@@ -39,7 +39,7 @@ int main()
     if (find != NULL)
         printf("Number %i, was found!\n", find->value);
 
-    DeleteNode(5, head, &head); //TODO: not deleting head
+    DeleteNode(3, &head);
 
     /* Print the linked list */
     PrintList(head);
@@ -49,28 +49,29 @@ int main()
 
 }
 
-void DeleteNode(int target_val, node *head, node **list)
+void DeleteNode(int target_val, node **head)
 {
     node *prevNode = NULL;
     node *tmp = NULL;
+    node *copy = *head;
 
-    while (head != NULL)
+    while(copy != NULL)
     {
         // Set the previous node pointer
-        if ((head->next != NULL) && (head->next->value == target_val))      // IF: next node value has the target value
-            prevNode = head;                                                // point the prevNode pointer to where head is currently pointing
+        if ((copy->next != NULL) && (copy->next->value == target_val))      // IF: next node value has the target value
+            prevNode = copy;                                                // point the prevNode pointer to where head is currently pointing
 
         // Delete the target node
-        if (head->value == target_val && prevNode != NULL)
+        if (copy->value == target_val && prevNode != NULL)
         {
-            if (head->next != NULL)
+            if (copy->next != NULL)
             {
-                prevNode->next = head->next;
-                free(head);
+                prevNode->next = copy->next;
+                free(copy);
             }
 
             // properly remove and de-allocate tail node
-            if (head->next == NULL)
+            if (copy->next == NULL)
             {
                 free(prevNode->next);
                 prevNode->next = NULL;
@@ -78,15 +79,15 @@ void DeleteNode(int target_val, node *head, node **list)
         }
 
         // properly remove and de-allocate the head node
-        if (head->value == target_val && prevNode == NULL)
+        if (copy->value == target_val && prevNode == NULL)
         {
-            tmp = *list;
-            *list = (*list)->next;
+            tmp = *head;
+            *head = (*head)->next;
             free(tmp);
             break; // O(1) operation: no need interate over the entire list if target is head
         }
 
-        head = head->next;
+        copy = copy->next;
     }
 
 }
