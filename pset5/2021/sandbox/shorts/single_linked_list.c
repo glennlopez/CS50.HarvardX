@@ -39,7 +39,7 @@ int main()
     if (find != NULL)
         printf("Number %i, was found!\n", find->value);
 
-    DeleteNode(3, &head);
+    DeleteNode(5, &head);
 
     /* Print the linked list */
     PrintList(head);
@@ -60,25 +60,25 @@ void DeleteNode(int target_val, node **head)
 {
     node *prevNode = NULL;  // keeps track of the target nodes prev node 
     node *tmp = NULL;       // temporary nullpointer 
-    node *copy = *head;     // copy of the head pointer
+    node *cur_node = *head;     // copy of the head pointer
 
-    while(copy != NULL)
+    while(cur_node != NULL)
     {
         // Set the previous node pointer
-        if ((copy->next != NULL) && (copy->next->value == target_val))      // IF: next node value has the target value
-            prevNode = copy;                                                // point the prevNode pointer to where head is currently pointing
+        if ((cur_node->next != NULL) && (cur_node->next->value == target_val))      // IF: next node value has the target value
+            prevNode = cur_node;                                                // point the prevNode pointer to where head is currently pointing
 
         // Delete the target node
-        if (copy->value == target_val && prevNode != NULL)
+        if (cur_node->value == target_val && prevNode != NULL)
         {
-            if (copy->next != NULL)
+            if (cur_node->next != NULL)
             {
-                prevNode->next = copy->next;
-                free(copy);
+                prevNode->next = cur_node->next;
+                free(cur_node);
             }
 
             // properly remove and de-allocate tail node
-            if (copy->next == NULL)
+            if (cur_node->next == NULL)
             {
                 free(prevNode->next);
                 prevNode->next = NULL;
@@ -86,7 +86,7 @@ void DeleteNode(int target_val, node **head)
         }
 
         // properly remove and de-allocate the head node
-        if (copy->value == target_val && prevNode == NULL)
+        if (cur_node->value == target_val && prevNode == NULL)
         {
             tmp = *head;
             *head = (*head)->next;
@@ -94,7 +94,7 @@ void DeleteNode(int target_val, node **head)
             break; // O(1) operation: no need interate over the entire list if target is head
         }
 
-        copy = copy->next;
+        cur_node = cur_node->next;
     }
 
 }
