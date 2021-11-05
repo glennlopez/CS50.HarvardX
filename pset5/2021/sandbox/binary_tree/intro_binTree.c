@@ -14,8 +14,17 @@ treenode;
 treenode *CreateTreenode(int value);
 treenode *LookFor(int value, treenode *root);
 
-int main()
+int main(int argc,char* argv[])
 {
+     int usrVal;
+    if (argc == 2)
+        usrVal = atoi(argv[1]);
+    else
+        {
+            printf("Usage: ./prog <num>\n");
+            return 1;
+        }
+
     /* Create the treenodes */
     treenode *root = NULL;
     treenode *n1 = CreateTreenode(11);
@@ -39,10 +48,9 @@ int main()
     /* Print the treenodes */
 
     /* Traverse into a treenode looking for a value */
-    int value = 58;
-    treenode *tmpNum = LookFor(value, root);
+    treenode *tmpNum = LookFor(usrVal, root);
     if (tmpNum != NULL)
-        printf("LookFor(%i, root) returned: %i\n", value, tmpNum->value);
+        printf("LookFor(%i, root) returned: %i\n", usrVal, tmpNum->value);
 
     /* Memory Management */
     free(n1); free(n2); free(n3); free(n4); free(n5); free(n6); free(n7);
