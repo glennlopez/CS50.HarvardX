@@ -42,7 +42,6 @@ int main(int argc,char* argv[])
     n2->right = n3;
     n6->left = n5;
     n6->right = n7;
-
     root = n4;
 
     /* Print the treenodes */
@@ -86,7 +85,7 @@ treenode *LookFor(int value, treenode *root)
 
         else 
         {
-            // greater - go right
+            // anything else go right
             printf("Move: Right\n");
             LookFor(value, tmp->right);
         }
