@@ -1,4 +1,5 @@
 //https://www.youtube.com/watch?v=UbhlOk7vjVY
+// https://www.youtube.com/watch?v=hfwwaNNJ-0A
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -60,6 +61,18 @@ int main(int argc,char* argv[])
  * @brief  
  * @note   
  * @param  value: 
+ * @param  **root: 
+ * @retval 
+ */
+TreeInsertNode(int value, treenode **root)
+{
+    //TODO:
+}
+
+/**
+ * @brief  
+ * @note   
+ * @param  value: 
  * @param  *root: 
  * @retval 
  */
@@ -80,14 +93,14 @@ treenode *LookFor(int value, treenode *root)
         {
             // less - go left
             printf("Move: Left\n");
-            LookFor(value, tmp->left);
+            return LookFor(value, tmp->left);
         }
 
         else 
         {
             // anything else go right
             printf("Move: Right\n");
-            LookFor(value, tmp->right);
+            return LookFor(value, tmp->right);
         }
     }
 
