@@ -11,6 +11,7 @@ treenode;
 
 treenode *CreateLeaf(int val);
 treenode *FindLeaf(int val, treenode *root);
+void InsertNewLeaf(int val, treenode **root);
 
 int main()
 {
@@ -31,12 +32,53 @@ int main()
     leaf[6 - 1]->right = leaf[7 - 1];
     root = leaf[4 - 1];
 
+    /* Insert a new leaf in the tree */
+    InsertNewLeaf(25, &root);
+    InsertNewLeaf(15, &root);
+    InsertNewLeaf(59, &root);
+    InsertNewLeaf(55, &root);
+    InsertNewLeaf(41, &root);
+    InsertNewLeaf(9, &root);
+    InsertNewLeaf(20, &root);
+
+    printf("\n");
 
     /* Search value in the tree */
-    treenode *find = FindLeaf(30, root);
+    treenode *find = FindLeaf(55, root);
     if (find != NULL)
         printf("FindLeaf() returns: %i\n", find->value);
 
+}
+
+/**
+ * @brief  
+ * @note   
+ * @param  val: 
+ * @param  **root: 
+ * @retval None
+ */
+void InsertNewLeaf(int val, treenode **root)
+{
+    treenode *tmp = *root;
+
+    /* Base Case */
+    if (tmp == NULL)
+    {
+        printf("Added new node.\n");
+        *root = CreateLeaf(val);
+    }
+
+    /* Recursive Case */
+    else if (val < tmp->value) 
+    {
+        printf("Adding: Go left.\n");
+        return InsertNewLeaf(val, &tmp->left);
+    }
+    else
+    {
+        printf("Adding: Go right.\n");
+        return InsertNewLeaf(val, &tmp->right);
+    }
 }
 
 /**
