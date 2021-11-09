@@ -14,6 +14,7 @@ treenode;
 
 treenode *CreateTreenode(int value);
 treenode *LookFor(int value, treenode *root);
+TreeInsertNode(int value, treenode **root);
 
 int main(int argc,char* argv[])
 {
@@ -67,14 +68,15 @@ int main(int argc,char* argv[])
 TreeInsertNode(int value, treenode **root)
 {
     //TODO:
+    return NULL;
 }
 
 /**
- * @brief  
+ * @brief  Find a node in the tree and return its pointer
  * @note   
- * @param  value: 
- * @param  *root: 
- * @retval 
+ * @param  value: Value to look for
+ * @param  *root: root of the treenode
+ * @retval Returns a pointer to the node
  */
 treenode *LookFor(int value, treenode *root)
 {
