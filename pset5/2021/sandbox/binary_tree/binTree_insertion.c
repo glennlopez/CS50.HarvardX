@@ -72,12 +72,12 @@ void InsertNewLeaf(int val, treenode **root)
     else if (val < tmp->value) 
     {
         printf("Adding: Go left.\n");
-        return InsertNewLeaf(val, &tmp->left);
+        InsertNewLeaf(val, &tmp->left);
     }
     else
     {
         printf("Adding: Go right.\n");
-        return InsertNewLeaf(val, &tmp->right);
+        InsertNewLeaf(val, &tmp->right);
     }
 }
 
