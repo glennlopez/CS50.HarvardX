@@ -55,17 +55,24 @@ int main()
     return 0;
 }
 
+
+/**
+ * @brief  Add a string to an existing hashtable
+ * @note   This will calculate the hash value of the string and palce it in a bucket
+ * @param  *hashtable[]: Pointer to an existing hashtable
+ * @param  value: String value to add to the hash table
+ * @retval None
+ */
 void AddToHashtable(node *hashtable[], string value)
 {
     int hashValue = QuickHash10(value);
     AddToBucket(&hashtable[hashValue], value);
 }
 
-
 /**
- * @brief  
+ * @brief  Add a string value to a linked list bucket
  * @note   
- * @param  *bucket: Array bucket
+ * @param  *bucket: existing linked list
  * @param  value: String value to set the new node
  * @retval None
  */
@@ -75,18 +82,12 @@ void AddToBucket(node **bucket, string value)
 
     /* Base case */
     if (*bucket == NULL)
-    {
         *bucket = NewNode(value);
-    }
 
     /* Recursive case */
     else
-    {
         AddToBucket(&tmp->next, value);
-    }
-
 }
-
 
 /**
  * @brief  Malloc a new node in HEAP memory of size node
