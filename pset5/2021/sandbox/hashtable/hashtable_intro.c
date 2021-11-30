@@ -13,37 +13,54 @@ int QuickHash10(string name);
 int StringLen(string s);
 node *NewNode(string strVal);
 void AddToBucket(node **bucket, string value);
+void AddToHashtable(node *hashtable[], string value);
 
 int main()
 {
-    // TODO: linked list array
-
     /* Create empty array */
-    node *tmp[3];
-    for (int i = 0; i < 3; i++)
+    node *tmp[10];
+    for (int i = 0; i < 10; i++)
         tmp[i] = NULL;
 
     /* Create new nodes */
-    AddToBucket(&tmp[0], "one_a");
-    AddToBucket(&tmp[0], "one_b");
-    AddToBucket(&tmp[0], "one_c");
+    
 
-    AddToBucket(&tmp[1], "two_a");
-    AddToBucket(&tmp[2], "three_a");
+    AddToHashtable(tmp, "Five");
+    AddToHashtable(tmp, "Twelve5");
+    AddToHashtable(tmp, "Four4");
+    AddToHashtable(tmp, "One6");
+
+    AddToBucket(&tmp[QuickHash10("One")], "One");
+    AddToBucket(&tmp[QuickHash10("Zero")], "Zero");
+    AddToBucket(&tmp[QuickHash10("Seven")], "Seven");
+
 
     /* Debug */
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 10; i++)
     {
         if (tmp[i] != NULL)
-            printf("%s\n", tmp[i]->value);
+            printf("tmp[%i]->%s\n",i, tmp[i]->value);
     }
+    printf("\n");
 
-    printf("next-> %s\n", tmp[0]->next->value);
-    printf("next-> %s\n", tmp[0]->next->next->value);
+    printf("tmp[4]->next-> %s\n", tmp[4]->next->value);
+    printf("tmp[4]->next-> %s\n", tmp[4]->next->next->value);
+    printf("tmp[4]->next-> %s\n", tmp[4]->next->next->next->value);
+    printf("\n");
+
+    printf("%i\n", QuickHash10("Seven"));
+
 
 
     return 0;
 }
+
+void AddToHashtable(node *hashtable[], string value)
+{
+    int hashValue = QuickHash10(value);
+    AddToBucket(&hashtable[hashValue], value);
+}
+
 
 /**
  * @brief  
@@ -54,7 +71,6 @@ int main()
  */
 void AddToBucket(node **bucket, string value)
 {
-    // THIS NEEDS TO BE RECURSIVE AND
     node *tmp = *bucket;
 
     /* Base case */
