@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define string char *
 typedef struct node_struct
@@ -22,17 +23,16 @@ int main()
     for (int i = 0; i < 10; i++)
         tmp[i] = NULL;
 
-    /* Create new nodes */
-    
-
+    /* Create new nodes + Add nodes to Hashtable*/
     AddToHashtable(tmp, "Five");
     AddToHashtable(tmp, "Twelve5");
     AddToHashtable(tmp, "Four4");
     AddToHashtable(tmp, "One6");
 
-    AddToBucket(&tmp[QuickHash10("One")], "One");
-    AddToBucket(&tmp[QuickHash10("Zero")], "Zero");
-    AddToBucket(&tmp[QuickHash10("Seven")], "Seven");
+    AddToHashtable(tmp, "One");
+    AddToHashtable(tmp, "Zero");
+    AddToHashtable(tmp, "Seven");
+    AddToHashtable(tmp, "One Hundred1");
 
 
     /* Debug */
@@ -48,7 +48,31 @@ int main()
     printf("tmp[4]->next-> %s\n", tmp[4]->next->next->next->value);
     printf("\n");
 
-    printf("%i\n", QuickHash10("Seven"));
+    //printf("%i\n", QuickHash10("One Hundred1"));
+
+    // TODO: containt this in a function
+    // TODO: check if a specific string is in the Hashtable
+        // if it is, return the address of the node
+            // check if the correct address was returned
+    string search = "One6";
+    for (int i = 0; i < 10; i++)
+    {
+        if ( (tmp[i] != NULL) && (tmp[i]->value == search))
+        {
+            printf("\"%s\" found!\n", search);
+            break; // <- this "breaks" the else if instruction below
+        }
+
+        //TODO: fix this - function does not seach through linked list
+
+        /*
+        else if ((tmp[i] != NULL) && (tmp[i]->value != search)) // <- this should be "if" not "else if" -- if there is break above
+        {
+            printf("Next->\n");
+            tmp[i] = tmp[i]->next; // TODO: fix this
+        }
+        */
+    }
 
 
 
