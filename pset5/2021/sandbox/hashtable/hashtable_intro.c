@@ -15,6 +15,7 @@ int StringLen(string s);
 node *NewNode(string strVal);
 void AddToBucket(node **bucket, string value);
 void AddToHashtable(node *hashtable[], string value);
+node *Search(string item, node *hashtable[]);
 
 int main()
 {
@@ -50,39 +51,52 @@ int main()
 
     //printf("%i\n", QuickHash10("One Hundred1"));
 
-    // TODO: containt this in a function
-    // TODO: check if a specific string is in the Hashtable
-        // if it is, return the address of the node
-            // check if the correct address was returned
-    string search = "One6";
-    for (int i = 0; i < 10; i++)
-    {
-        if ( (tmp[i] != NULL) && (tmp[i]->value == search))
-        {
-            printf("\"%s\" found!\n", search);
-            break; // <- this "breaks" the else if instruction below
-        }
-
-        //TODO: fix this - function does not seach through linked list
-
-        /*
-        else if ((tmp[i] != NULL) && (tmp[i]->value != search)) // <- this should be "if" not "else if" -- if there is break above
-        {
-            printf("Next->\n");
-            tmp[i] = tmp[i]->next; // TODO: fix this
-        }
-        */
-    }
-
+    node *test_found = Search("Zero", tmp);
+    printf("test_found = %s\n",test_found->value);
+    
 
 
     return 0;
 }
 
 
+node *Search(string item, node *hashtable[])
+{
+    // TODO: check if a specific string is in the Hashtable
+        // if it is, return the address of the node
+            // check if the correct address was returned
+    
+    node *found = NULL;
+
+    for (int i = 0; i < 10; i++)
+    {
+        if ((hashtable[i] != NULL) && (hashtable[i]->value == item))
+        {
+            printf("\"%s\" found!\n", item);
+            found = hashtable[i];
+            break; // <- this "breaks" the else if instruction below
+        }
+
+        //TODO: fix this - function does not seach through linked list
+
+        /*
+        else if ((hashtable[i] != NULL) && (hashtable[i]->value != item)) // <- this should be "if" not "else if" -- if there is break above
+        {
+            printf("Next->\n");
+            hashtable[i] = hashtable[i]->next; // TODO: fix this
+        }
+        */
+        
+        
+    }
+
+    return found;
+}
+
+
 /**
  * @brief  Add a string to an existing hashtable
- * @note   This will calculate the hash value of the string and palce it in a bucket
+ * @note   This will calculate the hash value of the string and place it in a bucket
  * @param  *hashtable[]: Pointer to an existing hashtable
  * @param  value: String value to add to the hash table
  * @retval None
