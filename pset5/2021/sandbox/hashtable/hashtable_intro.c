@@ -51,25 +51,47 @@ int main()
 
     //printf("%i\n", QuickHash10("One Hundred1"));
 
-    node *test_found = Search("Zero", tmp);
-    printf("test_found = %s\n",test_found->value);
+    node *test_found = Search("Twelve5", tmp);
+    if(test_found != NULL)
+        printf("test_found = %s\n",test_found->value);
     
 
 
     return 0;
 }
 
+/**
+ * @brief  Recursively search a linked list for a specific item
+ * @note   This is used in the node *Search() function
+ * @param  item: 
+ * @param  *linkedList: 
+ * @retval 
+ */
+node *Seek(string item, node *linkedList)
+{
+    /* Base case */
+    // if item is found, return it
 
+    /* Recursive case */
+    // if item is not found, 
+}
+
+
+/**
+ * @brief  Looks for a specified item in a hashtable
+ * @note   
+ * @param  item: String value
+ * @param  *hashtable[]: Pointer to a hash table array to look through
+ * @retval Returns a pointer to the item found in the hash table
+ */
 node *Search(string item, node *hashtable[])
 {
-    // TODO: check if a specific string is in the Hashtable
-        // if it is, return the address of the node
-            // check if the correct address was returned
-    
     node *found = NULL;
 
     for (int i = 0; i < 10; i++)
     {
+        /*
+        //TODO: searching through linked list should be RECURSIVE 
         if ((hashtable[i] != NULL) && (hashtable[i]->value == item))
         {
             printf("\"%s\" found!\n", item);
@@ -78,15 +100,19 @@ node *Search(string item, node *hashtable[])
         }
 
         //TODO: fix this - function does not seach through linked list
-
-        /*
+        
         else if ((hashtable[i] != NULL) && (hashtable[i]->value != item)) // <- this should be "if" not "else if" -- if there is break above
         {
-            printf("Next->\n");
             hashtable[i] = hashtable[i]->next; // TODO: fix this
         }
-        */
-        
+
+        /*
+
+        /* TODO: USE node *Seek() */
+
+
+
+
         
     }
 
