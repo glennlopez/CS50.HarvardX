@@ -1,4 +1,4 @@
-// https://cs50.harvard.edu/x/2022/psets/1/mario/less/
+// https://cs50.harvard.edu/x/2022/psets/1/mario/more/
 #include <cs50.h>
 #include <stdio.h>
 
@@ -13,7 +13,16 @@ void generateBricks(int height)
             printf(" ");
         }
 
-        // brick
+        // brick left side
+        for (int x = 0; x <= y; x++)
+        {
+            printf("#");
+        }
+
+        // the gap
+        printf("  ");
+
+        // brick right side
         for (int x = 0; x <= y; x++)
         {
             printf("#");
