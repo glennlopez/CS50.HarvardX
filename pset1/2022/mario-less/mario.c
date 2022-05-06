@@ -1,7 +1,8 @@
 #include <cs50.h>
 #include <stdio.h>
 
-int main(void) 
+// its a me a-mario
+int main(void)
 {
-    
+
 }
