@@ -33,12 +33,19 @@ int main(void)
 
     // Print total number of coins to give the customer
     printf("%i\n", coins);
+
 }
 
 int get_cents(void)
 {
     // TODO
-    return 0;
+    int usrInput;
+    do
+    {
+        usrInput = get_int("Change owed: ");
+    }
+    while(usrInput < 0);
+    return usrInput;
 }
 
 int calculate_quarters(int cents)
