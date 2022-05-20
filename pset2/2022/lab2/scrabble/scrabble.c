@@ -16,11 +16,19 @@ int main(void)
 
     // Score both words
     int score1 = compute_score(word1);
-    int score2 = compute_score(word2); 
+    int score2 = compute_score(word2);
 
     // Print the winner
-    char winner = (score1 > score2) ? '1' : '2';
-    printf("Player %c wins!\n", winner);
+    if (score1 == score2)
+    {
+        printf("Tie!\n");
+    }
+    else
+    {
+        char winner = (score1 > score2) ? '1' : '2';
+        printf("Player %c wins!\n", winner);
+    }
+
 
 
 }
@@ -33,7 +41,10 @@ int compute_score(string word)
     // itterate through the words
     for (int i = 0; word[i] != '\0'; i++)
     {
-        score += POINTS[tolower(word[i]) - ascii_offset];
+        if (isalpha(word[i]))
+        {
+            score += POINTS[tolower(word[i]) - ascii_offset];
+        }
     }
 
     return score;
