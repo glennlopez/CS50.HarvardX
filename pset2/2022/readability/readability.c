@@ -16,7 +16,20 @@ int main(void)
     int sentences = count_sentences(usrInput);
     int colemanLaiuIndex = calculate_colemanLaiuIndex(letters, words, sentences);
 
-    printf("Grade %d\n", colemanLaiuIndex);
+    if (colemanLaiuIndex > 16)
+    {
+        printf("Grade 16+\n");
+    }
+    else if (colemanLaiuIndex < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+    else
+    {
+        printf("Grade %d\n", colemanLaiuIndex);
+    }
+
+
 }
 
 float calculate_colemanLaiuIndex(int l, int w, int s)
