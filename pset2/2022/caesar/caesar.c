@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 
 /* Tasks:
  *  - Get key
@@ -11,8 +12,8 @@
  *  - Print ciphertext
 */
 
-int get_key(int, char **);
 bool string_isdigit(string);
+void encypher(int, string);
 
 
 
@@ -29,13 +30,40 @@ int main(int argc, string argv[])
     {
         // exit program
         printf("Usage: ./caesar key\n");
-        return 0;
+        return 1;
     }
 
     // 2. Get Plaintext
+    string plaintext = get_string("plaintext: ");
+
+    // 3. Encipher
+    encypher(key, plaintext);
+
+    // 4. Print ciphertext
+    printf("ciphertext: %s\n", plaintext);
 
 
 
+}
+
+// Shift the characters as per key
+void encypher(int key, string plaintext)
+{
+    int ascii_lower = 97;
+    int ascii_upper = 65;
+
+    // itterate through the plaintext string
+    for (int i = 0; plaintext[i] != '\0'; i++)
+    {
+        if (islower(plaintext[i]))
+        {
+            plaintext[i] = ((((int)plaintext[i] - ascii_lower) + key) % 26) + ascii_lower;
+        }
+        else if (isupper(plaintext[i]))
+        {
+            plaintext[i] = ((((int)plaintext[i] - ascii_upper) + key) % 26) + ascii_upper;
+        }
+    }
 }
 
 
