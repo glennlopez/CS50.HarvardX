@@ -14,6 +14,7 @@
 bool is26CharsLong(string);
 bool isAlphaString(string);
 bool isNotRepeating(string);
+string encipher(string);
 
 int main(int argc, string argv[])
 {
@@ -21,6 +22,7 @@ int main(int argc, string argv[])
     // 1. Get key
     string key = argv[1];
 
+    /* ------- disabled for debugging encipher
     // 2. Validate key
     if (argc != 2)   // incorrect comand line argument
     {
@@ -44,10 +46,17 @@ int main(int argc, string argv[])
         return 1;
     }
 
+
+    */
+
     // 3. Get plaintext
     string plaintext = get_string("plaintext: ");
 
+    // 4. Encipher
+    string ciphertext = encipher(plaintext);
 
+    // 5. Print ciphertext
+    printf("ciphertext: %s\n", ciphertext);
 }
 
 
@@ -101,4 +110,16 @@ bool isNotRepeating(string s)
         }
     }
     return true;
+}
+
+
+// Returns a ciphered string
+string encipher(string s)
+{
+    // for each char, determine what letter it maps to
+
+    // preserve case
+
+    // leave non- alphabetic chars as-is
+    return s;
 }
