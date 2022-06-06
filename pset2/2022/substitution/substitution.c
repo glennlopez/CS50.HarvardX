@@ -1,6 +1,7 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 // https://cs50.harvard.edu/x/2022/psets/2/substitution/
 /* TODO
@@ -14,7 +15,7 @@
 bool is26CharsLong(string);
 bool isAlphaString(string);
 bool isNotRepeating(string);
-string encipher(string);
+string encipher(string, string);
 
 int main(int argc, string argv[])
 {
@@ -53,7 +54,7 @@ int main(int argc, string argv[])
     string plaintext = get_string("plaintext: ");
 
     // 4. Encipher
-    string ciphertext = encipher(plaintext);
+    string ciphertext = encipher(plaintext, key);
 
     // 5. Print ciphertext
     printf("ciphertext: %s\n", ciphertext);
@@ -114,12 +115,26 @@ bool isNotRepeating(string s)
 
 
 // Returns a ciphered string
-string encipher(string s)
+string encipher(string plaintext, string key)
 {
+    // count plaintext
+    for (int i = 0; plaintext[i] != '\0'; i++)
+    {
+        // get plaintext alphabet char position
+        int char_pos = toupper(plaintext[i]) - 'A';
+
+        plaintext[i] = key[char_pos];
+
+
+        printf("%i \n", char_pos);
+
+    }
+
+
     // for each char, determine what letter it maps to
 
     // preserve case
 
     // leave non- alphabetic chars as-is
-    return s;
+    return plaintext;
 }
