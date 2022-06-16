@@ -44,17 +44,23 @@ int main ()
 
     head->next->next->next = tmp;
 
-
+    /*
     printf("link 0: %i \n", head->data);
     printf("link 1: %i \n", head->next->data);
     printf("link 2: %i \n", head->next->next->data);
     printf("link 3: %i \n", head->next->next->next->data);
+    */
+
 
     // ittirate through the linked list
-    while()
+    node *loop = NULL;
+    do
     {
-
+        loop = head;
+        printf("link: %i\n", loop->data);
+        head = loop->next;
     }
+    while(loop->next != NULL);
 
 
     return 0;
