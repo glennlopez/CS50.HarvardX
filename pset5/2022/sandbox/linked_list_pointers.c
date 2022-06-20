@@ -10,6 +10,9 @@ typedef struct node_struct
 }
 node;
 
+node *NewNode(int number);
+void PrintList(node *head);
+
 int main ()
 {
     // empty null pointers
@@ -17,42 +20,54 @@ int main ()
     node *tmp = NULL;
 
     // Link 0
-    tmp = malloc(sizeof(node));
-    tmp->data = 100;
-    tmp->next = NULL;
-
+    tmp = NewNode(100);
     head = tmp;
 
     // Link 1
-    tmp = malloc(sizeof(node));
-    tmp->data = 111;
-    tmp->next = NULL;
-
-    head->next = tmp;
+    tmp = NewNode(111);     // create new temp node in heap
+    head->next = tmp;       // point the heads next to tmp pointer
 
     // Link 2
-    tmp = malloc(sizeof(node));
-    tmp->data = 222;
-    tmp->next = NULL;
-
+    tmp = NewNode(222);
     head->next->next = tmp;
 
     // Link 3
-    tmp = malloc(sizeof(node));
-    tmp->data = 333;
-    tmp->next = NULL;
-
+    tmp = NewNode(333);
     head->next->next->next = tmp;
 
+    // Print linked list to console
+    PrintList(head);
+
+    return 0;
+}
+
+
+// NEW NODE
+node *NewNode(int number)
+{
+    // allocate memory to heap
+    node *new = malloc(sizeof(node));
+
+    // set list data
+    new->data = number;
+
+    // set next pointer to null
+    new->next = NULL;
+
+    // return newly created pointer
+    return new;
+}
+
+
+// PRINT LINK LIST TO CONSOLE
+void PrintList(node *head)
+{
     /*
     printf("link 0: %i \n", head->data);
     printf("link 1: %i \n", head->next->data);
     printf("link 2: %i \n", head->next->next->data);
     printf("link 3: %i \n", head->next->next->next->data);
     */
-
-
-    // ittirate through the linked list
     node *loop = NULL;
     do
     {
@@ -61,7 +76,4 @@ int main ()
         head = loop->next;
     }
     while(loop->next != NULL);
-
-
-    return 0;
 }
