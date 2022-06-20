@@ -29,17 +29,19 @@ int main(void)
     // 1. Create a new family with three generations
     person *p = create_family(GENERATIONS);
 
-    // 2. Print family tree of blood types
+    // Print family tree of blood types
     print_family(p, 0);
 
-    // 3. Free memory
+    // 2. Free memory
     free_family(p);
+
 }
 
 // STEP 1. Create a new individual with `generations`
 person *create_family(int generations)
 {
     // TODO: Allocate memory for new person
+    person *new_person = malloc(sizeof(person));
 
     // If there are still generations left to create
     if (generations > 1)
@@ -49,25 +51,32 @@ person *create_family(int generations)
         person *parent1 = create_family(generations - 1);
 
         // TODO: Set parent pointers for current person
+        new_person->parents[0] = parent0;
+        new_person->parents[1] = parent1;
 
-        // TODO: Randomly assign current person's alleles based on the alleles of their parents
-
+        // TODO: Randomly assign current person's alleles based on the alleles of their parents - use rand() function
+        new_person->alleles[0] = new_person->parents[0]->alleles[rand() % 2];
+        new_person->alleles[1] = new_person->parents[1]->alleles[rand() % 2];
     }
 
     // If there are no generations left to create
     else
     {
         // TODO: Set parent pointers to NULL
+        new_person->parents[0] = NULL;
+        new_person->parents[1] = NULL;
 
-        // TODO: Randomly assign alleles
+        // TODO: Randomly assign alleles - use CS50 built-in random_allele() function
+        new_person->alleles[0] = random_allele();
+        new_person->alleles[1] = random_allele();
 
     }
 
     // TODO: Return newly created person
-    return NULL;
+    return new_person;
 }
 
-// STEP 3. Free `p` and all ancestors of `p`.
+// STEP 2. Free `p` and all ancestors of `p`.
 void free_family(person *p)
 {
     // TODO: Handle base case
@@ -78,7 +87,7 @@ void free_family(person *p)
 
 }
 
-// STEP 2. Print each family member and their alleles.
+// Print each family member and their alleles.
 void print_family(person *p, int generation)
 {
     // Handle base case
