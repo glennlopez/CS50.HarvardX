@@ -2,10 +2,10 @@
 #include <stdlib.h> // for malloc
 
 /* TODO
-    [ ] Create node
-    [ ] Add node to Linked List
-    [ ] Display Linked List
-    [ ] Free Linked List
+    [x] Create node
+    [X] Add node to Linked List
+    [x] Display Linked List
+    [x] Free Linked List
 */
 
 // node struct
@@ -19,27 +19,22 @@ node;
 // Prototypes
 node *NewNode(int data);
 void PrintList(node *head);
+void AddNodeToHead(node **head, int data);
+void FreeLinkedList(node *head);
 
 
 int main ()
 {
     // set null pointers for tmp and head nodes
     node *head = NULL;
-    node *tmp = NULL;
 
-    tmp = NewNode(111);
-    tmp->next = head;
-    head = tmp;
-
-    tmp = NewNode(222);
-    tmp->next = head;
-    head = tmp;
-
-    tmp = NewNode(333);
-    tmp->next = head;
-    head = tmp;
+    AddNodeToHead(&head, 111);
+    AddNodeToHead(&head, 222);
+    AddNodeToHead(&head, 333);
+    AddNodeToHead(&head, 5432);
 
     PrintList(head);
+    FreeLinkedList(head);
 
 
 
@@ -47,6 +42,32 @@ int main ()
 
     return 0;
 }
+
+// Recursively free memory from linked list
+void FreeLinkedList(node *list)
+{
+    // base case - exit when node is null
+    if(list == NULL)
+    {
+        return;
+    }
+
+    // recursive case - go to the next pointer to see if its null
+    FreeLinkedList(list->next);
+
+    // free the pointer after checking to see if the next pointer is null
+    free(list);
+}
+
+
+// Add a node to the list
+void AddNodeToHead(node **head, int data)
+{
+    node *tmp = NewNode(data);
+    tmp->next = *head;
+    *head = tmp;
+}
+
 
 // Print Linked List
 void PrintList(node *head)
