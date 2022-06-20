@@ -23,20 +23,20 @@ char random_allele();
 
 int main(void)
 {
-    // Seed random number generator
+    // 0. Seed random number generator
     srand(time(0));
 
-    // Create a new family with three generations
+    // 1. Create a new family with three generations
     person *p = create_family(GENERATIONS);
 
-    // Print family tree of blood types
+    // 2. Print family tree of blood types
     print_family(p, 0);
 
-    // Free memory
+    // 3. Free memory
     free_family(p);
 }
 
-// Create a new individual with `generations`
+// STEP 1. Create a new individual with `generations`
 person *create_family(int generations)
 {
     // TODO: Allocate memory for new person
@@ -67,7 +67,7 @@ person *create_family(int generations)
     return NULL;
 }
 
-// Free `p` and all ancestors of `p`.
+// STEP 3. Free `p` and all ancestors of `p`.
 void free_family(person *p)
 {
     // TODO: Handle base case
@@ -78,7 +78,7 @@ void free_family(person *p)
 
 }
 
-// Print each family member and their alleles.
+// STEP 2. Print each family member and their alleles.
 void print_family(person *p, int generation)
 {
     // Handle base case
