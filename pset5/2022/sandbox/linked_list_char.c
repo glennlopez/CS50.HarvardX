@@ -63,7 +63,7 @@ bool load(const char *dictionary)
         return false;
     }
 
-    // Demo - placing words into diffrent buckets in the hashtable
+    // place textfile words in buffer
     char buffer[200];
     while (fscanf(textfile, "%s", buffer) != EOF)
     {
@@ -72,18 +72,18 @@ bool load(const char *dictionary)
         node *newNode = NULL;
         newNode = malloc(sizeof(node));
 
-        // check if enough memory is available
-        if (newNode != NULL)
-        {
-            newNode->word = malloc(strlen(buffer) + 1);
-            strcpy(newNode->word, buffer);
-            newNode->next = NULL;
-        }
-        else
+        // check if enough memory is available before adding node to linked list
+        if (newNode == NULL)
         {
             return false;
         }
 
+        // add word in buffer to the new node; also NULL the next pointer
+        newNode->word = malloc(strlen(buffer) + 1);
+        strcpy(newNode->word, buffer);
+        newNode->next = NULL;
+
+        // insert new node into head of linked list
         newNode->next = table[hash(buffer)];
         table[hash(buffer)] = newNode;
     }
