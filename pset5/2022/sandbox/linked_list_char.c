@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h> // for malloc
+#include <stdbool.h>
+#include<string.h>
+
 
 /* TODO
     [x] Create node
@@ -18,39 +21,66 @@ node;
 
 // Prototypes
 node *NewNode(char *word);
-void AddNodeToHead(node **head, char *word);
+void AddNode(node **head, char *word);
 void PrintList(node *head);
 
 int main ()
 {
+    // Hashtable params
+    const int BUCKETSIZE = 26;
+    node *hash_table[BUCKETSIZE];
 
-    // Hashtable Buckets
-    //node *bucket_0 = NULL;  // A
-    //node *bucket_1 = NULL;  // B
-    //node *bucket_2 = NULL;  // C
+    // File pointer params
+    const char *filename = "small";
+    FILE *textfile = fopen(filename, "r");
 
-    node *hash_table[3];
 
-    // TODO - Decide where the word will go in the hashtable
-    if ()
+    // Read string into a buffer and copy buffer to linked list
+    char buffer[180];
+    while (fscanf(textfile, "%s", buffer) != EOF)
     {
-
+        AddNode(&hash_table[0], buffer);
     }
 
-    AddNodeToHead(&hash_table[0], "Apple");
-    AddNodeToHead(&hash_table[0], "Ant");
-    AddNodeToHead(&hash_table[1], "Bread");
-    AddNodeToHead(&hash_table[2], "Cat");
-    AddNodeToHead(&hash_table[2], "Coat");
 
-    PrintList(hash_table[2]);
-
-
-
-
-
+    PrintList(hash_table[0]);
+    fclose(textfile);
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+    // TODO - Decide where the word will go in the hashtable using a hash function
+    // Hash Function
+    // Takes a word as input
+    // Outputs a number corresponding to which "bucket" to store the word in
+
+
+// STEP 1. Loads dictionary into memory, returning true if successful, else false - Load all of the words in the dictionary into datastructure (hashtable)
+bool load(const char *dictionary)
+{
+    // TODO:
+    // Open dictionary file
+        // loop(for each word in the dictionary){ ...
+            // Use: fopen() -> check for NULL
+            // Use: fscanf(file, "%s", word) -> fscanf will return EOF at the end of the file
+        // .. end fscanf loop at EOF}
+
+    // Read strings from the file one at a time
+    // Create a new node for each word
+    // Hash word to obtain a hash value
+    // Insert node into hash table at that location
+
+    return false;
+}
+
 
 
 
@@ -65,8 +95,9 @@ node *NewNode(char* data)
     // check if enough memory is available
     if (newNode != NULL)
     {
-        (*newNode).word = data;
-        (*newNode).next = NULL;
+        newNode->word = malloc(strlen(data) + 1);
+        strcpy(newNode->word, data);
+        newNode->next = NULL;
     }
     else
     {
@@ -80,7 +111,7 @@ node *NewNode(char* data)
 
 
 // Add a node to the list
-void AddNodeToHead(node **head, char *word)
+void AddNode(node **head, char *word)
 {
     node *tmp = NewNode(word);
     tmp->next = *head;
