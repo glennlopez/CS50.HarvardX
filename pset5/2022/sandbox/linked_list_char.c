@@ -23,82 +23,51 @@ node;
 node *NewNode(char *word);
 void AddNode(node **head, char *word);
 void PrintList(node *head);
+bool load(const char *dictionary);
+unsigned int hash(const char *word);
+
+// Hashtable params
+const unsigned int N = 26;
+node *table[N];
 
 int main ()
 {
-    // Hashtable params
-    const int BUCKETSIZE = 26;
-    node *hash_table[BUCKETSIZE];
 
-    // File pointer params
-    const char *filename = "large";
-    FILE *textfile = fopen(filename, "r");
+    // Step 1. demo
+    load("large");
 
 
-    // Demo - placing words into diffrent buckets in the hashtable
-    char buffer[200];
-    while (fscanf(textfile, "%s", buffer) != EOF)
-    {
-        if(buffer[0] == 'a')
-        {
-            AddNode(&hash_table[0], buffer);
-        }
-
-        if(buffer[0] == 'b')
-        {
-            AddNode(&hash_table[1], buffer);
-        }
-
-        if(buffer[0] == 'c')
-        {
-            AddNode(&hash_table[2], buffer);
-        }
-
-    }
-
-    printf("hash_table[0]:\n");
-    //PrintList(hash_table[0]);
-    printf("\n");
-
-    printf("hash_table[1]:\n");
-    //PrintList(hash_table[1]);
-    printf("\n");
-
-    printf("hash_table[2]:\n");
-    PrintList(hash_table[2]);
-    printf("\n");
-
-
-    fclose(textfile);
+    PrintList(table[0]);
     return 0;
 }
 
 
-
-
-
-
-
-
-
-
+// STEP 2. Hashes word to a number - Take a word and run a hash function on it, returning some number that coresponds with the word
+unsigned int hash(const char *word)
+{
+    // TODO
+    return 0;
+}
 
 
 
 // STEP 1. Loads dictionary into memory, returning true if successful, else false - Load all of the words in the dictionary into datastructure (hashtable)
 bool load(const char *dictionary)
 {
-    // TODO:
-    // Open dictionary file
-        // loop(for each word in the dictionary){ ...
-            // Use: fopen() -> check for NULL
-            // Use: fscanf(file, "%s", word) -> fscanf will return EOF at the end of the file
-        // .. end fscanf loop at EOF}
+    // File pointer params
+    const char *filename = dictionary;
+    FILE *textfile = fopen(filename, "r");
 
-    // Read strings from the file one at a time
-    // Create a new node for each word
-    // Hash word to obtain a hash value
-    // Insert node into hash table at that location
+    // Demo - placing words into diffrent buckets in the hashtable
+    char buffer[200];
+    while (fscanf(textfile, "%s", buffer) != EOF)
+    {
+        AddNode(&table[hash(buffer)], buffer);
+    }
+
+
+
+    fclose(textfile);
 
     return false;
 }
