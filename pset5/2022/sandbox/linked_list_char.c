@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h> // for malloc
+#include <stdlib.h>
 #include <stdbool.h>
-#include<string.h>
+#include <string.h>
 
 
 /* TODO
@@ -31,19 +31,44 @@ int main ()
     node *hash_table[BUCKETSIZE];
 
     // File pointer params
-    const char *filename = "small";
+    const char *filename = "large";
     FILE *textfile = fopen(filename, "r");
 
 
-    // Read string into a buffer and copy buffer to linked list
-    char buffer[180];
+    // Demo - placing words into diffrent buckets in the hashtable
+    char buffer[200];
     while (fscanf(textfile, "%s", buffer) != EOF)
     {
-        AddNode(&hash_table[0], buffer);
+        if(buffer[0] == 'a')
+        {
+            AddNode(&hash_table[0], buffer);
+        }
+
+        if(buffer[0] == 'b')
+        {
+            AddNode(&hash_table[1], buffer);
+        }
+
+        if(buffer[0] == 'c')
+        {
+            AddNode(&hash_table[2], buffer);
+        }
+
     }
 
+    printf("hash_table[0]:\n");
+    //PrintList(hash_table[0]);
+    printf("\n");
 
-    PrintList(hash_table[0]);
+    printf("hash_table[1]:\n");
+    //PrintList(hash_table[1]);
+    printf("\n");
+
+    printf("hash_table[2]:\n");
+    PrintList(hash_table[2]);
+    printf("\n");
+
+
     fclose(textfile);
     return 0;
 }
@@ -57,10 +82,7 @@ int main ()
 
 
 
-    // TODO - Decide where the word will go in the hashtable using a hash function
-    // Hash Function
-    // Takes a word as input
-    // Outputs a number corresponding to which "bucket" to store the word in
+
 
 
 // STEP 1. Loads dictionary into memory, returning true if successful, else false - Load all of the words in the dictionary into datastructure (hashtable)
