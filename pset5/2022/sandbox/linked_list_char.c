@@ -25,6 +25,10 @@ void AddNode(node **head, char *word);
 void PrintList(node *head);
 bool load(const char *dictionary);
 unsigned int hash(const char *word);
+unsigned int size(void);
+
+// Step 3. Size
+unsigned int ListSize = 0;
 
 // Hashtable params
 const unsigned int N = 330; // size of bucket
@@ -38,7 +42,19 @@ int main ()
 
 
     PrintList(table[300]); // debug - watch table[0]
+    printf("Number of words in Dictionary: %i", size());
+    printf("\n");
     return 0;
+}
+
+
+
+
+// STEP 3. Returns number of words in dictionary if loaded, else 0 if not yet loaded - Returns how many words are in your dictionary
+unsigned int size(void)
+{
+    int size = ListSize;
+    return size;
 }
 
 
@@ -102,6 +118,9 @@ bool load(const char *dictionary)
         // insert new node into head of linked list
         newNode->next = table[hash(buffer)];
         table[hash(buffer)] = newNode;
+
+        // keep track of the list size
+        ListSize++;
     }
 
     fclose(textfile);
