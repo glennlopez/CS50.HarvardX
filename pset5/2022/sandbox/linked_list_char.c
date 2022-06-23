@@ -27,7 +27,7 @@ bool load(const char *dictionary);
 unsigned int hash(const char *word);
 
 // Hashtable params
-const unsigned int N = 26;
+const unsigned int N = 26; // size of bucket
 node *table[N];
 
 int main ()
@@ -37,16 +37,25 @@ int main ()
     load("large");
 
 
-    PrintList(table[0]); // debug - watch table[0]
+    PrintList(table[3]); // debug - watch table[0]
     return 0;
 }
 
 
 // STEP 2. Hashes word to a number - Take a word and run a hash function on it, returning some number that coresponds with the word
 unsigned int hash(const char *word)
-{
-    // TODO
-    return 0;
+{                         //1   2   3   4   5   6   7   8   9   10  1   2   3   4   5   6   7   8   9   20  1   2   3   4   5   6
+    const char alphadex[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+
+    int indexSum = 0;
+
+    int i = 0;
+    while (alphadex[i] != word[0])
+    {
+        i++;
+    }
+
+    return i;
 }
 
 
@@ -60,6 +69,7 @@ bool load(const char *dictionary)
     FILE *textfile = fopen(filename, "r");
     if (textfile == NULL)
     {
+        // cannot open file or file doesnt exist
         return false;
     }
 
@@ -67,14 +77,12 @@ bool load(const char *dictionary)
     char buffer[200];
     while (fscanf(textfile, "%s", buffer) != EOF)
     {
-
         // allocate memory in heap
         node *newNode = NULL;
         newNode = malloc(sizeof(node));
-
-        // check if enough memory is available before adding node to linked list
         if (newNode == NULL)
         {
+            // not enough memory
             return false;
         }
 
@@ -89,7 +97,6 @@ bool load(const char *dictionary)
     }
 
     fclose(textfile);
-
     return true;
 }
 
@@ -105,3 +112,4 @@ void PrintList(node *head)
     }
     free(tmp);
 }
+
