@@ -26,6 +26,7 @@ void PrintList(node *head);
 bool load(const char *dictionary);
 unsigned int hash(const char *word);
 unsigned int size(void);
+bool check(const char *word);
 
 // Step 3. Size
 unsigned int ListSize = 0;
@@ -38,14 +39,40 @@ int main ()
 {
 
     // Step 1. demo
-    load("large");
+    load("small");
 
 
     PrintList(table[300]); // debug - watch table[0]
     printf("Number of words in Dictionary: %i", size());
     printf("\n");
+
+    check("ant"); // debug - Step 4 test
+
     return 0;
 }
+
+
+
+
+
+// STEP 4. Returns true if word is in dictionary, else false - Check if the word is in the dictionary or not (ie: is it correctly spelled or not)
+bool check(const char *word)
+{
+    // TODO
+        // Hash word to obtain the hash value pos of the word in the hashtable
+        // Access linked list in the index
+        // Traverse until NULL or the word is found
+
+    unsigned int hashval = hash(word);
+
+    char *targetWord = table[hashval]->word;
+    printf("targetWord: %s\n", targetWord);
+
+
+    return false;   // word not found
+}
+
+
 
 
 
@@ -56,7 +83,6 @@ unsigned int size(void)
     int size = ListSize;
     return size;
 }
-
 
 // STEP 2. Hashes word to a number - Take a word and run a hash function on it, returning some number that coresponds with the word
 unsigned int hash(const char *word)
@@ -81,8 +107,6 @@ unsigned int hash(const char *word)
 
     return indexSum % N;
 }
-
-
 
 // STEP 1. Loads dictionary into memory, returning true if successful, else false - Load all of the words in the dictionary into datastructure (hashtable)
 bool load(const char *dictionary)
