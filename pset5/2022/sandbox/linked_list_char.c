@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <strings.h>
 #include <string.h>
 
 
@@ -33,20 +34,22 @@ unsigned int ListSize = 0;
 
 // Hashtable params
 const unsigned int N = 330; // size of bucket
-node *table[N];
+node *table[330];
 
 int main ()
 {
 
     // Step 1. demo
-    load("small");
+    load("large");
 
-
-    PrintList(table[300]); // debug - watch table[0]
-    printf("Number of words in Dictionary: %i", size());
-    printf("\n");
-
-    check("ant"); // debug - Step 4 test
+    if (check("backwood"))
+    {
+        printf("Word Found!\n");
+    }
+    else
+    {
+        printf("Not found\n");
+    }
 
     return 0;
 }
@@ -59,18 +62,29 @@ int main ()
 bool check(const char *word)
 {
     // TODO
-        // Hash word to obtain the hash value pos of the word in the hashtable
-        // Access linked list in the index
+
+
         // Traverse until NULL or the word is found
 
+    // Hash word to obtain the hash value
     unsigned int hashval = hash(word);
 
-    char *targetWord = table[hashval]->word;
-    printf("targetWord: %s\n", targetWord);
+    // TODO - traverse the linked list bucket until NULL
+    node *tmp = table[hashval];
+    while (tmp != NULL)
+    {
+        if (strcasecmp(tmp->word, word) == 0)
+        {
+            return true;
+        }
+        tmp = tmp->next;
+    }
 
 
     return false;   // word not found
 }
+
+
 
 
 
