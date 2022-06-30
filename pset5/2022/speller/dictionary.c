@@ -21,8 +21,8 @@ node;
 void FreeLinkedList(node *list);
 
 // Number of buckets in hash table
-const unsigned int N = 330;
-node *table[N];
+const unsigned int N = 299;
+node *table[299];
 
 // STEP 4. Returns true if word is in dictionary, else false - Check if the word is in the dictionary or not (ie: is it correctly spelled or not)
 bool check(const char *word)
