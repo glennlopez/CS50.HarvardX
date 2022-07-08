@@ -95,7 +95,13 @@ with open("phonebook.csv", "a") as csv_file:
     writer.writerow([name, num])
 ```
 
-#### Reading a CSV file is done simply as follows:
+#### Reading a CSV file can be done in two ways:
+
+1. Using the **reader** in the csv library
+```python
+reader = csv.reader(file)
+```
+
 ```python
 from cs50 import get_string
 import csv
@@ -113,6 +119,38 @@ with open("snacks.csv", "r") as file:
     for row in reader:
         person = row[0]     #row[0] is the Person
         snack = row[1]      #row[1] is the Snack
+        try:
+            snacks[snack] += 1
+        except:
+            snacks["Others"] += 1
+
+
+
+for snack in snacks:
+    print(f"{snack}:{snacks[snack]}")
+```
+
+2. Using the **DictReader** in the csv library:
+
+```python
+reader = csv.DictReader(file)
+```
+
+```python
+from cs50 import get_string
+import csv
+
+snacks = {
+    "Chips": 0,
+    "Chocolate": 0,
+    "Fruit": 0,
+    "Others": 0
+}
+
+with open("snacks.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        snack = row["Snack"]
         try:
             snacks[snack] += 1
         except:

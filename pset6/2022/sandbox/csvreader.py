@@ -9,11 +9,9 @@ snacks = {
 }
 
 with open("snacks.csv", "r") as file:
-    reader = csv.reader(file)
-    next(reader)
+    reader = csv.DictReader(file)
     for row in reader:
-        person = row[0]     #row[0] is the Person
-        snack = row[1]      #row[1] is the Snack
+        snack = row["Snack"]
         try:
             snacks[snack] += 1
         except:
