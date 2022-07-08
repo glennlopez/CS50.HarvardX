@@ -57,6 +57,45 @@ num = 10;
 num += 1; # adds 1 to num (num = 11)
 ```
 
+#### Writing into a CSV file can be done in two ways:
+
+1. Opening a csv file into an object variable
+```python
+# open a file using open(file,a/r/w)
+csv_file = open("phonebook.csv", "a")
+
+# ask user for Name
+name = get_string("Name: ")
+
+# ask user for Number
+num = get_string("Number: ")
+
+# write the name and number to the newly opened csv file
+writer = csv.writer(csv_file)
+writer.writerow([name, num])
+
+# close the file
+csv_file.close()
+```
+
+2. Using the with open() as file:
+
+```python
+# ask user for Name
+name = get_string("Name: ")
+
+# ask user for Number
+num = get_string("Number: ")
+
+# open a file using open(file,a/r/w)
+with open("phonebook.csv", "a") as csv_file:
+
+    # write the name and number to the newly opened csv file
+    writer = csv.writer(csv_file)
+    writer.writerow([name, num])
+
+```
+
 ## Key takeaway from week 6
 * Python takes away memory management from the programmer
 * There are no pointers to worry about it Python
