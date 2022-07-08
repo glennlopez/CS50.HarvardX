@@ -1,7 +1,7 @@
 '''
 Dictionary example: Key Value Pair
 '''
-#from cs50 import get_str
+from cs50 import get_string
 
 people = {
     # Name:ID
@@ -12,12 +12,13 @@ people = {
     "Stacy":"4765756"
 }
 
+# ask user for a name they would like to look up
+find = get_string("Look up: ")
+result = (f"User {find}, not found.")
 
 # Print the ID of a specific Name
 for name in people:
-    if "Glenn" in name:
-        print(f"Found! - ID: {people[name]}")
+    if find in name:
+        result = (f"Found {find} with ID: {people[name]}")
 
-# Print the name with the specific ID
-find = [k for k, name in people.items() if name == '12345']
-print(find)
+print(result)
