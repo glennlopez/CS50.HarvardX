@@ -29,6 +29,13 @@ from cs50 import get_int
 from cs50 import get_string
 ```
 
+Following concepts were learned in week 6:
+ * Importing python libraries
+ * Python datatype abstractions
+ * Pythonic way of programming
+ * Loops, conditions, and commandline arguments
+ * Reading and writing files
+
 For loops are written differently in Python when compared to C
 ```python
 # For loop written in python

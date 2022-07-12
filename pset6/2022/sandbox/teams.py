@@ -6,8 +6,16 @@ import sys
 if len(sys.argv) != 2:
     sys.exit("Usage: python teams.py <FILENAME>")
 
-# open an dread the file
+teams = []
+# open and read the file
+with open(sys.argv[1], "r") as file:
+    reader = csv.DictReader(file)
+    # store the teams in the file in a list (teams = [])
+    for row in reader:
+        team = row['team']
+        teams.append(team)
 
-# store the teams in the file in a list (teams = [])
 
 # display all the teams stored in teams[]
+for i in range(len(teams)):
+    print(teams[i])
