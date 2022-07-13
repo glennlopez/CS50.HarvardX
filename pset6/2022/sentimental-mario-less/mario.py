@@ -15,10 +15,12 @@ def get_height():
 
 # draw the bricks
 def draw(usr_input):
+    width = usr_input
     for y in range(usr_input):
-        for x in range(usr_input):
+        for x in range(width):
             print("#", end="")
         print("")
+        width -= 1
 
 # excecute main if main exists as a def module
 if __name__ == '__main__':
