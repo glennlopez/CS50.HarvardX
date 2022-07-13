@@ -20,15 +20,20 @@ def main():
         reader = csv.DictReader(file)
         # itterate through the csv files row
         for row in reader:
-            # set the key value pair as-per csv file
-            team = {row['team']:row['rating']}
-            # append the team {key:value} pair to list of teams
+
+            # create a team dictionary with key:value pair as team:rating
+            team = {'team': row['team'], 'rating': int(row['rating'])}
+
+            # append the team {key:value} dictionary to the teams[] list
             teams.append(team)
 
 
 
-    counts = {}
+    counts = {} # Keys = name of team, value = how many tournament the team has won
     # TODO: Simulate N tournaments and keep track of win counts
+    simulate_tournament(teams)
+
+
 
     # Print each team's chances of winning, according to simulation
     for team in sorted(counts, key=lambda team: counts[team], reverse=True):

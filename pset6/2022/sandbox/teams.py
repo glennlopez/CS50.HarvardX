@@ -11,15 +11,19 @@ counts = {} #key: name of team, value: how many tournaments team has won
 
 # open and read the file
 with open(sys.argv[1], "r") as file:
-    reader = csv.DictReader(file)
-    # store the teams in the file in a list (teams = [])
-    for row in reader:
-        # set the key value pair in the team as per csv file
-        team = {row['team']:row['rating']}
-        # append the team to list of teams
-        teams.append(team)
+        reader = csv.DictReader(file)
+        # itterate through the csv files row
+        for row in reader:
+
+            # create a team dictionary with key:value pair as team:rating
+            team = {'team': row['team'], 'rating': int(row['rating'])}
+
+            # append the team {key:value} dictionary to the teams[] list
+            teams.append(team)
 
 
 # display all the teams stored in teams[]
 for i in range(len(teams)):
     print(teams[i])
+
+#print(teams[0]) #debug
