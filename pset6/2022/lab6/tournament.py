@@ -18,11 +18,11 @@ def main():
     # open and read the file
     with open(sys.argv[1], "r") as file:
         reader = csv.DictReader(file)
-        # store the teams in the file in a list (teams = [])
+        # itterate through the csv files row
         for row in reader:
-            # set the key value pair in the team as per csv file
+            # set the key value pair as-per csv file
             team = {row['team']:row['rating']}
-            # append the team to list of teams
+            # append the team {key:value} pair to list of teams
             teams.append(team)
 
 
