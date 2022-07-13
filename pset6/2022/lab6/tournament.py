@@ -7,6 +7,7 @@ import random
 # Number of simluations to run
 N = 1000
 
+
 def main():
 
     # Ensure correct usage
@@ -26,7 +27,8 @@ def main():
             # append the team to the teams[] list
             teams.append(team)
 
-    counts = {} # Keys = name of team, value = how many tournament the team has won
+    counts = {}
+    # Keys = name of team, value = how many tournament the team has won
     # TODO: Simulate N tournaments and keep track of win counts
     for n in range(N):
         winner = simulate_tournament(teams)
@@ -62,7 +64,7 @@ def simulate_round(teams):
     return winners
 
 
-def simulate_tournament(teams): #TODO:
+def simulate_tournament(teams):
     """Simulate a tournament. Return name of winning team."""
     # Use the simulate_round function, which accepts a list of teams and returns a list of winners
 
