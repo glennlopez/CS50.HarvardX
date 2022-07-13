@@ -15,10 +15,10 @@ with open(sys.argv[1], "r") as file:
         # itterate through the csv files row
         for row in reader:
 
-            # create a team dictionary with key:value pair as team:rating
+            # store each team as a dictionary
             team = {'team': row['team'], 'rating': int(row['rating'])}
 
-            # append the team {key:value} dictionary to the teams[] list
+            # append the team to the teams[] list
             teams.append(team)
 
 

@@ -7,7 +7,6 @@ import random
 # Number of simluations to run
 N = 1000
 
-
 def main():
 
     # Ensure correct usage
@@ -21,19 +20,20 @@ def main():
         # itterate through the csv files row
         for row in reader:
 
-            # create a team dictionary with key:value pair as team:rating
+            # store each team as a dictionary
             team = {'team': row['team'], 'rating': int(row['rating'])}
 
-            # append the team {key:value} dictionary to the teams[] list
+            # append the team to the teams[] list
             teams.append(team)
-
-
 
     counts = {} # Keys = name of team, value = how many tournament the team has won
     # TODO: Simulate N tournaments and keep track of win counts
-    simulate_tournament(teams)
-
-
+    for n in range(N):
+        winner = simulate_tournament(teams)
+        if winner in counts:
+            counts[winner] += 1
+        else:
+            counts[winner] = 1
 
     # Print each team's chances of winning, according to simulation
     for team in sorted(counts, key=lambda team: counts[team], reverse=True):
@@ -62,9 +62,16 @@ def simulate_round(teams):
     return winners
 
 
-def simulate_tournament(teams):
+def simulate_tournament(teams): #TODO:
     """Simulate a tournament. Return name of winning team."""
-    # TODO
+    # Use the simulate_round function, which accepts a list of teams and returns a list of winners
+
+    # Repeate simulated rounds until one teams is left
+    while len(teams) > 1:
+        teams = simulate_round(teams)
+
+    # Return the name of the winning team (last team left)
+    return teams[0]["team"]
 
 
 if __name__ == "__main__":
