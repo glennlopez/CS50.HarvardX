@@ -1,4 +1,3 @@
-# TODO
 from cs50 import get_int
 
 # main
@@ -21,4 +20,6 @@ def draw(usr_input):
             print("#", end="")
         print("")
 
-main()
+# excecute main if main exists as a def module
+if __name__ == '__main__':
+    main()
