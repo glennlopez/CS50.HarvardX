@@ -28,6 +28,9 @@ def main():
             teams.append(team)
 
     counts = {}
+    '''
+    REDO THIS WITHOUT ANY HINTS: HINT WAS USED TO FINISH LAB
+    '''
     # Keys = name of team, value = how many tournament the team has won
     # TODO: Simulate N tournaments and keep track of win counts
     for n in range(N):
@@ -63,7 +66,9 @@ def simulate_round(teams):
 
     return winners
 
-
+'''
+REDO THIS WITHOUT ANY HINTS: HINT WAS USED TO FINISH LAB
+'''
 def simulate_tournament(teams):
     """Simulate a tournament. Return name of winning team."""
     # Use the simulate_round function, which accepts a list of teams and returns a list of winners
