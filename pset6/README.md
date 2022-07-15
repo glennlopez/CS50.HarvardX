@@ -36,6 +36,7 @@ Following concepts were learned in week 6:
  * Loops, conditions, and commandline arguments
  * Reading and writing files
  * Python Dictionary and Lists
+ * How DNA databases work
 
 For loops are written differently in Python when compared to C
 ```python
