@@ -18,7 +18,7 @@ def main():
     with open(database) as db_file:
         reader = csv.DictReader(db_file)
         for row in reader:
-            dna = {'name':row['name'], 'AGATC':row['AGATC'], 'AATG':row['AATG'], 'TATC':row['TATC']}
+            dna = {'name':row['name'], 'AGATC':int(row['AGATC']), 'AATG':int(row['AATG']), 'TATC':int(row['TATC'])}
             dna_db.append(dna)
 
 
@@ -37,6 +37,10 @@ def main():
     print(f"TATC {TATC}")
 
     # TODO: Check database for matching profiles
+    for dna in dna_db:
+        #print(f"{dna['name']}, {dna['AGATC']}, {dna['AATG']}, {dna['TATC']}")
+        if dna['AGATC'] == AGATC and dna['AATG'] == AATG and dna['TATC'] == TATC:
+            print(f"Match found: {dna['name']}")
 
     return
 
