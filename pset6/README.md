@@ -37,6 +37,7 @@ Following concepts were learned in week 6:
  * Reading and writing files
  * Python Dictionary and Lists
  * How DNA databases work
+ * Python Global variables
 
 For loops are written differently in Python when compared to C
 ```python
@@ -175,4 +176,5 @@ for snack in snacks:
 * Python takes away memory management from the programmer
 * There are no pointers to worry about it Python
 * There are no do-while loops in Python
+* [Global variables](https://stackoverflow.com/questions/423379/using-global-variables-in-a-function) used within functions are diffrent in python
 
