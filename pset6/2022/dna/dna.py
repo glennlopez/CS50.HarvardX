@@ -10,6 +10,7 @@ TATC = 0
 GAAA = 0
 TCTG = 0
 
+
 def main():
 
     # TODO: Check for command-line usage
@@ -23,32 +24,40 @@ def main():
 
     # TODO: Read database file into a variable
     dna_db = []
+    AGATC_row = 0
+    TTTTTTCT_row = 0
+    AATG_row = 0
+    TCTAG_row = 0
+    GATA_row = 0
+    TATC_row = 0
+    GAAA_row = 0
+    TCTG_row = 0
 
-    # append to db for small database
-    if database.find('small') > 0:
-        with open(database) as db_file:
-            reader = csv.DictReader(db_file)
-            for row in reader:
-                dna = {'name':row['name'], 'AGATC':int(row['AGATC']), 'AATG':int(row['AATG']), 'TATC':int(row['TATC'])}
-                dna_db.append(dna)
+    with open(database) as db_file:
+        reader = csv.DictReader(db_file)
+        for row in reader:
 
-    # append to db for large database
-    if database.find('large') > 0:
-        with open(database) as db_file:
-            reader = csv.DictReader(db_file)
-            for row in reader:
-                dna = {
-                'name':row['name'],
-                'AGATC':int(row['AGATC']),
-                'TTTTTTCT':int(row['TTTTTTCT']),
-                'AATG':int(row['AATG']),
-                'TCTAG':int(row['TCTAG']),
-                'GATA':int(row['GATA']),
-                'TATC':int(row['TATC']),
-                'GAAA':int(row['GAAA']),
-                'TCTG':int(row['TCTG'])
-                }
-                dna_db.append(dna)
+            # check if the key exists in database
+            if 'AGATC' in row:
+                AGATC_row = int(row['AGATC'])
+            if 'TTTTTTCT' in row:
+                TTTTTTCT_row = int(row['TTTTTTCT'])
+            if 'AATG' in row:
+                AATG_row = int(row['AATG'])
+            if 'TCTAG' in row:
+                TCTAG_row = int(row['TCTAG'])
+            if 'GATA' in row:
+                GATA_row = int(row['GATA'])
+            if 'TATC' in row:
+                TATC_row = int(row['TATC'])
+            if 'GAAA' in row:
+                GAAA_row = int(row['GAAA'])
+            if 'TCTG' in row:
+                TCTG_row = int(row['TCTG'])
+
+            dna = {'name': row['name'], 'AGATC': AGATC_row, 'TTTTTTCT': TTTTTTCT_row, 'AATG': AATG_row,
+                   'TCTAG': TCTAG_row, 'GATA': GATA_row, 'TATC': TATC_row, 'GAAA': GAAA_row, 'TCTG': TCTG_row}
+            dna_db.append(dna)
 
     # TODO: Read DNA sequence file into a variable
     sq_file = open(sequence, 'r')
@@ -57,50 +66,42 @@ def main():
     # TODO: Find longest match of each STR in DNA sequence
     global AGATC, TTTTTTCT, AATG, TCTAG, GATA, TATC, GAAA, TCTG
     AGATC = longest_match(sequence_file, 'AGATC')
-    TTTTTTCT = longest_match(sequence_file, 'TTTTTTCT') # Large
+    TTTTTTCT = longest_match(sequence_file, 'TTTTTTCT')
     AATG = longest_match(sequence_file, 'AATG')
-    TCTAG = longest_match(sequence_file, 'TCTAG') # Large
-    GATA = longest_match(sequence_file, 'GATA') # Large
+    TCTAG = longest_match(sequence_file, 'TCTAG')
+    GATA = longest_match(sequence_file, 'GATA')
     TATC = longest_match(sequence_file, 'TATC')
-    GAAA = longest_match(sequence_file, 'GAAA') # Large
-    TCTG = longest_match(sequence_file, 'TCTG') # Large
-
-    #debug
-    print(f"AGATC {AGATC}")
-    print(f"TTTTTTCT {TTTTTTCT}")
-    print(f"AATG {AATG}")
-    print(f"TCTAG {TCTAG}")
-    print(f"GATA {GATA}")
-    print(f"TATC {TATC}")
-    print(f"GAAA {GAAA}")
-    print(f"TCTG {TCTG}")
-    print()
+    GAAA = longest_match(sequence_file, 'GAAA')
+    TCTG = longest_match(sequence_file, 'TCTG')
 
     # TODO: Check database for matching profiles
     # for small database
     if database.find('small') > 0:
-        for dna in dna_db:
-            if dna['AGATC'] == AGATC and dna['AATG'] == AATG and dna['TATC'] == TATC:
-                print(dna['name'])
+        print(find_small_match(dna_db))
 
     # for large database
     if database.find('large') > 0:
-        print(find_match(dna_db))
-        '''
-        for dna in dna_db:
-            if dna['AGATC'] == AGATC and dna['TTTTTTCT'] == TTTTTTCT and dna['AATG'] == AATG and dna['TCTAG'] == TCTAG and dna['GATA'] == GATA and dna['TATC'] == TATC and dna['GAAA'] == GAAA and dna['TCTG'] == TCTG:
-                print(dna['name'])
-        '''
+        print(find_large_match(dna_db))
 
     return
 
-def find_match(db):
-    match = "No Match"
+
+# returns a match or no match
+def find_large_match(db):
+    match = "No match"
     for dna in db:
         if dna['AGATC'] == AGATC and dna['TTTTTTCT'] == TTTTTTCT and dna['AATG'] == AATG and dna['TCTAG'] == TCTAG and dna['GATA'] == GATA and dna['TATC'] == TATC and dna['GAAA'] == GAAA and dna['TCTG'] == TCTG:
-                match = dna['name']
+            match = dna['name']
     return match
 
+
+# returns a match or no match
+def find_small_match(db):
+    match = "No match"
+    for dna in db:
+        if dna['AGATC'] == AGATC and dna['AATG'] == AATG and dna['TATC'] == TATC:
+            match = dna['name']
+    return match
 
 
 def longest_match(sequence, subsequence):
