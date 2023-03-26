@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+
+
+.service-price-header {
+    margin-bottom: -5px;
+    font-size: 70%;
+    text-transform: uppercase;
+    color: #48971b !important;
+}
+
+.service-body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    background: linear-gradient(287.83deg, #d6dee3, rgba(255, 255, 255, 0));
+}
+
+.service-font-color {
+    color: #2a2a28;
+}
+
+.row {
+    min-height: 100vh;
+}
+
+.card {
+    border: 0;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 3px 0px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 3px 0px 0 rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    padding: 2.25rem 0;
+    position: relative;
+    will-change: transform;
+}
+.card:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    /* background-color: #2a2a28; */
+    transition: 0.5s;
+}
+.card:hover {
+    transform: scale(1.05);
+    -webkit-box-shadow: 0 20px 35px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 35px 0 rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.card:hover:after {
+    width: 100%;
+}
+.card .card-header {
+    background-color: white;
+    padding-left: 2rem;
+    border-bottom: 0px;
+}
+.card .card-title {
+    margin-bottom: 1rem;
+}
+.card .card-block {
+    padding-top: 0;
+}
+.card .list-group-item {
+    border: 0px;
+    padding: 0.25rem;
+    color: #808080;
+    font-weight: 300;
+    font-size: 80%;
+}
+
+.display-2 {
+    font-size: 7rem;
+    letter-spacing: -0.5rem;
+}
+.display-2 .currency {
+    font-size: 2.75rem;
+    position: relative;
+    font-weight: 400;
+    top: -45px;
+    letter-spacing: 0px;
+}
+.display-2 .period {
+    font-size: 1rem;
+    color: #b3b3b3;
+    letter-spacing: 0px;
+}
+
+.services-coming-soon {
+    font-weight: bold; font-size: 100%;
+}
+

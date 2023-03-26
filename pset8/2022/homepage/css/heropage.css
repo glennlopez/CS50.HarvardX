@@ -1,0 +1,135 @@
+
+/*======================
+    Hero Page Styling
+=======================*/
+
+@media screen and (max-width: 768px) {
+    #output {
+        display: none !important;
+    }
+}
+
+.linear-gradient-body-main {
+    background: linear-gradient(287.83deg, #e1d7ca, rgba(255, 255, 255, 0));
+}
+
+.typing_carrousel {
+    color:rgb(137,137,137);
+    font-size: 130%;
+    margin-left: 3px;
+    font-weight: 600;
+}
+
+.hero-header-highlight {
+    color: #F4F5F5;
+    background-color: #2d2a2e;
+    display: inline-block;
+    border-radius: 6px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.hero-main-header {
+    font-size: 200%;
+    font-weight: 900;
+    color: #3f3d3f;
+    line-height: 1.1;
+}
+
+.hero-top-header {
+    font-size: 130%;
+    font-weight: 600;
+    color: #888888;
+}
+
+.hero-second-header {
+    font-size: 90%;
+    font-weight: 460;
+    line-height: 1.5;
+    margin-top: 5px;
+    max-width: 460px;
+}
+
+.curly_brace {
+    color:rgb(128,191,52);
+    display:inline-block;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 200%;
+}
+
+/* ANIMATED LOGO */
+.logo {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+.logo .icon {
+    width: 75%;
+    /* max-width: 300px; */
+}
+.logo .icon path {
+    color: #2a2a28;
+    stroke-width: 3px;
+    stroke-dashoffset: -3000;
+    stroke-dasharray: 3000;
+}
+.logo .icon path.is-active {
+    animation-name: icon;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+.logo .text {
+    width: 100%;
+    max-width: 900px;
+}
+.logo .text text {
+    color: #2a2a28;
+    stroke-width: 3px;
+    stroke-dashoffset: -800;
+    stroke-dasharray: 800;
+}
+.logo .text text.is-active {
+    animation-name: text;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+@keyframes icon {
+    50% {
+        stroke-dashoffset: 0;
+        fill: transparent;
+    }
+    75% {
+        fill: transparent;
+        stroke-width: 3px;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        fill: #2d2a2e;
+        stroke-width: 0px;
+    }
+}
+@keyframes text {
+    50% {
+        fill: transparent;
+    }
+    75% {
+        fill: transparent;
+        stroke-dashoffset: 0;
+        stroke-width: 3px;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        fill: #2d2a2e;
+        stroke-width: 0px;
+    }
+}
+
